@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "./ui/button";
 import { Star } from "lucide-react";
-import areumLogo from "@/assets/areum-logo.png";
+import areumLogo from "@/assets/areum-logo-main.png";
 import areumSerum from "@/assets/areum-serum.png";
 
 const Hero = () => {
