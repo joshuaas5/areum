@@ -193,8 +193,8 @@ const Hero = () => {
                     <path d="M12 5 L5 10 L12 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                   <div className="bg-white/95 backdrop-blur-sm px-4 py-3 rounded-xl shadow-lg border border-primary/20 max-w-[160px]">
-                    <p className="text-sm font-bold text-foreground">10x Penetração</p>
-                    <p className="text-[11px] text-muted-foreground">Nanotecnologia &gt;200nm</p>
+                    <p className="text-sm font-bold text-foreground">Nanotecnologia</p>
+                    <p className="text-[11px] text-muted-foreground">Absorção potencializada</p>
                   </div>
                 </div>
               </motion.div>
@@ -212,8 +212,8 @@ const Hero = () => {
                     <path d="M12 5 L5 10 L12 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                   <div className="bg-white/95 backdrop-blur-sm px-4 py-3 rounded-xl shadow-lg border border-primary/20 max-w-[160px]">
-                    <p className="text-sm font-bold text-foreground">1000x Retenção</p>
-                    <p className="text-[11px] text-muted-foreground">Ác. Hialurônico retém água</p>
+                    <p className="text-sm font-bold text-foreground">-35% Linhas Finas</p>
+                    <p className="text-[11px] text-muted-foreground">Resultados em 28 dias</p>
                   </div>
                 </div>
               </motion.div>
