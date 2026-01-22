@@ -49,17 +49,18 @@ const CTA = () => {
               {/* Right - CTA */}
               <div>
                 <span className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-medium mb-6">
-                  🔥 Oferta por tempo limitado
+                  🔥 Últimas unidades com desconto
                 </span>
 
                 <h2 className="font-heading text-3xl md:text-4xl font-semibold text-foreground mb-4">
-                  Transforme sua rotina de{" "}
-                  <span className="text-gradient-rose">skincare</span>
+                  Sua jornada para a{" "}
+                  <span className="text-gradient-rose">Glass Skin</span>
+                  <br />começa aqui
                 </h2>
 
                 <p className="text-muted-foreground mb-6">
-                  Garanta agora o seu Sérum Hyalocolagreen e experimente o
-                  poder da Glass Skin coreana.
+                  Milhares de mulheres já transformaram sua pele com o Sérum Areum.
+                  Está na hora de você descobrir o segredo coreano.
                 </p>
 
                 {/* Pricing */}
@@ -72,6 +73,9 @@ const CTA = () => {
                       R$ 59,90
                     </span>
                   </div>
+                  <p className="text-sm text-muted-foreground">
+                    ou 3x de R$ 19,97 sem juros
+                  </p>
                 </div>
 
                 <Button
@@ -80,12 +84,12 @@ const CTA = () => {
                   className="w-full shimmer"
                   onClick={() => window.location.href = "https://areum.pay.yampi.com.br/checkout?skipToCheckout=1&tokenReference=40KOQLA7X"}
                 >
-                  Comprar Agora
+                  Garantir Meu Sérum Agora
                 </Button>
 
                 <p className="text-center text-xs text-muted-foreground mt-4 flex items-center justify-center gap-2">
                   <Check className="w-4 h-4 text-primary" />
-                  Compra 100% segura
+                  Compra 100% segura • Entrega garantida
                 </p>
               </div>
             </div>

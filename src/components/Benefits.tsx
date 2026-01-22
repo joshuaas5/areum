@@ -1,30 +1,31 @@
 import { motion } from "framer-motion";
 import { Droplets, Sparkles, Shield, Leaf } from "lucide-react";
+import areumLogo from "@/assets/areum-logo.png";
 
 const benefits = [
   {
     icon: Droplets,
-    title: "Hidratação Estrutural",
+    title: "Hidratação Profunda",
     description:
-      "Ácido Hialurônico de baixo peso molecular que penetra profundamente nas camadas da pele, proporcionando hidratação de dentro para fora.",
+      "Partículas nanoencapsuladas que penetram nas camadas mais profundas da pele, entregando hidratação onde realmente importa.",
   },
   {
     icon: Sparkles,
     title: "Efeito Glass Skin",
     description:
-      "Tecnologia que promove luminosidade natural e aspecto translúcido, revelando uma pele radiante e saudável.",
+      "Aquele brilho saudável de 'pele de vidro' que você vê nos doramas coreanos. Luminosidade natural, sem oleosidade.",
   },
   {
     icon: Shield,
     title: "Firmeza & Elasticidade",
     description:
-      "Colágeno Vegano de alta absorção que estimula a produção natural de colágeno, combatendo sinais de envelhecimento.",
+      "Colágeno Vegetal de alta absorção que ajuda a manter a estrutura da pele jovem, suave e firme.",
   },
   {
     icon: Leaf,
     title: "100% Vegano",
     description:
-      "Fórmula clean beauty, livre de ingredientes de origem animal, cruelty-free e sustentável.",
+      "Fórmula clean beauty, livre de ingredientes de origem animal, cruelty-free e dermatologicamente testada.",
   },
 ];
 
@@ -62,16 +63,16 @@ const Benefits = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="inline-block text-primary text-sm font-medium tracking-wider uppercase mb-4">
-            Tecnologia Avançada
+          <span className="inline-flex items-center gap-2 text-primary text-sm font-medium tracking-wider uppercase mb-4">
+            <span>🇰🇷</span> Tecnologia Coreana
           </span>
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground mb-6">
-            Por que escolher o{" "}
-            <span className="text-gradient-rose">Hyalocolagreen</span>?
+            Por que Escolher o Sérum{" "}
+            <span className="text-gradient-rose">Areum</span>?
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Desenvolvido com nanotecnologia de ponta para resultados visíveis 
-            desde a primeira aplicação.
+            Nanotecnologia que faz a diferença: ativos encapsulados que chegam
+            onde outros séruns não alcançam.
           </p>
         </motion.div>
 
@@ -89,7 +90,7 @@ const Benefits = () => {
               className="group relative bg-background/80 backdrop-blur-sm rounded-2xl p-8 shadow-card-soft border border-border/50 hover:border-primary/30 transition-all duration-300 hover:-translate-y-2"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-blush/20 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              
+
               <div className="relative z-10">
                 <div className="w-14 h-14 rounded-xl bg-secondary flex items-center justify-center mb-6 group-hover:bg-primary/10 transition-colors duration-300">
                   <benefit.icon className="w-7 h-7 text-primary" />

@@ -77,25 +77,26 @@ const Hero = () => {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="inline-flex items-center gap-2 bg-secondary/80 backdrop-blur-sm px-4 py-2 rounded-full mb-6"
             >
-              <Sparkles className="w-4 h-4 text-primary" />
+              <span className="text-lg">🇰🇷</span>
               <span className="text-sm font-medium text-secondary-foreground">
-                Pele de protagonista de dorama
+                Tecnologia Coreana
               </span>
             </motion.div>
 
             <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold text-foreground leading-tight mb-6">
-              Desperte sua{" "}
-              <span className="text-gradient-rose italic">Glass Skin</span>
+              A pele de{" "}
+              <span className="text-gradient-rose italic">protagonista</span>
+              <br />que você merece
             </h1>
 
             <p className="text-lg md:text-xl text-muted-foreground mb-4 max-w-xl mx-auto lg:mx-0">
-              Sérum Facial com Ácido Hialurônico e Colágeno Vegano.
-              Hidratação estrutural profunda para uma pele luminosa e firme.
+              Resultados visíveis em 7 dias. Ácido Hialurônico e Colágeno Vegetal
+              com nanotecnologia para penetração 10x mais profunda.
             </p>
 
             <p className="text-sm text-muted-foreground mb-8 flex items-center justify-center lg:justify-start gap-2">
               <Star className="w-4 h-4 text-gold fill-gold" />
-              Dermatologicamente Testado
+              Dermatologicamente Testado • Vegano • Cruelty-Free
             </p>
 
             {/* Pricing */}
@@ -109,7 +110,7 @@ const Hero = () => {
                 </span>
               </div>
               <p className="text-sm text-muted-foreground mt-2">
-                30ml
+                30ml • Rende até 60 aplicações
               </p>
             </div>
 
@@ -127,12 +128,12 @@ const Hero = () => {
                 size="xl"
                 onClick={() => document.getElementById('beneficios')?.scrollIntoView({ behavior: 'smooth' })}
               >
-                Saiba mais
+                Ver benefícios
               </Button>
             </div>
           </motion.div>
 
-          {/* Right - Product image */}
+          {/* Right - Product image with arrow callouts */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -147,29 +148,64 @@ const Hero = () => {
             {/* Product image */}
             <motion.img
               src={areumSerum}
-              alt="Areum Sérum Facial Hyalocolagreen"
+              alt="Areum Sérum Facial"
               className="relative z-10 w-64 md:w-80 lg:w-96 drop-shadow-2xl float-animation"
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
             />
 
-            {/* Floating badges */}
+            {/* Arrow callouts - Right side */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.8, duration: 0.5 }}
-              className="absolute top-10 right-4 md:right-10 glass-effect px-4 py-2 rounded-full shadow-card-soft"
+              className="absolute top-16 md:top-20 right-0 md:-right-4 flex items-center gap-2"
             >
-              <span className="text-sm font-medium text-foreground">✨ Vegano</span>
+              <span className="text-2xl rotate-[135deg]">↗</span>
+              <div className="bg-white/90 backdrop-blur-sm px-3 py-2 rounded-lg shadow-lg border border-rose-100 max-w-[140px]">
+                <p className="text-xs font-semibold text-foreground">Ác. Hialurônico</p>
+                <p className="text-[10px] text-muted-foreground">Hidratação 96% maior</p>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 1, duration: 0.5 }}
+              className="absolute top-1/2 -translate-y-1/2 right-0 md:-right-4 flex items-center gap-2"
+            >
+              <span className="text-2xl">→</span>
+              <div className="bg-white/90 backdrop-blur-sm px-3 py-2 rounded-lg shadow-lg border border-rose-100 max-w-[140px]">
+                <p className="text-xs font-semibold text-foreground">Nanotecnologia</p>
+                <p className="text-[10px] text-muted-foreground">Penetração 10x profunda</p>
+              </div>
+            </motion.div>
+
+            {/* Arrow callouts - Left side */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 1.2, duration: 0.5 }}
+              className="absolute bottom-32 md:bottom-40 left-0 md:-left-4 flex items-center gap-2 flex-row-reverse"
+            >
+              <span className="text-2xl rotate-180">→</span>
+              <div className="bg-white/90 backdrop-blur-sm px-3 py-2 rounded-lg shadow-lg border border-rose-100 max-w-[140px]">
+                <p className="text-xs font-semibold text-foreground">Colágeno Vegetal</p>
+                <p className="text-[10px] text-muted-foreground">Firmeza + Elasticidade</p>
+              </div>
             </motion.div>
 
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 1, duration: 0.5 }}
-              className="absolute bottom-20 left-4 md:left-10 glass-effect px-4 py-2 rounded-full shadow-card-soft"
+              transition={{ delay: 1.4, duration: 0.5 }}
+              className="absolute bottom-12 md:bottom-16 left-0 md:-left-4 flex items-center gap-2 flex-row-reverse"
             >
-              <span className="text-sm font-medium text-foreground">🧬 Nano Tech</span>
+              <span className="text-2xl rotate-[225deg]">↗</span>
+              <div className="bg-white/90 backdrop-blur-sm px-3 py-2 rounded-lg shadow-lg border border-rose-100 max-w-[140px]">
+                <p className="text-xs font-semibold text-foreground">100% Vegano</p>
+                <p className="text-[10px] text-muted-foreground">Cruelty-Free & Clean</p>
+              </div>
             </motion.div>
           </motion.div>
         </div>

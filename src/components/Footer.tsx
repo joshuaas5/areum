@@ -7,15 +7,14 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center text-center">
           {/* Logo */}
-          <img 
-            src={areumLogo} 
-            alt="Areum" 
-            className="h-16 mb-6 brightness-0 invert opacity-90" 
+          <img
+            src={areumLogo}
+            alt="Areum"
+            className="h-16 mb-6 brightness-0 invert opacity-90"
           />
 
           <p className="text-primary-foreground/70 max-w-md mb-8">
-            Descubra a beleza natural da sua pele com a ciência 
-            coreana mais avançada.
+            O segredo da pele coreana, finalmente ao seu alcance.
           </p>
 
           {/* Social Links */}
@@ -41,13 +40,13 @@ const Footer = () => {
           {/* Badges */}
           <div className="flex flex-wrap justify-center gap-4 mb-8">
             <span className="px-4 py-2 bg-primary-foreground/10 rounded-full text-sm text-primary-foreground/70">
+              🇰🇷 Tecnologia Coreana
+            </span>
+            <span className="px-4 py-2 bg-primary-foreground/10 rounded-full text-sm text-primary-foreground/70">
               🧪 Dermatologicamente Testado
             </span>
             <span className="px-4 py-2 bg-primary-foreground/10 rounded-full text-sm text-primary-foreground/70">
               🌱 100% Vegano
-            </span>
-            <span className="px-4 py-2 bg-primary-foreground/10 rounded-full text-sm text-primary-foreground/70">
-              🐰 Cruelty-Free
             </span>
           </div>
 
