@@ -12,19 +12,19 @@ const benefits = [
     icon: Sparkles,
     title: "Pele de Protagonista",
     description:
-      "Aquele efeito de 'pele de vidro' dos K-Dramas que todo mundo inveja. Brilho saudável, transparência e zero oleosidade.",
+      "Aquele efeito de 'pele de vidro' dos K-Dramas. Brilho saudável, transparência e zero oleosidade.",
   },
   {
     icon: Shield,
-    title: "Menos Rugas em 28 Dias",
+    title: "Aparência Revitalizada",
     description:
-      "Redução de até 35% na aparência de linhas finas comprovada em estudos. Sua pele mais firme, lisa e rejuvenescida.",
+      "Ajuda a melhorar a firmeza e vitalidade da pele. Rosto com aspecto mais descansado, liso e radiante.",
   },
   {
     icon: Leaf,
     title: "Livre de Culpa",
     description:
-      "100% vegano, cruelty-free e dermatologicamente testado. Beleza sem compromissos com a sua pele ou com o planeta.",
+      "100% vegano, cruelty-free e dermatologicamente testado. Beleza consciente que respeita sua pele e o meio ambiente.",
   },
 ];
 

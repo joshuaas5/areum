@@ -77,14 +77,13 @@ const Hero = () => {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="inline-flex items-center gap-2 bg-secondary/80 backdrop-blur-sm px-4 py-2 rounded-full mb-6"
             >
-              {/* Korean Flag - using image URL */}
               <img
                 src="https://flagcdn.com/w40/kr.png"
                 alt="Korea"
                 className="w-5 h-4 object-cover rounded-sm"
               />
               <span className="text-sm font-medium text-secondary-foreground">
-                Tecnologia Coreana
+                A tecnologia coreana que sua pele merece
               </span>
             </motion.div>
 
@@ -96,7 +95,7 @@ const Hero = () => {
 
             <p className="text-lg md:text-xl text-muted-foreground mb-4 max-w-xl mx-auto lg:mx-0">
               Resultados visíveis em 7 dias. Ácido Hialurônico e Colágeno Vegetal
-              com nanotecnologia para penetração 10x mais profunda.
+              com tecnologia inteligente para máxima absorção.
             </p>
 
             <p className="text-sm text-muted-foreground mb-8 flex items-center justify-center lg:justify-start gap-2">
@@ -138,7 +137,7 @@ const Hero = () => {
             </div>
           </motion.div>
 
-          {/* Right - Product image with callouts */}
+          {/* Right - Product image with simple floating keywoards */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -150,108 +149,52 @@ const Hero = () => {
               <div className="w-80 h-80 md:w-96 md:h-96 bg-gradient-to-br from-blush-deep/40 to-champagne/40 rounded-full blur-3xl pulse-glow" />
             </div>
 
-            {/* Product container with callouts - Desktop only */}
-            <div className="relative hidden md:block">
-              {/* Product image */}
-              <motion.img
-                src={areumSerum}
-                alt="Areum Sérum Facial"
-                className="relative z-10 w-72 lg:w-96 drop-shadow-2xl float-animation"
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.3 }}
-              />
-
-              {/* Callout 1 - Top Right - Hydration */}
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 1, duration: 0.5 }}
-                className="absolute top-8 -right-2 lg:-right-16"
-              >
-                <div className="flex items-start gap-1">
-                  <svg width="40" height="30" viewBox="0 0 40 30" fill="none" className="text-primary mt-3 -mr-2">
-                    <path d="M38 15 C30 15, 20 15, 5 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                    <path d="M12 10 L5 15 L12 20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                  <div className="bg-white/95 backdrop-blur-sm px-4 py-3 rounded-xl shadow-lg border border-primary/20 max-w-[160px]">
-                    <p className="text-sm font-bold text-foreground">+96% Hidratação</p>
-                    <p className="text-[11px] text-muted-foreground">Comprovado clinicamente</p>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Callout 2 - Middle Right - Nano */}
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 1.2, duration: 0.5 }}
-                className="absolute top-1/2 -translate-y-1/2 -right-2 lg:-right-20"
-              >
-                <div className="flex items-center gap-1">
-                  <svg width="40" height="20" viewBox="0 0 40 20" fill="none" className="text-primary -mr-2">
-                    <path d="M38 10 C30 10, 20 10, 5 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                    <path d="M12 5 L5 10 L12 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                  <div className="bg-white/95 backdrop-blur-sm px-4 py-3 rounded-xl shadow-lg border border-primary/20 max-w-[160px]">
-                    <p className="text-sm font-bold text-foreground">Nanotecnologia</p>
-                    <p className="text-[11px] text-muted-foreground">Absorção potencializada</p>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Callout 3 - Bottom Left - Collagen */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 1.4, duration: 0.5 }}
-                className="absolute bottom-32 lg:bottom-40 -left-2 lg:-left-20"
-              >
-                <div className="flex items-center gap-1 flex-row-reverse">
-                  <svg width="40" height="20" viewBox="0 0 40 20" fill="none" className="text-primary -ml-2 rotate-180">
-                    <path d="M38 10 C30 10, 20 10, 5 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                    <path d="M12 5 L5 10 L12 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                  <div className="bg-white/95 backdrop-blur-sm px-4 py-3 rounded-xl shadow-lg border border-primary/20 max-w-[160px]">
-                    <p className="text-sm font-bold text-foreground">-35% Linhas Finas</p>
-                    <p className="text-[11px] text-muted-foreground">Resultados em 28 dias</p>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Callout 4 - Bottom Left Lower - Vegan */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 1.6, duration: 0.5 }}
-                className="absolute bottom-12 lg:bottom-16 -left-2 lg:-left-16"
-              >
-                <div className="flex items-end gap-1 flex-row-reverse">
-                  <svg width="40" height="30" viewBox="0 0 40 30" fill="none" className="text-primary -ml-2">
-                    <path d="M38 15 C30 15, 20 20, 5 25" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                    <path d="M10 18 L5 25 L14 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                  <div className="bg-white/95 backdrop-blur-sm px-4 py-3 rounded-xl shadow-lg border border-primary/20 max-w-[160px]">
-                    <p className="text-sm font-bold text-foreground">100% Vegano</p>
-                    <p className="text-[11px] text-muted-foreground">Cruelty-Free certificado</p>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-
-            {/* Mobile - Product only, no callouts */}
+            {/* Product image */}
             <motion.img
               src={areumSerum}
               alt="Areum Sérum Facial"
-              className="relative z-10 w-64 drop-shadow-2xl float-animation md:hidden"
+              className="relative z-10 w-64 md:w-80 lg:w-96 drop-shadow-2xl float-animation"
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
             />
 
-            {/* Mobile - Simple badges below product */}
-            <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex gap-2 md:hidden">
-              <span className="bg-white/90 px-3 py-1.5 rounded-full text-xs font-medium shadow-md">+96% Hidratação</span>
-              <span className="bg-white/90 px-3 py-1.5 rounded-full text-xs font-medium shadow-md">Vegano</span>
-            </div>
+            {/* Floating text badges - replacing arrows */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8, duration: 0.5 }}
+              className="absolute top-10 right-0 md:top-20 md:-right-10 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg border border-rose-100"
+            >
+              <span className="font-heading font-medium text-foreground">✨ Sofisticação</span>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.0, duration: 0.5 }}
+              className="absolute bottom-20 right-0 md:bottom-40 md:-right-10 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg border border-rose-100"
+            >
+              <span className="font-heading font-medium text-foreground">⚡ Glow Imediato</span>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.2, duration: 0.5 }}
+              className="absolute bottom-10 left-0 md:bottom-20 md:-left-10 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg border border-rose-100"
+            >
+              <span className="font-heading font-medium text-foreground">🧬 Nanotecnologia</span>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.4, duration: 0.5 }}
+              className="absolute top-20 left-0 md:top-32 md:-left-10 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg border border-rose-100"
+            >
+              <span className="font-heading font-medium text-foreground">👸 Pele de Protagonista</span>
+            </motion.div>
+
           </motion.div>
         </div>
       </div>
