@@ -1,31 +1,30 @@
 import { motion } from "framer-motion";
 import { Droplets, Sparkles, Shield, Leaf } from "lucide-react";
-import areumLogo from "@/assets/areum-logo.png";
 
 const benefits = [
   {
     icon: Droplets,
-    title: "Hidratação Profunda",
+    title: "Hidratação Instantânea",
     description:
-      "Partículas nanoencapsuladas que penetram nas camadas mais profundas da pele, entregando hidratação onde realmente importa.",
+      "Sinta sua pele 96% mais hidratada em 8 semanas. Adeus pele seca e opaca. Bem-vinda à luminosidade que você vê nas coreanas.",
   },
   {
     icon: Sparkles,
-    title: "Efeito Glass Skin",
+    title: "Pele de Protagonista",
     description:
-      "Aquele brilho saudável de 'pele de vidro' que você vê nos doramas coreanos. Luminosidade natural, sem oleosidade.",
+      "Aquele efeito de 'pele de vidro' dos K-Dramas que todo mundo inveja. Brilho saudável, transparência e zero oleosidade.",
   },
   {
     icon: Shield,
-    title: "Firmeza & Elasticidade",
+    title: "Menos Rugas em 28 Dias",
     description:
-      "Colágeno Vegetal de alta absorção que ajuda a manter a estrutura da pele jovem, suave e firme.",
+      "Redução de até 35% na aparência de linhas finas comprovada em estudos. Sua pele mais firme, lisa e rejuvenescida.",
   },
   {
     icon: Leaf,
-    title: "100% Vegano",
+    title: "Livre de Culpa",
     description:
-      "Fórmula clean beauty, livre de ingredientes de origem animal, cruelty-free e dermatologicamente testada.",
+      "100% vegano, cruelty-free e dermatologicamente testado. Beleza sem compromissos com a sua pele ou com o planeta.",
   },
 ];
 
@@ -72,8 +71,8 @@ const Benefits = () => {
             <span className="text-gradient-rose">Areum</span>?
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Nanotecnologia que faz a diferença: ativos encapsulados que chegam
-            onde outros séruns não alcançam.
+            Resultados visíveis que vão fazer você se olhar no espelho e pensar:
+            "Finalmente encontrei O produto."
           </p>
         </motion.div>
 
