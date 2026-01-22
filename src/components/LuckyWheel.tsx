@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Gift, Loader2, Sparkles } from "lucide-react";
+import { X, Gift, Loader2, Sparkles, Download } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { useToast } from "@/components/ui/use-toast";
@@ -8,23 +8,14 @@ import { supabase } from "@/lib/supabase";
 
 type Step = "form" | "wheel" | "result";
 
-// Colors: Rose Gold, Champagne, Soft White
-const COLORS = [
-    "#E8A0BF", // Rose Gold (Win)
-    "#FDF2F8", // Soft Pink (Lose)
-    "#E8A0BF", // Rose Gold (Win)
-    "#FDF2F8", // Soft Pink (Lose)
-    "#E8A0BF", // Rose Gold (Win)
-    "#FDF2F8", // Soft Pink (Lose)
-];
-
+// Alternating Win/Lose
 const PRIZES = [
-    { label: "Ebook Segredos para a pele de protagonista", value: "win", color: COLORS[0] },
-    { label: "Tente de novo amanhã", value: "lose", color: COLORS[1] },
-    { label: "Ebook Segredos para a pele de protagonista", value: "win", color: COLORS[2] },
-    { label: "Tente de novo amanhã", value: "lose", color: COLORS[3] },
-    { label: "Ebook Segredos para a pele de protagonista", value: "win", color: COLORS[4] },
-    { label: "Tente de novo amanhã", value: "lose", color: COLORS[5] },
+    { label: "Ganhou!", value: "win", color: "#E8A0BF" },
+    { label: "Não Ganhou", value: "lose", color: "#FDF2F8" },
+    { label: "Ganhou!", value: "win", color: "#E8A0BF" },
+    { label: "Não Ganhou", value: "lose", color: "#FDF2F8" },
+    { label: "Ganhou!", value: "win", color: "#E8A0BF" },
+    { label: "Não Ganhou", value: "lose", color: "#FDF2F8" },
 ];
 
 const LuckyWheel = () => {
@@ -43,7 +34,6 @@ const LuckyWheel = () => {
     const { toast } = useToast();
 
     useEffect(() => {
-        // Persistence Check
         const wonBefore = localStorage.getItem("areum_wheel_won");
         if (wonBefore) return;
 
@@ -60,8 +50,6 @@ const LuckyWheel = () => {
 
     const handleClose = () => {
         setIsOpen(false);
-        // If closed without playing, we treat as played for today to avoid spam
-        // Unless we want to be aggressive. Let's be polite.
         localStorage.setItem("areum_wheel_date", new Date().toDateString());
     };
 
@@ -70,15 +58,19 @@ const LuckyWheel = () => {
         setLoading(true);
 
         try {
-            if (formData.email) {
-                await supabase.from('leads').insert([{
-                    name: formData.name,
-                    email: formData.email,
-                    whatsapp: formData.whatsapp
-                }]);
+            const { error } = await supabase.from('leads').insert([{
+                name: formData.name,
+                email: formData.email,
+                whatsapp: formData.whatsapp
+            }]);
+
+            if (error) {
+                console.error('Supabase error:', error);
+            } else {
+                console.log('Lead saved successfully!');
             }
         } catch (err) {
-            console.error(err);
+            console.error('Error:', err);
         }
 
         setLoading(false);
@@ -86,17 +78,13 @@ const LuckyWheel = () => {
     };
 
     const spinWheel = () => {
-        const spins = 8; // More spins for dramatic effect
-        // Logic: 50% chance perfectly alternating
         const randomIndex = Math.floor(Math.random() * PRIZES.length);
         const targetSegment = randomIndex;
 
+        const spins = 8;
         const segmentAngle = 360 / PRIZES.length;
         const extraDegrees = 360 * spins;
-
-        // Center of the segment
         const winningAngle = extraDegrees + (360 - (targetSegment * segmentAngle)) - (segmentAngle / 2);
-        // Add small random flutter (+/- 5 deg) for realism
         const randomOffset = (Math.random() * 10) - 5;
 
         setRotation(winningAngle + randomOffset);
@@ -106,9 +94,12 @@ const LuckyWheel = () => {
             setPrize(wonPrize);
             setStep("result");
 
+            // Update prize in Supabase
             try {
                 if (formData.email) {
-                    await supabase.from('leads').update({ prize_won: wonPrize.label }).eq('email', formData.email);
+                    await supabase.from('leads')
+                        .update({ prize_won: wonPrize.value === "win" ? "Ebook Segredos" : "Não ganhou" })
+                        .eq('email', formData.email);
                 }
             } catch (e) {
                 console.error(e);
@@ -116,11 +107,25 @@ const LuckyWheel = () => {
 
             if (wonPrize.value === "win") {
                 localStorage.setItem("areum_wheel_won", "true");
-                // Confetti effect could go here
             } else {
                 localStorage.setItem("areum_wheel_date", new Date().toDateString());
             }
-        }, 5500); // 5.5s spin time
+        }, 5500);
+    };
+
+    const handleDownloadEbook = () => {
+        // Direct download from public folder
+        const link = document.createElement('a');
+        link.href = '/ebook-areum-glass-skin.html';
+        link.download = 'Ebook-Segredos-Pele-Protagonista.html';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        toast({
+            title: "Download iniciado!",
+            description: "Seu ebook está sendo baixado.",
+        });
     };
 
     if (!isOpen) return null;
@@ -133,16 +138,16 @@ const LuckyWheel = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="absolute inset-0 bg-black/40 backdrop-blur-sm transition-all"
+                    className="absolute inset-0 bg-black/50 backdrop-blur-sm"
                     onClick={handleClose}
                 />
 
-                {/* Modal Card */}
+                {/* Modal */}
                 <motion.div
-                    initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                    initial={{ opacity: 0, scale: 0.9, y: 20 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    className="relative w-full max-w-[420px] bg-white rounded-[32px] shadow-2xl overflow-hidden z-50 ring-4 ring-white/50"
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    className="relative w-full max-w-[420px] bg-gradient-to-br from-white to-pink-50 rounded-[32px] shadow-2xl overflow-hidden z-50 border-2 border-pink-100"
                 >
                     <button
                         onClick={handleClose}
@@ -151,81 +156,84 @@ const LuckyWheel = () => {
                         <X size={18} className="text-gray-500" />
                     </button>
 
-                    {/* Decorative Header */}
-                    <div className="bg-gradient-to-br from-[#FFF5F7] to-[#FFF0F5] pt-8 pb-6 px-6 text-center relative overflow-hidden">
-                        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
-                        <div className="absolute -top-10 -right-10 w-32 h-32 bg-primary/5 rounded-full blur-3xl" />
-                        <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-gold/10 rounded-full blur-3xl" />
+                    {/* Header with sparkles */}
+                    <div className="bg-gradient-to-br from-pink-100 via-rose-50 to-pink-100 pt-8 pb-6 px-6 text-center relative overflow-hidden">
+                        {/* Sparkle decorations */}
+                        <div className="absolute top-2 left-4 text-yellow-400 animate-pulse">✨</div>
+                        <div className="absolute top-6 right-8 text-yellow-300 animate-pulse delay-100">✨</div>
+                        <div className="absolute bottom-2 left-1/4 text-pink-300 animate-pulse delay-200">✨</div>
+                        <div className="absolute top-4 left-1/3 text-yellow-200 animate-pulse delay-150">⭐</div>
+                        <div className="absolute bottom-4 right-1/4 text-yellow-400 animate-pulse delay-300">✨</div>
 
-                        <div className="inline-flex items-center justify-center w-12 h-12 bg-white rounded-2xl shadow-md mb-4 rotate-3">
-                            <Gift className="text-primary w-6 h-6" />
+                        <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br from-pink-400 to-rose-500 rounded-2xl shadow-lg mb-4">
+                            <Gift className="text-white w-7 h-7" />
                         </div>
 
-                        <h3 className="font-heading text-2xl font-bold text-gray-800 mb-1">
-                            Sorteio Exclusivo
+                        <h3 className="font-heading text-2xl font-bold text-gray-800 mb-1 flex items-center justify-center gap-2">
+                            <Sparkles className="w-5 h-5 text-yellow-500" />
+                            Roleta da Sorte
+                            <Sparkles className="w-5 h-5 text-yellow-500" />
                         </h3>
-                        <p className="text-sm text-gray-500 font-medium">
-                            Você tem uma chance de ganhar hoje!
+                        <p className="text-sm text-gray-600 font-medium">
+                            Gire e descubra se você ganhou!
                         </p>
                     </div>
 
-                    <div className="p-8 pt-4">
+                    <div className="p-6">
                         {step === "form" && (
                             <form onSubmit={handleFormSubmit} className="space-y-4">
-                                <div className="space-y-3">
-                                    <Input
-                                        placeholder="Seu Nome"
-                                        required
-                                        className="bg-gray-50 border-gray-100 focus:bg-white transition-all h-12 rounded-xl"
-                                        value={formData.name}
-                                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                    />
-                                    <Input
-                                        type="email"
-                                        placeholder="Seu Melhor E-mail"
-                                        required
-                                        className="bg-gray-50 border-gray-100 focus:bg-white transition-all h-12 rounded-xl"
-                                        value={formData.email}
-                                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                    />
-                                    <Input
-                                        type="tel"
-                                        placeholder="WhatsApp (DDD + Número)"
-                                        required
-                                        className="bg-gray-50 border-gray-100 focus:bg-white transition-all h-12 rounded-xl"
-                                        value={formData.whatsapp}
-                                        onChange={(e) => setFormData({ ...formData, whatsapp: e.target.value })}
-                                    />
-                                </div>
+                                <Input
+                                    placeholder="Seu Nome"
+                                    required
+                                    className="bg-white border-pink-100 focus:border-pink-300 h-12 rounded-xl"
+                                    value={formData.name}
+                                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                />
+                                <Input
+                                    type="email"
+                                    placeholder="Seu Melhor E-mail"
+                                    required
+                                    className="bg-white border-pink-100 focus:border-pink-300 h-12 rounded-xl"
+                                    value={formData.email}
+                                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                />
+                                <Input
+                                    type="tel"
+                                    placeholder="WhatsApp (DDD + Número)"
+                                    required
+                                    className="bg-white border-pink-100 focus:border-pink-300 h-12 rounded-xl"
+                                    value={formData.whatsapp}
+                                    onChange={(e) => setFormData({ ...formData, whatsapp: e.target.value })}
+                                />
 
                                 <Button
                                     type="submit"
-                                    className="w-full bg-gradient-to-r from-primary to-rose-400 hover:from-primary/90 hover:to-rose-500 text-white h-12 rounded-xl shadow-lg shadow-primary/25 font-semibold text-base transition-all hover:scale-[1.02] active:scale-[0.98]"
+                                    className="w-full bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white h-12 rounded-xl shadow-lg font-semibold text-base"
                                     disabled={loading}
                                 >
                                     {loading ? <Loader2 className="animate-spin mr-2" /> : <Sparkles className="w-4 h-4 mr-2" />}
-                                    Quero testar minha sorte
+                                    Quero Girar a Roleta!
                                 </Button>
                             </form>
                         )}
 
                         {step === "wheel" && (
                             <div className="flex flex-col items-center">
-                                <div className="relative w-[280px] h-[280px] mb-8">
-                                    {/* Outer Ring */}
-                                    <div className="absolute inset-0 rounded-full border-[10px] border-white shadow-xl z-20 pointer-events-none" />
-                                    <div className="absolute -inset-1 rounded-full bg-gradient-to-br from-gold/50 to-primary/50 -z-10 blur-sm" />
+                                <div className="relative w-[260px] h-[260px] mb-6">
+                                    {/* Sparkle border effect */}
+                                    <div className="absolute -inset-2 rounded-full bg-gradient-to-r from-yellow-200 via-pink-200 to-yellow-200 animate-spin-slow opacity-50 blur-sm" style={{ animationDuration: '8s' }} />
+
+                                    {/* Outer glow */}
+                                    <div className="absolute -inset-1 rounded-full bg-gradient-to-br from-pink-300 to-rose-400 shadow-xl" />
 
                                     {/* Pointer */}
-                                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-30 drop-shadow-md">
-                                        <div className="w-8 h-10 bg-white clip-path-polygon-[50%_100%,_0_0,_100%_0] flex items-center justify-center">
-                                            <div className="w-6 h-8 bg-primary clip-path-polygon-[50%_100%,_0_0,_100%_0]" />
-                                        </div>
+                                    <div className="absolute -top-2 left-1/2 -translate-x-1/2 z-30">
+                                        <div className="w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-t-[20px] border-t-pink-500 drop-shadow-lg" />
                                     </div>
 
                                     {/* Wheel */}
                                     <div
-                                        className="w-full h-full rounded-full overflow-hidden relative shadow-inner"
+                                        className="absolute inset-1 rounded-full overflow-hidden shadow-inner"
                                         style={{
                                             transform: `rotate(${rotation}deg)`,
                                             transition: "transform 5.5s cubic-bezier(0.15, 0, 0.15, 1)"
@@ -234,38 +242,38 @@ const LuckyWheel = () => {
                                         {PRIZES.map((p, i) => (
                                             <div
                                                 key={i}
-                                                className="absolute w-[50%] h-[50%] top-0 right-0 origin-bottom-left"
+                                                className="absolute w-[50%] h-[50%] top-0 right-0 origin-bottom-left flex items-center justify-center"
                                                 style={{
-                                                    transform: `rotate(${i * 60}deg) skewY(-30deg)`, // 6 segments = 60deg slices
+                                                    transform: `rotate(${i * 60}deg) skewY(-30deg)`,
                                                     background: p.color,
+                                                    borderRight: '1px solid rgba(255,255,255,0.3)',
                                                 }}
                                             >
-                                                <div
-                                                    className="absolute left-0 bottom-0 w-full h-full flex items-center justify-center p-4 text-center"
+                                                <span
+                                                    className={`text-[11px] font-bold ${p.value === 'win' ? 'text-white' : 'text-gray-500'}`}
                                                     style={{
-                                                        transform: 'skewY(30deg) rotate(30deg) translate(20px, -60px)', // Center text in slice
+                                                        transform: 'skewY(30deg) rotate(30deg)',
+                                                        textShadow: p.value === 'win' ? '0 1px 2px rgba(0,0,0,0.3)' : 'none',
                                                     }}
                                                 >
-                                                    <span className={`text-[10px] font-bold leading-tight ${p.value === 'win' ? 'text-white drop-shadow-sm' : 'text-gray-400'}`}>
-                                                        {p.label.length > 20 ? "Ebook Glass Skin" : p.label}
-                                                    </span>
-                                                </div>
+                                                    {p.label}
+                                                </span>
                                             </div>
                                         ))}
                                     </div>
 
-                                    {/* Center Hub */}
-                                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-lg z-30 flex items-center justify-center">
-                                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-rose-300" />
+                                    {/* Center hub */}
+                                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 bg-white rounded-full shadow-lg z-20 flex items-center justify-center border-4 border-pink-200">
+                                        <span className="text-2xl">🎀</span>
                                     </div>
                                 </div>
 
                                 <Button
                                     onClick={spinWheel}
                                     disabled={rotation > 0}
-                                    className="w-full bg-gradient-to-r from-primary to-rose-400 text-white h-12 rounded-xl shadow-lg shadow-primary/25 font-bold tracking-wide"
+                                    className="w-full bg-gradient-to-r from-pink-500 to-rose-500 text-white h-12 rounded-xl shadow-lg font-bold"
                                 >
-                                    {rotation > 0 ? "TORCENDO..." : "GIRAR AGORA!"}
+                                    {rotation > 0 ? "Girando... ✨" : "GIRAR AGORA! 🎉"}
                                 </Button>
                             </div>
                         )}
@@ -275,35 +283,32 @@ const LuckyWheel = () => {
                                 <motion.div
                                     initial={{ scale: 0, rotate: -180 }}
                                     animate={{ scale: 1, rotate: 0 }}
-                                    type="spring"
-                                    className="w-20 h-20 bg-gradient-to-br from-green-400 to-emerald-500 rounded-2xl mx-auto flex items-center justify-center shadow-lg shadow-green-200 mb-6"
+                                    className={`w-20 h-20 ${prize.value === 'win' ? 'bg-gradient-to-br from-green-400 to-emerald-500' : 'bg-gradient-to-br from-gray-300 to-gray-400'} rounded-2xl mx-auto flex items-center justify-center shadow-lg mb-6`}
                                 >
-                                    {prize.value === "win" ? (
-                                        <span className="text-4xl">📚</span>
-                                    ) : (
-                                        <span className="text-4xl">😢</span>
-                                    )}
+                                    <span className="text-4xl">{prize.value === "win" ? "🎉" : "😢"}</span>
                                 </motion.div>
 
                                 <h4 className="text-2xl font-bold text-gray-800 mb-2">
-                                    {prize.value === "win" ? "VOCÊ GANHOU!" : "Não foi dessa vez..."}
+                                    {prize.value === "win" ? "PARABÉNS! 🎊" : "Não foi dessa vez..."}
                                 </h4>
 
-                                <p className="text-gray-500 mb-8 leading-relaxed">
+                                <p className="text-gray-500 mb-6 leading-relaxed">
                                     {prize.value === "win" ? (
                                         <>
-                                            Parabéns! Você ganhou nosso ebook exclusivo<br />
-                                            <strong className="text-primary">"Segredos para a pele de protagonista"</strong>
+                                            Você ganhou nosso ebook exclusivo<br />
+                                            <strong className="text-pink-600">"Segredos para a Pele de Protagonista"</strong>
                                         </>
                                     ) : (
-                                        "Infelizmente você não ganhou hoje. Mas não desanime, amanhã você pode tentar de novo!"
+                                        "Infelizmente você não ganhou hoje. Tente novamente amanhã!"
                                     )}
                                 </p>
 
                                 {prize.value === "win" ? (
-                                    <Button className="w-full bg-green-500 hover:bg-green-600 text-white h-12 rounded-xl shadow-lg shadow-green-200 font-semibold text-lg animate-pulse"
-                                        onClick={() => window.open("/ebook-areum-glass-skin.pdf", "_blank")} // Assuming ebook is public
+                                    <Button
+                                        className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white h-14 rounded-xl shadow-lg font-bold text-lg"
+                                        onClick={handleDownloadEbook}
                                     >
+                                        <Download className="w-5 h-5 mr-2" />
                                         BAIXAR EBOOK AGORA
                                     </Button>
                                 ) : (

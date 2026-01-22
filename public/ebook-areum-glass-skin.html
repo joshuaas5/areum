@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Glass Skin - AREUM</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Noto+Serif+KR:wght@300;400;500&family=Montserrat:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            /* GOLD - Mais dourado e brilhante */
+            --gold-dark: #9A7B4F;
+            --gold: #D4AF37;
+            --gold-light: #F0D875;
+            --gold-shimmer: #FFF3C4;
+            --gold-glow: rgba(212, 175, 55, 0.3);
+            /* ROSÉ - Cor de página bem rosa */
+            --rose-deep: #C99999;
+            --rose: #DDB8B8;
+            --rose-light: #E8CCCC;
+            --rose-pale: #EED6D6;
+            --rose-page: #F2DCDC;
+            /* TEXT - Mais contraste para legibilidade */
+            --text-dark: #000000;
+            --text-body: #111111;
+            --text-soft: #222222;
+            --text-muted: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-body);
+            background: #1E1A1A;
+            line-height: 1.9;
+            font-weight: 500;
+            /* Increased weight */
+            font-size: 12px;
+        }
+
+        /* PÁGINA */
+        .page {
+            width: 210mm;
+            height: 297mm;
+            margin: 20px auto;
+            padding: 50px 55px;
+            background: var(--rose-page);
+            page-break-after: always;
+            page-break-inside: avoid;
+            position: relative;
+            overflow: hidden;
+            /* Optimized shadow */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ==================== BRILHOS E SHIMMER ==================== */
+        .page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(ellipse at 20% 20%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .sparkle-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                radial-gradient(circle at 10% 15%, var(--gold) 1px, transparent 1px),
+                radial-gradient(circle at 90% 25%, var(--gold) 1px, transparent 1px),
+                radial-gradient(circle at 25% 85%, var(--gold) 1px, transparent 1px),
+                radial-gradient(circle at 75% 90%, var(--gold) 1px, transparent 1px),
+                radial-gradient(circle at 50% 5%, var(--gold) 1px, transparent 1px),
+                radial-gradient(circle at 5% 50%, var(--gold) 1px, transparent 1px),
+                radial-gradient(circle at 95% 60%, var(--gold) 1px, transparent 1px);
+            opacity: 0.25;
+            pointer-events: none;
+        }
+
+        /* ==================== BORDAS DOURADAS ==================== */
+        .gold-border-frame {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border: 1px solid var(--gold);
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .gold-border-frame::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            right: 8px;
+            bottom: 8px;
+            border: 1px solid var(--gold-light);
+            opacity: 0.5;
+        }
+
+        /* ==================== CORNER ORNAMENTS - Mais elaborados ==================== */
+        .corner-ornament {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+        }
+
+        .corner-ornament::before,
+        .corner-ornament::after {
+            content: '';
+            position: absolute;
+            background: var(--gold);
+        }
+
+        .corner-ornament.top-left {
+            top: 25px;
+            left: 25px;
+        }
+
+        .corner-ornament.top-left::before {
+            top: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light), transparent);
+        }
+
+        .corner-ornament.top-left::after {
+            top: 0;
+            left: 0;
+            width: 2px;
+            height: 40px;
+            background: linear-gradient(180deg, var(--gold), var(--gold-light), transparent);
+        }
+
+        .corner-ornament.top-right {
+            top: 25px;
+            right: 25px;
+        }
+
+        .corner-ornament.top-right::before {
+            top: 0;
+            right: 0;
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(270deg, var(--gold), var(--gold-light), transparent);
+        }
+
+        .corner-ornament.top-right::after {
+            top: 0;
+            right: 0;
+            width: 2px;
+            height: 40px;
+            background: linear-gradient(180deg, var(--gold), var(--gold-light), transparent);
+        }
+
+        .corner-ornament.bottom-left {
+            bottom: 25px;
+            left: 25px;
+        }
+
+        .corner-ornament.bottom-left::before {
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light), transparent);
+        }
+
+        .corner-ornament.bottom-left::after {
+            bottom: 0;
+            left: 0;
+            width: 2px;
+            height: 40px;
+            background: linear-gradient(0deg, var(--gold), var(--gold-light), transparent);
+        }
+
+        .corner-ornament.bottom-right {
+            bottom: 25px;
+            right: 25px;
+        }
+
+        .corner-ornament.bottom-right::before {
+            bottom: 0;
+            right: 0;
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(270deg, var(--gold), var(--gold-light), transparent);
+        }
+
+        .corner-ornament.bottom-right::after {
+            bottom: 0;
+            right: 0;
+            width: 2px;
+            height: 40px;
+            background: linear-gradient(0deg, var(--gold), var(--gold-light), transparent);
+        }
+
+        /* ==================== DIVIDERS DOURADOS ==================== */
+        .gold-line {
+            height: 2px;
+            background: linear-gradient(90deg, transparent 5%, var(--gold-light) 20%, var(--gold) 50%, var(--gold-light) 80%, transparent 95%);
+            margin: 18px auto;
+            width: 140px;
+            box-shadow: 0 0 10px var(--gold-glow);
+        }
+
+        .ornament-star {
+            text-align: center;
+            color: var(--gold);
+            font-size: 12px;
+            letter-spacing: 15px;
+            text-shadow: 0 0 10px var(--gold-glow);
+            margin: 20px 0;
+        }
+
+        .fancy-divider {
+            text-align: center;
+            margin: 25px 0;
+            position: relative;
+        }
+
+        .fancy-divider::before {
+            content: '─────── ✦ ───────';
+            color: var(--gold);
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 8px var(--gold-glow);
+        }
+
+        /* ==================== CAPA ==================== */
+        .cover {
+            background: linear-gradient(180deg,
+                    var(--rose-page) 0%,
+                    var(--rose-pale) 15%,
+                    var(--rose-light) 30%,
+                    var(--gold-shimmer) 50%,
+                    var(--rose-light) 70%,
+                    var(--rose-pale) 85%,
+                    var(--rose-page) 100%);
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .cover::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .cover-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cover-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 78px;
+            font-weight: 400;
+            letter-spacing: 16px;
+            background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold) 30%, var(--gold-light) 50%, var(--gold) 70%, var(--gold-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 5px;
+            text-align: center;
+            text-shadow: 0 0 30px var(--gold-glow);
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        }
+
+        .cover-korean {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 24px;
+            font-weight: 400;
+            color: var(--gold);
+            letter-spacing: 10px;
+            margin-bottom: 45px;
+            text-align: center;
+            text-shadow: 0 0 15px var(--gold-glow);
+        }
+
+        .cover-divider {
+            width: 200px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold-light), var(--gold), var(--gold-light), transparent);
+            margin: 0 auto 45px;
+            position: relative;
+            box-shadow: 0 0 15px var(--gold-glow);
+        }
+
+        .cover-divider::before,
+        .cover-divider::after {
+            content: '✦';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gold);
+            font-size: 10px;
+            text-shadow: 0 0 10px var(--gold-glow);
+        }
+
+        .cover-divider::before {
+            left: -20px;
+        }
+
+        .cover-divider::after {
+            right: -20px;
+        }
+
+        .cover-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 40px;
+            font-weight: 400;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            line-height: 1.35;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        .cover-subtitle {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--gold-dark);
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .cover-poem {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 16px;
+            color: var(--text-soft);
+            line-height: 2;
+            text-align: center;
+            max-width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border-top: 1px solid var(--gold-light);
+            border-bottom: 1px solid var(--gold-light);
+        }
+
+        .cover-footer {
+            position: absolute;
+            bottom: 45px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 10px;
+            color: var(--gold);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px var(--gold-glow);
+        }
+
+        /* ==================== CABEÇALHO DAS PÁGINAS ==================== */
+        .page-header {
+            text-align: center;
+            margin-bottom: 30px;
+            flex-shrink: 0;
+        }
+
+        .page-header-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 18px;
+            font-weight: 400;
+            letter-spacing: 6px;
+            background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-header-korean {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 10px;
+            color: var(--gold);
+            letter-spacing: 4px;
+            margin-top: 3px;
+        }
+
+        /* ==================== TIPOGRAFIA ==================== */
+        .chapter-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 11px;
+            color: var(--gold);
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 5px;
+            text-shadow: 0 0 8px var(--gold-glow);
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 30px;
+            font-weight: 400;
+            color: var(--text-dark);
+            text-align: center;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+
+        h1 .gold {
+            background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 22px;
+            font-weight: 400;
+            color: var(--gold-dark);
+            margin-bottom: 12px;
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        p {
+            font-size: 12px;
+            margin-bottom: 12px;
+            text-align: justify;
+            color: var(--text-body);
+            line-height: 1.85;
+            font-weight: 400;
+        }
+
+        .lead {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 17px;
+            font-style: italic;
+            font-weight: 500;
+            color: var(--text-dark);
+            text-align: center;
+            line-height: 1.75;
+            margin-bottom: 20px;
+        }
+
+        .content-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ==================== TEXTO ESPECIAL ==================== */
+        .korean-word {
+            font-family: 'Noto Serif KR', serif;
+            display: inline-block;
+            padding: 3px 10px;
+            background: linear-gradient(135deg, var(--gold-shimmer), var(--rose-pale));
+            border: 1px solid var(--gold);
+            border-radius: 4px;
+            color: var(--gold-dark);
+            font-weight: 400;
+            box-shadow: 0 2px 8px var(--gold-glow);
+        }
+
+        .highlight {
+            background: linear-gradient(180deg, transparent 50%, var(--gold-shimmer) 50%);
+            padding: 0 3px;
+        }
+
+        /* ==================== QUOTE BLOCKS ==================== */
+        .quote-block {
+            position: relative;
+            padding: 28px 40px;
+            margin: 22px 0;
+            text-align: center;
+            background: linear-gradient(135deg, var(--rose-pale) 0%, var(--gold-shimmer) 50%, var(--rose-pale) 100%);
+            border-radius: 6px;
+            border: 1px solid var(--gold);
+            box-shadow: 0 4px 20px var(--gold-glow);
+        }
+
+        .quote-block::before,
+        .quote-block::after {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 45px;
+            color: var(--gold);
+            position: absolute;
+            line-height: 1;
+        }
+
+        .quote-block::before {
+            content: '"';
+            top: 8px;
+            left: 15px;
+        }
+
+        .quote-block::after {
+            content: '"';
+            bottom: -10px;
+            right: 15px;
+        }
+
+        .quote-block p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 17px;
+            font-style: italic;
+            font-weight: 500;
+            color: var(--text-dark);
+            text-align: center;
+            margin: 0;
+            line-height: 1.65;
+        }
+
+        /* ==================== WISDOM CARDS ==================== */
+        .wisdom-card {
+            background: linear-gradient(135deg, white 0%, var(--gold-shimmer) 100%);
+            border: 1px solid var(--gold);
+            border-radius: 6px;
+            padding: 20px 22px;
+            margin: 14px 0;
+            position: relative;
+            box-shadow: 0 4px 15px var(--gold-glow);
+        }
+
+        .wisdom-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold-light), var(--gold), var(--gold-light));
+            border-radius: 6px 6px 0 0;
+        }
+
+        .wisdom-card-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 36px;
+            font-weight: 400;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: absolute;
+            top: 12px;
+            right: 18px;
+            line-height: 1;
+        }
+
+        .wisdom-card-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 17px;
+            color: var(--gold-dark);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .wisdom-card-title .korean {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 11px;
+            color: var(--gold);
+        }
+
+        .wisdom-card p {
+            margin-bottom: 0;
+            font-size: 12px;
+            line-height: 1.75;
+            color: var(--text-body);
+        }
+
+        /* ==================== STEP CARDS ==================== */
+        .step-flow {
+            position: relative;
+            padding-left: 30px;
+            margin-top: 15px;
+        }
+
+        .step-flow::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 15px;
+            bottom: 15px;
+            width: 2px;
+            background: linear-gradient(180deg, var(--gold-light), var(--gold), var(--gold-light));
+            box-shadow: 0 0 10px var(--gold-glow);
+        }
+
+        .step-item {
+            position: relative;
+            padding: 10px 0 10px 20px;
+        }
+
+        .step-item::before {
+            content: '';
+            position: absolute;
+            left: -22px;
+            top: 16px;
+            width: 8px;
+            height: 8px;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            border-radius: 50%;
+            box-shadow: 0 0 0 3px var(--rose-page), 0 0 0 5px var(--gold), 0 0 15px var(--gold-glow);
+        }
+
+        .step-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 16px;
+            color: var(--gold-dark);
+            margin-bottom: 2px;
+        }
+
+        .step-korean {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 10px;
+            color: var(--gold);
+            margin-bottom: 6px;
+        }
+
+        .step-item p {
+            margin-bottom: 0;
+            font-size: 11.5px;
+            line-height: 1.75;
+            color: var(--text-body);
+        }
+
+        /* ==================== INSIGHT BOX ==================== */
+        .insight-box {
+            background: linear-gradient(135deg, white, var(--gold-shimmer));
+            border-left: 3px solid var(--gold);
+            padding: 16px 20px;
+            margin: 20px 0;
+            border-radius: 0 6px 6px 0;
+            box-shadow: 0 3px 12px var(--gold-glow);
+        }
+
+        .insight-box-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 12px;
+            color: var(--gold);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            text-shadow: 0 0 8px var(--gold-glow);
+        }
+
+        .insight-box p {
+            margin-bottom: 0;
+            font-size: 12px;
+            line-height: 1.75;
+            color: var(--text-body);
+        }
+
+        /* ==================== PRODUCT SECTION ==================== */
+        .product-intro {
+            text-align: center;
+            padding: 30px 28px;
+            background: linear-gradient(180deg, white, var(--gold-shimmer), var(--rose-light), var(--gold-shimmer), white);
+            border-radius: 10px;
+            margin: 20px 0;
+            position: relative;
+            border: 2px solid var(--gold);
+            box-shadow: 0 6px 25px var(--gold-glow);
+        }
+
+        .product-intro::before {
+            content: '';
+            position: absolute;
+            inset: 6px;
+            border: 1px solid var(--gold-light);
+            border-radius: 6px;
+            pointer-events: none;
+        }
+
+        .product-intro h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 12px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin: 0 0 12px 0;
+            text-shadow: 0 0 8px var(--gold-glow);
+        }
+
+        .product-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 22px;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+
+        .product-tagline {
+            font-size: 10px;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            margin-bottom: 18px;
+        }
+
+        .product-benefits {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            text-align: center;
+        }
+
+        .benefit {
+            padding: 14px 12px;
+            background: white;
+            border-radius: 6px;
+            border: 1px solid var(--gold);
+            box-shadow: 0 2px 8px var(--gold-glow);
+        }
+
+        .benefit-icon {
+            font-size: 22px;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .benefit p {
+            font-size: 10px;
+            margin: 0;
+            text-align: center;
+            color: var(--text-dark);
+        }
+
+        /* ==================== TIPS SECTION ==================== */
+        .tip-item {
+            display: flex;
+            gap: 14px;
+            margin: 12px 0;
+            padding: 14px 18px;
+            background: linear-gradient(135deg, white, var(--gold-shimmer));
+            border: 1px solid var(--gold);
+            border-radius: 6px;
+            align-items: flex-start;
+            box-shadow: 0 3px 12px var(--gold-glow);
+        }
+
+        .tip-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+            box-shadow: 0 3px 10px var(--gold-glow);
+        }
+
+        .tip-content h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 15px;
+            color: var(--gold-dark);
+            margin-bottom: 5px;
+        }
+
+        .tip-content p {
+            margin: 0;
+            font-size: 11.5px;
+            line-height: 1.7;
+            color: var(--text-body);
+        }
+
+        /* ==================== CTA PAGE ==================== */
+        .cta-page {
+            background: linear-gradient(180deg,
+                    var(--rose-page) 0%,
+                    var(--rose-pale) 15%,
+                    var(--rose-light) 30%,
+                    var(--gold-shimmer) 50%,
+                    var(--rose-light) 70%,
+                    var(--rose-pale) 85%,
+                    var(--rose-page) 100%);
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .cta-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 350px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 50px;
+            font-weight: 400;
+            letter-spacing: 12px;
+            background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light), var(--gold), var(--gold-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        .cta-korean {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 16px;
+            color: var(--gold);
+            letter-spacing: 6px;
+            margin-bottom: 35px;
+            text-align: center;
+            text-shadow: 0 0 10px var(--gold-glow);
+        }
+
+        .cta-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            color: var(--text-dark);
+            margin-bottom: 18px;
+            line-height: 1.4;
+            text-align: center;
+        }
+
+        .cta-closing {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 16px;
+            font-style: italic;
+            color: var(--text-soft);
+            margin-bottom: 35px;
+            line-height: 1.7;
+            text-align: center;
+        }
+
+        .cta-link {
+            display: inline-block;
+            padding: 14px 45px;
+            background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light));
+            color: white;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            border-radius: 25px;
+            box-shadow: 0 6px 25px var(--gold-glow), 0 0 30px var(--gold-glow);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-instagram {
+            margin-top: 35px;
+            font-size: 11px;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        .cta-instagram a {
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* ==================== NÚMERO DA PÁGINA ==================== */
+        .page-number {
+            position: absolute;
+            bottom: 25px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 12px;
+            color: var(--gold);
+            letter-spacing: 2px;
+            z-index: 1;
+        }
+
+        /* ==================== PRINT ==================== */
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                background: white;
+            }
+
+            .page {
+                box-shadow: none;
+                margin: 0;
+                page-break-after: always;
+                page-break-inside: avoid;
+            }
+        }
+
+        @page {
+            size: A4;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ==================== CAPA ==================== -->
+    <div class="page cover">
+        <div class="sparkle-pattern"></div>
+        <div class="gold-border-frame"></div>
+        <div class="corner-ornament top-left"></div>
+        <div class="corner-ornament top-right"></div>
+        <div class="corner-ornament bottom-left"></div>
+        <div class="corner-ornament bottom-right"></div>
+
+        <div class="cover-content">
+            <div class="cover-logo">AREUM</div>
+            <div class="cover-korean">아름</div>
+
+            <div class="cover-divider"></div>
+
+            <h1 class="cover-title">O Segredo Coreano<br>para a Pele Perfeita</h1>
+            <p class="cover-subtitle">Guia Glass Skin</p>
+
+            <p class="cover-poem">
+                "Como a luz da manhã<br>
+                que toca suavemente o orvalho,<br>
+                assim deve brilhar a pele —<br>
+                natural, luminosa, viva."
+            </p>
+        </div>
+
+        <div class="cover-footer">Areum ✦ K-Beauty ✦ Brasil</div>
+    </div>
+
+    <!-- ==================== PÁGINA 2: INTRODUÇÃO ==================== -->
+    <div class="page">
+        <div class="sparkle-pattern"></div>
+        <div class="gold-border-frame"></div>
+        <div class="page-header">
+            <div class="page-header-logo">AREUM</div>
+            <div class="page-header-korean">아름</div>
+        </div>
+
+        <div class="content-area">
+            <div class="chapter-label">Introdução</div>
+            <h1>O Sonho do <span class="gold">Glass Skin</span></h1>
+            <div class="gold-line"></div>
+
+            <p class="lead">Há uma beleza que não se compra em potes,<br>mas se cultiva todos os dias.</p>
+
+            <p>Você já percebeu como algumas mulheres parecem ter uma luz própria? Não é maquiagem. Não é filtro. É algo
+                que vem de dentro — uma pele tão bem cuidada que reflete a luz naturalmente, como se estivesse sempre
+                úmida, sempre descansada.</p>
+
+            <p>Na Coreia, esse conceito tem um nome: <span class="korean-word">유리 피부</span> — Glass Skin, ou "Pele de
+                Vidro". É a ideia de uma pele tão transparente e luminosa que parece feita de cristal.</p>
+
+            <div class="quote-block">
+                <p>A verdadeira beleza não esconde — ela revela. Revela cuidado, revela atenção, revela amor próprio.
+                </p>
+            </div>
+
+            <p>Neste guia, você vai descobrir a <span class="highlight">filosofia de cuidado</span> que transformou a
+                forma como milhões de mulheres asiáticas enxergam sua própria pele. Uma abordagem que prioriza a saúde
+                da pele acima de tudo.</p>
+
+            <p>Aqui você vai entender por que a abordagem coreana funciona, quais são os passos essenciais de uma rotina
+                que realmente entrega resultados, e como pequenos hábitos diários podem fazer uma diferença enorme ao
+                longo do tempo.</p>
+
+            <div class="insight-box">
+                <div class="insight-box-label">✦ Uma reflexão</div>
+                <p>Na correria do dia a dia, é fácil esquecer de cuidar de si mesma. Mas os minutos que você dedica à
+                    sua pele todas as manhãs e noites são minutos dedicados a você. É um momento de pausa, de respirar,
+                    de se olhar no espelho e dizer: "eu mereço esse cuidado".</p>
+            </div>
+        </div>
+
+        <div class="page-number">02</div>
+    </div>
+
+    <!-- ==================== PÁGINA 3: FILOSOFIA ==================== -->
+    <div class="page">
+        <div class="sparkle-pattern"></div>
+        <div class="gold-border-frame"></div>
+        <div class="page-header">
+            <div class="page-header-logo">AREUM</div>
+            <div class="page-header-korean">아름</div>
+        </div>
+
+        <div class="content-area">
+            <div class="chapter-label">Capítulo Um</div>
+            <h1>A Filosofia da <span class="gold">Beleza Coreana</span></h1>
+            <div class="gold-line"></div>
+
+            <p class="lead">Menos correção, mais prevenção.<br>Menos cobertura, mais transparência.</p>
+
+            <p>A palavra <span class="korean-word">아름</span> significa "beleza" em coreano. Mas não uma beleza qualquer
+                — é a beleza natural, a que vem de dentro, a que não precisa de máscaras para existir.</p>
+
+            <p>A abordagem coreana é fundamentalmente diferente da ocidental. Enquanto no Brasil tendemos a focar em
+                corrigir problemas depois que eles aparecem, na Coreia o foco está em <span
+                    class="highlight">prevenir</span> — em manter a pele tão saudável que os problemas simplesmente não
+                aparecem.</p>
+
+            <div class="wisdom-card">
+                <div class="wisdom-card-number">1</div>
+                <div class="wisdom-card-title">
+                    Hidratação como Fundamento
+                    <span class="korean">수분</span>
+                </div>
+                <p>Se há um segredo que define o skincare coreano, é este: água. Muita água. A pele hidratada é
+                    naturalmente mais luminosa, mais elástica, mais saudável.</p>
+            </div>
+
+            <div class="wisdom-card">
+                <div class="wisdom-card-number">2</div>
+                <div class="wisdom-card-title">
+                    Gentileza com a Pele
+                    <span class="korean">부드러움</span>
+                </div>
+                <p>Nada de esfregar com força, nada de produtos agressivos. A pele é tratada com delicadeza, como algo
+                    precioso. Os gestos são suaves, os ingredientes são gentis.</p>
+            </div>
+
+            <div class="wisdom-card">
+                <div class="wisdom-card-number">3</div>
+                <div class="wisdom-card-title">
+                    Ritual, Não Tarefa
+                    <span class="korean">의식</span>
+                </div>
+                <p>O momento do skincare não é uma obrigação — é um presente que você dá a si mesma. É pausa, é respiro,
+                    é autocuidado.</p>
+            </div>
+        </div>
+
+        <div class="page-number">03</div>
+    </div>
+
+    <!-- ==================== PÁGINA 4: ROTINA ==================== -->
+    <div class="page">
+        <div class="sparkle-pattern"></div>
+        <div class="gold-border-frame"></div>
+        <div class="page-header">
+            <div class="page-header-logo">AREUM</div>
+            <div class="page-header-korean">아름</div>
+        </div>
+
+        <div class="content-area">
+            <div class="chapter-label">Capítulo Dois</div>
+            <h1>A Rotina <span class="gold">Essencial</span></h1>
+            <div class="gold-line"></div>
+
+            <p class="lead">Cinco etapas. Poucos minutos.<br>Uma transformação que começa hoje.</p>
+
+            <p>Esqueça rotinas de 10 ou 12 passos. A versão moderna do K-Beauty é simplificada e prática. Com apenas
+                cinco etapas bem executadas, você consegue resultados incríveis. Use os produtos que você já tem — o
+                importante é a consistência.</p>
+
+            <div class="step-flow">
+                <div class="step-item">
+                    <div class="step-name">Limpeza</div>
+                    <div class="step-korean">클렌징</div>
+                    <p>A base de tudo. Uma pele limpa absorve melhor os tratamentos. À noite, remova bem a maquiagem e o
+                        protetor solar. De manhã, uma limpeza leve já basta.</p>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-name">Preparo</div>
+                    <div class="step-korean">토너</div>
+                    <p>Prepare a pele para receber os ativos. Um bom tônico hidratante equilibra o pH e deixa a pele
+                        receptiva. Aplique com as mãos, pressionando suavemente.</p>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-name">Tratamento</div>
+                    <div class="step-korean">세럼</div>
+                    <p>O coração da rotina. O sérum carrega os ativos em alta concentração. Ingredientes como Ácido
+                        Hialurônico e Colágeno Vegano criam aquele efeito luminoso e "rechonchudo".</p>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-name">Hidratação</div>
+                    <div class="step-korean">수분크림</div>
+                    <p>A barreira final. O hidratante "sela" tudo o que você aplicou antes, impedindo que a água
+                        evapore. Protege e mantém os ativos no lugar.</p>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-name">Proteção</div>
+                    <div class="step-korean">선크림</div>
+                    <p>De manhã, sempre. Não existe skincare completo sem proteção solar. O sol é responsável por boa
+                        parte do envelhecimento visível da pele.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-number">04</div>
+    </div>
+
+    <!-- ==================== PÁGINA 5: INGREDIENTE ==================== -->
+    <div class="page">
+        <div class="sparkle-pattern"></div>
+        <div class="gold-border-frame"></div>
+        <div class="page-header">
+            <div class="page-header-logo">AREUM</div>
+            <div class="page-header-korean">아름</div>
+        </div>
+
+        <div class="content-area">
+            <div class="chapter-label">Capítulo Três</div>
+            <h1>O Poder da <span class="gold">Hidratação Profunda</span></h1>
+            <div class="gold-line"></div>
+
+            <p class="lead">Quando a pele está verdadeiramente hidratada,<br>ela simplesmente brilha.</p>
+
+            <p>Existe um ingrediente que se tornou praticamente sinônimo de Glass Skin: o <span class="highlight">Ácido
+                    Hialurônico</span>. O que muita gente não sabe é que ele já existe
+                naturalmente na nossa pele — só que, com o tempo, vamos perdendo essa reserva natural.</p>
+
+            <p>O que torna esse ingrediente tão especial? Sua capacidade única de atrair e reter água. Uma única
+                molécula de Ácido Hialurônico pode segurar até 1.000 vezes seu peso em água. Isso significa pele
+                "rechonchuda", macia, com aquela aparência de quem dormiu bem.</p>
+
+            <div class="quote-block">
+                <p>Hidratar a pele de verdade não é molhar — é fazer com que ela retenha essa água por dentro, nas
+                    camadas onde realmente importa.</p>
+            </div>
+
+            <p>Combinado com <span class="highlight">Colágeno Vegano</span>, que fornece os aminoácidos necessários para
+                manter a estrutura da pele firme e elástica, você tem uma fórmula que entrega hidratação profunda que
+                você consegue ver e sentir.</p>
+
+            <div class="product-intro">
+                <h3>✦ Sérum Areum ✦</h3>
+                <div class="product-name">Ácido Hialurônico + Colágeno Vegano</div>
+                <div class="product-tagline">Tecnologia brasileira de nanoencapsulação</div>
+
+                <div class="product-benefits">
+                    <div class="benefit">
+                        <span class="benefit-icon">💧</span>
+                        <p>Hidratação profunda</p>
+                    </div>
+                    <div class="benefit">
+                        <span class="benefit-icon">✨</span>
+                        <p>Luminosidade natural</p>
+                    </div>
+                    <div class="benefit">
+                        <span class="benefit-icon">🌿</span>
+                        <p>100% vegano</p>
+                    </div>
+                    <div class="benefit">
+                        <span class="benefit-icon">🧬</span>
+                        <p>Nanotecnologia</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-number">05</div>
+    </div>
+
+    <!-- ==================== PÁGINA 6: DICAS ==================== -->
+    <div class="page">
+        <div class="sparkle-pattern"></div>
+        <div class="gold-border-frame"></div>
+        <div class="page-header">
+            <div class="page-header-logo">AREUM</div>
+            <div class="page-header-korean">아름</div>
+        </div>
+
+        <div class="content-area">
+            <div class="chapter-label">Capítulo Quatro</div>
+            <h1>Segredos de <span class="gold">Quem Sabe</span></h1>
+            <div class="gold-line"></div>
+
+            <p class="lead">Pequenos hábitos que fazem<br>uma grande diferença.</p>
+
+            <div class="tip-item">
+                <div class="tip-icon">💧</div>
+                <div class="tip-content">
+                    <h4>Aplique em Pele Úmida</h4>
+                    <p>O Ácido Hialurônico funciona melhor quando aplicado em pele levemente úmida. Ele "puxa" essa água
+                        para dentro, potencializando a hidratação.</p>
+                </div>
+            </div>
+
+            <div class="tip-item">
+                <div class="tip-icon">🌙</div>
+                <div class="tip-content">
+                    <h4>A Noite é Sua Aliada</h4>
+                    <p>Durante o sono, sua pele entra em modo de restauração. É quando ela absorve melhor os ativos. O
+                        sérum aplicado à noite trabalha enquanto você descansa.</p>
+                </div>
+            </div>
+
+            <div class="tip-item">
+                <div class="tip-icon">👐</div>
+                <div class="tip-content">
+                    <h4>A Técnica do Pat-Pat</h4>
+                    <p>Em vez de esfregar, faça movimentos suaves de pressão com as palmas das mãos. Isso ajuda a
+                        absorção e evita irritar a pele.</p>
+                </div>
+            </div>
+
+            <div class="tip-item">
+                <div class="tip-icon">⏰</div>
+                <div class="tip-content">
+                    <h4>Consistência Vence Intensidade</h4>
+                    <p>Melhor uma rotina simples todos os dias do que uma elaborada de vez em quando. Mantenha o ritual
+                        por 7 dias para notar a diferença.</p>
+                </div>
+            </div>
+
+            <div class="insight-box">
+                <div class="insight-box-label">✦ Lembre-se</div>
+                <p>A água que você bebe também conta. A hidratação de dentro para fora faz diferença. Tente manter pelo
+                    menos 2 litros de água por dia — sua pele vai agradecer.</p>
+            </div>
+        </div>
+
+        <div class="page-number">06</div>
+    </div>
+
+    <!-- ==================== PÁGINA 7: CTA ==================== -->
+    <div class="page cta-page">
+        <div class="sparkle-pattern"></div>
+        <div class="gold-border-frame"></div>
+        <div class="corner-ornament top-left"></div>
+        <div class="corner-ornament top-right"></div>
+        <div class="corner-ornament bottom-left"></div>
+        <div class="corner-ornament bottom-right"></div>
+
+        <div class="cta-content">
+            <div class="cta-logo">AREUM</div>
+            <div class="cta-korean">아름</div>
+
+            <h2 class="cta-title">Sua Jornada<br>Começa Agora</h2>
+
+            <p class="cta-closing">
+                Você merece ter uma pele que te faça sentir confiante.<br>
+                Uma pele que brilha naturalmente.<br>
+                Uma pele que conta a história de quem cuida de si mesma.
+            </p>
+
+            <div class="ornament-star">✦ ✦ ✦</div>
+
+            <p style="font-size: 11px; color: var(--text-soft); margin-bottom: 28px; text-align: center;">
+                O Sérum Areum foi desenvolvido para ser o coração da sua rotina K-Beauty — simples, eficaz e
+                transformador.
+            </p>
+
+            <a href="https://areum.lovable.app" class="cta-link">Conhecer o Sérum</a>
+
+            <div class="cta-instagram">
+                <p style="margin-bottom: 4px; text-align: center;">Acompanhe nossa jornada</p>
+                <a href="#">@areum.skincare</a>
+            </div>
+        </div>
+
+        <div class="cover-footer">Areum ✦ K-Beauty ✦ Brasil ✦ 2026</div>
+    </div>
+
+</body>
+
+</html>
