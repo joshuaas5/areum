@@ -47,19 +47,28 @@
 
         /* PÁGINA */
         .page {
-            width: 210mm;
-            height: 297mm;
-            margin: 20px auto;
-            padding: 50px 55px;
+            width: 100%;
+            max-width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            padding: 40px 25px;
             background: var(--rose-page);
             page-break-after: always;
             page-break-inside: avoid;
             position: relative;
             overflow: hidden;
             /* Optimized shadow */
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
+        }
+
+        @media (min-width: 768px) {
+            .page {
+                margin: 20px auto;
+                padding: 50px 55px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            }
         }
 
         /* ==================== BRILHOS E SHIMMER ==================== */
@@ -923,6 +932,25 @@
         @page {
             size: A4;
             margin: 0;
+        }
+
+        /* Mobile Optimization */
+        @media screen and (max-width: 768px) {
+            body {
+                background: var(--rose-page);
+            }
+
+            .page {
+                box-shadow: none;
+                border-bottom: 5px solid var(--gold);
+            }
+
+            .sparkle-pattern,
+            .gold-border-frame,
+            .corner-ornament {
+                display: none;
+                /* Hide heavy decorations on mobile */
+            }
         }
     </style>
 </head>

@@ -171,11 +171,11 @@ const LuckyWheel = () => {
 
                         <h3 className="font-heading text-2xl font-bold text-gray-800 mb-1 flex items-center justify-center gap-2">
                             <Sparkles className="w-5 h-5 text-yellow-500" />
-                            Roleta da Sorte
+                            Queremos te dar um presente!
                             <Sparkles className="w-5 h-5 text-yellow-500" />
                         </h3>
                         <p className="text-sm text-gray-600 font-medium">
-                            Gire e descubra se você ganhou!
+                            Rode a roleta e tente a sorte!
                         </p>
                     </div>
 
