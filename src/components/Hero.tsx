@@ -158,16 +158,16 @@ const Hero = () => {
               transition={{ duration: 0.3 }}
             />
 
-            {/* Hand-drawn style badges */}
+            {/* Hand-drawn style badges - Adjusted positioning */}
             {/* Top Right */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.8, duration: 0.5 }}
-              className="absolute top-[15%] -right-2 md:top-[20%] md:-right-4 lg:-right-6 z-20"
+              className="absolute top-[5%] -right-0 md:top-[12%] md:-right-6 lg:-right-4 z-20"
             >
-              <div className="bg-white/95 backdrop-blur-sm px-4 py-2 rounded-sm shadow-sketch border-2 border-primary/15 -rotate-2 transform hover:rotate-0 transition-transform duration-300">
-                <span className="font-heading text-lg md:text-xl font-medium text-foreground tracking-wide">Sofisticação</span>
+              <div className="bg-white/95 backdrop-blur-sm px-5 py-2.5 rounded-sm shadow-sketch border-2 border-primary/15 transition-transform duration-300">
+                <span className="font-heading text-lg md:text-xl font-medium text-foreground tracking-wide whitespace-nowrap">Sofisticação</span>
               </div>
             </motion.div>
 
@@ -176,10 +176,10 @@ const Hero = () => {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 1.0, duration: 0.5 }}
-              className="absolute bottom-[25%] -right-2 md:bottom-[30%] md:-right-4 lg:-right-6 z-20"
+              className="absolute bottom-[20%] -right-0 md:bottom-[22%] md:-right-6 lg:-right-4 z-20"
             >
-              <div className="bg-white/95 backdrop-blur-sm px-4 py-2 rounded-sm shadow-sketch border-2 border-primary/15 rotate-1 transform hover:rotate-0 transition-transform duration-300">
-                <span className="font-heading text-lg md:text-xl font-medium text-foreground tracking-wide">Glow imediato</span>
+              <div className="bg-white/95 backdrop-blur-sm px-5 py-2.5 rounded-sm shadow-sketch border-2 border-primary/15 transition-transform duration-300">
+                <span className="font-heading text-lg md:text-xl font-medium text-foreground tracking-wide whitespace-nowrap">Glow imediato</span>
               </div>
             </motion.div>
 
@@ -188,10 +188,10 @@ const Hero = () => {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 1.2, duration: 0.5 }}
-              className="absolute bottom-[15%] -left-2 md:bottom-[20%] md:-left-4 lg:-left-6 z-20"
+              className="absolute bottom-[10%] -left-0 md:bottom-[12%] md:-left-6 lg:-left-4 z-20"
             >
-              <div className="bg-white/95 backdrop-blur-sm px-4 py-2 rounded-sm shadow-sketch border-2 border-primary/15 -rotate-1 transform hover:rotate-0 transition-transform duration-300">
-                <span className="font-heading text-lg md:text-xl font-medium text-foreground tracking-wide">Nanotecnologia</span>
+              <div className="bg-white/95 backdrop-blur-sm px-5 py-2.5 rounded-sm shadow-sketch border-2 border-primary/15 transition-transform duration-300">
+                <span className="font-heading text-lg md:text-xl font-medium text-foreground tracking-wide whitespace-nowrap">Nanotecnologia</span>
               </div>
             </motion.div>
 
@@ -200,10 +200,10 @@ const Hero = () => {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 1.4, duration: 0.5 }}
-              className="absolute top-[25%] -left-2 md:top-[30%] md:-left-4 lg:-left-6 z-20"
+              className="absolute top-[15%] -left-0 md:top-[18%] md:-left-6 lg:-left-4 z-20"
             >
-              <div className="bg-white/95 backdrop-blur-sm px-4 py-2 rounded-sm shadow-sketch border-2 border-primary/15 rotate-2 transform hover:rotate-0 transition-transform duration-300">
-                <span className="font-heading text-lg md:text-xl font-medium text-foreground tracking-wide">Pele de protagonista</span>
+              <div className="bg-white/95 backdrop-blur-sm px-5 py-2.5 rounded-sm shadow-sketch border-2 border-primary/15 transition-transform duration-300">
+                <span className="font-heading text-lg md:text-xl font-medium text-foreground tracking-wide whitespace-nowrap">Pele de protagonista</span>
               </div>
             </motion.div>
 

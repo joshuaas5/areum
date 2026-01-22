@@ -34,7 +34,7 @@
         body {
             font-family: 'Montserrat', sans-serif;
             color: var(--text-body);
-            background: linear-gradient(180deg, var(--rose-page) 0%, #FFF8FA 50%, var(--rose-page) 100%);
+            background: linear-gradient(180deg, #FFE4EC 0%, #FFF5F8 50%, #FFE4EC 100%);
             line-height: 1.8;
             font-size: 17px;
         }
@@ -49,9 +49,32 @@
         .header {
             text-align: center;
             padding: 50px 20px;
-            background: linear-gradient(180deg, #FFE4EC 0%, var(--rose-page) 100%);
-            position: relative;
-            overflow: hidden;
+            background: linear-gradient(180deg, #FFE4EC 0%, #FFF5F8 100%);
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        @media print {
+            body {
+                background: linear-gradient(180deg, #FFF0F5 0%, #FFF8FA 50%, #FFF0F5 100%) !important;
+                -webkit-print-color-adjust: exact;
+            }
+
+            .section,
+            .tech-highlight,
+            .nano-box,
+            .tip-box,
+            .ingredient-card,
+            .stat-card,
+            .step {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            .header {
+                background: #FFE4EC !important;
+                -webkit-print-color-adjust: exact;
+            }
         }
 
         .header::before {
@@ -540,7 +563,11 @@
             color: var(--green);
             font-weight: bold;
             font-size: 18px;
-        }
+
+            @page {
+                margin: 0;
+                size: A4;
+            }
     </style>
 </head>
 
