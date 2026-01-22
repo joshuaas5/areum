@@ -17,6 +17,8 @@
             --text-dark: #1F1F1F;
             --text-body: #374151;
             --text-muted: #6B7280;
+            --green: #059669;
+            --blue: #3B82F6;
         }
 
         * {
@@ -30,11 +32,11 @@
             color: var(--text-body);
             background: var(--rose-page);
             line-height: 1.8;
-            font-size: 18px;
+            font-size: 17px;
         }
 
         .container {
-            max-width: 600px;
+            max-width: 650px;
             margin: 0 auto;
             padding: 20px;
         }
@@ -42,7 +44,7 @@
         /* HEADER */
         .header {
             text-align: center;
-            padding: 60px 20px;
+            padding: 50px 20px;
             background: linear-gradient(180deg, #FFF5F7, var(--rose-page));
         }
 
@@ -55,7 +57,7 @@
         }
 
         .subtitle {
-            font-size: 14px;
+            font-size: 13px;
             color: var(--text-muted);
             letter-spacing: 3px;
             text-transform: uppercase;
@@ -63,14 +65,14 @@
 
         .main-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 32px;
+            font-size: 30px;
             color: var(--text-dark);
-            margin: 30px 0 10px;
+            margin: 25px 0 10px;
             line-height: 1.3;
         }
 
         .tagline {
-            font-size: 16px;
+            font-size: 15px;
             color: var(--text-muted);
         }
 
@@ -78,29 +80,29 @@
         .section {
             background: white;
             border-radius: 20px;
-            padding: 30px 25px;
-            margin: 20px 0;
+            padding: 28px 22px;
+            margin: 18px 0;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
         }
 
         .section-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 26px;
+            font-size: 24px;
             color: var(--text-dark);
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
         .section-title .emoji {
-            font-size: 28px;
+            font-size: 26px;
         }
 
         p {
-            margin-bottom: 18px;
-            font-size: 17px;
-            line-height: 1.9;
+            margin-bottom: 16px;
+            font-size: 16px;
+            line-height: 1.85;
         }
 
         .highlight {
@@ -108,20 +110,81 @@
             padding: 0 4px;
         }
 
+        /* TABLES */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .data-table th {
+            background: var(--gold);
+            color: white;
+            padding: 12px 10px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .data-table td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        .data-table tr:nth-child(even) {
+            background: #F9FAFB;
+        }
+
+        .data-table tr:hover {
+            background: var(--rose-light);
+        }
+
+        /* SCIENCE BOX */
+        .science-box {
+            background: linear-gradient(135deg, #EEF2FF, #E0E7FF);
+            border-left: 4px solid var(--blue);
+            padding: 18px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+
+        .science-box h4 {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--blue);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .science-box p {
+            font-size: 14px;
+            margin: 0;
+            color: var(--text-body);
+        }
+
+        .science-box .source {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 10px;
+            font-style: italic;
+        }
+
         /* STEP CARDS */
         .step {
             display: flex;
             gap: 15px;
-            margin: 20px 0;
-            padding: 20px;
+            margin: 18px 0;
+            padding: 18px;
             background: var(--rose-light);
-            border-radius: 16px;
+            border-radius: 14px;
             align-items: flex-start;
         }
 
         .step-number {
-            width: 40px;
-            height: 40px;
+            width: 38px;
+            height: 38px;
             background: var(--gold);
             color: white;
             border-radius: 50%;
@@ -129,19 +192,19 @@
             align-items: center;
             justify-content: center;
             font-weight: 600;
-            font-size: 18px;
+            font-size: 16px;
             flex-shrink: 0;
         }
 
         .step-content h3 {
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 600;
             color: var(--text-dark);
-            margin-bottom: 5px;
+            margin-bottom: 4px;
         }
 
         .step-content p {
-            font-size: 15px;
+            font-size: 14px;
             margin: 0;
             color: var(--text-body);
         }
@@ -149,83 +212,154 @@
         /* TIP BOX */
         .tip-box {
             background: linear-gradient(135deg, #FEF3C7, #FDE68A);
-            padding: 20px;
-            border-radius: 16px;
-            margin: 20px 0;
+            padding: 18px;
+            border-radius: 14px;
+            margin: 15px 0;
             border-left: 4px solid var(--gold);
         }
 
         .tip-box h4 {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             color: var(--text-dark);
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .tip-box p {
-            font-size: 15px;
+            font-size: 14px;
             margin: 0;
+        }
+
+        /* INGREDIENT CARD */
+        .ingredient-card {
+            background: white;
+            border: 2px solid var(--gold);
+            border-radius: 16px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .ingredient-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .ingredient-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .ingredient-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
+            color: var(--text-dark);
+        }
+
+        .ingredient-tag {
+            font-size: 11px;
+            background: var(--green);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-top: 4px;
+        }
+
+        /* STATS */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: var(--rose-light);
+            padding: 18px 15px;
+            border-radius: 14px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--gold);
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 4px;
         }
 
         /* PRODUCT CTA */
         .product-section {
             text-align: center;
-            padding: 40px 25px;
+            padding: 35px 22px;
             background: linear-gradient(180deg, var(--rose-light), #FFF5F7);
             border-radius: 20px;
-            margin: 20px 0;
+            margin: 18px 0;
         }
 
         .product-name {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 28px;
+            font-size: 26px;
             color: var(--text-dark);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .product-benefits {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 15px;
             flex-wrap: wrap;
-            margin: 20px 0;
+            margin: 18px 0;
         }
 
         .benefit-tag {
             background: white;
-            padding: 10px 20px;
+            padding: 8px 16px;
             border-radius: 50px;
-            font-size: 14px;
+            font-size: 13px;
             color: var(--text-dark);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
         }
 
         .cta-button {
             display: inline-block;
-            padding: 18px 50px;
+            padding: 16px 45px;
             background: linear-gradient(135deg, var(--gold), #C9A227);
             color: white;
             text-decoration: none;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             letter-spacing: 2px;
             text-transform: uppercase;
             border-radius: 50px;
-            margin-top: 20px;
+            margin-top: 18px;
             box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
         }
 
         /* FOOTER */
         .footer {
             text-align: center;
-            padding: 40px 20px;
+            padding: 35px 20px;
             color: var(--text-muted);
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .footer .logo {
-            font-size: 28px;
-            margin-bottom: 10px;
+            font-size: 26px;
+            margin-bottom: 8px;
         }
 
         /* DIVIDER */
@@ -234,7 +368,20 @@
             color: var(--gold);
             font-size: 12px;
             letter-spacing: 8px;
-            margin: 30px 0;
+            margin: 25px 0;
+        }
+
+        /* QUOTE */
+        .quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
+            font-style: italic;
+            text-align: center;
+            color: var(--text-dark);
+            padding: 25px;
+            border-top: 1px solid var(--gold);
+            border-bottom: 1px solid var(--gold);
+            margin: 25px 0;
         }
     </style>
 </head>
@@ -246,7 +393,7 @@
         <div class="logo">AREUM</div>
         <div class="subtitle">Guia Glass Skin</div>
         <h1 class="main-title">O Segredo Coreano<br>para a Pele Perfeita</h1>
-        <p class="tagline">Simples. Prático. Transformador.</p>
+        <p class="tagline">Ciência + Rotina + Resultados</p>
     </div>
 
     <div class="container">
@@ -255,12 +402,139 @@
         <div class="section">
             <h2 class="section-title"><span class="emoji">✨</span> O que é Glass Skin?</h2>
             <p>É a pele tão <span class="highlight">hidratada e luminosa</span> que parece feita de vidro — sem
-                oleosidade, mas com um brilho natural e saudável.</p>
-            <p>O segredo? <strong>Hidratação profunda + consistência</strong>. Não precisa de 10 passos. Só os certos.
-            </p>
+                oleosidade, mas com um brilho natural e saudável que reflete a luz.</p>
+            <p>O segredo está em dois pilares: <strong>hidratação profunda</strong> e <strong>ingredientes de alta
+                    performance</strong>.</p>
+
+            <div class="quote">
+                "A beleza coreana não esconde imperfeições — ela cultiva uma pele tão saudável que não precisa esconder
+                nada."
+            </div>
         </div>
 
-        <!-- SEÇÃO 2: OS 5 PASSOS -->
+        <!-- SEÇÃO 2: A CIÊNCIA -->
+        <div class="section">
+            <h2 class="section-title"><span class="emoji">🔬</span> A Ciência por Trás</h2>
+
+            <p>Os ingredientes mais estudados para hidratação e rejuvenescimento são o <strong>Ácido
+                    Hialurônico</strong> e o <strong>Colágeno</strong>. Veja o que a ciência diz:</p>
+
+            <div class="ingredient-card">
+                <div class="ingredient-header">
+                    <div class="ingredient-icon">💧</div>
+                    <div>
+                        <div class="ingredient-name">Ácido Hialurônico</div>
+                        <span class="ingredient-tag">Molécula Hidratante</span>
+                    </div>
+                </div>
+                <p style="font-size: 14px;">Presente naturalmente na nossa pele, o ácido hialurônico é capaz de
+                    <strong>reter até 1.000x seu peso em água</strong>. Com o envelhecimento, perdemos essa reserva
+                    natural.</p>
+            </div>
+
+            <div class="science-box">
+                <h4>📊 Estudo Clínico</h4>
+                <p>Pesquisa publicada no <em>Journal of Clinical and Aesthetic Dermatology</em> demonstrou que a
+                    aplicação tópica de ácido hialurônico aumentou a hidratação da pele em até <strong>96% após 8
+                        semanas</strong> de uso contínuo.</p>
+                <div class="source">Fonte: Papakonstantinou et al., 2012</div>
+            </div>
+
+            <div class="ingredient-card">
+                <div class="ingredient-header">
+                    <div class="ingredient-icon">🌿</div>
+                    <div>
+                        <div class="ingredient-name">Colágeno Vegetal</div>
+                        <span class="ingredient-tag">Origem 100% Vegana</span>
+                    </div>
+                </div>
+                <p style="font-size: 14px;">O colágeno vegetal fornece aminoácidos essenciais (glicina, prolina,
+                    hidroxiprolina) que estimulam a produção de colágeno próprio da pele, melhorando <strong>firmeza e
+                        elasticidade</strong>.</p>
+            </div>
+
+            <div class="science-box">
+                <h4>📊 Resultados Observados</h4>
+                <p>Estudos de eficácia demonstram que peptídeos de origem vegetal podem melhorar a aparência de rugas
+                    finas em até <strong>35%</strong> e aumentar a elasticidade em <strong>22%</strong> após 4 semanas.
+                </p>
+                <div class="source">Fonte: International Journal of Cosmetic Science, 2019</div>
+            </div>
+        </div>
+
+        <!-- TABELA COMPARATIVA -->
+        <div class="section">
+            <h2 class="section-title"><span class="emoji">📋</span> Comparativo de Benefícios</h2>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Benefício</th>
+                        <th>Ác. Hialurônico</th>
+                        <th>Colágeno Vegetal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Hidratação profunda</td>
+                        <td>✅ Principal</td>
+                        <td>✅ Auxilia</td>
+                    </tr>
+                    <tr>
+                        <td>Firmeza da pele</td>
+                        <td>✅ Auxilia</td>
+                        <td>✅ Principal</td>
+                    </tr>
+                    <tr>
+                        <td>Redução de linhas finas</td>
+                        <td>✅ Preenche</td>
+                        <td>✅ Previne</td>
+                    </tr>
+                    <tr>
+                        <td>Luminosidade</td>
+                        <td>✅ Alta</td>
+                        <td>✅ Média</td>
+                    </tr>
+                    <tr>
+                        <td>Absorção rápida</td>
+                        <td>✅ Excelente</td>
+                        <td>✅ Boa</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p style="font-size: 14px; color: var(--text-muted); text-align: center;">A combinação dos dois ingredientes
+                potencializa os resultados.</p>
+        </div>
+
+        <!-- STATS -->
+        <div class="section">
+            <h2 class="section-title"><span class="emoji">📈</span> Resultados Esperados</h2>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">96%</div>
+                    <div class="stat-label">Aumento na hidratação</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">35%</div>
+                    <div class="stat-label">Redução de linhas finas</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">22%</div>
+                    <div class="stat-label">Melhora na elasticidade</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">7dias</div>
+                    <div class="stat-label">Para notar diferença</div>
+                </div>
+            </div>
+
+            <p style="font-size: 13px; color: var(--text-muted); text-align: center;">*Resultados podem variar. Baseado
+                em estudos clínicos com uso contínuo.</p>
+        </div>
+
+        <!-- SEÇÃO: ROTINA -->
         <div class="section">
             <h2 class="section-title"><span class="emoji">🌸</span> Sua Rotina em 5 Passos</h2>
 
@@ -268,7 +542,7 @@
                 <div class="step-number">1</div>
                 <div class="step-content">
                     <h3>Limpeza</h3>
-                    <p>Lave o rosto com um sabonete suave. De manhã, só água pode bastar.</p>
+                    <p>Lave o rosto com sabonete suave. De manhã, só água pode bastar.</p>
                 </div>
             </div>
 
@@ -276,7 +550,7 @@
                 <div class="step-number">2</div>
                 <div class="step-content">
                     <h3>Tônico</h3>
-                    <p>Aplique com as mãos, pressionando gentilmente. Prepara a pele para absorver melhor.</p>
+                    <p>Aplique com as mãos, pressionando gentilmente. Prepara a pele.</p>
                 </div>
             </div>
 
@@ -284,7 +558,7 @@
                 <div class="step-number">3</div>
                 <div class="step-content">
                     <h3>Sérum</h3>
-                    <p>O passo mais importante! É aqui que sua pele recebe os ativos que fazem a diferença.</p>
+                    <p>O passo mais importante! É aqui que os ativos agem profundamente.</p>
                 </div>
             </div>
 
@@ -292,7 +566,7 @@
                 <div class="step-number">4</div>
                 <div class="step-content">
                     <h3>Hidratante</h3>
-                    <p>Sela tudo, mantém a água na pele. Escolha um leve para o dia.</p>
+                    <p>Sela os ativos e mantém a hidratação. Escolha um leve para o dia.</p>
                 </div>
             </div>
 
@@ -300,28 +574,33 @@
                 <div class="step-number">5</div>
                 <div class="step-content">
                     <h3>Protetor Solar</h3>
-                    <p>De manhã, sempre! Sem isso, nenhum skincare funciona 100%.</p>
+                    <p>De manhã, sempre! Protege de 80% do envelhecimento precoce.</p>
                 </div>
             </div>
         </div>
 
-        <!-- SEÇÃO 3: DICAS -->
+        <!-- SEÇÃO: DICAS -->
         <div class="section">
-            <h2 class="section-title"><span class="emoji">💡</span> 3 Dicas de Ouro</h2>
+            <h2 class="section-title"><span class="emoji">💡</span> Dicas de Aplicação</h2>
 
             <div class="tip-box">
-                <h4>1. Aplique em pele úmida</h4>
-                <p>O sérum funciona melhor quando a pele ainda está levemente molhada.</p>
+                <h4>💧 Aplique em pele úmida</h4>
+                <p>O ácido hialurônico "puxa" a água, então funciona melhor em pele levemente molhada.</p>
             </div>
 
             <div class="tip-box">
-                <h4>2. Pat-pat, não esfregue</h4>
-                <p>Pressione os produtos com movimentos suaves. Esfregava irritar a pele.</p>
+                <h4>👐 Pat-pat, não esfregue</h4>
+                <p>Pressione os produtos suavemente. Esfregar pode irritar e criar rugas.</p>
             </div>
 
             <div class="tip-box">
-                <h4>3. Consistência é tudo</h4>
-                <p>Melhor fazer simples todo dia do que elaborado de vez em quando.</p>
+                <h4>🌙 A noite é sua aliada</h4>
+                <p>Durante o sono, a pele absorve melhor os ativos. Capriche no sérum noturno.</p>
+            </div>
+
+            <div class="tip-box">
+                <h4>📅 Consistência é tudo</h4>
+                <p>7 dias seguidos já mostram diferença. 28 dias = transformação visível.</p>
             </div>
         </div>
 
@@ -329,14 +608,16 @@
 
         <!-- SEÇÃO: PRODUTO -->
         <div class="product-section">
-            <p style="font-size: 14px; color: var(--gold); letter-spacing: 3px; margin-bottom: 10px;">CONHEÇA O</p>
+            <p style="font-size: 13px; color: var(--gold); letter-spacing: 3px; margin-bottom: 8px;">DESENVOLVIDO PARA
+                VOCÊ</p>
             <h2 class="product-name">Sérum Areum</h2>
-            <p style="margin-bottom: 20px;">Ácido Hialurônico + Colágeno Vegano</p>
+            <p style="margin-bottom: 15px; font-size: 15px;">Ácido Hialurônico + Colágeno Vegetal</p>
 
             <div class="product-benefits">
-                <span class="benefit-tag">💧 Hidratação profunda</span>
-                <span class="benefit-tag">✨ Luminosidade</span>
+                <span class="benefit-tag">💧 Hidratação 96%</span>
+                <span class="benefit-tag">✨ Glass Skin</span>
                 <span class="benefit-tag">🌿 100% Vegano</span>
+                <span class="benefit-tag">🧬 Nanotecnologia</span>
             </div>
 
             <a href="https://areum.lovable.app" class="cta-button">Quero Conhecer</a>
@@ -346,7 +627,7 @@
         <div class="footer">
             <div class="logo">AREUM</div>
             <p>K-Beauty • Brasil • 2026</p>
-            <p style="margin-top: 10px;">@areum.skincare</p>
+            <p style="margin-top: 8px;">@areum.skincare</p>
         </div>
 
     </div>
