@@ -52,8 +52,8 @@ const Hero = () => {
             <a href="#depoimentos" className="text-foreground/70 hover:text-primary transition-colors hidden md:block">
               Depoimentos
             </a>
-            <Button 
-              variant="outline-rose" 
+            <Button
+              variant="outline-rose"
               size="sm"
               onClick={() => window.location.href = "https://areum.pay.yampi.com.br/checkout?skipToCheckout=1&tokenReference=40KOQLA7X"}
             >
@@ -89,7 +89,7 @@ const Hero = () => {
             </h1>
 
             <p className="text-lg md:text-xl text-muted-foreground mb-4 max-w-xl mx-auto lg:mx-0">
-              Sérum Facial com Ácido Hialurônico e Colágeno Vegano. 
+              Sérum Facial com Ácido Hialurônico e Colágeno Vegano.
               Hidratação estrutural profunda para uma pele luminosa e firme.
             </p>
 
@@ -114,15 +114,19 @@ const Hero = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Button 
-                variant="hero" 
-                size="xl" 
+              <Button
+                variant="hero"
+                size="xl"
                 className="shimmer"
                 onClick={() => window.location.href = "https://areum.pay.yampi.com.br/checkout?skipToCheckout=1&tokenReference=40KOQLA7X"}
               >
                 Quero minha Glass Skin
               </Button>
-              <Button variant="glass" size="xl">
+              <Button
+                variant="glass"
+                size="xl"
+                onClick={() => document.getElementById('beneficios')?.scrollIntoView({ behavior: 'smooth' })}
+              >
                 Saiba mais
               </Button>
             </div>

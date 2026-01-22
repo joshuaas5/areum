@@ -4,6 +4,7 @@ import HowToUse from "@/components/HowToUse";
 import Testimonials from "@/components/Testimonials";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
+import LuckyWheel from "@/components/LuckyWheel";
 
 const Index = () => {
   return (
@@ -14,6 +15,7 @@ const Index = () => {
       <Testimonials />
       <CTA />
       <Footer />
+      <LuckyWheel />
     </main>
   );
 };
