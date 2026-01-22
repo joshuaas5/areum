@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "./ui/button";
 import { Star } from "lucide-react";
-import areumLogo from "@/assets/areum-logo-main.png";
+import areumLogo from "@/assets/areum-logo.png";
 import areumSerum from "@/assets/areum-serum.png";
 
 const Hero = () => {
@@ -137,7 +137,7 @@ const Hero = () => {
             </div>
           </motion.div>
 
-          {/* Right - Product image with simple floating keywoards */}
+          {/* Right - Product image with hand-drawn style badges */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -158,41 +158,53 @@ const Hero = () => {
               transition={{ duration: 0.3 }}
             />
 
-            {/* Floating text badges - replacing arrows */}
+            {/* Hand-drawn style badges */}
+            {/* Top Right */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.8, duration: 0.5 }}
-              className="absolute top-10 right-0 md:top-20 md:-right-10 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg border border-rose-100"
+              className="absolute top-[10%] -right-4 md:top-[15%] md:-right-8 lg:-right-12 z-20"
             >
-              <span className="font-heading font-medium text-foreground">✨ Sofisticação</span>
+              <div className="bg-white/90 backdrop-blur-sm px-4 py-2 rounded-sm shadow-sketch border-2 border-primary/20 -rotate-2 transform hover:rotate-0 transition-transform duration-300">
+                <span className="font-heading text-lg font-medium text-foreground tracking-wide">Sofisticação</span>
+              </div>
             </motion.div>
 
+            {/* Bottom Right */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 1.0, duration: 0.5 }}
-              className="absolute bottom-20 right-0 md:bottom-40 md:-right-10 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg border border-rose-100"
+              className="absolute bottom-[20%] -right-4 md:bottom-[25%] md:-right-8 lg:-right-10 z-20"
             >
-              <span className="font-heading font-medium text-foreground">⚡ Glow Imediato</span>
+              <div className="bg-white/90 backdrop-blur-sm px-4 py-2 rounded-sm shadow-sketch border-2 border-primary/20 rotate-1 transform hover:rotate-0 transition-transform duration-300">
+                <span className="font-heading text-lg font-medium text-foreground tracking-wide">Glow imediato</span>
+              </div>
             </motion.div>
 
+            {/* Bottom Left */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 1.2, duration: 0.5 }}
-              className="absolute bottom-10 left-0 md:bottom-20 md:-left-10 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg border border-rose-100"
+              className="absolute bottom-[10%] -left-4 md:bottom-[15%] md:-left-8 lg:-left-12 z-20"
             >
-              <span className="font-heading font-medium text-foreground">🧬 Nanotecnologia</span>
+              <div className="bg-white/90 backdrop-blur-sm px-4 py-2 rounded-sm shadow-sketch border-2 border-primary/20 -rotate-1 transform hover:rotate-0 transition-transform duration-300">
+                <span className="font-heading text-lg font-medium text-foreground tracking-wide">Nanotecnologia</span>
+              </div>
             </motion.div>
 
+            {/* Top Left */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 1.4, duration: 0.5 }}
-              className="absolute top-20 left-0 md:top-32 md:-left-10 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg border border-rose-100"
+              className="absolute top-[20%] -left-4 md:top-[25%] md:-left-8 lg:-left-16 z-20"
             >
-              <span className="font-heading font-medium text-foreground">👸 Pele de Protagonista</span>
+              <div className="bg-white/90 backdrop-blur-sm px-4 py-2 rounded-sm shadow-sketch border-2 border-primary/20 rotate-2 transform hover:rotate-0 transition-transform duration-300">
+                <span className="font-heading text-lg font-medium text-foreground tracking-wide">Pele de protagonista</span>
+              </div>
             </motion.div>
 
           </motion.div>

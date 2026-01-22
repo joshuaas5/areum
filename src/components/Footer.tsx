@@ -1,5 +1,5 @@
 import { Instagram, Mail } from "lucide-react";
-import areumLogo from "@/assets/areum-logo-main.png";
+import areumLogo from "@/assets/areum-logo.png";
 
 const Footer = () => {
   return (

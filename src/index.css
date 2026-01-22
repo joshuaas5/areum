@@ -203,4 +203,8 @@
   .text-balance {
     text-wrap: balance;
   }
+  .shadow-sketch {
+    box-shadow: 4px 4px 0px 0px hsl(var(--primary) / 0.1), 
+                8px 8px 0px 0px hsl(var(--primary) / 0.05);
+  }
 }

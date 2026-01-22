@@ -59,7 +59,7 @@ const CTA = () => {
                 </h2>
 
                 <p className="text-muted-foreground mb-6">
-                  Milhares de mulheres já transformaram sua pele com o Sérum Areum.
+                  Junte-se às mulheres que já transformaram sua pele com o Sérum Areum.
                   Está na hora de você descobrir o segredo coreano.
                 </p>
 
