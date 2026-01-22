@@ -100,7 +100,7 @@ const Hero = () => {
 
             <p className="text-sm text-muted-foreground mb-8 flex items-center justify-center lg:justify-start gap-2">
               <Star className="w-4 h-4 text-gold fill-gold" />
-              Dermatologicamente Testado • Vegano • Cruelty-Free
+              Dermatologicamente Testado • Cruelty-Free
             </p>
 
             {/* Pricing */}

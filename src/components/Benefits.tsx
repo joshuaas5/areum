@@ -24,7 +24,7 @@ const benefits = [
     icon: Leaf,
     title: "Livre de Culpa",
     description:
-      "100% vegano, cruelty-free e dermatologicamente testado. Beleza consciente que respeita sua pele e o meio ambiente.",
+      "Cruelty-free e dermatologicamente testado. Beleza consciente que respeita sua pele e o meio ambiente.",
   },
 ];
 
