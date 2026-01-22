@@ -79,7 +79,7 @@ const Hero = () => {
             >
               <span className="text-lg">🇰🇷</span>
               <span className="text-sm font-medium text-secondary-foreground">
-                Tecnologia Coreana
+                A tecnologia coreana que sua pele merece
               </span>
             </motion.div>
 

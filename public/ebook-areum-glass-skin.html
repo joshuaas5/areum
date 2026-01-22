@@ -10,16 +10,19 @@
         rel="stylesheet">
     <style>
         :root {
-            --gold: #D4AF37;
-            --gold-light: #F0D875;
-            --rose-page: #FDF2F8;
-            --rose-light: #FCE7F3;
-            --text-dark: #1F1F1F;
-            --text-body: #374151;
-            --text-muted: #6B7280;
-            --green: #059669;
+            --gold: #C9A227;
+            --gold-light: #E8C34A;
+            --rose: #E8A0BF;
+            --rose-dark: #D4749A;
+            --rose-page: #FFF0F5;
+            --rose-light: #FFE4EC;
+            --text-dark: #1A1A1A;
+            --text-body: #2D2D2D;
+            --text-muted: #555555;
+            --green: #10B981;
             --blue: #3B82F6;
-            --purple: #7C3AED;
+            --purple: #8B5CF6;
+            --coral: #F97316;
         }
 
         * {
@@ -31,7 +34,7 @@
         body {
             font-family: 'Montserrat', sans-serif;
             color: var(--text-body);
-            background: var(--rose-page);
+            background: linear-gradient(180deg, var(--rose-page) 0%, #FFF8FA 50%, var(--rose-page) 100%);
             line-height: 1.8;
             font-size: 17px;
         }
@@ -46,49 +49,73 @@
         .header {
             text-align: center;
             padding: 50px 20px;
-            background: linear-gradient(180deg, #FFF5F7, var(--rose-page));
+            background: linear-gradient(180deg, #FFE4EC 0%, var(--rose-page) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--rose), var(--gold), var(--rose));
         }
 
         .logo {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 48px;
+            font-size: 52px;
             letter-spacing: 8px;
-            color: var(--gold);
+            background: linear-gradient(135deg, var(--gold), var(--rose-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 5px;
         }
 
         .subtitle {
             font-size: 13px;
-            color: var(--text-muted);
-            letter-spacing: 3px;
+            color: var(--rose-dark);
+            letter-spacing: 4px;
             text-transform: uppercase;
+            font-weight: 600;
         }
 
         .main-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 30px;
+            font-size: 32px;
             color: var(--text-dark);
             margin: 25px 0 10px;
             line-height: 1.3;
         }
 
         .tagline {
-            font-size: 15px;
-            color: var(--text-muted);
+            font-size: 16px;
+            color: var(--rose-dark);
+            font-weight: 500;
+        }
+
+        .korean-flag {
+            font-size: 24px;
+            margin-bottom: 10px;
+            display: block;
         }
 
         /* SECTIONS */
         .section {
             background: white;
-            border-radius: 20px;
+            border-radius: 24px;
             padding: 28px 22px;
             margin: 18px 0;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 8px 30px rgba(232, 160, 191, 0.15);
+            border: 1px solid rgba(232, 160, 191, 0.2);
         }
 
         .section-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 24px;
+            font-size: 26px;
             color: var(--text-dark);
             margin-bottom: 18px;
             display: flex;
@@ -97,7 +124,7 @@
         }
 
         .section-title .emoji {
-            font-size: 26px;
+            font-size: 28px;
         }
 
         p {
@@ -109,6 +136,7 @@
         .highlight {
             background: linear-gradient(180deg, transparent 60%, var(--gold-light) 60%);
             padding: 0 4px;
+            font-weight: 600;
         }
 
         /* TABLES */
@@ -117,23 +145,25 @@
             border-collapse: collapse;
             margin: 20px 0;
             font-size: 14px;
+            border-radius: 12px;
+            overflow: hidden;
         }
 
         .data-table th {
-            background: var(--gold);
+            background: linear-gradient(135deg, var(--rose-dark), var(--rose));
             color: white;
-            padding: 12px 10px;
+            padding: 14px 12px;
             text-align: left;
             font-weight: 600;
         }
 
         .data-table td {
-            padding: 12px 10px;
-            border-bottom: 1px solid #E5E7EB;
+            padding: 14px 12px;
+            border-bottom: 1px solid #F3E8F0;
         }
 
         .data-table tr:nth-child(even) {
-            background: #F9FAFB;
+            background: #FFF8FA;
         }
 
         .data-table tr:hover {
@@ -142,17 +172,17 @@
 
         /* SCIENCE BOX */
         .science-box {
-            background: linear-gradient(135deg, #EEF2FF, #E0E7FF);
-            border-left: 4px solid var(--blue);
-            padding: 18px;
+            background: linear-gradient(135deg, #FDF2F8, #FCE7F3);
+            border-left: 4px solid var(--rose);
+            padding: 20px;
             border-radius: 12px;
             margin: 20px 0;
         }
 
         .science-box h4 {
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 600;
-            color: var(--blue);
+            color: var(--rose-dark);
             margin-bottom: 10px;
             display: flex;
             align-items: center;
@@ -174,15 +204,15 @@
 
         /* NANO BOX */
         .nano-box {
-            background: linear-gradient(135deg, #F3E8FF, #E9D5FF);
+            background: linear-gradient(135deg, #EDE9FE, #DDD6FE);
             border-left: 4px solid var(--purple);
-            padding: 18px;
+            padding: 20px;
             border-radius: 12px;
             margin: 20px 0;
         }
 
         .nano-box h4 {
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 600;
             color: var(--purple);
             margin-bottom: 10px;
@@ -199,28 +229,30 @@
             display: flex;
             gap: 15px;
             margin: 18px 0;
-            padding: 18px;
-            background: var(--rose-light);
-            border-radius: 14px;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--rose-light), #FFF8FA);
+            border-radius: 16px;
             align-items: flex-start;
+            border: 1px solid rgba(232, 160, 191, 0.2);
         }
 
         .step-number {
-            width: 38px;
-            height: 38px;
-            background: var(--gold);
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--rose), var(--rose-dark));
             color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 600;
-            font-size: 16px;
+            font-weight: 700;
+            font-size: 18px;
             flex-shrink: 0;
+            box-shadow: 0 4px 15px rgba(232, 160, 191, 0.4);
         }
 
         .step-content h3 {
-            font-size: 17px;
+            font-size: 18px;
             font-weight: 600;
             color: var(--text-dark);
             margin-bottom: 4px;
@@ -235,14 +267,14 @@
         /* TIP BOX */
         .tip-box {
             background: linear-gradient(135deg, #FEF3C7, #FDE68A);
-            padding: 18px;
-            border-radius: 14px;
+            padding: 20px;
+            border-radius: 16px;
             margin: 15px 0;
             border-left: 4px solid var(--gold);
         }
 
         .tip-box h4 {
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 600;
             color: var(--text-dark);
             margin-bottom: 6px;
@@ -255,108 +287,109 @@
 
         /* INGREDIENT CARD */
         .ingredient-card {
-            background: white;
-            border: 2px solid var(--gold);
-            border-radius: 16px;
-            padding: 20px;
-            margin: 15px 0;
+            background: linear-gradient(135deg, white, #FFF8FA);
+            border: 2px solid var(--rose);
+            border-radius: 20px;
+            padding: 22px;
+            margin: 18px 0;
+            box-shadow: 0 6px 20px rgba(232, 160, 191, 0.15);
         }
 
         .ingredient-header {
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 12px;
+            gap: 14px;
+            margin-bottom: 14px;
         }
 
         .ingredient-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--gold), var(--gold-light));
-            border-radius: 12px;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--rose), var(--rose-dark));
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 28px;
+            box-shadow: 0 4px 15px rgba(232, 160, 191, 0.4);
         }
 
         .ingredient-name {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 20px;
+            font-size: 22px;
             color: var(--text-dark);
+            font-weight: 600;
         }
 
         .ingredient-tag {
             font-size: 11px;
-            background: var(--green);
+            background: linear-gradient(135deg, var(--green), #059669);
             color: white;
-            padding: 3px 10px;
+            padding: 4px 12px;
             border-radius: 20px;
             display: inline-block;
             margin-top: 4px;
+            font-weight: 600;
         }
 
         /* STATS */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 12px;
             margin: 20px 0;
         }
 
         .stat-card {
-            background: var(--rose-light);
-            padding: 18px 15px;
-            border-radius: 14px;
+            background: linear-gradient(135deg, var(--rose-light), white);
+            padding: 20px 12px;
+            border-radius: 16px;
             text-align: center;
+            border: 1px solid rgba(232, 160, 191, 0.3);
         }
 
         .stat-number {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 32px;
-            font-weight: 600;
-            color: var(--gold);
+            font-size: 36px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--rose-dark), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .stat-label {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-muted);
             margin-top: 4px;
-        }
-
-        /* CERTIFICATION BADGES */
-        .cert-grid {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin: 20px 0;
-        }
-
-        .cert-badge {
-            background: white;
-            border: 2px solid var(--green);
-            padding: 12px 20px;
-            border-radius: 12px;
-            text-align: center;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--green);
+            font-weight: 500;
         }
 
         /* TECH BOX */
         .tech-highlight {
             background: linear-gradient(135deg, #1F2937, #374151);
             color: white;
-            padding: 25px;
-            border-radius: 16px;
+            padding: 28px;
+            border-radius: 20px;
             margin: 20px 0;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-highlight::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--rose), var(--gold), var(--purple));
         }
 
         .tech-highlight h3 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 22px;
+            font-size: 24px;
             margin-bottom: 12px;
             color: var(--gold-light);
         }
@@ -368,9 +401,12 @@
         }
 
         .tech-highlight .tech-number {
-            font-size: 42px;
+            font-size: 48px;
             font-weight: 700;
-            color: var(--gold);
+            background: linear-gradient(135deg, var(--gold), var(--rose));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             display: block;
             margin: 15px 0;
         }
@@ -378,15 +414,28 @@
         /* PRODUCT CTA */
         .product-section {
             text-align: center;
-            padding: 35px 22px;
-            background: linear-gradient(180deg, var(--rose-light), #FFF5F7);
-            border-radius: 20px;
-            margin: 18px 0;
+            padding: 40px 25px;
+            background: linear-gradient(180deg, var(--rose-light), #FFF0F5, var(--rose-light));
+            border-radius: 24px;
+            margin: 20px 0;
+            border: 2px solid var(--rose);
+            position: relative;
+        }
+
+        .product-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--rose), var(--gold), var(--rose));
+            border-radius: 24px 24px 0 0;
         }
 
         .product-name {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 26px;
+            font-size: 30px;
             color: var(--text-dark);
             margin-bottom: 8px;
         }
@@ -396,66 +445,77 @@
             justify-content: center;
             gap: 12px;
             flex-wrap: wrap;
-            margin: 18px 0;
+            margin: 20px 0;
         }
 
         .benefit-tag {
             background: white;
-            padding: 8px 16px;
+            padding: 10px 18px;
             border-radius: 50px;
-            font-size: 12px;
+            font-size: 13px;
             color: var(--text-dark);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 4px 15px rgba(232, 160, 191, 0.2);
+            font-weight: 500;
+            border: 1px solid rgba(232, 160, 191, 0.3);
         }
 
         .cta-button {
             display: inline-block;
-            padding: 16px 45px;
-            background: linear-gradient(135deg, var(--gold), #C9A227);
+            padding: 18px 50px;
+            background: linear-gradient(135deg, var(--rose-dark), var(--rose));
             color: white;
             text-decoration: none;
-            font-size: 15px;
-            font-weight: 600;
+            font-size: 16px;
+            font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
             border-radius: 50px;
-            margin-top: 18px;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+            margin-top: 20px;
+            box-shadow: 0 8px 25px rgba(232, 160, 191, 0.5);
         }
 
         /* FOOTER */
         .footer {
             text-align: center;
-            padding: 35px 20px;
+            padding: 40px 20px;
             color: var(--text-muted);
             font-size: 13px;
         }
 
         .footer .logo {
-            font-size: 26px;
+            font-size: 28px;
             margin-bottom: 8px;
+            background: linear-gradient(135deg, var(--gold), var(--rose-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         /* DIVIDER */
         .divider {
             text-align: center;
-            color: var(--gold);
-            font-size: 12px;
+            font-size: 14px;
             letter-spacing: 8px;
-            margin: 25px 0;
+            margin: 30px 0;
+            background: linear-gradient(135deg, var(--rose), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         /* QUOTE */
         .quote {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 20px;
+            font-size: 22px;
             font-style: italic;
             text-align: center;
             color: var(--text-dark);
-            padding: 25px;
-            border-top: 1px solid var(--gold);
-            border-bottom: 1px solid var(--gold);
-            margin: 25px 0;
+            padding: 28px;
+            border-top: 2px solid var(--rose);
+            border-bottom: 2px solid var(--rose);
+            margin: 28px 0;
+            background: linear-gradient(135deg, #FFF8FA, white);
+            border-radius: 16px;
         }
 
         /* LIST */
@@ -466,11 +526,11 @@
         }
 
         .benefit-list li {
-            padding: 10px 0;
-            padding-left: 30px;
+            padding: 12px 0;
+            padding-left: 32px;
             position: relative;
             font-size: 15px;
-            border-bottom: 1px solid #F3F4F6;
+            border-bottom: 1px solid #FCE7F3;
         }
 
         .benefit-list li:before {
@@ -479,6 +539,7 @@
             left: 0;
             color: var(--green);
             font-weight: bold;
+            font-size: 18px;
         }
     </style>
 </head>
@@ -487,10 +548,11 @@
 
     <!-- HEADER -->
     <div class="header">
+        <span class="korean-flag">🇰🇷</span>
         <div class="logo">AREUM</div>
         <div class="subtitle">Guia Glass Skin</div>
-        <h1 class="main-title">O Segredo Coreano<br>para a Pele Perfeita</h1>
-        <p class="tagline">Tecnologia Avançada + Ingredientes Premium</p>
+        <h1 class="main-title">O Segredo da Pele Coreana<br>Simplificado Para Você</h1>
+        <p class="tagline">A tecnologia coreana que sua pele merece</p>
     </div>
 
     <div class="container">
@@ -524,35 +586,31 @@
 
             <div class="nano-box">
                 <h4>🧬 Por que isso importa?</h4>
-                <p>A <strong>encapsulação em nanopartículas</strong> permite que ingredientes sensíveis — como o ácido
-                    hialurônico e o colágeno vegetal — sejam estabilizados e entregues de forma mais eficiente. Isso
-                    significa: maior aproveitamento, melhor penetração e resultados visíveis mais rapidamente.</p>
+                <p>A <strong>encapsulação em nanopartículas</strong> permite que ingredientes sensíveis sejam
+                    estabilizados e entregues de forma mais eficiente. Isso significa: maior aproveitamento, melhor
+                    penetração e resultados visíveis mais rapidamente.</p>
             </div>
-
-            <p>Diferente de fórmulas convencionais onde os ativos podem se degradar antes de fazer efeito, a tecnologia
-                de encapsulação garante que cada gota do sérum trabalhe a seu favor.</p>
         </div>
 
         <!-- SEÇÃO: INGREDIENTES -->
         <div class="section">
-            <h2 class="section-title"><span class="emoji">🌿</span> Ingredientes de Alta Performance</h2>
+            <h2 class="section-title"><span class="emoji">�</span> Ingredientes de Alta Performance</h2>
 
             <div class="ingredient-card">
                 <div class="ingredient-header">
                     <div class="ingredient-icon">💧</div>
                     <div>
                         <div class="ingredient-name">Ácido Hialurônico</div>
-                        <span class="ingredient-tag">Encapsulado</span>
+                        <span class="ingredient-tag">Nanoencapsulado</span>
                     </div>
                 </div>
-                <p style="font-size: 14px;">Polissacarídeo naturalmente presente na pele com <strong>alta capacidade de
-                        ligação à água</strong>. Forma um bloco coeso que mantém a hidratação, prevenindo a perda de
-                    água transepidérmica (TEWL).</p>
+                <p style="font-size: 14px;">Polissacarídeo naturalmente presente na pele com <strong>capacidade de reter
+                        até 1.000x seu peso em água</strong>. Mantém a hidratação, prevenindo a perda de água.</p>
 
                 <ul class="benefit-list">
-                    <li>Mantém a pele intensamente hidratada</li>
-                    <li>Ajuda a suavizar a aparência de linhas finas</li>
-                    <li>Contribui para um aspecto mais firme e preenchido</li>
+                    <li>Hidratação intensa e duradoura</li>
+                    <li>Suaviza a aparência de linhas finas</li>
+                    <li>Aspecto mais firme e preenchido</li>
                     <li>Propriedades antioxidantes naturais</li>
                 </ul>
             </div>
@@ -560,51 +618,35 @@
             <div class="science-box">
                 <h4>📊 O que dizem os estudos</h4>
                 <p>Pesquisas demonstram que o ácido hialurônico aplicado topicamente pode contribuir para o aumento da
-                    hidratação cutânea em até <strong>96%</strong> após uso contínuo, ajudando a manter a pele com
-                    aparência mais jovem e saudável.</p>
+                    hidratação cutânea em até <strong>96%</strong> após uso contínuo.</p>
                 <div class="source">Fonte: Journal of Clinical and Aesthetic Dermatology</div>
             </div>
 
             <div class="ingredient-card">
                 <div class="ingredient-header">
-                    <div class="ingredient-icon">�</div>
+                    <div class="ingredient-icon">🌿</div>
                     <div>
                         <div class="ingredient-name">Colágeno Vegetal</div>
                         <span class="ingredient-tag">100% Vegano</span>
                     </div>
                 </div>
-                <p style="font-size: 14px;">Obtido através de fermentação de leveduras, sem origem animal. Contém grupos
-                    funcionais hidrofílicos com <strong>excelentes propriedades de absorção de umidade</strong>.</p>
+                <p style="font-size: 14px;">Obtido através de fermentação, sem origem animal. Contém grupos funcionais
+                    hidrofílicos com <strong>excelentes propriedades de absorção</strong>.</p>
 
                 <ul class="benefit-list">
-                    <li>Forma filme protetor na superfície da pele</li>
-                    <li>Reduz perda de água epidérmica</li>
-                    <li>Hidratação instantânea e de longa duração</li>
-                    <li>Contribui para a firmeza e elasticidade</li>
+                    <li>Forma filme protetor na superfície</li>
+                    <li>Reduz perda de água</li>
+                    <li>Hidratação instantânea e prolongada</li>
+                    <li>Contribui para firmeza e elasticidade</li>
                 </ul>
             </div>
 
             <div class="science-box">
                 <h4>📊 Resultados observados</h4>
                 <p>Estudos de eficácia demonstram que peptídeos de colágeno podem contribuir para a melhoria na
-                    aparência de linhas finas em até <strong>35%</strong> e ajudar a melhorar a elasticidade aparente da
-                    pele em <strong>22%</strong> após 4 semanas de uso regular.</p>
+                    aparência de linhas finas em até <strong>35%</strong> após 4 semanas de uso regular.</p>
                 <div class="source">Fonte: International Journal of Cosmetic Science</div>
             </div>
-        </div>
-
-        <!-- CERTIFICAÇÕES -->
-        <div class="section">
-            <h2 class="section-title"><span class="emoji">🏆</span> Certificações e Qualidade</h2>
-
-            <div class="cert-grid">
-                <div class="cert-badge">🌿 Vegano</div>
-                <div class="cert-badge">🐰 Cruelty Free</div>
-                <div class="cert-badge">☪️ Halal</div>
-            </div>
-
-            <p style="text-align: center; font-size: 14px; color: var(--text-muted);">Produto seguro para uso cosmético
-                diário, desenvolvido com ingredientes de alta qualidade e procedência certificada.</p>
         </div>
 
         <!-- TABELA COMPARATIVA -->
@@ -632,8 +674,8 @@
                     </tr>
                     <tr>
                         <td>Liberação dos ativos</td>
-                        <td>Imediata (se perde)</td>
-                        <td>✅ Gradual e controlada</td>
+                        <td>Se perde rápido</td>
+                        <td>✅ Gradual</td>
                     </tr>
                     <tr>
                         <td>Aproveitamento</td>
@@ -651,34 +693,30 @@
 
         <!-- STATS -->
         <div class="section">
-            <h2 class="section-title"><span class="emoji">📈</span> Resultados que Você Pode Esperar</h2>
+            <h2 class="section-title"><span class="emoji">📈</span> Números que Impressionam</h2>
 
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-number">96%</div>
-                    <div class="stat-label">Aumento na hidratação</div>
+                    <div class="stat-label">Aumento na<br>hidratação</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-number">35%</div>
-                    <div class="stat-label">Melhora em linhas finas</div>
+                    <div class="stat-label">Melhora em<br>linhas finas</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number">22%</div>
-                    <div class="stat-label">Mais elasticidade</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">7dias</div>
-                    <div class="stat-label">Para notar diferença</div>
+                    <div class="stat-number">1000x</div>
+                    <div class="stat-label">Retenção de<br>água</div>
                 </div>
             </div>
 
-            <p style="font-size: 13px; color: var(--text-muted); text-align: center;">*Resultados podem variar. Baseado
-                em estudos com uso contínuo.</p>
+            <p style="font-size: 13px; color: var(--text-muted); text-align: center;">*Baseado em estudos clínicos com
+                uso contínuo.</p>
         </div>
 
         <!-- SEÇÃO: ROTINA -->
         <div class="section">
-            <h2 class="section-title"><span class="emoji">🌸</span> Sua Rotina em 5 Passos</h2>
+            <h2 class="section-title"><span class="emoji">💆‍♀️</span> Sua Rotina em 5 Passos</h2>
 
             <div class="step">
                 <div class="step-number">1</div>
@@ -742,7 +780,7 @@
 
             <div class="tip-box">
                 <h4>📅 Consistência é tudo</h4>
-                <p>7 dias seguidos já mostram diferença. 28 dias = transformação visível.</p>
+                <p>7 dias seguidos já mostram diferença. 28 dias = transformação inacreditável.</p>
             </div>
         </div>
 
@@ -750,18 +788,19 @@
 
         <!-- SEÇÃO: PRODUTO -->
         <div class="product-section">
-            <p style="font-size: 13px; color: var(--gold); letter-spacing: 3px; margin-bottom: 8px;">DESENVOLVIDO COM
-                NANOTECNOLOGIA</p>
+            <span class="korean-flag">🇰🇷</span>
+            <p
+                style="font-size: 13px; color: var(--rose-dark); letter-spacing: 3px; margin-bottom: 8px; font-weight: 600;">
+                DESENVOLVIDO COM NANOTECNOLOGIA</p>
             <h2 class="product-name">Sérum Areum</h2>
-            <p style="margin-bottom: 8px; font-size: 15px;">Ácido Hialurônico + Colágeno Vegetal</p>
-            <p style="margin-bottom: 15px; font-size: 13px; color: var(--text-muted);">Tecnologia de encapsulação em
-                partículas &gt;200nm</p>
+            <p style="margin-bottom: 8px; font-size: 16px; font-weight: 500;">Ácido Hialurônico + Colágeno Vegetal</p>
+            <p style="margin-bottom: 18px; font-size: 13px; color: var(--text-muted);">Encapsulação em partículas
+                &gt;200nm</p>
 
             <div class="product-benefits">
-                <span class="benefit-tag">💧 Hidratação Profunda</span>
+                <span class="benefit-tag">💧 Hidratação 96%</span>
                 <span class="benefit-tag">✨ Glass Skin</span>
                 <span class="benefit-tag">🌿 100% Vegano</span>
-                <span class="benefit-tag">🧬 Nanotecnologia</span>
                 <span class="benefit-tag">🐰 Cruelty Free</span>
             </div>
 

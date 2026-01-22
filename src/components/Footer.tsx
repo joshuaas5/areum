@@ -14,7 +14,7 @@ const Footer = () => {
           />
 
           <p className="text-primary-foreground/70 max-w-md mb-8">
-            O segredo da pele coreana, finalmente ao seu alcance.
+            O segredo da pele coreana, simplificado para você.
           </p>
 
           {/* Social Links */}
