@@ -161,9 +161,8 @@ const LuckyWheel = () => {
                         {/* Sparkle decorations */}
                         <div className="absolute top-2 left-4 text-yellow-400 animate-pulse">✨</div>
                         <div className="absolute top-6 right-8 text-yellow-300 animate-pulse delay-100">✨</div>
-                        <div className="absolute bottom-2 left-1/4 text-pink-300 animate-pulse delay-200">✨</div>
                         <div className="absolute top-4 left-1/3 text-yellow-200 animate-pulse delay-150">⭐</div>
-                        <div className="absolute bottom-4 right-1/4 text-yellow-400 animate-pulse delay-300">✨</div>
+                        <div className="absolute top-3 right-1/4 text-yellow-400 animate-pulse delay-300">✨</div>
 
                         <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br from-pink-400 to-rose-500 rounded-2xl shadow-lg mb-4">
                             <Gift className="text-white w-7 h-7" />
