@@ -19,6 +19,7 @@
             --text-muted: #6B7280;
             --green: #059669;
             --blue: #3B82F6;
+            --purple: #7C3AED;
         }
 
         * {
@@ -171,6 +172,28 @@
             font-style: italic;
         }
 
+        /* NANO BOX */
+        .nano-box {
+            background: linear-gradient(135deg, #F3E8FF, #E9D5FF);
+            border-left: 4px solid var(--purple);
+            padding: 18px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+
+        .nano-box h4 {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--purple);
+            margin-bottom: 10px;
+        }
+
+        .nano-box p {
+            font-size: 14px;
+            margin: 0;
+            color: var(--text-body);
+        }
+
         /* STEP CARDS */
         .step {
             display: flex;
@@ -301,6 +324,57 @@
             margin-top: 4px;
         }
 
+        /* CERTIFICATION BADGES */
+        .cert-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .cert-badge {
+            background: white;
+            border: 2px solid var(--green);
+            padding: 12px 20px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--green);
+        }
+
+        /* TECH BOX */
+        .tech-highlight {
+            background: linear-gradient(135deg, #1F2937, #374151);
+            color: white;
+            padding: 25px;
+            border-radius: 16px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .tech-highlight h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 22px;
+            margin-bottom: 12px;
+            color: var(--gold-light);
+        }
+
+        .tech-highlight p {
+            font-size: 14px;
+            color: #D1D5DB;
+            margin: 0;
+        }
+
+        .tech-highlight .tech-number {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--gold);
+            display: block;
+            margin: 15px 0;
+        }
+
         /* PRODUCT CTA */
         .product-section {
             text-align: center;
@@ -320,7 +394,7 @@
         .product-benefits {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 12px;
             flex-wrap: wrap;
             margin: 18px 0;
         }
@@ -329,7 +403,7 @@
             background: white;
             padding: 8px 16px;
             border-radius: 50px;
-            font-size: 13px;
+            font-size: 12px;
             color: var(--text-dark);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
         }
@@ -383,6 +457,29 @@
             border-bottom: 1px solid var(--gold);
             margin: 25px 0;
         }
+
+        /* LIST */
+        .benefit-list {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0;
+        }
+
+        .benefit-list li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            font-size: 15px;
+            border-bottom: 1px solid #F3F4F6;
+        }
+
+        .benefit-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--green);
+            font-weight: bold;
+        }
     </style>
 </head>
 
@@ -393,7 +490,7 @@
         <div class="logo">AREUM</div>
         <div class="subtitle">Guia Glass Skin</div>
         <h1 class="main-title">O Segredo Coreano<br>para a Pele Perfeita</h1>
-        <p class="tagline">Ciência + Rotina + Resultados</p>
+        <p class="tagline">Tecnologia Avançada + Ingredientes Premium</p>
     </div>
 
     <div class="container">
@@ -403,8 +500,8 @@
             <h2 class="section-title"><span class="emoji">✨</span> O que é Glass Skin?</h2>
             <p>É a pele tão <span class="highlight">hidratada e luminosa</span> que parece feita de vidro — sem
                 oleosidade, mas com um brilho natural e saudável que reflete a luz.</p>
-            <p>O segredo está em dois pilares: <strong>hidratação profunda</strong> e <strong>ingredientes de alta
-                    performance</strong>.</p>
+            <p>O segredo está em dois pilares: <strong>hidratação profunda</strong> e <strong>tecnologia de
+                    ponta</strong> que permite aos ativos chegarem onde realmente precisam.</p>
 
             <div class="quote">
                 "A beleza coreana não esconde imperfeições — ela cultiva uma pele tão saudável que não precisa esconder
@@ -412,104 +509,149 @@
             </div>
         </div>
 
-        <!-- SEÇÃO 2: A CIÊNCIA -->
+        <!-- SEÇÃO: NANOTECNOLOGIA -->
         <div class="section">
-            <h2 class="section-title"><span class="emoji">🔬</span> A Ciência por Trás</h2>
+            <h2 class="section-title"><span class="emoji">🔬</span> O Diferencial: Nanotecnologia</h2>
 
-            <p>Os ingredientes mais estudados para hidratação e rejuvenescimento são o <strong>Ácido
-                    Hialurônico</strong> e o <strong>Colágeno</strong>. Veja o que a ciência diz:</p>
+            <p>Nem todo sérum é igual. A diferença está em <strong>como</strong> os ativos são entregues à sua pele.</p>
+
+            <div class="tech-highlight">
+                <h3>Tecnologia de Encapsulação</h3>
+                <span class="tech-number">&gt;200nm</span>
+                <p>Partículas biopoliméricas que protegem e transportam os ativos até as camadas mais profundas da pele.
+                </p>
+            </div>
+
+            <div class="nano-box">
+                <h4>🧬 Por que isso importa?</h4>
+                <p>A <strong>encapsulação em nanopartículas</strong> permite que ingredientes sensíveis — como o ácido
+                    hialurônico e o colágeno vegetal — sejam estabilizados e entregues de forma mais eficiente. Isso
+                    significa: maior aproveitamento, melhor penetração e resultados visíveis mais rapidamente.</p>
+            </div>
+
+            <p>Diferente de fórmulas convencionais onde os ativos podem se degradar antes de fazer efeito, a tecnologia
+                de encapsulação garante que cada gota do sérum trabalhe a seu favor.</p>
+        </div>
+
+        <!-- SEÇÃO: INGREDIENTES -->
+        <div class="section">
+            <h2 class="section-title"><span class="emoji">🌿</span> Ingredientes de Alta Performance</h2>
 
             <div class="ingredient-card">
                 <div class="ingredient-header">
                     <div class="ingredient-icon">💧</div>
                     <div>
                         <div class="ingredient-name">Ácido Hialurônico</div>
-                        <span class="ingredient-tag">Molécula Hidratante</span>
+                        <span class="ingredient-tag">Encapsulado</span>
                     </div>
                 </div>
-                <p style="font-size: 14px;">Presente naturalmente na nossa pele, o ácido hialurônico é capaz de
-                    <strong>reter até 1.000x seu peso em água</strong>. Com o envelhecimento, perdemos essa reserva
-                    natural.</p>
+                <p style="font-size: 14px;">Polissacarídeo naturalmente presente na pele com <strong>alta capacidade de
+                        ligação à água</strong>. Forma um bloco coeso que mantém a hidratação, prevenindo a perda de
+                    água transepidérmica (TEWL).</p>
+
+                <ul class="benefit-list">
+                    <li>Mantém a pele intensamente hidratada</li>
+                    <li>Ajuda a suavizar a aparência de linhas finas</li>
+                    <li>Contribui para um aspecto mais firme e preenchido</li>
+                    <li>Propriedades antioxidantes naturais</li>
+                </ul>
             </div>
 
             <div class="science-box">
-                <h4>📊 Estudo Clínico</h4>
-                <p>Pesquisa publicada no <em>Journal of Clinical and Aesthetic Dermatology</em> demonstrou que a
-                    aplicação tópica de ácido hialurônico aumentou a hidratação da pele em até <strong>96% após 8
-                        semanas</strong> de uso contínuo.</p>
-                <div class="source">Fonte: Papakonstantinou et al., 2012</div>
+                <h4>📊 O que dizem os estudos</h4>
+                <p>Pesquisas demonstram que o ácido hialurônico aplicado topicamente pode contribuir para o aumento da
+                    hidratação cutânea em até <strong>96%</strong> após uso contínuo, ajudando a manter a pele com
+                    aparência mais jovem e saudável.</p>
+                <div class="source">Fonte: Journal of Clinical and Aesthetic Dermatology</div>
             </div>
 
             <div class="ingredient-card">
                 <div class="ingredient-header">
-                    <div class="ingredient-icon">🌿</div>
+                    <div class="ingredient-icon">�</div>
                     <div>
                         <div class="ingredient-name">Colágeno Vegetal</div>
-                        <span class="ingredient-tag">Origem 100% Vegana</span>
+                        <span class="ingredient-tag">100% Vegano</span>
                     </div>
                 </div>
-                <p style="font-size: 14px;">O colágeno vegetal fornece aminoácidos essenciais (glicina, prolina,
-                    hidroxiprolina) que estimulam a produção de colágeno próprio da pele, melhorando <strong>firmeza e
-                        elasticidade</strong>.</p>
+                <p style="font-size: 14px;">Obtido através de fermentação de leveduras, sem origem animal. Contém grupos
+                    funcionais hidrofílicos com <strong>excelentes propriedades de absorção de umidade</strong>.</p>
+
+                <ul class="benefit-list">
+                    <li>Forma filme protetor na superfície da pele</li>
+                    <li>Reduz perda de água epidérmica</li>
+                    <li>Hidratação instantânea e de longa duração</li>
+                    <li>Contribui para a firmeza e elasticidade</li>
+                </ul>
             </div>
 
             <div class="science-box">
-                <h4>📊 Resultados Observados</h4>
-                <p>Estudos de eficácia demonstram que peptídeos de origem vegetal podem melhorar a aparência de rugas
-                    finas em até <strong>35%</strong> e aumentar a elasticidade em <strong>22%</strong> após 4 semanas.
-                </p>
-                <div class="source">Fonte: International Journal of Cosmetic Science, 2019</div>
+                <h4>📊 Resultados observados</h4>
+                <p>Estudos de eficácia demonstram que peptídeos de colágeno podem contribuir para a melhoria na
+                    aparência de linhas finas em até <strong>35%</strong> e ajudar a melhorar a elasticidade aparente da
+                    pele em <strong>22%</strong> após 4 semanas de uso regular.</p>
+                <div class="source">Fonte: International Journal of Cosmetic Science</div>
             </div>
+        </div>
+
+        <!-- CERTIFICAÇÕES -->
+        <div class="section">
+            <h2 class="section-title"><span class="emoji">🏆</span> Certificações e Qualidade</h2>
+
+            <div class="cert-grid">
+                <div class="cert-badge">🌿 Vegano</div>
+                <div class="cert-badge">🐰 Cruelty Free</div>
+                <div class="cert-badge">☪️ Halal</div>
+            </div>
+
+            <p style="text-align: center; font-size: 14px; color: var(--text-muted);">Produto seguro para uso cosmético
+                diário, desenvolvido com ingredientes de alta qualidade e procedência certificada.</p>
         </div>
 
         <!-- TABELA COMPARATIVA -->
         <div class="section">
-            <h2 class="section-title"><span class="emoji">📋</span> Comparativo de Benefícios</h2>
+            <h2 class="section-title"><span class="emoji">📋</span> Por que a Nanotecnologia Faz Diferença</h2>
 
             <table class="data-table">
                 <thead>
                     <tr>
-                        <th>Benefício</th>
-                        <th>Ác. Hialurônico</th>
-                        <th>Colágeno Vegetal</th>
+                        <th>Característica</th>
+                        <th>Fórmula Comum</th>
+                        <th>Com Nanotecnologia</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Hidratação profunda</td>
-                        <td>✅ Principal</td>
-                        <td>✅ Auxilia</td>
-                    </tr>
-                    <tr>
-                        <td>Firmeza da pele</td>
-                        <td>✅ Auxilia</td>
-                        <td>✅ Principal</td>
-                    </tr>
-                    <tr>
-                        <td>Redução de linhas finas</td>
-                        <td>✅ Preenche</td>
-                        <td>✅ Previne</td>
-                    </tr>
-                    <tr>
-                        <td>Luminosidade</td>
+                        <td>Estabilidade dos ativos</td>
+                        <td>Baixa</td>
                         <td>✅ Alta</td>
-                        <td>✅ Média</td>
                     </tr>
                     <tr>
-                        <td>Absorção rápida</td>
-                        <td>✅ Excelente</td>
-                        <td>✅ Boa</td>
+                        <td>Penetração na pele</td>
+                        <td>Superficial</td>
+                        <td>✅ Profunda</td>
+                    </tr>
+                    <tr>
+                        <td>Liberação dos ativos</td>
+                        <td>Imediata (se perde)</td>
+                        <td>✅ Gradual e controlada</td>
+                    </tr>
+                    <tr>
+                        <td>Aproveitamento</td>
+                        <td>Parcial</td>
+                        <td>✅ Maximizado</td>
+                    </tr>
+                    <tr>
+                        <td>Resultados visíveis</td>
+                        <td>Demorados</td>
+                        <td>✅ Mais rápidos</td>
                     </tr>
                 </tbody>
             </table>
-
-            <p style="font-size: 14px; color: var(--text-muted); text-align: center;">A combinação dos dois ingredientes
-                potencializa os resultados.</p>
         </div>
 
         <!-- STATS -->
         <div class="section">
-            <h2 class="section-title"><span class="emoji">📈</span> Resultados Esperados</h2>
+            <h2 class="section-title"><span class="emoji">📈</span> Resultados que Você Pode Esperar</h2>
 
             <div class="stats-grid">
                 <div class="stat-card">
@@ -518,11 +660,11 @@
                 </div>
                 <div class="stat-card">
                     <div class="stat-number">35%</div>
-                    <div class="stat-label">Redução de linhas finas</div>
+                    <div class="stat-label">Melhora em linhas finas</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-number">22%</div>
-                    <div class="stat-label">Melhora na elasticidade</div>
+                    <div class="stat-label">Mais elasticidade</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-number">7dias</div>
@@ -531,7 +673,7 @@
             </div>
 
             <p style="font-size: 13px; color: var(--text-muted); text-align: center;">*Resultados podem variar. Baseado
-                em estudos clínicos com uso contínuo.</p>
+                em estudos com uso contínuo.</p>
         </div>
 
         <!-- SEÇÃO: ROTINA -->
@@ -558,7 +700,7 @@
                 <div class="step-number">3</div>
                 <div class="step-content">
                     <h3>Sérum</h3>
-                    <p>O passo mais importante! É aqui que os ativos agem profundamente.</p>
+                    <p>O passo mais importante! É aqui que os ativos nanoencapsulados agem.</p>
                 </div>
             </div>
 
@@ -590,7 +732,7 @@
 
             <div class="tip-box">
                 <h4>👐 Pat-pat, não esfregue</h4>
-                <p>Pressione os produtos suavemente. Esfregar pode irritar e criar rugas.</p>
+                <p>Pressione os produtos suavemente. Esfregar pode irritar a pele.</p>
             </div>
 
             <div class="tip-box">
@@ -608,16 +750,19 @@
 
         <!-- SEÇÃO: PRODUTO -->
         <div class="product-section">
-            <p style="font-size: 13px; color: var(--gold); letter-spacing: 3px; margin-bottom: 8px;">DESENVOLVIDO PARA
-                VOCÊ</p>
+            <p style="font-size: 13px; color: var(--gold); letter-spacing: 3px; margin-bottom: 8px;">DESENVOLVIDO COM
+                NANOTECNOLOGIA</p>
             <h2 class="product-name">Sérum Areum</h2>
-            <p style="margin-bottom: 15px; font-size: 15px;">Ácido Hialurônico + Colágeno Vegetal</p>
+            <p style="margin-bottom: 8px; font-size: 15px;">Ácido Hialurônico + Colágeno Vegetal</p>
+            <p style="margin-bottom: 15px; font-size: 13px; color: var(--text-muted);">Tecnologia de encapsulação em
+                partículas &gt;200nm</p>
 
             <div class="product-benefits">
-                <span class="benefit-tag">💧 Hidratação 96%</span>
+                <span class="benefit-tag">💧 Hidratação Profunda</span>
                 <span class="benefit-tag">✨ Glass Skin</span>
                 <span class="benefit-tag">🌿 100% Vegano</span>
                 <span class="benefit-tag">🧬 Nanotecnologia</span>
+                <span class="benefit-tag">🐰 Cruelty Free</span>
             </div>
 
             <a href="https://areum.lovable.app" class="cta-button">Quero Conhecer</a>
@@ -627,7 +772,7 @@
         <div class="footer">
             <div class="logo">AREUM</div>
             <p>K-Beauty • Brasil • 2026</p>
-            <p style="margin-top: 8px;">@areum.skincare</p>
+            <p style="margin-top: 8px;">@AreumCo</p>
         </div>
 
     </div>
