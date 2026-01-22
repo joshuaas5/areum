@@ -4,15 +4,16 @@ import { X, Gift, Loader2 } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { useToast } from "@/components/ui/use-toast";
+import { supabase } from "@/lib/supabase";
 
 type Step = "form" | "wheel" | "result";
 
 const PRIZES = [
-    { label: "5% OFF", color: "#FAD4D8" }, // Blush Light
-    { label: "Ebook Glass Skin", color: "#E8A0BF" }, // Primary Pink (Winner)
-    { label: "10% OFF", color: "#FAD4D8" },
     { label: "Tente de novo", color: "#F3F4F6" },
-    { label: "Frete Grátis", color: "#FAD4D8" },
+    { label: "Ebook Glass Skin", color: "#E8A0BF" }, // Primary Pink (Winner)
+    { label: "Tente de novo", color: "#F3F4F6" },
+    { label: "Tente de novo", color: "#F3F4F6" },
+    { label: "Tente de novo", color: "#F3F4F6" },
     { label: "Ebook Glass Skin", color: "#E8A0BF" }, // Primary Pink (Winner)
 ];
 
@@ -32,71 +33,104 @@ const LuckyWheel = () => {
     const { toast } = useToast();
 
     useEffect(() => {
-        // Check if already played today
+        // Check persistence
+        const wonBefore = localStorage.getItem("areum_wheel_won");
+        if (wonBefore) return; // Never show if won
+
         const lastPlayed = localStorage.getItem("areum_wheel_date");
         const today = new Date().toDateString();
 
         if (lastPlayed !== today) {
             const timer = setTimeout(() => {
                 setIsOpen(true);
-            }, 5000); // 5 seconds delay
+            }, 5000);
             return () => clearTimeout(timer);
         }
     }, []);
 
     const handleClose = () => {
         setIsOpen(false);
+        // User logic: "se nao ganhou pode tentar dnv amanha". 
+        // If they just close without playing, we can let them see it again? 
+        // Or assume they saw it today. Let's assume saw it today.
         localStorage.setItem("areum_wheel_date", new Date().toDateString());
     };
 
-    const handleFormSubmit = (e: React.FormEvent) => {
+    const handleFormSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
 
-        // Simulate API call / save data
-        console.log("Lead captured:", formData);
+        // Save to Supabase
+        try {
+            const { error } = await supabase
+                .from('leads')
+                .insert([
+                    {
+                        name: formData.name,
+                        email: formData.email,
+                        whatsapp: formData.whatsapp
+                    }
+                ]);
 
-        setTimeout(() => {
-            setLoading(false);
-            setStep("wheel");
-        }, 1000);
+            if (error) {
+                console.error('Supabase error:', error);
+            }
+        } catch (err) {
+            console.error('Error submitting:', err);
+        }
+
+        setLoading(false);
+        setStep("wheel");
     };
 
-    const spinWheel = () => {
-        // Determine winner (Rigged for Ebook mostly, index 1 or 5)
-        // Indexes: 0(5%), 1(Ebook), 2(10%), 3(Sad), 4(Frete), 5(Ebook)
-        // 360 / 6 = 60 degrees per segment
-        // Target Ebook at index 1 (approx 60-120 deg) or 5 (300-360 deg)
+    const spinWheel = async () => {
+        // Determine winner
+        // Prizes: 0(Lose), 1(Win), 2(Lose), 3(Lose), 4(Lose), 5(Win)
+        // Indexes 1 and 5 are winners.
 
-        const spins = 5; // Minimum full rotations
-        const targetSegment = 1; // Index 1 is Ebook
+        const randomIndex = Math.floor(Math.random() * PRIZES.length);
+        const targetSegment = randomIndex;
+        const isWin = PRIZES[targetSegment].label.includes("Ebook");
+
+        const spins = 5;
         const segmentAngle = 360 / PRIZES.length;
 
-        // Calculate random position within the target segment
-        // To land on index 1, we need to rotate NEGATIVE or counter-clockwise physics? 
-        // Usually 0 is top. If we rotate clockwise:
-        // 0-60: Index 0? No, usually 0 is right or top.
-        // Let's keep it simple: Extra Rotation + Specific Angle.
-        // Ensure we land on Ebook (Index 1).
-
         const extraDegrees = 360 * spins;
-        // Rotate to land on "Ebook" roughly. 
-        // Let's just create a random visual spin that lands on a specific range.
-
-        const randomOffset = Math.random() * 30 + 10; // Randomize slightly within segment
+        // Calculate winning angle to center the segment
         const winningAngle = extraDegrees + (360 - (targetSegment * segmentAngle)) - (segmentAngle / 2);
+        // Add randomness within segment (+/- 15 degrees)
+        const randomOffset = (Math.random() * 30) - 15;
 
-        setRotation(winningAngle);
+        setRotation(winningAngle + randomOffset);
 
-        setTimeout(() => {
+        setTimeout(async () => {
             setPrize(PRIZES[targetSegment].label);
             setStep("result");
 
-            toast({
-                title: "Parabéns!",
-                description: `Você ganhou: ${PRIZES[targetSegment].label}`,
-            });
-        }, 4500); // Wait for animation
+            // Update Supabase with prize result
+            if (formData.email) {
+                await supabase
+                    .from('leads')
+                    .update({ prize_won: PRIZES[targetSegment].label })
+                    .eq('email', formData.email);
+            }
+
+            // Persistence Logic
+            if (isWin) {
+                localStorage.setItem("areum_wheel_won", "true");
+                toast({
+                    title: "Parabéns!",
+                    description: "Você ganhou o Ebook Glass Skin!",
+                });
+            } else {
+                localStorage.setItem("areum_wheel_date", new Date().toDateString());
+                toast({
+                    title: "Que pena!",
+                    description: "Não foi dessa vez. Tente novamente amanhã!",
+                });
+            }
+
+        }, 4500);
     };
 
     if (!isOpen) return null;
@@ -187,7 +221,7 @@ const LuckyWheel = () => {
                                         className="w-full h-full rounded-full border-4 border-white shadow-xl overflow-hidden relative"
                                         style={{
                                             transform: `rotate(${rotation}deg)`,
-                                            transition: "transform 4s cubic-bezier(0.25, 0.1, 0.25, 1)"
+                                            transition: "transform 4s cubic-bezier(0.25, 0.1, 0.25, 1)`
                                         }}
                                     >
                                         {PRIZES.map((p, i) => (
@@ -227,15 +261,15 @@ const LuckyWheel = () => {
                                     animate={{ scale: 1 }}
                                     className="text-6xl text-center"
                                 >
-                                    🎉
+                                    {prize.includes("Ebook") ? "🎉" : "😅"}
                                 </motion.div>
 
                                 <div>
                                     <h4 className="text-xl font-bold text-gray-800 mb-2">
-                                        PARABÉNS!
+                                        {prize.includes("Ebook") ? "PARABÉNS!" : "POXA..."}
                                     </h4>
                                     <p className="text-gray-600">
-                                        Você ganhou: <span className="font-bold text-primary">{prize}</span>
+                                        {prize.includes("Ebook") ? "Você ganhou:" : "O prêmio foi:"} <span className="font-bold text-primary">{prize}</span>
                                     </p>
                                 </div>
 
@@ -249,14 +283,13 @@ const LuckyWheel = () => {
                                         </Button>
                                     </div>
                                 ) : (
-                                    <div className="bg-pink-50 p-4 rounded-xl border border-pink-100">
-                                        <p className="text-sm text-pink-800 mb-2">
-                                            Use o cupom abaixo no checkout:
+                                    <div className="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                        <p className="text-sm text-gray-800 mb-2">
+                                            Infelizmente não foi dessa vez.
                                         </p>
-                                        <code className="block bg-white border-2 border-dashed border-pink-300 rounded p-2 text-lg font-mono font-bold text-primary mb-2 select-all">
-                                            AREUM{prize.replace("% OFF", "")}
-                                        </code>
-                                        <p className="text-xs text-muted-foreground">Copiado automaticamente!</p>
+                                        <p className="text-xs text-muted-foreground">
+                                            Tente novamente amanhã!
+                                        </p>
                                     </div>
                                 )}
 
