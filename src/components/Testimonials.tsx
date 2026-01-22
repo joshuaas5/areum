@@ -3,25 +3,25 @@ import { Star, Quote } from "lucide-react";
 
 const testimonials = [
   {
-    name: "Carolina S.",
-    location: "São Paulo, SP",
+    name: "Cristiane",
+    location: "Cliente Verificada",
     rating: 5,
-    text: "Minha pele nunca esteve tão hidratada! O efeito glass skin é real, uso há 3 semanas e já recebi muitos elogios.",
-    avatar: "CS",
+    text: "Estou apaixonada! Minha pele estava sem vida e agora tem aquele brilho saudável de dorama que eu sempre quis.",
+    avatar: "C",
   },
   {
-    name: "Fernanda M.",
-    location: "Rio de Janeiro, RJ",
+    name: "Ema Ramos",
+    location: "Cliente Verificada",
     rating: 5,
-    text: "Textura leve e absorção rápida. Perfeito para usar antes da maquiagem. Minha pele fica luminosa o dia todo!",
-    avatar: "FM",
+    text: "A textura é incrível, absorve super rápido e não deixa oleoso. Sinto minha pele muito mais firme e hidratada.",
+    avatar: "ER",
   },
   {
-    name: "Juliana R.",
-    location: "Curitiba, PR",
+    name: "Maria Gabriela",
+    location: "Cliente Verificada",
     rating: 5,
-    text: "Finalmente um sérum vegano que realmente funciona! Senti diferença na firmeza da minha pele em poucas semanas.",
-    avatar: "JR",
+    text: "Melhor investimento que fiz para meu rosto. O efeito lifting é real e todo mundo pergunta o que estou usando!",
+    avatar: "MG",
   },
 ];
 
@@ -59,7 +59,7 @@ const Testimonials = () => {
               className="relative bg-background/80 backdrop-blur-sm rounded-2xl p-8 shadow-card-soft border border-border/50 hover:border-primary/20 transition-all duration-300"
             >
               <Quote className="absolute top-6 right-6 w-10 h-10 text-blush-deep/30" />
-              
+
               {/* Stars */}
               <div className="flex gap-1 mb-4">
                 {[...Array(testimonial.rating)].map((_, i) => (

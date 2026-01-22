@@ -52,7 +52,11 @@ const Hero = () => {
             <a href="#depoimentos" className="text-foreground/70 hover:text-primary transition-colors hidden md:block">
               Depoimentos
             </a>
-            <Button variant="outline-rose" size="sm">
+            <Button 
+              variant="outline-rose" 
+              size="sm"
+              onClick={() => window.location.href = "https://areum.pay.yampi.com.br/checkout?skipToCheckout=1&tokenReference=40KOQLA7X"}
+            >
               Comprar
             </Button>
           </div>
@@ -75,7 +79,7 @@ const Hero = () => {
             >
               <Sparkles className="w-4 h-4 text-primary" />
               <span className="text-sm font-medium text-secondary-foreground">
-                Nanotecnologia Avançada
+                Pele de protagonista de dorama
               </span>
             </motion.div>
 
@@ -105,12 +109,17 @@ const Hero = () => {
                 </span>
               </div>
               <p className="text-sm text-muted-foreground mt-2">
-                30ml | Frete grátis para todo Brasil
+                30ml
               </p>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Button variant="hero" size="xl" className="shimmer">
+              <Button 
+                variant="hero" 
+                size="xl" 
+                className="shimmer"
+                onClick={() => window.location.href = "https://areum.pay.yampi.com.br/checkout?skipToCheckout=1&tokenReference=40KOQLA7X"}
+              >
                 Quero minha Glass Skin
               </Button>
               <Button variant="glass" size="xl">
@@ -145,7 +154,7 @@ const Hero = () => {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.8, duration: 0.5 }}
-              className="absolute top-10 right-0 md:right-10 glass-effect px-4 py-2 rounded-full shadow-card-soft"
+              className="absolute top-10 right-4 md:right-10 glass-effect px-4 py-2 rounded-full shadow-card-soft"
             >
               <span className="text-sm font-medium text-foreground">✨ Vegano</span>
             </motion.div>
@@ -154,7 +163,7 @@ const Hero = () => {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 1, duration: 0.5 }}
-              className="absolute bottom-20 left-0 md:left-10 glass-effect px-4 py-2 rounded-full shadow-card-soft"
+              className="absolute bottom-20 left-4 md:left-10 glass-effect px-4 py-2 rounded-full shadow-card-soft"
             >
               <span className="text-sm font-medium text-foreground">🧬 Nano Tech</span>
             </motion.div>

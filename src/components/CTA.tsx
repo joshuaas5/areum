@@ -58,7 +58,7 @@ const CTA = () => {
                 </h2>
 
                 <p className="text-muted-foreground mb-6">
-                  Garanta agora o seu Sérum Hyalocolagreen e experimente o 
+                  Garanta agora o seu Sérum Hyalocolagreen e experimente o
                   poder da Glass Skin coreana.
                 </p>
 
@@ -72,24 +72,14 @@ const CTA = () => {
                       R$ 59,90
                     </span>
                   </div>
-                  <p className="text-sm text-muted-foreground">
-                    ou 3x de R$ 19,97 sem juros
-                  </p>
                 </div>
 
-                {/* Features */}
-                <div className="space-y-3 mb-8">
-                  {features.map((feature, index) => (
-                    <div key={index} className="flex items-center gap-3 text-foreground">
-                      <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-                        <feature.icon className="w-4 h-4 text-primary" />
-                      </div>
-                      <span className="text-sm">{feature.text}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <Button variant="hero" size="xl" className="w-full shimmer">
+                <Button
+                  variant="hero"
+                  size="xl"
+                  className="w-full shimmer"
+                  onClick={() => window.location.href = "https://areum.pay.yampi.com.br/checkout?skipToCheckout=1&tokenReference=40KOQLA7X"}
+                >
                   Comprar Agora
                 </Button>
 
