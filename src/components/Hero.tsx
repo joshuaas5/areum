@@ -158,52 +158,52 @@ const Hero = () => {
               transition={{ duration: 0.3 }}
             />
 
-            {/* Hand-drawn style badges - Adjusted positioning */}
-            {/* Top Right */}
+            {/* Hand-drawn style badges - Positioned OUTSIDE product area */}
+            {/* Top Right - Above product */}
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8, duration: 0.5 }}
-              className="absolute top-[5%] -right-0 md:top-[12%] md:-right-6 lg:-right-4 z-20"
+              className="absolute -top-4 right-4 md:-top-8 md:right-8 lg:right-12 z-20"
             >
               <div className="bg-white/95 backdrop-blur-sm px-5 py-2.5 rounded-sm shadow-sketch border-2 border-primary/15 transition-transform duration-300">
-                <span className="font-heading text-lg md:text-xl font-medium text-foreground tracking-wide whitespace-nowrap">Sofisticação</span>
+                <span className="font-heading text-base md:text-lg font-medium text-foreground tracking-wide whitespace-nowrap">Sofisticação</span>
               </div>
             </motion.div>
 
-            {/* Bottom Right */}
+            {/* Bottom Right - Below product */}
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.0, duration: 0.5 }}
-              className="absolute bottom-[20%] -right-0 md:bottom-[22%] md:-right-6 lg:-right-4 z-20"
+              className="absolute -bottom-4 right-4 md:-bottom-8 md:right-8 lg:right-12 z-20"
             >
               <div className="bg-white/95 backdrop-blur-sm px-5 py-2.5 rounded-sm shadow-sketch border-2 border-primary/15 transition-transform duration-300">
-                <span className="font-heading text-lg md:text-xl font-medium text-foreground tracking-wide whitespace-nowrap">Glow imediato</span>
+                <span className="font-heading text-base md:text-lg font-medium text-foreground tracking-wide whitespace-nowrap">Glow imediato</span>
               </div>
             </motion.div>
 
-            {/* Bottom Left */}
+            {/* Bottom Left - Below product */}
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.2, duration: 0.5 }}
-              className="absolute bottom-[10%] -left-0 md:bottom-[12%] md:-left-6 lg:-left-4 z-20"
+              className="absolute -bottom-4 left-4 md:-bottom-8 md:left-8 lg:left-12 z-20"
             >
               <div className="bg-white/95 backdrop-blur-sm px-5 py-2.5 rounded-sm shadow-sketch border-2 border-primary/15 transition-transform duration-300">
-                <span className="font-heading text-lg md:text-xl font-medium text-foreground tracking-wide whitespace-nowrap">Nanotecnologia</span>
+                <span className="font-heading text-base md:text-lg font-medium text-foreground tracking-wide whitespace-nowrap">Nanotecnologia</span>
               </div>
             </motion.div>
 
-            {/* Top Left */}
+            {/* Top Left - Above product */}
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.4, duration: 0.5 }}
-              className="absolute top-[15%] -left-0 md:top-[18%] md:-left-6 lg:-left-4 z-20"
+              className="absolute -top-4 left-4 md:-top-8 md:left-8 lg:left-12 z-20"
             >
               <div className="bg-white/95 backdrop-blur-sm px-5 py-2.5 rounded-sm shadow-sketch border-2 border-primary/15 transition-transform duration-300">
-                <span className="font-heading text-lg md:text-xl font-medium text-foreground tracking-wide whitespace-nowrap">Pele de protagonista</span>
+                <span className="font-heading text-base md:text-lg font-medium text-foreground tracking-wide whitespace-nowrap">Pele de protagonista</span>
               </div>
             </motion.div>
 
