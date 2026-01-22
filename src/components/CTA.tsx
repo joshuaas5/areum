@@ -27,14 +27,14 @@ const CTA = () => {
             transition={{ duration: 0.6 }}
             className="bg-background/90 backdrop-blur-md rounded-3xl p-8 md:p-12 shadow-2xl border border-border/50"
           >
-            <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
               {/* Left - Product */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="relative flex justify-center items-center"
+                className="relative flex justify-center items-center order-1 md:order-1"
               >
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="w-64 h-64 bg-gradient-to-br from-blush-deep/30 to-champagne/30 rounded-full blur-2xl" />
@@ -47,7 +47,7 @@ const CTA = () => {
               </motion.div>
 
               {/* Right - CTA */}
-              <div>
+              <div className="order-2 md:order-2 text-center md:text-left">
                 <span className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-medium mb-6">
                   🔥 Últimas unidades com desconto
                 </span>
@@ -65,7 +65,7 @@ const CTA = () => {
 
                 {/* Pricing */}
                 <div className="bg-secondary/50 rounded-xl p-6 mb-6">
-                  <div className="flex items-baseline gap-3 mb-2">
+                  <div className="flex items-baseline gap-3 mb-2 justify-center md:justify-start">
                     <span className="text-muted-foreground line-through text-lg">
                       R$ 79,90
                     </span>
