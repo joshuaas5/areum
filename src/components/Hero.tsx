@@ -114,7 +114,7 @@ const Hero = () => {
                 </span>
               </div>
               <p className="text-sm text-muted-foreground mt-2">
-                30ml • Rende até 60 aplicações
+                30ml
               </p>
             </div>
 
