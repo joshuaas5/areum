@@ -1,0 +1,109 @@
+import { motion } from "framer-motion";
+import { Button } from "./ui/button";
+import { Check, Shield, Truck, Clock } from "lucide-react";
+import areumSerum from "@/assets/areum-serum.png";
+
+const features = [
+  { icon: Truck, text: "Frete Grátis para todo Brasil" },
+  { icon: Shield, text: "Garantia de 30 dias" },
+  { icon: Clock, text: "Entrega em até 7 dias úteis" },
+];
+
+const CTA = () => {
+  return (
+    <section className="py-24 bg-gradient-to-br from-background via-blush/20 to-champagne/30 relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0">
+        <div className="absolute top-20 right-20 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 left-20 w-96 h-96 bg-blush-deep/20 rounded-full blur-3xl" />
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="bg-background/90 backdrop-blur-md rounded-3xl p-8 md:p-12 shadow-2xl border border-border/50"
+          >
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              {/* Left - Product */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="relative flex justify-center"
+              >
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-64 h-64 bg-gradient-to-br from-blush-deep/30 to-champagne/30 rounded-full blur-2xl" />
+                </div>
+                <img
+                  src={areumSerum}
+                  alt="Areum Sérum"
+                  className="relative z-10 w-48 md:w-56 drop-shadow-2xl"
+                />
+              </motion.div>
+
+              {/* Right - CTA */}
+              <div>
+                <span className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-medium mb-6">
+                  🔥 Oferta por tempo limitado
+                </span>
+
+                <h2 className="font-heading text-3xl md:text-4xl font-semibold text-foreground mb-4">
+                  Transforme sua rotina de{" "}
+                  <span className="text-gradient-rose">skincare</span>
+                </h2>
+
+                <p className="text-muted-foreground mb-6">
+                  Garanta agora o seu Sérum Hyalocolagreen e experimente o 
+                  poder da Glass Skin coreana.
+                </p>
+
+                {/* Pricing */}
+                <div className="bg-secondary/50 rounded-xl p-6 mb-6">
+                  <div className="flex items-baseline gap-3 mb-2">
+                    <span className="text-muted-foreground line-through text-lg">
+                      R$ 79,90
+                    </span>
+                    <span className="font-heading text-4xl font-bold text-primary">
+                      R$ 59,90
+                    </span>
+                  </div>
+                  <p className="text-sm text-muted-foreground">
+                    ou 3x de R$ 19,97 sem juros
+                  </p>
+                </div>
+
+                {/* Features */}
+                <div className="space-y-3 mb-8">
+                  {features.map((feature, index) => (
+                    <div key={index} className="flex items-center gap-3 text-foreground">
+                      <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                        <feature.icon className="w-4 h-4 text-primary" />
+                      </div>
+                      <span className="text-sm">{feature.text}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <Button variant="hero" size="xl" className="w-full shimmer">
+                  Comprar Agora
+                </Button>
+
+                <p className="text-center text-xs text-muted-foreground mt-4 flex items-center justify-center gap-2">
+                  <Check className="w-4 h-4 text-primary" />
+                  Compra 100% segura
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default CTA;
