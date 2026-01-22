@@ -83,7 +83,7 @@ const Hero = () => {
                 className="w-5 h-4 object-cover rounded-sm"
               />
               <span className="text-sm font-medium text-secondary-foreground">
-                A tecnologia coreana que sua pele merece
+                Tecnologia coreana
               </span>
             </motion.div>
 
@@ -94,7 +94,7 @@ const Hero = () => {
             </h1>
 
             <p className="text-lg md:text-xl text-muted-foreground mb-4 max-w-xl mx-auto lg:mx-0">
-              Resultados visíveis em 7 dias. Ácido Hialurônico e Colágeno Vegetal
+              Resultados visíveis. Ácido Hialurônico e Colágeno Vegetal
               com tecnologia inteligente para máxima absorção.
             </p>
 
@@ -164,7 +164,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8, duration: 0.5 }}
-              className="absolute -top-4 right-4 md:-top-8 md:right-8 lg:right-12 z-20"
+              className="absolute -top-6 right-4 md:-top-10 md:right-8 lg:right-12 z-20"
             >
               <div className="bg-white/95 backdrop-blur-sm px-5 py-2.5 rounded-sm shadow-sketch border-2 border-primary/15 transition-transform duration-300">
                 <span className="font-heading text-base md:text-lg font-medium text-foreground tracking-wide whitespace-nowrap">Sofisticação</span>
@@ -200,7 +200,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.4, duration: 0.5 }}
-              className="absolute -top-4 left-4 md:-top-8 md:left-8 lg:left-12 z-20"
+              className="absolute -top-6 left-4 md:-top-10 md:left-8 lg:left-12 z-20"
             >
               <div className="bg-white/95 backdrop-blur-sm px-5 py-2.5 rounded-sm shadow-sketch border-2 border-primary/15 transition-transform duration-300">
                 <span className="font-heading text-base md:text-lg font-medium text-foreground tracking-wide whitespace-nowrap">Pele de protagonista</span>

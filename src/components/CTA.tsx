@@ -34,7 +34,7 @@ const CTA = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="relative flex justify-center"
+                className="relative flex justify-center items-center"
               >
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="w-64 h-64 bg-gradient-to-br from-blush-deep/30 to-champagne/30 rounded-full blur-2xl" />
@@ -42,7 +42,7 @@ const CTA = () => {
                 <img
                   src={areumSerum}
                   alt="Areum Sérum"
-                  className="relative z-10 w-48 md:w-56 drop-shadow-2xl"
+                  className="relative z-10 w-48 md:w-56 drop-shadow-2xl mx-auto"
                 />
               </motion.div>
 
