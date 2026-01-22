@@ -83,7 +83,7 @@ const CTA = () => {
                     variant="hero"
                     size="xl"
                     className="w-full shimmer"
-                    onClick={() => window.location.href = "https://areum.pay.yampi.com.br/checkout?skipToCheckout=1&tokenReference=40KOQLA7X"}
+                    onClick={() => window.location.href = "https://areum.pay.yampi.com.br/r/40KOQLA7XE"}
                   >
                     Garantir Meu Sérum Agora
                   </Button>
