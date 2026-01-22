@@ -39,8 +39,9 @@ const Footer = () => {
 
           {/* Badges */}
           <div className="flex flex-wrap justify-center gap-4 mb-8">
-            <span className="px-4 py-2 bg-primary-foreground/10 rounded-full text-sm text-primary-foreground/70">
-              🇰🇷 Tecnologia Coreana
+            <span className="px-4 py-2 bg-primary-foreground/10 rounded-full text-sm text-primary-foreground/70 inline-flex items-center gap-2">
+              <img src="https://flagcdn.com/w40/kr.png" alt="Korea" className="w-4 h-3 object-cover rounded-sm" />
+              Tecnologia Coreana
             </span>
             <span className="px-4 py-2 bg-primary-foreground/10 rounded-full text-sm text-primary-foreground/70">
               🧪 Dermatologicamente Testado

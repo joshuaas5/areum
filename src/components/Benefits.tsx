@@ -64,7 +64,8 @@ const Benefits = () => {
           className="text-center mb-16"
         >
           <span className="inline-flex items-center gap-2 text-primary text-sm font-medium tracking-wider uppercase mb-4">
-            <span>🇰🇷</span> Tecnologia Coreana
+            <img src="https://flagcdn.com/w40/kr.png" alt="Korea" className="w-5 h-4 object-cover rounded-sm" />
+            Tecnologia Coreana
           </span>
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground mb-6">
             Por que Escolher o Sérum{" "}
