@@ -107,6 +107,7 @@ const LuckyWheel = () => {
 
             if (wonPrize.value === "win") {
                 localStorage.setItem("areum_wheel_won", "true");
+                setTimeout(() => handleDownloadEbook(), 500); // Small delay to let the UI update
             } else {
                 localStorage.setItem("areum_wheel_date", new Date().toDateString());
             }
