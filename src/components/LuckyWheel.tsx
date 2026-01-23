@@ -116,8 +116,8 @@ const LuckyWheel = () => {
     const handleDownloadEbook = () => {
         // Direct download from public folder
         const link = document.createElement('a');
-        link.href = '/ebook-areum-glass-skin.html';
-        link.download = 'Ebook-Segredos-Pele-Protagonista.html';
+        link.href = '/AREUM - EBOOK.pdf';
+        link.download = 'AREUM - EBOOK.pdf';
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
