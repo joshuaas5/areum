@@ -99,7 +99,7 @@
             }
 
             nav,
-            button,
+            /* button, removed button from hidden to allow sales links */
             .print-hidden {
                 display: none !important;
             }
@@ -160,6 +160,11 @@
         </div>
 
         <div class="relative z-10 text-center max-w-3xl mx-auto px-6 fade-in">
+            <!-- Print-visible Logo for Cover -->
+            <div class="mb-4 flex justify-center">
+                <img src="./areum-logo-premium.png" alt="AREUM" class="h-20 object-contain filter drop-shadow-sm mb-4">
+            </div>
+
             <span class="uppercase tracking-[0.3em] text-sm text-brand-primary mb-4 block font-semibold">K-Beauty
                 Science</span>
             <h1 class="text-6xl md:text-8xl mb-6 text-gray-800 font-light leading-none">Glass <br><span
@@ -170,9 +175,9 @@
             </p>
             <div class="w-24 h-[1px] bg-brand-primary/30 mx-auto"></div>
 
-            <div class="mt-8 flex justify-center gap-4 print:hidden">
+            <div class="mt-8 flex justify-center gap-4">
                 <a href="https://www.areumco.com.br" target="_blank"
-                    class="px-8 py-3 bg-brand-primary text-white text-xs uppercase tracking-widest hover:bg-brand-dark transition-colors rounded-sm shadow-lg">
+                    class="px-8 py-3 bg-brand-primary text-white text-xs uppercase tracking-widest hover:bg-brand-dark transition-colors rounded-sm shadow-lg no-underline">
                     Visitar Loja
                 </a>
             </div>
