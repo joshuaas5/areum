@@ -55,7 +55,7 @@ const Hero = () => {
             <Button
               variant="outline-rose"
               size="sm"
-              onClick={() => window.location.href = "https://areum.pay.yampi.com.br/checkout?skipToCheckout=1&tokenReference=40KOQLA7XE"}
+              onClick={() => window.location.href = "https://areum.pay.yampi.com.br/r/40KOQLA7XE"}
             >
               Comprar
             </Button>
@@ -123,7 +123,7 @@ const Hero = () => {
                 variant="hero"
                 size="xl"
                 className="shimmer"
-                onClick={() => window.location.href = "https://areum.pay.yampi.com.br/checkout?skipToCheckout=1&tokenReference=40KOQLA7XE"}
+                onClick={() => window.location.href = "https://areum.pay.yampi.com.br/r/40KOQLA7XE"}
               >
                 Quero minha Glass Skin
               </Button>
