@@ -107,10 +107,10 @@ const Hero = () => {
             <div className="mb-8">
               <div className="flex items-center justify-center lg:justify-start gap-4">
                 <span className="text-muted-foreground line-through text-lg">
-                  R$ 79,90
+                  R$ 89,90
                 </span>
                 <span className="font-heading text-4xl md:text-5xl font-bold text-primary">
-                  R$ 59,90
+                  R$ 69,90
                 </span>
               </div>
               <p className="text-sm text-muted-foreground mt-2">
