@@ -38,8 +38,9 @@ const Footer = () => {
           </div>
 
           {/* Badges */}
-          <div className="flex flex-col md:flex-row items-center gap-4 mb-10">
-            <span className="px-4 py-2 bg-primary-foreground/10 rounded-full text-sm text-primary-foreground/70 inline-flex items-center gap-2">
+          {/* Badges */}
+          <div className="flex flex-col md:flex-row items-center gap-6 mb-10">
+            <span className="mb-4 md:mb-0 px-4 py-2 bg-primary-foreground/10 rounded-full text-sm text-primary-foreground/70 inline-flex items-center gap-2">
               <img src="https://flagcdn.com/w40/kr.png" alt="Korea" className="w-4 h-3 object-cover rounded-sm" />
               Tecnologia Coreana
             </span>
