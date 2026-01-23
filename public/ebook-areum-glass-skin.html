@@ -12,34 +12,32 @@
                 extend: {
                     colors: {
                         brand: {
-                            primary: '#B87333', // Copper (Cobre) - Adjusted for better visibility
-                            light: '#F8C3CD', // Rosé Pink
-                            dark: '#8B5A2B', // Dark Copper
+                            primary: '#B87333',
+                            light: '#F8C3CD',
+                            dark: '#8B5A2B',
                             bg: '#FFF0F5'
                         }
+                    },
+                    boxShadow: {
+                        'glass': '0 8px 32px 0 rgba(184, 115, 51, 0.08)'
                     }
                 }
             }
         }
     </script>
     <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap"
         rel="stylesheet">
-    <!-- Development version of lucide for better error handling, switching to unpkg for stability -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
             --glass-bg: rgba(255, 240, 245, 0.65);
-            /* Rosé glass */
             --glass-border: rgba(184, 115, 51, 0.3);
-            /* Copper border */
             --text-dark: #4A3B32;
-            /* Deep warm brown */
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            /* Richer Rosé Gradient as requested */
             background: linear-gradient(135deg, #FDEBEE 0%, #F6D5DD 100%);
             color: var(--text-dark);
             overflow-x: hidden;
@@ -61,7 +59,15 @@
             -webkit-backdrop-filter: blur(14px);
             border: 1px solid var(--glass-border);
             box-shadow: 0 8px 32px 0 rgba(184, 115, 51, 0.08);
-            /* Copper shadow */
+            border-radius: 12px;
+        }
+
+        /* Sophisticated Visuals */
+        .decoration-line {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--glass-border), transparent);
+            width: 60%;
+            margin: 2rem auto;
         }
 
         .gradient-text {
@@ -86,53 +92,87 @@
             }
         }
 
-        /* Print Improvements */
+        /* 
+           PROFESSIONAL PRINT STYLESHEET
+           Designed for A4 Harmony
+        */
         @media print {
             @page {
-                margin: 0;
                 size: A4;
+                margin: 0;
+                /* Full bleed control */
             }
 
             body {
+                background: linear-gradient(135deg, #FDEBEE 0%, #F6D5DD 100%) !important;
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
+                font-size: 11pt;
+                /* Optimal reading size */
             }
 
-            nav,
-            /* button, removed button from hidden to allow sales links */
-            .print-hidden {
-                display: none !important;
-            }
-
-            .glass-panel {
-                box-shadow: none !important;
-                border: 1px solid rgba(184, 115, 51, 0.3) !important;
-                break-inside: avoid;
-            }
-
+            /* Consistent Padding logic for pages */
             section {
-                break-inside: avoid;
+                padding: 40px !important;
+                break-inside: avoid-page;
+                /* Try to keep sections whole */
                 page-break-inside: avoid;
-                padding-top: 20px !important;
-                padding-bottom: 20px !important;
+                min-height: auto !important;
+                /* Reset generic heights */
             }
 
-            h1,
-            h2,
-            h3 {
+            /* Forcing Cover Page Isolation */
+            header {
+                height: 100vh !important;
+                break-after: always;
+                page-break-after: always;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+            /* Avoiding "widow" lines/boxes */
+            h2 {
                 break-after: avoid;
                 page-break-after: avoid;
             }
 
-            img {
-                break-inside: avoid;
-                page-break-inside: avoid;
+            /* Utility for specific page breaks */
+            .page-break {
+                break-before: page;
+                page-break-before: always;
             }
 
-            /* Start major sections on new pages if needed */
-            section:not(:first-of-type) {
-                break-before: auto;
-                /* Let browser decide best break to avoid gaps, usage of 'avoid' inside is key */
+            /* Better Glass Panel Contrast for Print */
+            .glass-panel {
+                background: rgba(255, 255, 255, 0.75) !important;
+                /* More opaque for readability */
+                box-shadow: none !important;
+                border: 1px solid rgba(184, 115, 51, 0.5) !important;
+                break-inside: avoid;
+            }
+
+            /* Hide interactive nav but show specific branding */
+            nav {
+                display: none !important;
+            }
+
+            .print-hidden {
+                display: none !important;
+            }
+
+            /* Grid Adjustments for A4 Portrait */
+            .print-grid-2 {
+                display: grid !important;
+                grid-template-columns: 1fr 1fr !important;
+                gap: 2rem !important;
+            }
+
+            .print-grid-3 {
+                display: grid !important;
+                grid-template-columns: 1fr 1fr 1fr !important;
+                gap: 1.5rem !important;
             }
         }
     </style>
@@ -140,476 +180,326 @@
 
 <body class="antialiased selection:bg-brand-light selection:text-brand-dark">
 
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 glass-panel border-b border-brand-primary/20 print:hidden">
+    <!-- Navigation (Screen Only) -->
+    <nav
+        class="fixed top-0 w-full z-50 glass-panel border-b border-brand-primary/20 print:hidden transition-all duration-300">
         <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
-            <!-- LOGO -->
-            <div>
-                <img src="./areum-logo-premium.png" alt="AREUM"
-                    class="h-10 md:h-12 object-contain filter drop-shadow-sm">
-            </div>
+            <img src="./areum-logo-premium.png" alt="AREUM" class="h-10 md:h-12 object-contain filter drop-shadow-sm">
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header class="min-h-screen flex items-center justify-center relative pt-20">
-        <!-- CSS pattern background - Copper Dots -->
+    <!-- PAGE 1: COVER -->
+    <header class="min-h-screen flex flex-col items-center justify-center relative p-8">
+        <!-- Visual Texture for Cover -->
         <div
-            class="absolute inset-0 z-0 opacity-15 bg-[radial-gradient(#B87333_1.5px,transparent_1.5px)] [background-size:24px_24px]">
+            class="absolute inset-0 z-0 opacity-15 bg-[radial-gradient(#B87333_1px,transparent_1px)] [background-size:24px_24px]">
         </div>
 
-        <div class="relative z-10 text-center max-w-3xl mx-auto px-6 fade-in">
-            <!-- Print-visible Logo for Cover -->
-            <div class="mb-4 flex justify-center">
-                <img src="./areum-logo-premium.png" alt="AREUM" class="h-20 object-contain filter drop-shadow-sm mb-4">
+        <div class="relative z-10 text-center max-w-3xl mx-auto fade-in">
+            <!-- Cover Logo -->
+            <div class="mb-8 flex justify-center">
+                <img src="./areum-logo-premium.png" alt="AREUM" class="h-24 object-contain filter drop-shadow-sm">
             </div>
 
-            <span class="uppercase tracking-[0.3em] text-sm text-brand-primary mb-4 block font-semibold">K-Beauty
-                Science</span>
-            <h1 class="text-6xl md:text-8xl mb-6 text-gray-800 font-light leading-none">Glass <br><span
-                    class="italic gradient-text font-normal">Skin</span></h1>
-            <p class="text-xl md:text-2xl font-light text-gray-600 mb-12 serif italic">
-                "A beleza coreana não é sobre esconder imperfeições.<br>É sobre revelar o brilho natural de uma pele bem
-                cuidada."
-            </p>
-            <div class="w-24 h-[1px] bg-brand-primary/30 mx-auto"></div>
+            <div class="border-t border-b border-brand-primary/30 py-8 mb-8">
+                <span class="uppercase tracking-[0.4em] text-xs text-brand-primary mb-6 block font-bold">Guia
+                    Oficial</span>
+                <h1 class="text-7xl md:text-9xl text-brand-dark font-light leading-none tracking-tight">
+                    Glass <span class="italic font-normal text-brand-primary">Skin</span>
+                </h1>
+            </div>
 
-            <div class="mt-8 flex justify-center gap-4">
+            <p class="text-xl font-light text-gray-700 italic serif max-w-lg mx-auto leading-relaxed">
+                "A excelência da biotecnologia coreana unida à sua beleza natural."
+            </p>
+
+            <div class="mt-12">
                 <a href="https://www.areumco.com.br" target="_blank"
-                    class="px-8 py-3 bg-brand-primary text-white text-xs uppercase tracking-widest hover:bg-brand-dark transition-colors rounded-sm shadow-lg no-underline">
-                    Visitar Loja
+                    class="inline-block px-10 py-4 bg-brand-primary text-white text-xs font-bold uppercase tracking-widest hover:bg-brand-dark transition-colors rounded-sm shadow-glass no-underline">
+                    Visitar Loja Oficial
                 </a>
             </div>
         </div>
+
+        <!-- Cover Footer -->
+        <div class="absolute bottom-10 text-xs text-brand-primary/60 tracking-widest uppercase font-semibold">
+            Edição Especial • 2026
+        </div>
     </header>
 
-    <!-- Introduction -->
-    <section class="py-12 md:py-24 px-6 max-w-4xl mx-auto">
-        <div class="grid md:grid-cols-2 gap-12 items-center">
-            <div class="glass-panel p-8 rounded-2xl">
-                <h2 class="text-3xl mb-6 serif text-brand-primary">O Conceito</h2>
-                <p class="text-gray-600 leading-relaxed mb-4">
-                    <strong>Glass Skin</strong> é sobre uma pele com aparência hidratada, luminosa e uniforme que
-                    reflete a beleza naturalmente, como o brilho do vidro.
+    <!-- PAGE 2: CONCEPT & TECH (Grouped for flow) -->
+    <section class="py-16 px-8 max-w-5xl mx-auto page-break">
+        <!-- Concepts -->
+        <div class="mb-16">
+            <h2
+                class="text-4xl serif text-brand-primary mb-8 text-center border-b border-brand-primary/20 pb-4 inline-block mx-auto">
+                O Conceito</h2>
+            <div class="print-grid-2 grid md:grid-cols-2 gap-10 items-center">
+                <div class="glass-panel p-10 rounded-xl relative">
+                    <div class="absolute -top-3 -left-3 text-6xl text-brand-primary/10 serif">"</div>
+                    <p class="text-gray-700 leading-relaxed text-lg mb-6 relative z-10">
+                        <strong>Glass Skin</strong> não é sobre oleosidade. É sobre uma pele tão hidratada, nutrida e
+                        uniforme que reflete a luz naturalmente, simulando a translucidez do vidro.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed relative z-10">
+                        Para alcançar este resultado, unimos dois pilares fundamentais: a
+                        <strong>Nanotecnologia</strong> e a <strong>Bio-Sinergia</strong>.
+                    </p>
+                </div>
+                <!-- Visual -->
+                <div
+                    class="h-64 rounded-xl bg-gradient-to-tr from-brand-light/40 to-white flex items-center justify-center border border-brand-primary/10 shadow-inner">
+                    <i data-lucide="sparkles" class="w-20 h-20 text-brand-primary/40"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tech Specs -->
+        <div>
+            <div class="text-center mb-10">
+                <h2 class="text-3xl serif text-brand-dark mb-2">Tecnologia de Alta Performance</h2>
+                <div class="decoration-line"></div>
+            </div>
+
+            <div class="print-grid-3 grid md:grid-cols-3 gap-6">
+                <!-- Tech 1 -->
+                <div class="glass-panel p-6 rounded-lg text-center">
+                    <div
+                        class="w-10 h-10 bg-brand-bg rounded-full flex items-center justify-center mx-auto mb-4 text-brand-primary border border-brand-primary/20">
+                        <i data-lucide="microscope" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="serif text-lg text-brand-dark font-bold mb-2">Partículas Finas</h3>
+                    <p class="text-xs text-gray-600 leading-relaxed">Aplicação uniforme e leveza absoluta na superfície
+                        da pele.</p>
+                </div>
+
+                <!-- Tech 2 -->
+                <div class="glass-panel p-6 rounded-lg text-center">
+                    <div
+                        class="w-10 h-10 bg-brand-bg rounded-full flex items-center justify-center mx-auto mb-4 text-brand-primary border border-brand-primary/20">
+                        <i data-lucide="layers" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="serif text-lg text-brand-dark font-bold mb-2">Ação Prolongada</h3>
+                    <p class="text-xs text-gray-600 leading-relaxed">Liberação gradual de ativos para 12 horas de
+                        nutrição contínua.</p>
+                </div>
+
+                <!-- Tech 3 -->
+                <div class="glass-panel p-6 rounded-lg text-center">
+                    <div
+                        class="w-10 h-10 bg-brand-bg rounded-full flex items-center justify-center mx-auto mb-4 text-brand-primary border border-brand-primary/20">
+                        <i data-lucide="droplet" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="serif text-lg text-brand-dark font-bold mb-2">Estabilidade</h3>
+                    <p class="text-xs text-gray-600 leading-relaxed">Preservação total do potencial antioxidante dos
+                        ingredientes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAGE 3: INGREDIENTS & NUTRITION -->
+    <section class="py-16 px-8 max-w-5xl mx-auto page-break">
+        <!-- Ingredients -->
+        <h2 class="text-4xl serif text-center text-brand-dark mb-12">Ativos Principais</h2>
+
+        <div class="print-grid-2 grid md:grid-cols-2 gap-8 mb-16">
+            <div class="glass-panel p-8 rounded-xl border-l-4 border-brand-primary">
+                <span
+                    class="text-xs font-bold tracking-widest text-brand-primary uppercase mb-2 block">Hidratação</span>
+                <h3 class="text-2xl serif text-brand-dark mb-4">Ácido Hialurônico</h3>
+                <p class="text-sm text-gray-600 mb-4">Retém até 1000x seu peso em água, garantindo o "plump" imediato.
                 </p>
-                <p class="text-gray-600 leading-relaxed">
-                    Para alcançar este visual, unimos dois pilares fundamentais: a <strong>Tecnologia Coreana</strong>
-                    presente nos produtos Areum e a <strong>Rotina de Autocuidado</strong> com hábitos saudáveis.
-                </p>
-            </div>
-            <!-- Visual CSS element -->
-            <div
-                class="relative h-80 rounded-2xl overflow-hidden shadow-xl bg-brand-light/30 flex items-center justify-center">
-                <div class="text-brand-primary opacity-30">
-                    <i data-lucide="sparkles" style="width: 80px; height: 80px;"></i>
+                <div class="flex items-center gap-2 text-xs font-semibold text-brand-primary">
+                    <i data-lucide="check" class="w-4 h-4"></i> Hidratação Profunda
                 </div>
-                <div class="absolute inset-0 bg-gradient-to-tr from-brand-light/40 to-transparent"></div>
+            </div>
+
+            <div class="glass-panel p-8 rounded-xl border-l-4 border-brand-primary">
+                <span class="text-xs font-bold tracking-widest text-brand-primary uppercase mb-2 block">Firmeza</span>
+                <h3 class="text-2xl serif text-brand-dark mb-4">Colágeno Vegetal</h3>
+                <p class="text-sm text-gray-600 mb-4">Biocompatível e sustentável, cria um filme tensor natural.</p>
+                <div class="flex items-center gap-2 text-xs font-semibold text-brand-primary">
+                    <i data-lucide="check" class="w-4 h-4"></i> Efeito Lifting
+                </div>
             </div>
         </div>
-    </section>
 
-    <!-- The Technology -->
-    <section class="py-12 md:py-20 bg-white/40">
-        <div class="max-w-5xl mx-auto px-6">
-            <div class="text-center mb-12 md:mb-16">
-                <h2 class="text-4xl serif mb-4 text-brand-dark">Tecnologia de Alta Performance</h2>
-                <p class="text-gray-500 max-w-2xl mx-auto">Fórmulas cosméticas avançadas para realçar sua beleza.</p>
+        <!-- Nutrition Cards (Condensed) -->
+        <h3 class="text-2xl serif text-center text-brand-dark mb-8">Nutrição &amp; Pele</h3>
+        <div class="print-grid-2 grid md:grid-cols-2 gap-4">
+            <div class="bg-white/60 p-5 rounded-lg border border-brand-primary/10 flex items-start gap-4">
+                <div class="p-2 bg-brand-bg rounded-md text-brand-primary"><i data-lucide="ban" class="w-4 h-4"></i>
+                </div>
+                <div>
+                    <h4 class="font-bold text-sm text-brand-dark">Açúcar</h4>
+                    <p class="text-xs text-gray-600">Causa glicação (envelhecimento). Substitua por frutas.</p>
+                </div>
             </div>
-
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Card 1 -->
-                <div class="glass-panel p-8 rounded-xl hover:shadow-lg transition-shadow duration-300">
-                    <div
-                        class="w-12 h-12 bg-pink-50 rounded-full flex items-center justify-center mb-6 text-brand-primary">
-                        <i data-lucide="microscope"></i>
-                    </div>
-                    <h3 class="text-xl serif mb-3 text-brand-dark">Partículas Avançadas</h3>
-                    <p class="text-sm text-gray-600 leading-relaxed">
-                        Utilizamos tecnologia de partículas finas para uma aplicação mais uniforme e uma sensação leve
-                        na superfície da pele.
-                    </p>
+            <div class="bg-white/60 p-5 rounded-lg border border-brand-primary/10 flex items-start gap-4">
+                <div class="p-2 bg-brand-bg rounded-md text-brand-primary"><i data-lucide="sprout" class="w-4 h-4"></i>
                 </div>
-
-                <!-- Card 2 -->
-                <div
-                    class="glass-panel p-8 rounded-xl hover:shadow-lg transition-shadow duration-300 relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-brand-light to-transparent">
-                    </div>
-                    <div
-                        class="w-12 h-12 bg-brand-light/30 rounded-full flex items-center justify-center mb-6 text-brand-primary">
-                        <i data-lucide="layers"></i>
-                    </div>
-                    <h3 class="text-xl serif mb-3 text-brand-dark">Ação Prolongada</h3>
-                    <p class="text-sm text-gray-600 leading-relaxed">
-                        Nossos ingredientes auxiliam na manutenção da hidratação ao longo do dia, mantendo o viço e o
-                        brilho por mais tempo.
-                    </p>
+                <div>
+                    <h4 class="font-bold text-sm text-brand-dark">Intestino</h4>
+                    <p class="text-xs text-gray-600">Use probióticos para reduzir inflamação sistêmica.</p>
                 </div>
-
-                <!-- Card 3 -->
-                <div class="glass-panel p-8 rounded-xl hover:shadow-lg transition-shadow duration-300">
-                    <div
-                        class="w-12 h-12 bg-brand-light/30 rounded-full flex items-center justify-center mb-6 text-brand-primary">
-                        <i data-lucide="droplet"></i>
-                    </div>
-                    <h3 class="text-xl serif mb-3 text-brand-dark">Formulações Estáveis</h3>
-                    <p class="text-sm text-gray-600 leading-relaxed">
-                        Cuidadosamente formulado para preservar as propriedades cosméticas dos ingredientes e garantir a
-                        melhor experiência sensorial.
-                    </p>
+            </div>
+            <div class="bg-white/60 p-5 rounded-lg border border-brand-primary/10 flex items-start gap-4">
+                <div class="p-2 bg-brand-bg rounded-md text-brand-primary"><i data-lucide="moon" class="w-4 h-4"></i>
+                </div>
+                <div>
+                    <h4 class="font-bold text-sm text-brand-dark">Sono & Sódio</h4>
+                    <p class="text-xs text-gray-600">Evite sal à noite para reduzir o inchaço matinal.</p>
+                </div>
+            </div>
+            <div class="bg-white/60 p-5 rounded-lg border border-brand-primary/10 flex items-start gap-4">
+                <div class="p-2 bg-brand-bg rounded-md text-brand-primary"><i data-lucide="coffee" class="w-4 h-4"></i>
+                </div>
+                <div>
+                    <h4 class="font-bold text-sm text-brand-dark">Antioxidantes</h4>
+                    <p class="text-xs text-gray-600">Chá verde combate radicais livres e desincha.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Ingredients Deep Dive -->
-    <section class="py-12 md:py-24 px-6 break-before-page">
-        <div class="max-w-6xl mx-auto">
-            <div class="grid md:grid-cols-2 gap-12 md:gap-16">
-                <!-- Hyaluronic -->
-                <div class="flex flex-col justify-center glass-panel p-8 rounded-xl border-l-4 border-brand-primary">
-                    <span class="text-brand-primary text-sm tracking-widest font-bold mb-2">HIDRATAÇÃO INTENSIVA</span>
-                    <h2 class="text-4xl serif mb-6 text-brand-dark">Ácido Hialurônico</h2>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
-                        Um poderoso aliado para a hidratação da pele. Ajuda a reter a umidade, promovendo uma aparência
-                        mais lisa e macia.
-                    </p>
-                    <ul class="space-y-3">
-                        <li class="flex items-center gap-3 text-sm text-gray-700">
-                            <i data-lucide="check-circle" class="w-4 h-4 text-green-500"></i>
-                            Promove hidratação superficial intensa
-                        </li>
-                        <li class="flex items-center gap-3 text-sm text-gray-700">
-                            <i data-lucide="check-circle" class="w-4 h-4 text-green-500"></i>
-                            Melhora visualmente o aspecto de ressecamento
-                        </li>
-                    </ul>
-                </div>
+    <!-- PAGE 4: ROUTINE & TIMELINE -->
+    <section class="py-16 px-8 max-w-5xl mx-auto page-break">
+        <h2 class="text-4xl serif text-center text-brand-dark mb-12">Seu Ritual de Beleza</h2>
 
-                <!-- Collagen -->
+        <div class="space-y-6 max-w-3xl mx-auto mb-16">
+            <!-- Simplified List Steps -->
+            <div class="flex gap-6 items-center glass-panel p-4 rounded-lg">
                 <div
-                    class="flex flex-col justify-center md:order-last glass-panel p-8 rounded-xl border-l-4 border-brand-primary">
-                    <span class="text-brand-primary text-sm tracking-widest font-bold mb-2">FIRMEZA &
-                        ELASTICIDADE</span>
-                    <h2 class="text-4xl serif mb-6 text-brand-dark">Colágeno Vegetal</h2>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
-                        Ingrediente de origem biotecnológica que forma um filme protetor sobre a pele, auxiliando na
-                        sensação de firmeza.
-                    </p>
-                    <ul class="space-y-3">
-                        <li class="flex items-center gap-3 text-sm text-gray-700">
-                            <i data-lucide="check-circle" class="w-4 h-4 text-green-500"></i>
-                            Efeito visual de pele mais esticada (Efeito Tensor)
-                        </li>
-                        <li class="flex items-center gap-3 text-sm text-gray-700">
-                            <i data-lucide="check-circle" class="w-4 h-4 text-green-500"></i>
-                            Cruelty-free e de origem não-animal
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- NEW SECTION: Nutrition Science -->
-    <section class="py-12 md:py-24 bg-brand-light/5 relative overflow-hidden break-before-page">
-        <!-- Decorative bg circle -->
-        <div
-            class="absolute top-0 right-0 w-96 h-96 bg-brand-light rounded-full mix-blend-multiply filter blur-3xl opacity-30 transform translate-x-1/2 -translate-y-1/2">
-        </div>
-
-        <div class="max-w-5xl mx-auto px-6 relative z-10">
-            <h2 class="text-4xl serif text-center mb-4 text-brand-dark">Nutrição & Beleza</h2>
-            <p class="text-center text-gray-500 mb-12 md:mb-16 max-w-2xl mx-auto">
-                O produto Areum realça, mas os hábitos sustentam. Entenda como a alimentação influencia na aparência da
-                pele.
-            </p>
-
-            <div class="grid md:grid-cols-2 gap-8">
-                <!-- Item 1: Glycation -->
-                <div
-                    class="bg-white p-8 rounded-xl shadow-sm border-l-4 border-brand-primary hover:shadow-md transition-shadow">
-                    <h3 class="text-xl font-bold mb-2 flex items-center gap-2 text-brand-dark">
-                        <i data-lucide="ban" class="w-5 h-5 text-brand-primary"></i>
-                        Açúcar e Aparência
-                    </h3>
-                    <p class="text-sm text-gray-600 leading-relaxed">
-                        O consumo excessivo de açúcares pode afetar a qualidade da pele, contribuindo para uma aparência
-                        menos firme.
-                    </p>
-                    <div class="mt-4 text-xs font-semibold text-brand-primary uppercase tracking-wide">Dica Areum:</div>
-                    <p class="text-sm text-gray-700 italic">Prefira frutas ricas em água (melancia, pera) que ajudam na
-                        hidratação.</p>
-                </div>
-
-                <!-- Item 2: Microbiome -->
-                <div
-                    class="bg-white p-8 rounded-xl shadow-sm border-l-4 border-purple-300 hover:shadow-md transition-shadow">
-                    <h3 class="text-xl font-bold mb-2 flex items-center gap-2 text-purple-700">
-                        <i data-lucide="sprout" class="w-5 h-5 text-purple-400"></i>
-                        Bem-estar Intestinal
-                    </h3>
-                    <p class="text-sm text-gray-600 leading-relaxed">
-                        O equilíbrio do corpo reflete na pele. Alimentos fermentados são tradicionais na Coreia e
-                        considerados benéficos.
-                    </p>
-                    <div class="mt-4 text-xs font-semibold text-brand-primary uppercase tracking-wide">Dica Areum:</div>
-                    <p class="text-sm text-gray-700 italic">Mantenha uma dieta equilibrada para uma pele mais radiante.
-                    </p>
-                </div>
-
-                <!-- Item 3: Sodium -->
-                <div
-                    class="bg-white p-8 rounded-xl shadow-sm border-l-4 border-blue-300 hover:shadow-md transition-shadow">
-                    <h3 class="text-xl font-bold mb-2 flex items-center gap-2 text-blue-700">
-                        <i data-lucide="moon" class="w-5 h-5 text-blue-400"></i>
-                        Sono e Inchaço
-                    </h3>
-                    <p class="text-sm text-gray-600 leading-relaxed">
-                        O consumo de sódio à noite pode favorecer a retensão de líquidos, resultando em inchaço facial
-                        ao acordar.
-                    </p>
-                    <div class="mt-4 text-xs font-semibold text-brand-primary uppercase tracking-wide">Dica Areum:</div>
-                    <p class="text-sm text-gray-700 italic">Evite excesso de sal no jantar para acordar com o rosto mais
-                        leve.</p>
-                </div>
-
-                <!-- Item 4: Antioxidants -->
-                <div
-                    class="bg-white p-8 rounded-xl shadow-sm border-l-4 border-green-300 hover:shadow-md transition-shadow">
-                    <h3 class="text-xl font-bold mb-2 flex items-center gap-2 text-green-700">
-                        <i data-lucide="coffee" class="w-5 h-5 text-green-400"></i>
-                        Antioxidantes Naturais
-                    </h3>
-                    <p class="text-sm text-gray-600 leading-relaxed">
-                        Chás como o Verde são conhecidos por suas propriedades antioxidantes que ajudam a proteger
-                        contra poluição.
-                    </p>
-                    <div class="mt-4 text-xs font-semibold text-brand-primary uppercase tracking-wide">Dica Areum:</div>
-                    <p class="text-sm text-gray-700 italic">Incorpore chás na rotina para um momento de relaxamento e
-                        cuidado.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Routine Steps -->
-    <section class="py-12 md:py-24 max-w-4xl mx-auto px-6 break-before-page">
-        <h2 class="text-4xl serif text-center mb-16 text-brand-dark">Seu Ritual de Beleza</h2>
-
-        <div class="space-y-8 relative">
-            <div class="absolute left-8 top-0 bottom-0 w-px bg-brand-light hidden md:block"></div>
-
-            <!-- Step 1 -->
-            <div class="flex flex-col md:flex-row gap-6 items-start relative box-break-avoid">
-                <div
-                    class="hidden md:flex w-16 h-16 bg-white border-2 border-brand-light rounded-full items-center justify-center text-xl font-serif z-10 shrink-0 text-brand-primary">
+                    class="w-8 h-8 rounded-full bg-brand-primary text-white flex items-center justify-center font-serif text-lg">
                     1</div>
-                <div
-                    class="flex-1 glass-panel p-6 rounded-xl border-l-4 md:border-l-0 md:border-t-4 border-brand-light">
-                    <span class="text-xs font-bold tracking-widest text-brand-primary uppercase">Limpeza</span>
-                    <h3 class="text-xl font-bold mb-2 text-brand-dark">Limpeza Suave</h3>
-                    <p class="text-sm text-gray-600">Remova impurezas sem agredir a pele. Pela manhã, limpe suavemente
-                        para manter o equilíbrio natural.</p>
+                <div>
+                    <h4 class="font-bold text-brand-dark uppercase text-sm">Limpeza Suave</h4>
+                    <p class="text-xs text-gray-600">Remova impurezas sem agredir a barreira natural.</p>
                 </div>
             </div>
 
-            <!-- Step 2 -->
-            <div class="flex flex-col md:flex-row gap-6 items-start relative box-break-avoid">
+            <div class="flex gap-6 items-center glass-panel p-4 rounded-lg">
                 <div
-                    class="hidden md:flex w-16 h-16 bg-white border-2 border-brand-light rounded-full items-center justify-center text-xl font-serif z-10 shrink-0 text-brand-primary">
+                    class="w-8 h-8 rounded-full bg-brand-primary text-white flex items-center justify-center font-serif text-lg">
                     2</div>
-                <div
-                    class="flex-1 glass-panel p-6 rounded-xl border-l-4 md:border-l-0 md:border-t-4 border-brand-light">
-                    <span class="text-xs font-bold tracking-widest text-brand-primary uppercase">Preparação</span>
-                    <h3 class="text-xl font-bold mb-2 text-brand-dark">Tonificação</h3>
-                    <p class="text-sm text-gray-600">Equilibra e refresca a pele, preparando-a para receber a
-                        hidratação.</p>
+                <div>
+                    <h4 class="font-bold text-brand-dark uppercase text-sm">Tonificação</h4>
+                    <p class="text-xs text-gray-600">Equilibre o pH para receber o tratamento.</p>
                 </div>
             </div>
 
-            <!-- Step 3 HERO -->
+            <!-- Highlight Step -->
             <div
-                class="flex flex-col md:flex-row gap-6 items-center relative transform md:scale-105 origin-left box-break-avoid">
+                class="flex gap-6 items-center bg-brand-dark text-white p-6 rounded-xl shadow-lg transform scale-105 border border-brand-primary/30">
                 <div
-                    class="hidden md:flex w-16 h-16 bg-brand-primary text-white rounded-full items-center justify-center text-xl font-serif z-10 shadow-lg shrink-0">
+                    class="w-10 h-10 rounded-full bg-white text-brand-dark flex items-center justify-center font-serif text-xl border-2 border-brand-primary">
                     3</div>
-                <div
-                    class="flex-1 bg-gradient-to-r from-brand-light/30 to-white p-8 rounded-xl shadow-xl border border-brand-light">
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <span class="text-xs font-bold tracking-widest text-brand-primary uppercase">Cuidado
-                                Principal</span>
-                            <h3 class="text-2xl font-bold mb-2 text-brand-dark">Sérum Areum</h3>
-                        </div>
-                        <i data-lucide="star" class="text-brand-primary/50 fill-current"></i>
+                <div class="flex-1">
+                    <div class="flex justify-between items-center">
+                        <h4 class="font-bold uppercase text-brand-light">Sérum Areum</h4>
+                        <i data-lucide="star" class="w-4 h-4 text-brand-light fill-current"></i>
                     </div>
-                    <p class="text-gray-700 my-4">O passo essencial para o efeito Glass Skin. Hidratação intensa e
-                        luminosidade para sua pele.</p>
-                    <div class="bg-white/60 p-3 rounded-lg text-sm text-gray-600 italic border border-white">
-                        <strong class="block not-italic text-brand-primary mb-1">Dica de Beleza:</strong>
-                        Aplique com a pele ainda úmida para potencializar a sensação de hidratação.
-                    </div>
+                    <p class="text-sm text-brand-bg/90 mt-1">O passo transformador. Aplique com a pele úmida para máxima
+                        absorção.</p>
                 </div>
             </div>
 
-            <!-- Step 4 -->
-            <div class="flex flex-col md:flex-row gap-6 items-start relative box-break-avoid">
+            <div class="flex gap-6 items-center glass-panel p-4 rounded-lg">
                 <div
-                    class="hidden md:flex w-16 h-16 bg-white border-2 border-brand-light rounded-full items-center justify-center text-xl font-serif z-10 shrink-0 text-brand-primary">
+                    class="w-8 h-8 rounded-full bg-brand-primary text-white flex items-center justify-center font-serif text-lg">
                     4</div>
-                <div
-                    class="flex-1 glass-panel p-6 rounded-xl border-l-4 md:border-l-0 md:border-t-4 border-brand-light">
-                    <span class="text-xs font-bold tracking-widest text-brand-primary uppercase">Hidratação</span>
-                    <h3 class="text-xl font-bold mb-2 text-brand-dark">Hidratante Facial</h3>
-                    <p class="text-sm text-gray-600">Ajuda a manter a hidratação na pele, evitando o ressecamento ao
-                        longo do dia.</p>
+                <div>
+                    <h4 class="font-bold text-brand-dark uppercase text-sm">Hidratação</h4>
+                    <p class="text-xs text-gray-600">Sele a umidade para um glow duradouro.</p>
                 </div>
             </div>
 
-            <!-- Step 5 -->
-            <div class="flex flex-col md:flex-row gap-6 items-start relative box-break-avoid">
+            <div class="flex gap-6 items-center glass-panel p-4 rounded-lg">
                 <div
-                    class="hidden md:flex w-16 h-16 bg-white border-2 border-brand-light rounded-full items-center justify-center text-xl font-serif z-10 shrink-0 text-brand-primary">
+                    class="w-8 h-8 rounded-full bg-brand-primary text-white flex items-center justify-center font-serif text-lg">
                     5</div>
-                <div
-                    class="flex-1 glass-panel p-6 rounded-xl border-l-4 md:border-l-0 md:border-t-4 border-brand-light">
-                    <span class="text-xs font-bold tracking-widest text-brand-primary uppercase">Proteção</span>
-                    <h3 class="text-xl font-bold mb-2 text-brand-dark">Fotoproteção</h3>
-                    <p class="text-sm text-gray-600">Proteger a pele do sol é essencial para manter a aparência saudável
-                        e prevenir o envelhecimento precoce.</p>
+                <div>
+                    <h4 class="font-bold text-brand-dark uppercase text-sm">Fotoproteção</h4>
+                    <p class="text-xs text-gray-600">Indispensável para prevenir manchas e envelhecimento.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Timeline -->
+        <div class="border-t border-brand-primary/20 pt-10">
+            <h3 class="text-center font-serif text-2xl text-brand-dark mb-8">Cronograma de Resultados</h3>
+            <div class="print-grid-3 grid md:grid-cols-3 gap-6 text-center">
+                <div class="p-4">
+                    <span class="block text-3xl font-serif text-brand-primary mb-2">01</span>
+                    <span class="text-xs font-bold uppercase tracking-widest text-brand-dark">Imediatamente</span>
+                </div>
+                <div class="p-4 relative">
+                    <div class="absolute inset-x-0 top-1/2 h-px bg-brand-primary/20 -z-10 hidden md:block"></div>
+                    <span class="block text-3xl font-serif text-brand-dark mb-2">07</span>
+                    <span class="text-xs font-bold uppercase tracking-widest text-brand-dark">Dias</span>
+                </div>
+                <div class="p-4">
+                    <span class="block text-3xl font-serif text-brand-dark mb-2">28</span>
+                    <span class="text-xs font-bold uppercase tracking-widest text-brand-dark">Dias</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- EXTRA INFO SECTION: Timeline -->
-    <section class="py-12 md:py-24 bg-white/40">
-        <div class="max-w-5xl mx-auto px-6">
-            <h2 class="text-4xl serif text-center mb-12 text-brand-dark">O Que Esperar</h2>
-            <p class="text-center text-gray-500 mb-16 max-w-2xl mx-auto">
-                A pele se renova naturalmente. Veja como o cuidado contínuo pode realçar sua beleza.
+    <!-- PAGE 5: APPLICATION & CTA -->
+    <section
+        class="py-16 px-8 max-w-5xl mx-auto page-break bg-gray-900 text-white rounded-xl my-8 print:bg-gray-900 print:text-white">
+        <h2 class="text-3xl serif text-center text-brand-light mb-12">Dicas de Expert</h2>
+
+        <div class="print-grid-2 grid md:grid-cols-2 gap-12 mb-16">
+            <div class="flex gap-6">
+                <div
+                    class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-2xl shrink-0 border border-white/20">
+                    ✋</div>
+                <div>
+                    <h4 class="font-bold text-brand-light mb-2">Patting</h4>
+                    <p class="text-sm text-gray-400">Pressione levemente com as palmas das mãos para "empurrar" o
+                        produto para dentro da pele.</p>
+                </div>
+            </div>
+
+            <div class="flex gap-6">
+                <div
+                    class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-2xl shrink-0 border border-white/20">
+                    💆</div>
+                <div>
+                    <h4 class="font-bold text-brand-light mb-2">Massagem</h4>
+                    <p class="text-sm text-gray-400">Movimentos ascendentes (de baixo para cima) para estimular o efeito
+                        lifting.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Area -->
+        <div class="text-center border-t border-white/10 pt-12">
+            <img src="./areum-logo-premium.png" alt="AREUM"
+                class="h-16 mx-auto mb-6 brightness-0 invert opacity-90 object-contain">
+
+            <p class="text-gray-400 text-sm max-w-lg mx-auto mb-8 font-light italic">
+                "Sua pele é o seu melhor investimento. Cuide dela com Areum."
             </p>
 
-            <div class="grid md:grid-cols-3 gap-8">
-                <div
-                    class="glass-panel p-8 text-center rounded-xl border-t-4 border-brand-light hover:shadow-lg transition-all break-inside-avoid">
-                    <span class="text-4xl font-serif block mb-4 text-brand-primary">01</span>
-                    <h4 class="font-bold mb-2 uppercase tracking-wider text-sm text-brand-dark">Imediatamente</h4>
-                    <p class="text-gray-600 text-sm">Pele com toque macio e aparência mais hidratada.</p>
-                </div>
-                <div
-                    class="glass-panel p-8 text-center rounded-xl border-t-4 border-brand-primary hover:shadow-lg transition-all transform md:-translate-y-4 break-inside-avoid">
-                    <span class="text-4xl font-serif block mb-4 text-brand-dark">07</span>
-                    <h4 class="font-bold mb-2 uppercase tracking-wider text-sm text-brand-dark">Dias</h4>
-                    <p class="text-gray-600 text-sm">Aparência mais luminosa e viçosa ("Glow").</p>
-                </div>
-                <div
-                    class="glass-panel p-8 text-center rounded-xl border-t-4 border-brand-dark hover:shadow-lg transition-all break-inside-avoid">
-                    <span class="text-4xl font-serif block mb-4 text-brand-dark">28</span>
-                    <h4 class="font-bold mb-2 uppercase tracking-wider text-sm text-brand-dark">Dias</h4>
-                    <p class="text-gray-600 text-sm">Pele com aspecto renovado, textura mais uniforme e saudável.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Application Technique -->
-    <section class="py-12 md:py-24 bg-gray-900 text-white">
-        <div class="max-w-5xl mx-auto px-6">
-            <h2 class="text-4xl serif mb-12 text-center text-brand-light">Dicas de Aplicação</h2>
-
-            <div class="grid md:grid-cols-2 gap-12">
-                <div class="space-y-8">
-                    <div class="flex gap-4 break-inside-avoid">
-                        <div
-                            class="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center shrink-0 text-2xl">
-                            ✋</div>
-                        <div>
-                            <h3 class="text-xl font-bold mb-2 text-brand-light">Patting (Batidinhas)</h3>
-                            <p class="text-gray-400 leading-relaxed">
-                                Aplique o produto com delicadeza. Use as palmas das mãos para pressionar suavemente,
-                                ajudando na absorção.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="flex gap-4 break-inside-avoid">
-                        <div
-                            class="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center shrink-0 text-2xl">
-                            💆
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold mb-2 text-brand-light">Massagem Facial</h3>
-                            <p class="text-gray-400 leading-relaxed">
-                                Ao aplicar o hidratante, faça movimentos suaves do centro do rosto para fora, promovendo
-                                relaxamento.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white/5 p-8 rounded-2xl border border-white/10 break-inside-avoid">
-                    <h3 class="text-2xl serif mb-6 text-center text-brand-light">Ritual Semanal</h3>
-                    <ul class="space-y-4 text-sm text-gray-300">
-                        <li class="flex items-center gap-3">
-                            <input type="checkbox" class="accent-brand-primary w-5 h-5">
-                            <span>Beber água ao longo do dia</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <input type="checkbox" class="accent-brand-primary w-5 h-5">
-                            <span>Sérum Areum na rotina diária</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <input type="checkbox" class="accent-brand-primary w-5 h-5">
-                            <span>Incluir frutas na alimentação</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <input type="checkbox" class="accent-brand-primary w-5 h-5">
-                            <span>Priorizar uma boa noite de sono</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="py-12 text-center bg-white border-t border-gray-200 break-inside-avoid">
-        <div class="mb-6 flex flex-col items-center">
-            <img src="./areum-logo-premium.png" alt="AREUM"
-                class="h-14 md:h-16 mb-4 object-contain filter drop-shadow-sm">
-            <span class="block text-sm text-gray-400">K-Beauty Brasil • 2026</span>
-        </div>
-        <div class="flex flex-col md:flex-row justify-center gap-6 mb-8 items-center">
-            <a href="https://instagram.com/AreumCo" target="_blank"
-                class="flex items-center gap-2 text-gray-400 hover:text-brand-primary transition-colors">
-                <i data-lucide="instagram" class="w-4 h-4"></i> @AreumCo
-            </a>
             <a href="https://www.areumco.com.br" target="_blank"
-                class="flex items-center gap-2 text-gray-400 hover:text-brand-primary transition-colors">
-                <i data-lucide="globe" class="w-4 h-4"></i> www.areumco.com.br
-            </a>
-            <a href="mailto:areumcosmetics@gmail.com"
-                class="flex items-center gap-2 text-gray-400 hover:text-brand-primary transition-colors">
-                <i data-lucide="mail" class="w-4 h-4"></i> areumcosmetics@gmail.com
-            </a>
-        </div>
-        <div class="mt-8 mb-8">
-            <a href="https://www.areumco.com.br" target="_blank"
-                class="inline-flex items-center gap-2 px-6 py-3 bg-brand-primary text-white text-sm font-semibold rounded-full hover:bg-brand-dark transition-colors shadow-sm">
+                class="inline-flex items-center gap-3 px-8 py-4 bg-brand-light text-brand-dark font-bold uppercase text-xs tracking-widest rounded-full hover:bg-white transition-colors no-underline">
                 <i data-lucide="shopping-bag" class="w-4 h-4"></i>
-                Adquirir Sérum Glass Skin
+                Adquirir Tratamento Completo
             </a>
+
+            <div class="mt-12 flex justify-center gap-6 text-xs text-gray-500 uppercase tracking-wider">
+                <span>www.areumco.com.br</span>
+                <span>•</span>
+                <span>@AreumCo</span>
+            </div>
         </div>
-        <p class="text-xs text-gray-500 max-w-md mx-auto font-medium">
-            Este guia é informativo. Dicas de beleza e bem-estar.
-            Desenvolvido com carinho para sua pele.
-        </p>
-    </footer>
+    </section>
 
     <script>
-        // Check if lucide is loaded, if not wait for load event
         if (typeof lucide !== 'undefined') {
             lucide.createIcons();
         } else {
