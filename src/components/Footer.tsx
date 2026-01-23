@@ -38,13 +38,16 @@ const Footer = () => {
           </div>
 
           {/* Badges */}
-          <span className="px-4 py-2 bg-primary-foreground/10 rounded-full text-sm text-primary-foreground/70 inline-flex items-center gap-2">
-            <img src="https://flagcdn.com/w40/kr.png" alt="Korea" className="w-4 h-3 object-cover rounded-sm" />
-            Tecnologia Coreana
-          </span>
-          <span className="px-4 py-2 bg-primary-foreground/10 rounded-full text-sm text-primary-foreground/70">
-            🧪 Dermatologicamente Testado
-          </span>
+          <div className="flex flex-col md:flex-row items-center gap-4 mb-10">
+            <span className="px-4 py-2 bg-primary-foreground/10 rounded-full text-sm text-primary-foreground/70 inline-flex items-center gap-2">
+              <img src="https://flagcdn.com/w40/kr.png" alt="Korea" className="w-4 h-3 object-cover rounded-sm" />
+              Tecnologia Coreana
+            </span>
+            <span className="px-4 py-2 bg-primary-foreground/10 rounded-full text-sm text-primary-foreground/70 flex items-center gap-2">
+              <span>🧪</span>
+              <span>Dermatologicamente Testado</span>
+            </span>
+          </div>
 
           {/* Copyright */}
           <div className="border-t border-primary-foreground/10 pt-8 w-full">
