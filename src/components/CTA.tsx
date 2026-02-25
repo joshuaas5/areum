@@ -70,11 +70,11 @@ const CTA = () => {
                       R$ 89,90
                     </span>
                     <span className="font-heading text-4xl font-bold text-primary">
-                      R$ 69,90
+                      R$ 74,90
                     </span>
                   </div>
                   <p className="text-sm text-muted-foreground">
-                    ou 3x de R$ 23,30 sem juros
+                    ou 3x de R$ 24,97 sem juros
                   </p>
                 </div>
 

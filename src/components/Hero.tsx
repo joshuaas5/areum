@@ -110,7 +110,7 @@ const Hero = () => {
                   R$ 89,90
                 </span>
                 <span className="font-heading text-4xl md:text-5xl font-bold text-primary">
-                  R$ 69,90
+                  R$ 74,90
                 </span>
               </div>
               <p className="text-sm text-muted-foreground mt-2">
