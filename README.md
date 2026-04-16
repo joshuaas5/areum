@@ -1,73 +1,67 @@
-# Welcome to your Lovable project
+# AREUM - Landing de Cosmético com Conversão
 
-## Project info
+Projeto de landing page focado em conversão para o sérum facial AREUM.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+Objetivo do produto:
 
-## How can I edit this code?
+- posicionar o produto com estética premium
+- converter tráfego em checkout
+- capturar leads com roleta promocional
 
-There are several ways of editing your application.
+## O que está implementado
 
-**Use Lovable**
+- Hero comercial com proposta de valor e CTA direto para checkout
+- Seções de benefícios, modo de uso e depoimentos
+- Componente de roleta para captura de leads
+- Persistência de leads no Supabase
+- Design responsivo com microinterações (Framer Motion)
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+Principais componentes:
 
-Changes made via Lovable will be committed automatically to this repo.
+- src/components/Hero.tsx
+- src/components/Benefits.tsx
+- src/components/HowToUse.tsx
+- src/components/Testimonials.tsx
+- src/components/CTA.tsx
+- src/components/LuckyWheel.tsx
 
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
+## Stack
 
 - Vite
+- React 18
 - TypeScript
-- React
-- shadcn-ui
 - Tailwind CSS
+- Radix UI / shadcn
+- Supabase
+- Framer Motion
 
-## How can I deploy this project?
+## Como rodar localmente
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+~~~bash
+npm install
+npm run dev
+~~~
 
-## Can I connect a custom domain to my Lovable project?
+Build de produção:
 
-Yes, you can!
+~~~bash
+npm run build
+npm run preview
+~~~
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## Variáveis de ambiente
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Copie .env.example para .env e preencha:
+
+- VITE_SUPABASE_URL
+- VITE_SUPABASE_ANON_KEY
+
+## Status de segurança
+
+- .env removido do versionamento
+- .env adicionado ao .gitignore
+- .env.example criado com placeholders
+
+## Observação de produto
+
+Este repositório representa uma landing comercial real (não template de estudo), com foco em copy, conversão e operação de campanha.
