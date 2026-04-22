@@ -82,6 +82,6 @@ npm run build
 
 The production build will be available in the `dist/` directory, ready for deployment on Vercel, Netlify, or any static hosting provider.
 
-## License
+## Live Demo
 
-MIT
+[https://areumco.com.br](https://areumco.com.br)
