@@ -24,4 +24,4 @@ Areum was built to explore modern frontend patterns — responsive design system
 
 ## Access
 
-[https://areumco.com.br](https://areumco.com.br)
+[https://www.areumco.com.br](https://www.areumco.com.br)
