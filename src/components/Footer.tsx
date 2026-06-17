@@ -14,7 +14,7 @@ const Footer = () => {
           />
 
           <p className="text-primary-foreground/70 max-w-md mb-8">
-            O segredo da pele coreana ao seu alcance.
+            Beleza inspirada no skincare coreano, feita para a sua rotina real.
           </p>
 
           {/* Social Links */}
@@ -42,7 +42,7 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row items-center gap-6 mb-10">
             <span className="mb-4 md:mb-0 px-4 py-2 bg-primary-foreground/10 rounded-full text-sm text-primary-foreground/70 inline-flex items-center gap-2">
               <img src="https://flagcdn.com/w40/kr.png" alt="Korea" className="w-4 h-3 object-cover rounded-sm" />
-              Tecnologia Coreana
+              Inspirado no skincare coreano
             </span>
             <span className="px-4 py-2 bg-primary-foreground/10 rounded-full text-sm text-primary-foreground/70 flex items-center gap-2">
               <span>🧪</span>

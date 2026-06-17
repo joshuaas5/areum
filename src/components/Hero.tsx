@@ -1,212 +1,135 @@
 import { motion } from "framer-motion";
-import { Button } from "./ui/button";
-import { Star } from "lucide-react";
+import { ShieldCheck, Sparkles, Star } from "lucide-react";
 import areumLogo from "@/assets/areum-logo.png";
 import areumSerum from "@/assets/areum-serum.png";
+import { Button } from "./ui/button";
+
+const checkoutUrl = "https://areum.pay.yampi.com.br/r/40KOQLA7XE";
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen bg-gradient-hero overflow-hidden">
-      {/* Decorative elements */}
+    <section className="relative min-h-screen overflow-hidden bg-gradient-hero">
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-blush-deep/30 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-champagne/40 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-rose-gold-light/10 rounded-full blur-3xl" />
+        <div className="absolute left-[-10%] top-[-12%] h-[420px] w-[420px] rounded-full bg-blush-deep/25 blur-3xl" />
+        <div className="absolute bottom-[-15%] right-[-8%] h-[520px] w-[520px] rounded-full bg-champagne/45 blur-3xl" />
+        <div className="absolute left-1/2 top-1/2 h-[680px] w-[680px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/35 blur-3xl" />
       </div>
 
-      {/* Floating particles */}
-      {[...Array(6)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute w-2 h-2 bg-primary/30 rounded-full"
-          style={{
-            left: `${15 + i * 15}%`,
-            top: `${20 + (i % 3) * 25}%`,
-          }}
-          animate={{
-            y: [0, -30, 0],
-            opacity: [0.3, 0.7, 0.3],
-          }}
-          transition={{
-            duration: 4 + i,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: i * 0.5,
-          }}
-        />
-      ))}
-
-      <div className="container relative z-10 mx-auto px-4 pt-8 pb-20">
-        {/* Navigation */}
+      <div className="container relative z-10 mx-auto px-5 pb-16 pt-6 md:px-8 md:pb-20">
         <motion.nav
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: -16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="flex justify-between items-center py-4"
+          transition={{ duration: 0.55 }}
+          className="flex items-center justify-between"
         >
           <img src={areumLogo} alt="Areum" className="h-12 md:h-16" />
-          <div className="flex items-center gap-4">
-            <a href="#beneficios" className="text-foreground/70 hover:text-primary transition-colors hidden md:block">
+          <div className="flex items-center gap-6">
+            <a href="#beneficios" className="hidden text-sm text-foreground/65 transition-colors hover:text-primary md:block">
               Benefícios
             </a>
-            <a href="#depoimentos" className="text-foreground/70 hover:text-primary transition-colors hidden md:block">
-              Depoimentos
+            <a href="#modo-de-uso" className="hidden text-sm text-foreground/65 transition-colors hover:text-primary md:block">
+              Como usar
             </a>
             <Button
               variant="outline-rose"
               size="sm"
-              onClick={() => window.location.href = "https://areum.pay.yampi.com.br/r/40KOQLA7XE"}
+              onClick={() => {
+                window.location.href = checkoutUrl;
+              }}
             >
               Comprar
             </Button>
           </div>
         </motion.nav>
 
-        {/* Hero content */}
-        <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[80vh] py-12">
-          {/* Left content */}
+        <div className="grid min-h-[calc(100vh-96px)] items-center gap-10 py-10 lg:grid-cols-[0.96fr_1.04fr] lg:py-6">
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-center lg:text-left order-2 lg:order-1"
+            initial={{ opacity: 0, y: 28 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="order-1 mx-auto max-w-2xl text-center lg:mx-0 lg:text-left"
           >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="inline-flex items-center gap-2 bg-secondary/80 backdrop-blur-sm px-4 py-2 rounded-full mb-6"
-            >
-              <img
-                src="https://flagcdn.com/w40/kr.png"
-                alt="Korea"
-                className="w-5 h-4 object-cover rounded-sm"
-              />
-              <span className="text-sm font-medium text-secondary-foreground">
-                Tecnologia coreana
-              </span>
-            </motion.div>
+            <p className="mb-5 text-xs font-medium uppercase tracking-[0.28em] text-primary/85">
+              K-beauty para o clima brasileiro
+            </p>
 
-            <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold text-foreground leading-tight mb-6">
+            <h1 className="text-balance font-heading text-5xl font-semibold leading-[0.94] text-foreground md:text-6xl lg:text-7xl xl:text-[5.4rem]">
               A pele de{" "}
               <span className="text-gradient-rose italic">protagonista</span>
-              <br />que você merece
+              <br />
+              que você merece
             </h1>
 
-            <p className="text-lg md:text-xl text-muted-foreground mb-4 max-w-xl mx-auto lg:mx-0">
-              Resultados visíveis. Ácido Hialurônico e Colágeno Vegetal
-              com tecnologia inteligente para máxima absorção.
+            <p className="mx-auto mt-7 max-w-xl text-base leading-8 text-muted-foreground md:text-lg lg:mx-0">
+              Sérum facial com Hyalocollagreen 5%, ácido hialurônico e colágeno vegano para hidratação leve,
+              viço imediato e sensação de pele mais firme.
             </p>
 
-            <p className="text-sm text-muted-foreground mb-8 flex items-center justify-center lg:justify-start gap-2">
-              <Star className="w-4 h-4 text-gold fill-gold" />
-              Dermatologicamente Testado • Cruelty-Free
-            </p>
-
-            {/* Pricing */}
-            <div className="mb-8">
-              <div className="flex items-center justify-center lg:justify-start gap-4">
-                <span className="text-muted-foreground line-through text-lg">
-                  R$ 89,90
-                </span>
-                <span className="font-heading text-4xl md:text-5xl font-bold text-primary">
-                  R$ 74,90
-                </span>
-              </div>
-              <p className="text-sm text-muted-foreground mt-2">
-                30ml
-              </p>
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-3 text-sm text-muted-foreground lg:justify-start">
+              <span className="inline-flex items-center gap-2">
+                <Star className="h-4 w-4 fill-gold text-gold" />
+                Dermatologicamente testado
+              </span>
+              <span className="hidden h-1 w-1 rounded-full bg-primary/40 sm:block" />
+              <span>30ml</span>
+              <span className="hidden h-1 w-1 rounded-full bg-primary/40 sm:block" />
+              <span>Cruelty-free</span>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+            <div className="mt-8 flex flex-col items-center gap-2 lg:items-start">
+              <div className="flex items-end gap-4">
+                <span className="pb-2 text-lg text-muted-foreground line-through">R$ 99,90</span>
+                <span className="font-heading text-5xl font-bold text-primary md:text-6xl">R$ 84,90</span>
+              </div>
+              <p className="text-sm text-muted-foreground">Preço promocional de lançamento</p>
+            </div>
+
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center lg:justify-start">
               <Button
                 variant="hero"
                 size="xl"
                 className="shimmer"
-                onClick={() => window.location.href = "https://areum.pay.yampi.com.br/r/40KOQLA7XE"}
+                onClick={() => {
+                  window.location.href = checkoutUrl;
+                }}
               >
-                Quero minha Glass Skin
+                Garantir meu Sérum Areum
               </Button>
               <Button
                 variant="glass"
                 size="xl"
-                onClick={() => document.getElementById('beneficios')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => document.getElementById("beneficios")?.scrollIntoView({ behavior: "smooth" })}
               >
                 Ver benefícios
               </Button>
             </div>
           </motion.div>
 
-          {/* Right - Product image with hand-drawn style badges */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
+            initial={{ opacity: 0, scale: 0.92 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.4 }}
-            className="relative flex justify-center order-1 lg:order-2"
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="order-2 relative mx-auto flex min-h-[460px] w-full max-w-[620px] items-center justify-center lg:min-h-[680px]"
           >
-            {/* Glow effect behind product */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-80 h-80 md:w-96 md:h-96 bg-gradient-to-br from-blush-deep/40 to-champagne/40 rounded-full blur-3xl pulse-glow" />
-            </div>
+            <div className="absolute inset-x-8 bottom-14 top-16 rounded-[999px] bg-gradient-to-b from-white/70 via-blush/45 to-champagne/45 blur-2xl" />
+            <div className="absolute h-[360px] w-[360px] rounded-full border border-primary/10 bg-white/30 shadow-product md:h-[500px] md:w-[500px]" />
 
-            {/* Product image */}
             <motion.img
               src={areumSerum}
-              alt="Areum Sérum Facial"
-              className="relative z-10 w-64 md:w-80 lg:w-96 drop-shadow-2xl float-animation"
-              whileHover={{ scale: 1.05 }}
+              alt="Sérum facial Areum 30ml"
+              className="relative z-10 h-[430px] w-auto object-contain drop-shadow-2xl md:h-[560px] lg:h-[650px]"
+              whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
             />
 
-            {/* Hand-drawn style badges - Positioned OUTSIDE product area */}
-            {/* Top Right - Above product */}
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8, duration: 0.5 }}
-              className="absolute -top-6 right-4 md:-top-10 md:right-8 lg:right-12 z-20"
-            >
-              <div className="bg-white/95 backdrop-blur-sm px-5 py-2.5 rounded-sm shadow-sketch border-2 border-primary/15 transition-transform duration-300">
-                <span className="font-heading text-base md:text-lg font-medium text-foreground tracking-wide whitespace-nowrap">Sofisticação</span>
-              </div>
-            </motion.div>
-
-            {/* Bottom Right - Below product */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.0, duration: 0.5 }}
-              className="absolute -bottom-4 right-4 md:-bottom-8 md:right-8 lg:right-12 z-20"
-            >
-              <div className="bg-white/95 backdrop-blur-sm px-5 py-2.5 rounded-sm shadow-sketch border-2 border-primary/15 transition-transform duration-300">
-                <span className="font-heading text-base md:text-lg font-medium text-foreground tracking-wide whitespace-nowrap">Glow imediato</span>
-              </div>
-            </motion.div>
-
-            {/* Bottom Left - Below product */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.2, duration: 0.5 }}
-              className="absolute -bottom-4 left-4 md:-bottom-8 md:left-8 lg:left-12 z-20"
-            >
-              <div className="bg-white/95 backdrop-blur-sm px-5 py-2.5 rounded-sm shadow-sketch border-2 border-primary/15 transition-transform duration-300">
-                <span className="font-heading text-base md:text-lg font-medium text-foreground tracking-wide whitespace-nowrap">Nanotecnologia</span>
-              </div>
-            </motion.div>
-
-            {/* Top Left - Above product */}
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.4, duration: 0.5 }}
-              className="absolute -top-6 left-4 md:-top-10 md:left-8 lg:left-12 z-20"
-            >
-              <div className="bg-white/95 backdrop-blur-sm px-5 py-2.5 rounded-sm shadow-sketch border-2 border-primary/15 transition-transform duration-300">
-                <span className="font-heading text-base md:text-lg font-medium text-foreground tracking-wide whitespace-nowrap">Pele de protagonista</span>
-              </div>
-            </motion.div>
-
+            <div className="absolute left-0 top-12 z-20 hidden max-w-[190px] rounded-sm border border-primary/10 bg-white/90 px-5 py-4 text-left shadow-card-soft backdrop-blur md:block">
+              <Sparkles className="mb-3 h-5 w-5 text-primary" />
+              <p className="font-heading text-xl leading-tight text-foreground">Glow sem sensação pesada</p>
+            </div>
+            <div className="absolute bottom-16 right-0 z-20 hidden max-w-[205px] rounded-sm border border-primary/10 bg-white/90 px-5 py-4 text-left shadow-card-soft backdrop-blur md:block">
+              <ShieldCheck className="mb-3 h-5 w-5 text-primary" />
+              <p className="font-heading text-xl leading-tight text-foreground">Hidratação para uso diário</p>
+            </div>
           </motion.div>
         </div>
       </div>

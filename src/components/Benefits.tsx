@@ -1,112 +1,73 @@
 import { motion } from "framer-motion";
-import { Droplets, Sparkles, Shield, Leaf } from "lucide-react";
+import { Droplets, Leaf, Shield, Sparkles } from "lucide-react";
 
 const benefits = [
   {
-    icon: Droplets,
-    title: "Hidratação Instantânea",
+    icon: Sparkles,
+    title: "Viço de glass skin",
     description:
-      "Sinta sua pele 96% mais hidratada em 8 semanas. Adeus pele seca e opaca. Bem-vinda à luminosidade que você vê nas coreanas.",
+      "Ajuda a devolver luminosidade para a pele opaca, com acabamento leve e aparência descansada.",
   },
   {
-    icon: Sparkles,
-    title: "Pele de Protagonista",
+    icon: Droplets,
+    title: "Hidratação inteligente",
     description:
-      "Aquele efeito de 'pele de vidro' dos K-Dramas. Brilho saudável, transparência e zero oleosidade.",
+      "O ácido hialurônico atrai água para a superfície da pele, favorecendo toque macio e efeito plump visual.",
   },
   {
     icon: Shield,
-    title: "Aparência Revitalizada",
+    title: "Sensação de firmeza",
     description:
-      "Ajuda a melhorar a firmeza e vitalidade da pele. Rosto com aspecto mais descansado, liso e radiante.",
+      "O colágeno vegano forma um filme delicado que melhora a sensação de elasticidade e conforto.",
   },
   {
     icon: Leaf,
-    title: "Livre de Culpa",
+    title: "Leve para o dia a dia",
     description:
-      "Cruelty-free e dermatologicamente testado. Beleza consciente que respeita sua pele e o meio ambiente.",
+      "Textura aquosa, rápida absorção e acabamento sem pegajosidade para encaixar na sua rotina real.",
   },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6 },
-  },
-};
-
 const Benefits = () => {
   return (
-    <section id="beneficios" className="py-24 bg-card relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-blush/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-      <div className="absolute bottom-0 left-0 w-72 h-72 bg-champagne/40 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+    <section id="beneficios" className="relative overflow-hidden bg-card py-24 md:py-28">
+      <div className="absolute right-[-12%] top-[-20%] h-[520px] w-[520px] rounded-full bg-blush/35 blur-3xl" />
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container relative z-10 mx-auto px-5 md:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.55 }}
+          className="mx-auto mb-14 max-w-3xl text-center"
         >
-          <span className="inline-flex items-center gap-2 text-primary text-sm font-medium tracking-wider uppercase mb-4">
-            <img src="https://flagcdn.com/w40/kr.png" alt="Korea" className="w-5 h-4 object-cover rounded-sm" />
-            Tecnologia Coreana
-          </span>
-          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground mb-6">
-            Por que Escolher o Sérum{" "}
-            <span className="text-gradient-rose">Areum</span>?
+          <p className="mb-4 text-xs font-medium uppercase tracking-[0.28em] text-primary/85">
+            O efeito Areum
+          </p>
+          <h2 className="text-balance font-heading text-4xl font-semibold leading-tight text-foreground md:text-5xl">
+            Skincare coreano, simples de usar e pensado para pele com glow
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Resultados visíveis que vão fazer você se olhar no espelho e pensar:
-            "Finalmente encontrei O produto."
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-muted-foreground">
+            Um sérum único para hidratar, iluminar e deixar a pele com aparência mais lisa, sem prometer milagre e sem pesar.
           </p>
         </motion.div>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
-        >
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {benefits.map((benefit, index) => (
             <motion.div
-              key={index}
-              variants={itemVariants}
-              className="group relative bg-background/80 backdrop-blur-sm rounded-2xl p-8 shadow-card-soft border border-border/50 hover:border-primary/30 transition-all duration-300 hover:-translate-y-2"
+              key={benefit.title}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.08 }}
+              className="group border-t border-primary/15 bg-background/55 p-6 transition-colors hover:bg-background/85"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-blush/20 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-              <div className="relative z-10">
-                <div className="w-14 h-14 rounded-xl bg-secondary flex items-center justify-center mb-6 group-hover:bg-primary/10 transition-colors duration-300">
-                  <benefit.icon className="w-7 h-7 text-primary" />
-                </div>
-
-                <h3 className="font-heading text-xl font-semibold text-foreground mb-3">
-                  {benefit.title}
-                </h3>
-
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {benefit.description}
-                </p>
-              </div>
+              <benefit.icon className="mb-8 h-6 w-6 text-primary" />
+              <h3 className="mb-3 font-heading text-2xl font-semibold text-foreground">{benefit.title}</h3>
+              <p className="text-sm leading-7 text-muted-foreground">{benefit.description}</p>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

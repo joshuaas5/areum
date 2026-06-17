@@ -4,91 +4,64 @@ import areumSerum from "@/assets/areum-serum.png";
 const steps = [
   {
     number: "01",
-    title: "Limpe a pele",
-    description: "Lave o rosto com seu sabonete facial favorito e seque suavemente.",
+    title: "Use com a pele limpa",
+    description: "Lave o rosto e deixe a pele levemente úmida antes da aplicação.",
   },
   {
     number: "02",
-    title: "Aplique o sérum",
-    description: "Com a pele ainda úmida, aplique 3-4 gotas do sérum no rosto e pescoço.",
+    title: "Aplique 3 a 4 gotas",
+    description: "Espalhe no rosto e pescoço com movimentos suaves, sem esfregar.",
   },
   {
     number: "03",
-    title: "Massageie gentilmente",
-    description: "Faça movimentos circulares e ascendentes até completa absorção.",
-  },
-  {
-    number: "04",
-    title: "Finalize",
-    description: "Complete sua rotina com hidratante e protetor solar durante o dia.",
+    title: "Finalize do seu jeito",
+    description: "De dia, use protetor solar. Se sua pele for seca, finalize com seu hidratante habitual.",
   },
 ];
 
 const HowToUse = () => {
   return (
-    <section className="py-24 bg-gradient-to-b from-background to-card relative overflow-hidden">
-      {/* Background elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blush/10 rounded-full blur-3xl" />
-      </div>
-
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left - Product */}
+    <section id="modo-de-uso" className="relative overflow-hidden bg-gradient-to-b from-background to-card py-24 md:py-28">
+      <div className="container relative z-10 mx-auto px-5 md:px-8">
+        <div className="grid items-center gap-14 lg:grid-cols-[0.9fr_1.1fr]">
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, scale: 0.94 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="relative flex justify-center"
+            transition={{ duration: 0.65 }}
+            className="relative mx-auto flex min-h-[420px] w-full max-w-[480px] items-center justify-center"
           >
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-80 h-80 bg-gradient-to-br from-primary/10 to-champagne/30 rounded-full blur-2xl" />
-            </div>
+            <div className="absolute h-[360px] w-[360px] rounded-full bg-blush/35 blur-2xl" />
             <img
               src={areumSerum}
-              alt="Areum Sérum"
-              className="relative z-10 w-64 md:w-72 drop-shadow-2xl"
+              alt="Sérum Areum 30ml"
+              className="relative z-10 h-[430px] w-auto object-contain drop-shadow-2xl md:h-[520px]"
             />
           </motion.div>
 
-          {/* Right - Steps */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.65 }}
           >
-            <span className="inline-block text-primary text-sm font-medium tracking-wider uppercase mb-4">
-              Modo de Uso
-            </span>
-            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground mb-12">
-              Como usar para{" "}
-              <span className="text-gradient-rose">resultados incríveis</span>
+            <p className="mb-4 text-xs font-medium uppercase tracking-[0.28em] text-primary/85">Modo de uso</p>
+            <h2 className="text-balance font-heading text-4xl font-semibold leading-tight text-foreground md:text-5xl">
+              O detalhe que muda tudo: aplique na pele levemente úmida
             </h2>
+            <p className="mt-5 max-w-2xl text-base leading-8 text-muted-foreground">
+              O Areum foi pensado para ser simples. Um único sérum, poucos passos e uma aplicação correta para aproveitar melhor a hidratação.
+            </p>
 
-            <div className="space-y-8">
-              {steps.map((step, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: 30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="flex gap-6 group"
-                >
-                  <div className="flex-shrink-0">
-                    <span className="font-heading text-4xl font-bold text-gradient-rose opacity-60 group-hover:opacity-100 transition-opacity">
-                      {step.number}
-                    </span>
-                  </div>
+            <div className="mt-10 space-y-7">
+              {steps.map((step) => (
+                <div key={step.number} className="flex gap-5 border-t border-primary/15 pt-6">
+                  <span className="font-heading text-3xl font-semibold text-primary/70">{step.number}</span>
                   <div>
-                    <h3 className="font-heading text-xl font-semibold text-foreground mb-2">
-                      {step.title}
-                    </h3>
-                    <p className="text-muted-foreground">{step.description}</p>
+                    <h3 className="font-heading text-2xl font-semibold text-foreground">{step.title}</h3>
+                    <p className="mt-2 text-sm leading-7 text-muted-foreground">{step.description}</p>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
           </motion.div>

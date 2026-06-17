@@ -1,102 +1,70 @@
 import { motion } from "framer-motion";
-import { Button } from "./ui/button";
-import { Check, Shield, Truck, Clock } from "lucide-react";
+import { Check, Shield, Truck } from "lucide-react";
 import areumSerum from "@/assets/areum-serum.png";
+import { Button } from "./ui/button";
+
+const checkoutUrl = "https://areum.pay.yampi.com.br/r/40KOQLA7XE";
 
 const features = [
-  { icon: Truck, text: "Frete Grátis para todo Brasil" },
-  { icon: Shield, text: "Garantia de 30 dias" },
-  { icon: Clock, text: "Entrega em até 7 dias úteis" },
+  { icon: Truck, text: "Envio para todo Brasil" },
+  { icon: Shield, text: "Compra segura" },
+  { icon: Check, text: "30ml" },
 ];
 
 const CTA = () => {
   return (
-    <section className="py-24 bg-gradient-to-br from-background via-blush/20 to-champagne/30 relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute inset-0">
-        <div className="absolute top-20 right-20 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 left-20 w-96 h-96 bg-blush-deep/20 rounded-full blur-3xl" />
-      </div>
+    <section className="relative overflow-hidden bg-gradient-to-br from-background via-blush/20 to-champagne/30 py-24 md:py-28">
+      <div className="container relative z-10 mx-auto px-5 md:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mx-auto grid max-w-6xl items-center gap-10 border border-primary/10 bg-background/80 p-8 shadow-product backdrop-blur md:grid-cols-[0.9fr_1.1fr] md:p-12"
+        >
+          <div className="relative flex min-h-[360px] items-center justify-center">
+            <div className="absolute h-[320px] w-[320px] rounded-full bg-blush/40 blur-2xl" />
+            <img src={areumSerum} alt="Sérum Areum" className="relative z-10 h-[390px] w-auto object-contain drop-shadow-2xl" />
+          </div>
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="bg-background/90 backdrop-blur-md rounded-3xl p-8 md:p-12 shadow-2xl border border-border/50"
-          >
-            <div className="flex flex-col md:grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-              {/* Left - Product */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="relative w-full flex justify-center items-center order-1 md:order-1"
-              >
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-64 h-64 bg-gradient-to-br from-blush-deep/30 to-champagne/30 rounded-full blur-2xl" />
-                </div>
-                <img
-                  src={areumSerum}
-                  alt="Areum Sérum"
-                  className="relative z-10 w-48 md:w-56 drop-shadow-2xl mx-auto"
-                />
-              </motion.div>
+          <div className="text-center md:text-left">
+            <p className="mb-4 text-xs font-medium uppercase tracking-[0.28em] text-primary/85">Promoção de lançamento</p>
+            <h2 className="text-balance font-heading text-4xl font-semibold leading-tight text-foreground md:text-5xl">
+              Sua pele com glow começa com um sérum simples de usar
+            </h2>
+            <p className="mt-5 max-w-xl text-base leading-8 text-muted-foreground">
+              Areum combina hidratação, textura leve e acabamento luminoso para entrar na sua rotina sem complicar.
+            </p>
 
-              {/* Right - CTA */}
-              <div className="w-full flex flex-col items-center md:items-start text-center md:text-left order-2 md:order-2">
-                <span className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-medium mb-6">
-                  🔥 Últimas unidades com desconto
-                </span>
-
-                <h2 className="font-heading text-3xl md:text-4xl font-semibold text-foreground mb-4 w-full">
-                  Sua jornada para a{" "}
-                  <span className="text-gradient-rose">Glass Skin</span>
-                  <br />começa aqui
-                </h2>
-
-                <p className="text-muted-foreground mb-6 max-w-sm md:max-w-none mx-auto md:mx-0">
-                  Junte-se às mulheres que já transformaram sua pele com o Sérum Areum.
-                  Está na hora de você descobrir o segredo coreano.
-                </p>
-
-                {/* Pricing */}
-                <div className="bg-secondary/50 rounded-xl p-6 mb-6 w-full max-w-sm md:max-w-none mx-auto">
-                  <div className="flex items-baseline gap-3 mb-2 justify-center md:justify-start">
-                    <span className="text-muted-foreground line-through text-lg">
-                      R$ 89,90
-                    </span>
-                    <span className="font-heading text-4xl font-bold text-primary">
-                      R$ 74,90
-                    </span>
-                  </div>
-                  <p className="text-sm text-muted-foreground">
-                    ou 3x de R$ 24,97 sem juros
-                  </p>
-                </div>
-
-                <div className="w-full max-w-sm md:max-w-none mx-auto">
-                  <Button
-                    variant="hero"
-                    size="xl"
-                    className="w-full shimmer"
-                    onClick={() => window.location.href = "https://areum.pay.yampi.com.br/r/40KOQLA7XE"}
-                  >
-                    Garantir Meu Sérum Agora
-                  </Button>
-                </div>
-
-                <p className="text-center text-xs text-muted-foreground mt-4 flex items-center justify-center gap-2 w-full">
-                  <Check className="w-4 h-4 text-primary" />
-                  Compra 100% segura • Entrega garantida
-                </p>
+            <div className="my-8 flex flex-col items-center gap-2 md:items-start">
+              <div className="flex items-end gap-4">
+                <span className="pb-2 text-lg text-muted-foreground line-through">R$ 99,90</span>
+                <span className="font-heading text-5xl font-bold text-primary md:text-6xl">R$ 84,90</span>
               </div>
+              <p className="text-sm text-muted-foreground">Preço promocional por tempo limitado</p>
             </div>
-          </motion.div>
-        </div>
+
+            <div className="mb-8 grid gap-3 sm:grid-cols-3">
+              {features.map((feature) => (
+                <div key={feature.text} className="flex items-center justify-center gap-2 border border-primary/10 bg-white/60 px-3 py-3 text-sm text-muted-foreground md:justify-start">
+                  <feature.icon className="h-4 w-4 text-primary" />
+                  <span>{feature.text}</span>
+                </div>
+              ))}
+            </div>
+
+            <Button
+              variant="hero"
+              size="xl"
+              className="w-full shimmer sm:w-auto"
+              onClick={() => {
+                window.location.href = checkoutUrl;
+              }}
+            >
+              Garantir meu Sérum Areum
+            </Button>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
