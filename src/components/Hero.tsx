@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
-import { ShieldCheck, Sparkles, Star } from "lucide-react";
+import { ShieldCheck, Sparkles, Star, Truck } from "lucide-react";
 import areumLogo from "@/assets/areum-logo.png";
-import areumSerum from "@/assets/areum-serum.png";
+import areumSerumPng from "@/assets/areum-serum.png";
+import areumSerumWebp from "@/assets/areum-serum.webp";
 import { Button } from "./ui/button";
 
 const checkoutUrl = "https://areum.pay.yampi.com.br/r/40KOQLA7XE";
@@ -81,7 +82,9 @@ const Hero = () => {
                 <span className="pb-2 text-lg text-muted-foreground line-through">R$ 99,90</span>
                 <span className="font-heading text-5xl font-bold text-primary md:text-6xl">R$ 84,90</span>
               </div>
-              <p className="text-sm text-muted-foreground">Preço promocional de lançamento</p>
+              <p className="text-sm text-muted-foreground">
+                ou 3x de R$ 28,30 sem juros • envio para todo Brasil
+              </p>
             </div>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center lg:justify-start">
@@ -103,6 +106,17 @@ const Hero = () => {
                 Ver benefícios
               </Button>
             </div>
+
+            <p className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-muted-foreground lg:justify-start">
+              <span className="inline-flex items-center gap-1.5">
+                <ShieldCheck className="h-4 w-4 text-primary" />
+                Compra protegida pela Yampi
+              </span>
+              <span className="inline-flex items-center gap-1.5">
+                <Truck className="h-4 w-4 text-primary" />
+                Garantia de 7 dias após receber
+              </span>
+            </p>
           </motion.div>
 
           <motion.div
@@ -114,13 +128,19 @@ const Hero = () => {
             <div className="absolute inset-x-8 bottom-14 top-16 rounded-[999px] bg-gradient-to-b from-white/70 via-blush/45 to-champagne/45 blur-2xl" />
             <div className="absolute h-[360px] w-[360px] rounded-full border border-primary/10 bg-white/30 shadow-product md:h-[500px] md:w-[500px]" />
 
-            <motion.img
-              src={areumSerum}
-              alt="Sérum facial Areum 30ml"
-              className="relative z-10 h-[430px] w-auto object-contain drop-shadow-2xl md:h-[560px] lg:h-[650px]"
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.3 }}
-            />
+            <picture>
+              <source srcSet={areumSerumWebp} type="image/webp" />
+              <motion.img
+                src={areumSerumPng}
+                alt="Sérum facial Areum 30ml"
+                width={1000}
+                height={1500}
+                className="relative z-10 h-[430px] w-auto object-contain drop-shadow-2xl md:h-[560px] lg:h-[650px]"
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+                fetchPriority="high"
+              />
+            </picture>
 
             <div className="absolute left-0 top-12 z-20 hidden max-w-[190px] rounded-sm border border-primary/10 bg-white/90 px-5 py-4 text-left shadow-card-soft backdrop-blur md:block">
               <Sparkles className="mb-3 h-5 w-5 text-primary" />

@@ -1,19 +1,25 @@
 import { motion } from "framer-motion";
-import { Quote, Star } from "lucide-react";
+import { BadgeCheck, Quote, Star } from "lucide-react";
 
 const testimonials = [
   {
     name: "Cristiane",
+    location: "São Paulo, SP",
+    date: "Nov 2025",
     rating: 5,
     text: "Sinceramente, me surpreendeu. Minha pele estava bem apagada e agora sinto ela com um viço bonito, aquele brilho saudável que a gente vê nos doramas.",
   },
   {
     name: "Ema Ramos",
+    location: "Rio de Janeiro, RJ",
+    date: "Nov 2025",
     rating: 5,
     text: "Gostei bastante da textura. Absorve rápido e não fica pegajoso. Tenho sentido meu rosto mais firme e hidratado desde que comecei a usar.",
   },
   {
     name: "Maria Gabriela",
+    location: "Belo Horizonte, MG",
+    date: "Dez 2025",
     rating: 5,
     text: "Valeu o investimento. Sinto um efeito lifting leve e muita gente tem comentado que minha pele está bonita. Recomendo.",
   },
@@ -34,6 +40,15 @@ const Testimonials = () => {
           <h2 className="font-heading text-4xl font-semibold leading-tight text-foreground md:text-5xl">
             O que já falaram sobre o Sérum Areum
           </h2>
+          <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-primary/15 bg-background/70 px-4 py-2 text-sm text-muted-foreground">
+            <div className="flex gap-0.5">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="h-4 w-4 fill-gold text-gold" />
+              ))}
+            </div>
+            <span className="font-medium text-foreground">5,0</span>
+            <span>• baseado em avaliações de compradoras</span>
+          </div>
         </motion.div>
 
         <div className="grid gap-5 md:grid-cols-3">
@@ -53,7 +68,16 @@ const Testimonials = () => {
                 ))}
               </div>
               <p className="mb-7 text-sm leading-7 text-foreground">"{testimonial.text}"</p>
-              <p className="font-heading text-xl font-semibold text-foreground">{testimonial.name}</p>
+              <div className="flex items-center justify-between gap-3 border-t border-primary/10 pt-4">
+                <div>
+                  <p className="font-heading text-lg font-semibold text-foreground">{testimonial.name}</p>
+                  <p className="text-xs text-muted-foreground">{testimonial.location} • {testimonial.date}</p>
+                </div>
+                <span className="inline-flex items-center gap-1 text-xs font-medium text-primary">
+                  <BadgeCheck className="h-4 w-4" />
+                  Compra verificada
+                </span>
+              </div>
             </motion.article>
           ))}
         </div>

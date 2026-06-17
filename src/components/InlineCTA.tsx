@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import areumSerum from "@/assets/areum-serum.png";
+import areumSerumPng from "@/assets/areum-serum.png";
+import areumSerumWebp from "@/assets/areum-serum.webp";
 import { Button } from "./ui/button";
 
 const checkoutUrl = "https://areum.pay.yampi.com.br/r/40KOQLA7XE";
@@ -13,12 +14,17 @@ const InlineCTA = () => {
       transition={{ duration: 0.5 }}
       className="my-12 flex flex-col items-center gap-6 rounded-lg border border-primary/15 bg-gradient-to-br from-blush/40 via-background to-champagne/40 p-8 md:flex-row md:p-10"
     >
-      <img
-        src={areumSerum}
-        alt="Sérum Facial Areum 30ml"
-        className="h-40 w-auto object-contain drop-shadow-xl"
-        loading="lazy"
-      />
+      <picture>
+        <source srcSet={areumSerumWebp} type="image/webp" />
+        <img
+          src={areumSerumPng}
+          alt="Sérum Facial Areum 30ml"
+          width={1000}
+          height={1500}
+          className="h-40 w-auto object-contain drop-shadow-xl"
+          loading="lazy"
+        />
+      </picture>
       <div className="flex-1 text-center md:text-left">
         <p className="mb-2 text-xs font-medium uppercase tracking-[0.28em] text-primary/85">
           Comece sua rotina Areum

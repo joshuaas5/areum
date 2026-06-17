@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import areumSerum from "@/assets/areum-serum.png";
+import areumSerumPng from "@/assets/areum-serum.png";
+import areumSerumWebp from "@/assets/areum-serum.webp";
 
 const steps = [
   {
@@ -32,11 +33,17 @@ const HowToUse = () => {
             className="relative mx-auto flex min-h-[420px] w-full max-w-[480px] items-center justify-center"
           >
             <div className="absolute h-[360px] w-[360px] rounded-full bg-blush/35 blur-2xl" />
-            <img
-              src={areumSerum}
-              alt="Sérum Areum 30ml"
-              className="relative z-10 h-[430px] w-auto object-contain drop-shadow-2xl md:h-[520px]"
-            />
+            <picture>
+              <source srcSet={areumSerumWebp} type="image/webp" />
+              <img
+                src={areumSerumPng}
+                alt="Sérum Areum 30ml"
+                width={1000}
+                height={1500}
+                loading="lazy"
+                className="relative z-10 h-[430px] w-auto object-contain drop-shadow-2xl md:h-[520px]"
+              />
+            </picture>
           </motion.div>
 
           <motion.div

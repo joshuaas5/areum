@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Check, Shield, Truck } from "lucide-react";
-import areumSerum from "@/assets/areum-serum.png";
+import areumSerumPng from "@/assets/areum-serum.png";
+import areumSerumWebp from "@/assets/areum-serum.webp";
 import { Button } from "./ui/button";
 
 const checkoutUrl = "https://areum.pay.yampi.com.br/r/40KOQLA7XE";
@@ -24,7 +25,10 @@ const CTA = () => {
         >
           <div className="relative flex min-h-[360px] items-center justify-center">
             <div className="absolute h-[320px] w-[320px] rounded-full bg-blush/40 blur-2xl" />
-            <img src={areumSerum} alt="Sérum Areum" className="relative z-10 h-[390px] w-auto object-contain drop-shadow-2xl" />
+            <picture>
+              <source srcSet={areumSerumWebp} type="image/webp" />
+              <img src={areumSerumPng} alt="Sérum Areum" width={1000} height={1500} loading="lazy" className="relative z-10 h-[390px] w-auto object-contain drop-shadow-2xl" />
+            </picture>
           </div>
 
           <div className="text-center md:text-left">
@@ -41,7 +45,9 @@ const CTA = () => {
                 <span className="pb-2 text-lg text-muted-foreground line-through">R$ 99,90</span>
                 <span className="font-heading text-5xl font-bold text-primary md:text-6xl">R$ 84,90</span>
               </div>
-              <p className="text-sm text-muted-foreground">Preço promocional por tempo limitado</p>
+              <p className="text-sm text-muted-foreground">
+                ou 3x de R$ 28,30 sem juros • envio para todo Brasil
+              </p>
             </div>
 
             <div className="mb-8 grid gap-3 sm:grid-cols-3">
@@ -63,6 +69,10 @@ const CTA = () => {
             >
               Garantir meu Sérum Areum
             </Button>
+            <p className="mt-5 flex items-center justify-center gap-2 text-xs text-muted-foreground md:justify-start">
+              <Shield className="h-4 w-4 text-primary" />
+              Compra protegida • Garantia de 7 dias • Pagamento seguro via Yampi
+            </p>
           </div>
         </motion.div>
       </div>
