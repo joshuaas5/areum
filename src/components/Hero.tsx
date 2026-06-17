@@ -201,29 +201,28 @@ const Hero = () => {
               />
             </picture>
 
-            {/* Badge: K-beauty (top-left, ênfase coreana) — seta aponta para o produto */}
-            <div className="absolute left-0 top-3 z-20 max-w-[150px] rounded-md border border-primary/15 bg-white/95 px-3 py-2.5 text-left shadow-card-soft backdrop-blur md:left-0 md:top-8 md:max-w-[190px] md:px-5 md:py-4">
-              <div className="mb-1 flex items-center gap-1.5 md:mb-3">
-                <img src="https://flagcdn.com/w40/kr.png" alt="Coreia" className="h-3 w-4 rounded-sm object-cover md:h-3.5 md:w-5" />
-                <Sparkles className="h-3.5 w-3.5 text-primary md:h-5 md:w-5" />
+            {/* Badge: K-beauty (top-left, ênfase coreana) */}
+            <div className="absolute left-0 top-2 z-20 flex items-center gap-1.5 rounded-full bg-white/95 px-2.5 py-1 shadow-card-soft backdrop-blur md:left-0 md:top-8 md:max-w-[190px] md:block md:rounded-md md:border md:border-primary/15 md:px-5 md:py-4">
+              <img src="https://flagcdn.com/w40/kr.png" alt="Coreia" className="h-2.5 w-3.5 rounded-[1px] object-cover md:hidden" />
+              <span className="text-[0.6rem] font-semibold text-foreground md:hidden">K-beauty coreana</span>
+              <div className="hidden md:mb-3 md:flex md:items-center md:gap-1.5">
+                <img src="https://flagcdn.com/w40/kr.png" alt="Coreia" className="h-3.5 w-5 rounded-sm object-cover" />
+                <Sparkles className="h-5 w-5 text-primary" />
               </div>
-              <p className="font-heading text-sm font-semibold leading-tight text-foreground md:text-xl">Tecnologia K-beauty coreana</p>
-              <span className="absolute -bottom-1 right-4 z-30 hidden h-3 w-3 rotate-45 border-b border-r border-primary/15 bg-white/95 md:block" />
-              <span className="absolute -bottom-1 right-4 z-30 block h-2 w-2 rotate-45 border-b border-r border-primary/15 bg-white/95 md:hidden" />
+              <p className="hidden font-heading text-xl leading-tight text-foreground md:block">Tecnologia K-beauty coreana</p>
             </div>
 
-            {/* Badge: Hidratação (bottom-right) — seta aponta para o produto */}
-            <div className="absolute bottom-6 right-0 z-20 max-w-[160px] rounded-md border border-primary/15 bg-white/95 px-3 py-2.5 text-left shadow-card-soft backdrop-blur md:bottom-12 md:max-w-[205px] md:px-5 md:py-4">
-              <ShieldCheck className="mb-1 h-3.5 w-3.5 text-primary md:mb-3 md:h-5 md:w-5" />
-              <p className="font-heading text-sm font-semibold leading-tight text-foreground md:text-xl">Hidratação com ácido hialurônico</p>
-              <span className="absolute -top-1 left-5 z-30 block h-2 w-2 -rotate-45 border-l border-t border-primary/15 bg-white/95 md:hidden" />
-              <span className="absolute -top-1 left-5 z-30 hidden h-3 w-3 -rotate-45 border-l border-t border-primary/15 bg-white/95 md:block" />
+            {/* Badge: Ácido hialurônico (bottom-right) */}
+            <div className="absolute bottom-4 right-0 z-20 flex items-center gap-1.5 rounded-full bg-white/95 px-2.5 py-1 shadow-card-soft backdrop-blur md:bottom-12 md:max-w-[205px] md:block md:rounded-md md:border md:border-primary/15 md:px-5 md:py-4">
+              <ShieldCheck className="h-3 w-3 text-primary md:hidden" />
+              <span className="text-[0.6rem] font-semibold text-foreground md:hidden">Ácido hialurônico</span>
+              <ShieldCheck className="hidden md:mb-3 md:block md:h-5 md:w-5 md:text-primary" />
+              <p className="hidden font-heading text-xl leading-tight text-foreground md:block">Hidratação com ácido hialurônico</p>
             </div>
 
-            {/* Badge: Colágeno vegano (left, meio-baixo) — seta aponta para o produto */}
-            <div className="absolute bottom-2 left-0 z-20 max-w-[140px] rounded-md border border-primary/15 bg-white/95 px-3 py-2 text-left shadow-card-soft backdrop-blur md:bottom-20 md:max-w-[175px] md:px-4 md:py-3">
-              <p className="font-heading text-xs font-semibold leading-tight text-foreground md:text-sm">Colágeno vegano + Hyalocollagreen 5%</p>
-              <span className="absolute -top-1 right-4 z-30 block h-2 w-2 rotate-45 border-l border-t border-primary/15 bg-white/95" />
+            {/* Badge: Colágeno vegano — só desktop */}
+            <div className="absolute bottom-20 left-0 z-20 hidden max-w-[175px] rounded-md border border-primary/15 bg-white/95 px-4 py-3 text-left shadow-card-soft backdrop-blur md:block">
+              <p className="font-heading text-sm font-semibold leading-tight text-foreground">Colágeno vegano + Hyalocollagreen 5%</p>
             </div>
           </motion.div>
         </div>
