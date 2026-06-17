@@ -40,30 +40,30 @@ const Blog = () => {
     <>
       <Navbar variant="solid" />
 
-      <section className="bg-gradient-to-b from-blush/30 to-background py-16 md:py-24">
-        <div className="container mx-auto px-5 md:px-8">
+      <section className="bg-gradient-to-b from-blush/30 to-background py-12 md:py-24">
+        <div className="container mx-auto px-4 md:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55 }}
             className="mx-auto max-w-3xl text-center"
           >
-            <p className="mb-4 text-xs font-medium uppercase tracking-[0.28em] text-primary/85">
+            <p className="mb-3 text-[0.65rem] font-medium uppercase tracking-[0.2em] text-primary/85 md:mb-4 md:text-xs md:tracking-[0.28em]">
               Guia Areum
             </p>
-            <h1 className="text-balance font-heading text-4xl font-semibold leading-tight text-foreground md:text-5xl lg:text-6xl">
+            <h1 className="text-balance font-heading text-3xl font-semibold leading-tight text-foreground md:text-4xl lg:text-6xl">
               Conteúdos sobre skincare, K-beauty e rotina real
             </h1>
-            <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-muted-foreground">
+            <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-muted-foreground md:mt-5 md:text-base md:leading-8">
               Textos curtos e diretos para você entender skincare, escolher melhor seus produtos e montar uma rotina que funciona no dia a dia.
             </p>
           </motion.div>
         </div>
       </section>
 
-      <section className="bg-background py-16 md:py-20">
-        <div className="container mx-auto px-5 md:px-8">
-          <div className="mx-auto grid max-w-5xl gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <section className="bg-background py-12 md:py-20">
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="mx-auto grid max-w-5xl gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
             {articles.map((article, index) => (
               <motion.article
                 key={article.slug}
@@ -77,12 +77,12 @@ const Blog = () => {
                   <img
                     src={areumSerum}
                     alt={`Artigo: ${article.title}`}
-                    className="mx-auto h-48 w-auto object-contain p-6 transition-transform duration-500 group-hover:scale-105"
+                    className="mx-auto h-36 w-auto object-contain p-4 transition-transform duration-500 group-hover:scale-105 md:h-48 md:p-6"
                     loading="lazy"
                   />
                 </a>
-                <div className="flex flex-1 flex-col p-6">
-                  <div className="mb-3 flex items-center gap-3 text-xs text-muted-foreground">
+                <div className="flex flex-1 flex-col p-5 md:p-6">
+                  <div className="mb-2 flex flex-wrap items-center gap-2 text-[0.7rem] text-muted-foreground md:mb-3 md:gap-3 md:text-xs">
                     <span className="font-medium uppercase tracking-wider text-primary/85">
                       {article.category}
                     </span>
@@ -92,7 +92,7 @@ const Blog = () => {
                       {article.readTime}
                     </span>
                   </div>
-                  <h2 className="mb-3 font-heading text-xl font-semibold leading-snug text-foreground">
+                  <h2 className="mb-2 font-heading text-lg font-semibold leading-snug text-foreground md:mb-3 md:text-xl">
                     <a
                       href={`/blog/${article.slug}`}
                       className="transition-colors hover:text-primary"
@@ -100,7 +100,7 @@ const Blog = () => {
                       {article.title}
                     </a>
                   </h2>
-                  <p className="mb-5 flex-1 text-sm leading-7 text-muted-foreground">
+                  <p className="mb-4 flex-1 text-sm leading-6 text-muted-foreground md:mb-5 md:leading-7">
                     {article.description}
                   </p>
                   <a

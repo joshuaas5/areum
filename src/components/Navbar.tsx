@@ -27,9 +27,9 @@ const Navbar = ({ variant = "solid" }: NavbarProps) => {
           : "sticky top-0 z-40 border-b border-primary/10 bg-background/85 backdrop-blur"
       }
     >
-      <nav className="container mx-auto flex items-center justify-between px-5 py-4 md:px-8">
+      <nav className="container mx-auto flex items-center justify-between px-4 py-3 md:px-8 md:py-4">
         <a href="/" className="flex items-center" aria-label="Areum — Página inicial">
-          <img src={areumLogo} alt="Areum" className="h-10 md:h-12" />
+          <img src={areumLogo} alt="Areum" className="h-9 md:h-12" />
         </a>
 
         <div className="hidden items-center gap-7 md:flex">

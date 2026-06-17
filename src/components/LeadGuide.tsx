@@ -74,7 +74,7 @@ const LeadGuide = () => {
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-3 md:p-4">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -87,7 +87,7 @@ const LeadGuide = () => {
           initial={{ opacity: 0, y: 24, scale: 0.96 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 18, scale: 0.96 }}
-          className="relative z-50 w-full max-w-[460px] overflow-hidden border border-primary/15 bg-background shadow-2xl"
+          className="relative z-50 max-h-[90vh] w-full max-w-[460px] overflow-y-auto border border-primary/15 bg-background shadow-2xl"
         >
           <button
             onClick={handleClose}
@@ -97,19 +97,19 @@ const LeadGuide = () => {
             <X size={18} />
           </button>
 
-          <div className="bg-gradient-to-br from-blush/55 via-background to-champagne/45 px-7 pb-7 pt-10 text-center">
-            <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-white text-primary shadow-card-soft">
-              <Sparkles className="h-6 w-6" />
+          <div className="bg-gradient-to-br from-blush/55 via-background to-champagne/45 px-5 pb-6 pt-8 text-center md:px-7 md:pb-7 md:pt-10">
+            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-white text-primary shadow-card-soft md:mb-5 md:h-14 md:w-14">
+              <Sparkles className="h-5 w-5 md:h-6 md:w-6" />
             </div>
-            <h3 className="font-heading text-3xl font-semibold leading-tight text-foreground">
+            <h3 className="font-heading text-2xl font-semibold leading-tight text-foreground md:text-3xl">
               Guia Glass Skin gratuito
             </h3>
-            <p className="mx-auto mt-3 max-w-sm text-sm leading-7 text-muted-foreground">
+            <p className="mx-auto mt-2 max-w-sm text-sm leading-6 text-muted-foreground md:mt-3 md:leading-7">
               Baixe o manual da Areum com modo de uso, aplicação correta e cuidados para uma pele mais luminosa.
             </p>
           </div>
 
-          <form onSubmit={handleFormSubmit} className="space-y-4 p-7">
+          <form onSubmit={handleFormSubmit} className="space-y-3 p-5 md:space-y-4 md:p-7">
             <Input
               placeholder="Seu nome"
               required
@@ -131,11 +131,11 @@ const LeadGuide = () => {
               onChange={(e) => setFormData({ ...formData, whatsapp: e.target.value })}
             />
 
-            <Button type="submit" variant="hero" size="xl" className="w-full" disabled={loading}>
+            <Button type="submit" variant="hero" size="lg" className="w-full md:size-xl" disabled={loading}>
               {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />}
               Baixar guia agora
             </Button>
-            <p className="flex items-center justify-center gap-2 text-center text-xs text-muted-foreground">
+            <p className="flex items-center justify-center gap-2 text-center text-[0.7rem] text-muted-foreground md:text-xs">
               <Mail className="h-3.5 w-3.5" />
               Conteúdo gratuito para cuidar melhor da sua pele.
             </p>

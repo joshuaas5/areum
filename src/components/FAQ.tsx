@@ -52,23 +52,23 @@ const faqs = [
 
 const FAQ = () => {
   return (
-    <section id="faq" className="relative overflow-hidden bg-background py-24 md:py-28">
-      <div className="container relative z-10 mx-auto px-5 md:px-8">
+    <section id="faq" className="relative overflow-hidden bg-background py-16 md:py-28">
+      <div className="container relative z-10 mx-auto px-4 md:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.55 }}
-          className="mx-auto mb-14 max-w-3xl text-center"
+          className="mx-auto mb-10 max-w-3xl text-center md:mb-14"
         >
-          <p className="mb-4 flex items-center justify-center gap-2 text-xs font-medium uppercase tracking-[0.28em] text-primary/85">
-            <HelpCircle className="h-4 w-4" />
+          <p className="mb-3 flex items-center justify-center gap-2 text-[0.65rem] font-medium uppercase tracking-[0.2em] text-primary/85 md:mb-4 md:text-xs md:tracking-[0.28em]">
+            <HelpCircle className="h-3.5 w-3.5 md:h-4 md:w-4" />
             Dúvidas frequentes
           </p>
-          <h2 className="text-balance font-heading text-4xl font-semibold leading-tight text-foreground md:text-5xl">
+          <h2 className="text-balance font-heading text-3xl font-semibold leading-tight text-foreground md:text-4xl lg:text-5xl">
             Tudo que você precisa saber antes de comprar
           </h2>
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-muted-foreground">
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-muted-foreground md:mt-5 md:text-base md:leading-8">
             Reunimos as perguntas mais comuns sobre o Sérum Areum. Se ainda tiver dúvidas, fale com a gente no Instagram ou e-mail.
           </p>
         </motion.div>
@@ -83,10 +83,10 @@ const FAQ = () => {
           <Accordion type="single" collapsible className="border-t border-primary/15">
             {faqs.map((faq, index) => (
               <AccordionItem key={index} value={`item-${index}`} className="border-primary/15">
-                <AccordionTrigger className="text-left font-heading text-lg font-semibold text-foreground hover:no-underline">
+                <AccordionTrigger className="py-4 text-left font-heading text-base font-semibold text-foreground hover:no-underline md:text-lg">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-sm leading-7 text-muted-foreground">
+                <AccordionContent className="text-sm leading-6 text-muted-foreground md:leading-7">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>
