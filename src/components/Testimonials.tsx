@@ -4,21 +4,18 @@ import { BadgeCheck, Quote, Star } from "lucide-react";
 const testimonials = [
   {
     name: "Cristiane",
-    location: "São Paulo, SP",
     date: "Nov 2025",
     rating: 5,
     text: "Sinceramente, me surpreendeu. Minha pele estava bem apagada e agora sinto ela com um viço bonito, aquele brilho saudável que a gente vê nos doramas.",
   },
   {
     name: "Ema Ramos",
-    location: "Rio de Janeiro, RJ",
     date: "Nov 2025",
     rating: 5,
-    text: "Gostei bastante da textura. Absorve rápido e não fica pegajoso. Tenho sentido meu rosto mais firme e hidratado desde que comecei a usar.",
+    text: "Gostei bastante da textura. Absorbe rápido e não fica pegajoso. Tenho sentido meu rosto mais firme e hidratado desde que comecei a usar.",
   },
   {
     name: "Maria Gabriela",
-    location: "Belo Horizonte, MG",
     date: "Dez 2025",
     rating: 5,
     text: "Valeu o investimento. Sinto um efeito lifting leve e muita gente tem comentado que minha pele está bonita. Recomendo.",
@@ -71,7 +68,7 @@ const Testimonials = () => {
               <div className="flex items-center justify-between gap-3 border-t border-primary/10 pt-4">
                 <div>
                   <p className="font-heading text-lg font-semibold text-foreground">{testimonial.name}</p>
-                  <p className="text-xs text-muted-foreground">{testimonial.location} • {testimonial.date}</p>
+                  <p className="text-xs text-muted-foreground">{testimonial.date}</p>
                 </div>
                 <span className="inline-flex items-center gap-1 text-xs font-medium text-primary">
                   <BadgeCheck className="h-4 w-4" />
