@@ -3,21 +3,49 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
                             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-  
-  <!-- Homepage - Most important page -->
+
+  <!-- Homepage -->
   <url>
     <loc>https://areumco.com.br/</loc>
-    <lastmod>2026-01-22</lastmod>
+    <lastmod>2026-06-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
-  <!-- E-book Page (if accessible directly) -->
+  <!-- Blog index -->
   <url>
-    <loc>https://areumco.com.br/ebook-areum-glass-skin.html</loc>
-    <lastmod>2026-01-22</lastmod>
+    <loc>https://areumco.com.br/blog</loc>
+    <lastmod>2026-06-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Blog articles -->
+  <url>
+    <loc>https://areumco.com.br/blog/serum-facial-para-que-serve</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://areumco.com.br/blog/skincare-coreano-passo-a-passo</loc>
+    <lastmod>2026-06-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://areumco.com.br/blog/acido-hialuronico-como-usar</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- E-book page -->
+  <url>
+    <loc>https://areumco.com.br/ebook-areum-glass-skin.html</loc>
+    <lastmod>2026-06-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
 
 </urlset>

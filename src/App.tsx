@@ -5,6 +5,10 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import BlogIndex from "./pages/blog/Index";
+import SerumFacialParaQueServe from "./pages/blog/SerumFacialParaQueServe";
+import SkincareCoreanoPassoAPasso from "./pages/blog/SkincareCoreanoPassoAPasso";
+import AcidoHialuronicoComoUsar from "./pages/blog/AcidoHialuronicoComoUsar";
 
 const queryClient = new QueryClient();
 
@@ -16,6 +20,10 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/blog" element={<BlogIndex />} />
+          <Route path="/blog/serum-facial-para-que-serve" element={<SerumFacialParaQueServe />} />
+          <Route path="/blog/skincare-coreano-passo-a-passo" element={<SkincareCoreanoPassoAPasso />} />
+          <Route path="/blog/acido-hialuronico-como-usar" element={<AcidoHialuronicoComoUsar />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
