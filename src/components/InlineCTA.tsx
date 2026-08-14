@@ -35,9 +35,9 @@ const InlineCTA = () => {
         <div className="mt-3 flex flex-col items-center gap-1.5 md:mt-4 md:items-start md:gap-2">
           <div className="flex items-end gap-3">
             <span className="pb-0.5 text-xs text-muted-foreground line-through md:pb-1 md:text-sm">R$ 99,90</span>
-            <span className="font-heading text-2xl font-bold text-primary md:text-3xl">R$ 84,90</span>
+            <span className="font-heading text-2xl font-bold text-primary md:text-3xl">R$ 79,90</span>
           </div>
-          <p className="text-[0.7rem] text-muted-foreground md:text-xs">ou 3x de R$ 28,30 sem juros • envio para todo Brasil</p>
+          <p className="text-[0.7rem] text-muted-foreground md:text-xs">ou 3x de R$ 26,63 sem juros • envio para todo Brasil</p>
         </div>
         <Button
           variant="hero"

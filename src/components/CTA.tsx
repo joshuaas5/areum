@@ -43,10 +43,10 @@ const CTA = () => {
             <div className="my-6 flex flex-col items-center gap-1.5 md:my-8 md:items-start md:gap-2">
               <div className="flex items-end gap-3 md:gap-4">
                 <span className="pb-1 text-base text-muted-foreground line-through md:pb-2 md:text-lg">R$ 99,90</span>
-                <span className="font-heading text-4xl font-bold text-primary md:text-5xl lg:text-6xl">R$ 84,90</span>
+                <span className="font-heading text-4xl font-bold text-primary md:text-5xl lg:text-6xl">R$ 79,90</span>
               </div>
               <p className="text-xs text-muted-foreground md:text-sm">
-                ou 3x de R$ 28,30 sem juros • envio para todo Brasil
+                ou 3x de R$ 26,63 sem juros • envio para todo Brasil
               </p>
             </div>
 

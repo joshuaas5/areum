@@ -23,8 +23,8 @@ const MobileStickyCTA = () => {
     <div className="fixed inset-x-0 bottom-0 z-40 border-t border-primary/15 bg-background/95 px-4 py-3 shadow-[0_-4px_20px_rgba(0,0,0,0.08)] backdrop-blur md:hidden">
       <div className="flex items-center justify-between gap-3">
         <div className="flex flex-col">
-          <span className="font-heading text-xl font-bold text-primary leading-none">R$ 84,90</span>
-          <span className="text-[0.7rem] text-muted-foreground">3x de R$ 28,30 sem juros</span>
+          <span className="font-heading text-xl font-bold text-primary leading-none">R$ 79,90</span>
+          <span className="text-[0.7rem] text-muted-foreground">3x de R$ 26,63 sem juros</span>
         </div>
         <Button
           variant="hero"
