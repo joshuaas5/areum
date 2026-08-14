@@ -14,6 +14,6 @@
  */
 
 export const PIXEL_ID: string | null = null; // ex: "1234567890123456"
-export const GA4_ID: string | null = null; // ex: "G-XXXXXXXXXX"
+export const GA4_ID: string | null = "G-Y6RPCGXQT3"; // ex: "G-XXXXXXXXXX"
 
 export const CHECKOUT_URL = "https://areum.pay.yampi.com.br/r/40KOQLA7XE";
