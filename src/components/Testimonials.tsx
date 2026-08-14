@@ -4,19 +4,19 @@ import { BadgeCheck, Quote, Star } from "lucide-react";
 const testimonials = [
   {
     name: "Cristiane",
-    date: "Nov 2025",
+    date: "Jun 2026",
     rating: 5,
     text: "Sinceramente, me surpreendeu. Minha pele estava bem apagada e agora sinto ela com um viço bonito, aquele brilho saudável que a gente vê nos doramas.",
   },
   {
     name: "Ema Ramos",
-    date: "Nov 2025",
+    date: "Jul 2026",
     rating: 5,
     text: "Gostei bastante da textura. Absorbe rápido e não fica pegajoso. Tenho sentido meu rosto mais firme e hidratado desde que comecei a usar.",
   },
   {
     name: "Maria Gabriela",
-    date: "Dez 2025",
+    date: "Ago 2026",
     rating: 5,
     text: "Valeu o investimento. Sinto um efeito lifting leve e muita gente tem comentado que minha pele está bonita. Recomendo.",
   },

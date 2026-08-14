@@ -7,9 +7,9 @@ import { Button } from "./ui/button";
 const checkoutUrl = "https://areum.pay.yampi.com.br/r/40KOQLA7XE";
 
 const features = [
-  { icon: Truck, text: "Envio para todo Brasil" },
-  { icon: Shield, text: "Compra segura" },
-  { icon: Check, text: "30ml" },
+  { icon: Truck, text: "Frete promocional (tempo limitado)" },
+  { icon: Shield, text: "Registro ANVISA" },
+  { icon: Check, text: "Compra protegida" },
 ];
 
 const CTA = () => {
@@ -32,7 +32,7 @@ const CTA = () => {
           </div>
 
           <div className="text-center md:text-left">
-            <p className="mb-3 text-[0.65rem] font-medium uppercase tracking-[0.2em] text-primary/85 md:mb-4 md:text-xs md:tracking-[0.28em]">Promoção de lançamento</p>
+            <p className="mb-3 text-[0.65rem] font-medium uppercase tracking-[0.2em] text-primary/85 md:mb-4 md:text-xs md:tracking-[0.28em]">Promoção de lançamento • por tempo limitado</p>
             <h2 className="text-balance font-heading text-3xl font-semibold leading-tight text-foreground md:text-4xl lg:text-5xl">
               Sua pele com glow começa com um sérum simples de usar
             </h2>
@@ -46,7 +46,7 @@ const CTA = () => {
                 <span className="font-heading text-4xl font-bold text-primary md:text-5xl lg:text-6xl">R$ 79,90</span>
               </div>
               <p className="text-xs text-muted-foreground md:text-sm">
-                ou 3x de R$ 26,63 sem juros • envio para todo Brasil
+                ou 3x de R$ 26,63 sem juros • <strong className="font-semibold text-primary">FRETE PROMOCIONAL</strong> por tempo limitado
               </p>
             </div>
 

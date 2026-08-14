@@ -24,7 +24,7 @@ const MobileStickyCTA = () => {
       <div className="flex items-center justify-between gap-3">
         <div className="flex flex-col">
           <span className="font-heading text-xl font-bold text-primary leading-none">R$ 79,90</span>
-          <span className="text-[0.7rem] text-muted-foreground">3x de R$ 26,63 sem juros</span>
+          <span className="text-[0.7rem] text-muted-foreground">3x de R$ 26,63 • Frete prom. ⏳</span>
         </div>
         <Button
           variant="hero"

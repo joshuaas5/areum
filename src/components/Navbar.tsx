@@ -16,6 +16,9 @@ const navLinks = [
   { label: "Dúvidas", href: "/#faq" },
 ];
 
+const WHATSAPP_NUMBER = "5547989258264";
+const parceriasUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Oi! Quero falar sobre parceria com a Areum 💜")}`;
+
 const Navbar = ({ variant = "solid" }: NavbarProps) => {
   const [open, setOpen] = useState(false);
 
@@ -42,6 +45,14 @@ const Navbar = ({ variant = "solid" }: NavbarProps) => {
               {link.label}
             </a>
           ))}
+          <a
+            href={parceriasUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-foreground/65 transition-colors hover:text-primary"
+          >
+            Parcerias
+          </a>
           <Button
             variant="outline-rose"
             size="sm"
@@ -76,6 +87,15 @@ const Navbar = ({ variant = "solid" }: NavbarProps) => {
                 {link.label}
               </a>
             ))}
+            <a
+              href={parceriasUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setOpen(false)}
+              className="rounded-md px-2 py-3 text-sm text-foreground/80 transition-colors hover:bg-secondary/50"
+            >
+              Parcerias (WhatsApp)
+            </a>
             <Button
               variant="hero"
               size="lg"

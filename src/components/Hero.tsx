@@ -130,6 +130,11 @@ const Hero = () => {
                 Dermatologicamente testado
               </span>
               <span className="hidden h-1 w-1 rounded-full bg-primary/40 sm:block" />
+              <span className="inline-flex items-center gap-1.5 font-medium text-foreground/80">
+                <ShieldCheck className="h-3.5 w-3.5 text-primary md:h-4 md:w-4" />
+                Registro ANVISA
+              </span>
+              <span className="hidden h-1 w-1 rounded-full bg-primary/40 sm:block" />
               <span>30ml</span>
               <span className="hidden h-1 w-1 rounded-full bg-primary/40 sm:block" />
               <span>Cruelty-free</span>
@@ -141,7 +146,7 @@ const Hero = () => {
                 <span className="font-heading text-4xl font-bold text-primary md:text-5xl lg:text-6xl">R$ 79,90</span>
               </div>
               <p className="text-xs text-muted-foreground md:text-sm">
-                ou 3x de R$ 26,63 sem juros • envio para todo Brasil
+                ou 3x de R$ 26,63 sem juros • <strong className="font-semibold text-primary">FRETE PROMOCIONAL</strong> por tempo limitado
               </p>
             </div>
 

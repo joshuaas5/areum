@@ -1,5 +1,9 @@
-import { Instagram, Mail } from "lucide-react";
+import { Instagram, Mail, MessageCircle } from "lucide-react";
 import areumLogo from "@/assets/areum-logo.png";
+
+const WHATSAPP_NUMBER = "5547989258264";
+const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Oi! Quero saber mais sobre o Sérum Areum ✨")}`;
+const parceriasUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Oi! Quero falar sobre parceria com a Areum 💜")}`;
 
 const Footer = () => {
   return (
@@ -35,6 +39,24 @@ const Footer = () => {
               <Mail className="w-5 h-5 shrink-0" />
               <span>areumcosm@gmail.com</span>
             </a>
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors"
+            >
+              <MessageCircle className="w-5 h-5 shrink-0" />
+              <span>WhatsApp: (47) 98925-8264</span>
+            </a>
+            <a
+              href={parceriasUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors"
+            >
+              <span>🤝</span>
+              <span>Parcerias e influenciadores</span>
+            </a>
           </div>
 
           {/* Badges */}
@@ -46,6 +68,10 @@ const Footer = () => {
             <span className="px-3 py-1.5 bg-primary-foreground/10 rounded-full text-xs text-primary-foreground/70 inline-flex items-center gap-2 md:text-sm">
               <span>🧪</span>
               <span>Dermatologicamente Testado</span>
+            </span>
+            <span className="px-3 py-1.5 bg-primary-foreground/10 rounded-full text-xs text-primary-foreground/70 inline-flex items-center gap-2 md:text-sm">
+              <span>📋</span>
+              <span>Produto com Registro ANVISA</span>
             </span>
           </div>
 

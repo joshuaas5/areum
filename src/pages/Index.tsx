@@ -7,6 +7,7 @@ import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 import LeadGuide from "@/components/LeadGuide";
 import MobileStickyCTA from "@/components/MobileStickyCTA";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 const Index = () => {
   return (
@@ -20,6 +21,7 @@ const Index = () => {
       <Footer />
       <LeadGuide />
       <MobileStickyCTA />
+      <WhatsAppButton />
     </main>
   );
 };
