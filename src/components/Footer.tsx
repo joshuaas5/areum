@@ -33,11 +33,11 @@ const Footer = () => {
               <span>@AreumCo</span>
             </a>
             <a
-              href="mailto:areumcosm@gmail.com"
+              href="mailto:contato@areumco.com.br"
               className="flex items-center gap-2 text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors break-all"
             >
               <Mail className="w-5 h-5 shrink-0" />
-              <span>areumcosm@gmail.com</span>
+              <span>contato@areumco.com.br</span>
             </a>
             <a
               href={whatsappUrl}
