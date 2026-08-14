@@ -125,7 +125,7 @@ const UGCVideoSection = () => {
             Antes de comprar, olha isso 👇
           </p>
           <h2 className="font-heading text-3xl font-semibold leading-tight text-foreground md:text-4xl lg:text-5xl">
-            Elas testaram o Sérum Areum 😳
+            Elas testaram o Sérum Areum ✨
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-sm leading-7 text-muted-foreground md:mt-5 md:text-base md:leading-8">
             Rotina real, textura de verdade e o glow aparecendo. Os vídeos completos estão no nosso{" "}
