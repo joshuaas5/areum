@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import areumLogo from "@/assets/areum-logo.png";
 import { Button } from "./ui/button";
+import { goToCheckout } from "@/lib/analytics";
 
 const checkoutUrl = "https://areum.pay.yampi.com.br/r/40KOQLA7XE";
 
@@ -56,9 +57,7 @@ const Navbar = ({ variant = "solid" }: NavbarProps) => {
           <Button
             variant="outline-rose"
             size="sm"
-            onClick={() => {
-              window.location.href = checkoutUrl;
-            }}
+            onClick={goToCheckout}
           >
             Comprar
           </Button>
@@ -100,9 +99,7 @@ const Navbar = ({ variant = "solid" }: NavbarProps) => {
               variant="hero"
               size="lg"
               className="mt-2"
-              onClick={() => {
-                window.location.href = checkoutUrl;
-              }}
+              onClick={goToCheckout}
             >
               Comprar Sérum Areum
             </Button>

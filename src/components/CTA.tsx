@@ -3,6 +3,7 @@ import { Check, Shield, Truck } from "lucide-react";
 import areumSerumPng from "@/assets/areum-serum.png";
 import areumSerumWebp from "@/assets/areum-serum.webp";
 import { Button } from "./ui/button";
+import { goToCheckout } from "@/lib/analytics";
 
 const checkoutUrl = "https://areum.pay.yampi.com.br/r/40KOQLA7XE";
 
@@ -63,9 +64,7 @@ const CTA = () => {
               variant="hero"
               size="lg"
               className="w-full shimmer md:size-xl md:w-auto"
-              onClick={() => {
-                window.location.href = checkoutUrl;
-              }}
+              onClick={goToCheckout}
             >
               Garantir meu Sérum Areum
             </Button>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { ShoppingBag } from "lucide-react";
 import { Button } from "./ui/button";
+import { goToCheckout } from "@/lib/analytics";
 
 const checkoutUrl = "https://areum.pay.yampi.com.br/r/40KOQLA7XE";
 
@@ -30,9 +31,7 @@ const MobileStickyCTA = () => {
           variant="hero"
           size="lg"
           className="flex-1 max-w-[60%] shimmer"
-          onClick={() => {
-            window.location.href = checkoutUrl;
-          }}
+          onClick={goToCheckout}
         >
           <ShoppingBag className="h-4 w-4" />
           Comprar agora

@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import areumSerumPng from "@/assets/areum-serum.png";
 import areumSerumWebp from "@/assets/areum-serum.webp";
 import { Button } from "./ui/button";
+import { goToCheckout } from "@/lib/analytics";
 
 const checkoutUrl = "https://areum.pay.yampi.com.br/r/40KOQLA7XE";
 
@@ -43,9 +44,7 @@ const InlineCTA = () => {
           variant="hero"
           size="lg"
           className="mt-4 w-full shimmer md:mt-5 md:w-auto"
-          onClick={() => {
-            window.location.href = checkoutUrl;
-          }}
+          onClick={goToCheckout}
         >
           Garantir meu Sérum Areum
         </Button>

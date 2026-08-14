@@ -2,6 +2,8 @@ import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { BadgeCheck, Play, Star } from "lucide-react";
 import { Button } from "./ui/button";
+import { goToCheckout, trackViewContent } from "@/lib/analytics";
+import { goToCheckout } from "@/lib/analytics";
 
 const checkoutUrl = "https://areum.pay.yampi.com.br/r/40KOQLA7XE";
 
@@ -103,6 +105,9 @@ const UGCVideoCard = ({ video, index }: { video: UGCVideo; index: number }) => {
 };
 
 const UGCVideoSection = () => {
+  useEffect(() => {
+    trackViewContent();
+  }, []);
   return (
     <section id="videos" className="relative overflow-hidden bg-card py-16 md:py-24">
       <div className="absolute left-[-8%] top-[10%] h-[280px] w-[280px] rounded-full bg-champagne/35 blur-3xl" />
@@ -144,9 +149,7 @@ const UGCVideoSection = () => {
             variant="hero"
             size="lg"
             className="w-full shimmer sm:w-auto md:size-xl"
-            onClick={() => {
-              window.location.href = checkoutUrl;
-            }}
+            onClick={goToCheckout}
           >
             Quero o meu Sérum Areum
           </Button>

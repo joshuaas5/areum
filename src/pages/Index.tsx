@@ -16,9 +16,9 @@ const Index = () => {
     <main className="overflow-hidden pb-16 md:pb-0">
       <AnnouncementBar />
       <Hero />
+      <UGCVideoSection />
       <Benefits />
       <HowToUse />
-      <UGCVideoSection />
       <Testimonials />
       <FAQ />
       <CTA />

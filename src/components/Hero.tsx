@@ -1,15 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Menu, ShieldCheck, Sparkles, Star, Truck, X } from "lucide-react";
 import areumLogo from "@/assets/areum-logo.png";
 import areumSerumPng from "@/assets/areum-serum.png";
 import areumSerumWebp from "@/assets/areum-serum.webp";
 import { Button } from "./ui/button";
+import { goToCheckout, trackViewContent } from "@/lib/analytics";
 
 const checkoutUrl = "https://areum.pay.yampi.com.br/r/40KOQLA7XE";
 
 const Hero = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    trackViewContent();
+  }, []);
 
   return (
     <section className="relative overflow-hidden bg-gradient-hero">
@@ -41,9 +46,7 @@ const Hero = () => {
               variant="outline-rose"
               size="sm"
               className="hidden sm:inline-flex"
-              onClick={() => {
-                window.location.href = checkoutUrl;
-              }}
+              onClick={goToCheckout}
             >
               Comprar
             </Button>
@@ -92,9 +95,7 @@ const Hero = () => {
               variant="hero"
               size="lg"
               className="mt-2 w-full"
-              onClick={() => {
-                window.location.href = checkoutUrl;
-              }}
+              onClick={goToCheckout}
             >
               Comprar Sérum Areum
             </Button>
