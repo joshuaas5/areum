@@ -122,13 +122,22 @@ const UGCVideoSection = () => {
           className="mx-auto mb-10 max-w-3xl text-center md:mb-14"
         >
           <p className="mb-3 text-[0.65rem] font-medium uppercase tracking-[0.2em] text-primary/85 md:mb-4 md:text-xs md:tracking-[0.28em]">
-            Prova em vídeo
+            Antes de comprar, olha isso 👇
           </p>
           <h2 className="font-heading text-3xl font-semibold leading-tight text-foreground md:text-4xl lg:text-5xl">
-            Elas testaram o Sérum Areum
+            Elas testaram o Sérum Areum — e a reação foi essa 😳
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-sm leading-7 text-muted-foreground md:mt-5 md:text-base md:leading-8">
-            Rotinas reais, textura de verdade e o glow aparecendo. Assista sem som — é só o começo do que a hidratação certa faz.
+            Rotina real, textura de verdade e o glow aparecendo. Os vídeos completos estão no nosso{" "}
+            <a
+              href="https://www.instagram.com/areumco"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-primary underline decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary"
+            >
+              Instagram @areumco
+            </a>{" "}
+            💜
           </p>
         </motion.div>
 
@@ -143,7 +152,7 @@ const UGCVideoSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-10 flex flex-col items-center gap-3 md:mt-12"
+          className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row md:mt-12"
         >
           <Button
             variant="hero"
@@ -153,6 +162,14 @@ const UGCVideoSection = () => {
           >
             Quero o meu Sérum Areum
           </Button>
+          <a
+            href="https://www.instagram.com/areumco"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-primary/25 bg-background px-6 py-3.5 text-sm font-semibold text-primary transition-colors hover:bg-primary/5 sm:w-auto"
+          >
+            Ver vídeos completos no Instagram
+          </a>
           <p className="text-xs text-muted-foreground">
             R$ 79,90 • 3x de R$ 26,63 sem juros • Frete promocional por tempo limitado
           </p>
