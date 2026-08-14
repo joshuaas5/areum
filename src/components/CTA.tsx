@@ -73,6 +73,21 @@ const CTA = () => {
               <Shield className="h-3.5 w-3.5 shrink-0 text-primary md:h-4 md:w-4" />
               Compra protegida • Garantia 7 dias • Pagamento seguro Yampi
             </p>
+            <div className="mt-4 flex flex-wrap items-center justify-center gap-2 md:justify-start">
+              {[
+                { label: "Pix", emoji: "⚡" },
+                { label: "Cartão em até 3x", emoji: "💳" },
+                { label: "Boleto", emoji: "🧾" },
+              ].map((pm) => (
+                <span
+                  key={pm.label}
+                  className="inline-flex items-center gap-1.5 rounded-md border border-primary/15 bg-white/70 px-2.5 py-1.5 text-[0.7rem] font-medium text-foreground/80"
+                >
+                  <span aria-hidden="true">{pm.emoji}</span>
+                  {pm.label}
+                </span>
+              ))}
+            </div>
           </div>
         </motion.div>
       </div>
