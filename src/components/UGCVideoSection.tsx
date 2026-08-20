@@ -37,6 +37,13 @@ const videos: UGCVideo[] = [
     caption: "O segredo da pele de protagonista de dorama?",
     tag: "Teste de textura",
   },
+  {
+    src: "/videos/ugc-antes-depois.mp4",
+    poster: "/videos/poster-antes-depois.jpg",
+    name: "Antes e depois",
+    caption: "Pele mais viçosa com uso do Sérum Areum",
+    tag: "Antes de depois",
+  },
 ];
 
 const UGCVideoCard = ({ video, index }: { video: UGCVideo; index: number }) => {
@@ -141,7 +148,7 @@ const UGCVideoSection = () => {
           </p>
         </motion.div>
 
-        <div className="mx-auto grid max-w-5xl grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 md:gap-5">
+        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 md:gap-5">
           {videos.map((video, index) => (
             <UGCVideoCard key={video.src} video={video} index={index} />
           ))}
