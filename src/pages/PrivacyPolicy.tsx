@@ -51,7 +51,7 @@ const PrivacyPolicy = () => (
 
     <h2>Como falar conosco</h2>
     <p>
-      A Areum Cosmetics é a responsável pelas decisões sobre os dados tratados neste site. Para dúvidas, cancelamento de comunicações ou exercício de direitos, escreva para <a href="mailto:contato@areumco.com.br">contato@areumco.com.br</a> ou fale pelo WhatsApp <a href="https://wa.me/5547989258264">(47) 98925-8264</a>.
+      A operação da Areum Cosmetics, identificada pelo CNPJ 50.548.562/0001-42, é responsável pelas decisões sobre os dados tratados neste site. Para dúvidas, cancelamento de comunicações ou exercício de direitos, escreva para <a href="mailto:contato@areumco.com.br">contato@areumco.com.br</a> ou fale pelo WhatsApp <a href="https://wa.me/5547989258264">(47) 98925-8264</a>.
     </p>
 
     <h2>Atualizações</h2>

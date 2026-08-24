@@ -7,7 +7,7 @@ const TermsOfUse = () => (
     updatedAt="24 de agosto de 2026"
   >
     <p>
-      Ao utilizar o site areumco.com.br ou realizar uma compra, você concorda com estes termos. As regras de proteção ao consumidor previstas na legislação brasileira continuam valendo integralmente.
+      Ao utilizar o site areumco.com.br ou realizar uma compra, você concorda com estes termos. A operação da Areum é identificada pelo CNPJ 50.548.562/0001-42. As regras de proteção ao consumidor previstas na legislação brasileira continuam valendo integralmente.
     </p>
 
     <h2>Informações sobre os produtos</h2>

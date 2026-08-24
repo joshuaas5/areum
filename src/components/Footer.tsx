@@ -96,6 +96,9 @@ const Footer = () => {
                 Termos de Uso e Compra
               </a>
             </nav>
+            <p className="mb-1 text-xs text-primary-foreground/50 md:text-sm">
+              CNPJ 50.548.562/0001-42
+            </p>
             <p className="text-xs text-primary-foreground/50 md:text-sm">
               © 2026 Areum Cosmetics. Todos os direitos reservados.
             </p>
