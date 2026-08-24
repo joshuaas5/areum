@@ -71,9 +71,12 @@ const LeadGuide = () => {
       setIsOpen(false);
     } catch (error) {
       console.error("Lead capture error:", error);
+      localStorage.setItem("areum_guide_closed", new Date().toDateString());
+      handleDownloadEbook();
+      setIsOpen(false);
       toast({
-        title: "Não foi possível liberar o guia",
-        description: "Tente novamente em instantes.",
+        title: "Guia liberado, cadastro não confirmado",
+        description: "O download começou, mas seus dados não foram salvos. Tente novamente mais tarde.",
         variant: "destructive",
       });
     } finally {
