@@ -5,6 +5,7 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/lib/supabase";
+import { trackLead, trackLeadFormView } from "@/lib/analytics";
 
 const LeadGuide = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,6 +22,7 @@ const LeadGuide = () => {
 
     const timer = setTimeout(() => {
       setIsOpen(true);
+      trackLeadFormView();
     }, 9000);
 
     return () => clearTimeout(timer);
@@ -50,24 +52,33 @@ const LeadGuide = () => {
     setLoading(true);
 
     try {
-      if (supabase) {
-        await supabase.from("leads").insert([
-          {
-            name: formData.name,
-            email: formData.email,
-            whatsapp: formData.whatsapp,
-            source: "guia_glass_skin",
-          },
-        ]);
-      }
+      if (!supabase) throw new Error("Supabase não configurado");
+
+      const { error } = await supabase.from("leads").insert([
+        {
+          name: formData.name,
+          email: formData.email,
+          whatsapp: formData.whatsapp,
+          source: "guia_glass_skin",
+        },
+      ]);
+
+      if (error) throw error;
+
+      trackLead();
+      localStorage.setItem("areum_guide_closed", new Date().toDateString());
+      handleDownloadEbook();
+      setIsOpen(false);
     } catch (error) {
       console.error("Lead capture error:", error);
+      toast({
+        title: "Não foi possível liberar o guia",
+        description: "Tente novamente em instantes.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
-    localStorage.setItem("areum_guide_closed", new Date().toDateString());
-    handleDownloadEbook();
-    setIsOpen(false);
   };
 
   if (!isOpen) return null;
@@ -137,7 +148,7 @@ const LeadGuide = () => {
             </Button>
             <p className="flex items-center justify-center gap-2 text-center text-[0.7rem] text-muted-foreground md:text-xs">
               <Mail className="h-3.5 w-3.5" />
-              Conteúdo gratuito para cuidar melhor da sua pele.
+              Ao baixar, você autoriza o envio de conteúdos e ofertas da Areum por e-mail e WhatsApp. Você pode sair quando quiser.
             </p>
           </form>
         </motion.div>
@@ -147,3 +158,4 @@ const LeadGuide = () => {
 };
 
 export default LeadGuide;
+

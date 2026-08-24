@@ -5,8 +5,6 @@ import areumSerumWebp from "@/assets/areum-serum.webp";
 import { Button } from "./ui/button";
 import { goToCheckout } from "@/lib/analytics";
 
-const checkoutUrl = "https://areum.pay.yampi.com.br/r/40KOQLA7XE";
-
 const features = [
   { icon: Truck, text: "Frete promocional (tempo limitado)" },
   { icon: Shield, text: "Registro ANVISA" },
@@ -64,7 +62,7 @@ const CTA = () => {
               variant="hero"
               size="lg"
               className="w-full shimmer md:size-xl md:w-auto"
-              onClick={goToCheckout}
+              onClick={() => goToCheckout("final_cta")}
             >
               Garantir meu Sérum Areum
             </Button>
@@ -95,3 +93,4 @@ const CTA = () => {
 };
 
 export default CTA;
+

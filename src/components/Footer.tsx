@@ -1,5 +1,6 @@
 import { Instagram, Mail, MessageCircle } from "lucide-react";
 import areumLogo from "@/assets/areum-logo.png";
+import { trackContact, trackOutboundClick } from "@/lib/analytics";
 
 const WHATSAPP_NUMBER = "5547989258264";
 const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Oi! Quero saber mais sobre o Sérum Areum ✨")}`;
@@ -27,6 +28,7 @@ const Footer = () => {
               href="https://instagram.com/AreumCo"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackOutboundClick("instagram", "footer")}
               className="flex items-center gap-2 text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors"
             >
               <Instagram className="w-5 h-5 shrink-0" />
@@ -34,6 +36,7 @@ const Footer = () => {
             </a>
             <a
               href="mailto:contato@areumco.com.br"
+              onClick={() => trackContact("email", "footer")}
               className="flex items-center gap-2 text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors break-all"
             >
               <Mail className="w-5 h-5 shrink-0" />
@@ -43,6 +46,7 @@ const Footer = () => {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackContact("whatsapp", "footer_support")}
               className="flex items-center gap-2 text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors"
             >
               <MessageCircle className="w-5 h-5 shrink-0" />
@@ -52,6 +56,7 @@ const Footer = () => {
               href={parceriasUrl}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackContact("whatsapp", "footer_partnerships")}
               className="flex items-center gap-2 text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors"
             >
               <span>🤝</span>
@@ -88,3 +93,4 @@ const Footer = () => {
 };
 
 export default Footer;
+

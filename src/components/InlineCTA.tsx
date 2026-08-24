@@ -4,8 +4,6 @@ import areumSerumWebp from "@/assets/areum-serum.webp";
 import { Button } from "./ui/button";
 import { goToCheckout } from "@/lib/analytics";
 
-const checkoutUrl = "https://areum.pay.yampi.com.br/r/40KOQLA7XE";
-
 const InlineCTA = () => {
   return (
     <motion.div
@@ -44,7 +42,7 @@ const InlineCTA = () => {
           variant="hero"
           size="lg"
           className="mt-4 w-full shimmer md:mt-5 md:w-auto"
-          onClick={goToCheckout}
+          onClick={() => goToCheckout("blog_inline")}
         >
           Garantir meu Sérum Areum
         </Button>
@@ -54,3 +52,4 @@ const InlineCTA = () => {
 };
 
 export default InlineCTA;
+

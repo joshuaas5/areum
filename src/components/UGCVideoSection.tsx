@@ -2,10 +2,7 @@ import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { BadgeCheck, Play, Star } from "lucide-react";
 import { Button } from "./ui/button";
-import { goToCheckout, trackViewContent } from "@/lib/analytics";
-import { goToCheckout } from "@/lib/analytics";
-
-const checkoutUrl = "https://areum.pay.yampi.com.br/r/40KOQLA7XE";
+import { goToCheckout, trackOutboundClick } from "@/lib/analytics";
 
 type UGCVideo = {
   src: string;
@@ -112,9 +109,6 @@ const UGCVideoCard = ({ video, index }: { video: UGCVideo; index: number }) => {
 };
 
 const UGCVideoSection = () => {
-  useEffect(() => {
-    trackViewContent();
-  }, []);
   return (
     <section id="videos" className="relative overflow-hidden bg-card py-16 md:py-24">
       <div className="absolute left-[-8%] top-[10%] h-[280px] w-[280px] rounded-full bg-champagne/35 blur-3xl" />
@@ -140,6 +134,7 @@ const UGCVideoSection = () => {
               href="https://www.instagram.com/areumco"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackOutboundClick("instagram", "ugc_intro")}
               className="font-semibold text-primary underline decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary"
             >
               Instagram @areumco
@@ -165,7 +160,7 @@ const UGCVideoSection = () => {
             variant="hero"
             size="lg"
             className="w-full shimmer sm:w-auto md:size-xl"
-            onClick={goToCheckout}
+            onClick={() => goToCheckout("ugc_section")}
           >
             Quero o meu Sérum Areum
           </Button>
@@ -173,6 +168,7 @@ const UGCVideoSection = () => {
             href="https://www.instagram.com/areumco"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackOutboundClick("instagram", "ugc_cta")}
             className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-primary/25 bg-background px-6 py-3.5 text-sm font-semibold text-primary transition-colors hover:bg-primary/5 sm:w-auto"
           >
             Ver vídeos completos no Instagram
@@ -187,3 +183,4 @@ const UGCVideoSection = () => {
 };
 
 export default UGCVideoSection;
+

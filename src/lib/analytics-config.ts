@@ -13,7 +13,10 @@
  * Depois de colar os IDs, o código de eventos já está pronto no site.
  */
 
-export const PIXEL_ID: string | null = null; // ex: "1234567890123456"
+// Mesmo Pixel configurado no checkout da Yampi. Manter um único ID preserva a
+// jornada entre areumco.com.br e areum.pay.yampi.com.br.
+export const PIXEL_ID: string | null = "4527391874217268";
 export const GA4_ID: string | null = "G-Y6RPCGXQT3"; // ex: "G-XXXXXXXXXX"
 
 export const CHECKOUT_URL = "https://areum.pay.yampi.com.br/r/40KOQLA7XE";
+

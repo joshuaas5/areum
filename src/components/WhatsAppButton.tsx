@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { trackWhatsApp } from "@/lib/analytics";
+import { trackContact } from "@/lib/analytics";
 
 const WHATSAPP_NUMBER = "5547989258264";
 const WHATSAPP_MESSAGE = encodeURIComponent("Oi! Quero saber mais sobre o Sérum Areum ✨");
@@ -32,7 +32,7 @@ const WhatsAppButton = () => {
           transition={{ duration: 0.25 }}
           href={WHATSAPP_URL}
           target="_blank"
-          onClick={trackWhatsApp}
+          onClick={() => trackContact("whatsapp", "floating_button")}
           rel="noopener noreferrer"
           aria-label="Falar com a Areum no WhatsApp"
           className="fixed right-4 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_8px_24px_rgba(37,211,102,0.45)] transition-transform hover:scale-105 md:bottom-6 md:right-6 md:h-16 md:w-16 bottom-24"
@@ -49,3 +49,4 @@ const WhatsAppButton = () => {
 };
 
 export default WhatsAppButton;
+

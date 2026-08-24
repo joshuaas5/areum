@@ -2,9 +2,7 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import areumLogo from "@/assets/areum-logo.png";
 import { Button } from "./ui/button";
-import { goToCheckout } from "@/lib/analytics";
-
-const checkoutUrl = "https://areum.pay.yampi.com.br/r/40KOQLA7XE";
+import { goToCheckout, trackContact } from "@/lib/analytics";
 
 type NavbarProps = {
   variant?: "transparent" | "solid";
@@ -50,6 +48,7 @@ const Navbar = ({ variant = "solid" }: NavbarProps) => {
             href={parceriasUrl}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackContact("whatsapp", "navbar_partnerships")}
             className="text-sm text-foreground/65 transition-colors hover:text-primary"
           >
             Parcerias
@@ -57,7 +56,7 @@ const Navbar = ({ variant = "solid" }: NavbarProps) => {
           <Button
             variant="outline-rose"
             size="sm"
-            onClick={goToCheckout}
+            onClick={() => goToCheckout("site_nav_desktop")}
           >
             Comprar
           </Button>
@@ -90,7 +89,10 @@ const Navbar = ({ variant = "solid" }: NavbarProps) => {
               href={parceriasUrl}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => setOpen(false)}
+              onClick={() => {
+                trackContact("whatsapp", "mobile_nav_partnerships");
+                setOpen(false);
+              }}
               className="rounded-md px-2 py-3 text-sm text-foreground/80 transition-colors hover:bg-secondary/50"
             >
               Parcerias (WhatsApp)
@@ -99,7 +101,7 @@ const Navbar = ({ variant = "solid" }: NavbarProps) => {
               variant="hero"
               size="lg"
               className="mt-2"
-              onClick={goToCheckout}
+              onClick={() => goToCheckout("site_nav_mobile")}
             >
               Comprar Sérum Areum
             </Button>
@@ -111,3 +113,4 @@ const Navbar = ({ variant = "solid" }: NavbarProps) => {
 };
 
 export default Navbar;
+

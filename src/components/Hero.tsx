@@ -7,8 +7,6 @@ import areumSerumWebp from "@/assets/areum-serum.webp";
 import { Button } from "./ui/button";
 import { goToCheckout, trackViewContent } from "@/lib/analytics";
 
-const checkoutUrl = "https://areum.pay.yampi.com.br/r/40KOQLA7XE";
-
 const Hero = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -46,7 +44,7 @@ const Hero = () => {
               variant="outline-rose"
               size="sm"
               className="hidden sm:inline-flex"
-              onClick={goToCheckout}
+              onClick={() => goToCheckout("hero_nav_desktop")}
             >
               Comprar
             </Button>
@@ -95,7 +93,7 @@ const Hero = () => {
               variant="hero"
               size="lg"
               className="mt-2 w-full"
-              onClick={goToCheckout}
+              onClick={() => goToCheckout("hero_nav_mobile")}
             >
               Comprar Sérum Areum
             </Button>
@@ -156,9 +154,7 @@ const Hero = () => {
                 variant="hero"
                 size="lg"
                 className="shimmer md:size-xl w-full sm:w-auto"
-                onClick={() => {
-                  window.location.href = checkoutUrl;
-                }}
+                onClick={() => goToCheckout("hero_primary")}
               >
                 Garantir meu Sérum Areum
               </Button>
@@ -238,3 +234,4 @@ const Hero = () => {
 };
 
 export default Hero;
+
