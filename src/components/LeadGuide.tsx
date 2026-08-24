@@ -60,6 +60,7 @@ const LeadGuide = () => {
           email: formData.email,
           whatsapp: formData.whatsapp,
           source: "guia_glass_skin",
+          consent_marketing: true,
         },
       ]);
 
