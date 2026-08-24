@@ -9,6 +9,8 @@ import BlogIndex from "./pages/blog/Index";
 import SerumFacialParaQueServe from "./pages/blog/SerumFacialParaQueServe";
 import SkincareCoreanoPassoAPasso from "./pages/blog/SkincareCoreanoPassoAPasso";
 import AcidoHialuronicoComoUsar from "./pages/blog/AcidoHialuronicoComoUsar";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfUse from "./pages/TermsOfUse";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +26,8 @@ const App = () => (
           <Route path="/blog/serum-facial-para-que-serve" element={<SerumFacialParaQueServe />} />
           <Route path="/blog/skincare-coreano-passo-a-passo" element={<SkincareCoreanoPassoAPasso />} />
           <Route path="/blog/acido-hialuronico-como-usar" element={<AcidoHialuronicoComoUsar />} />
+          <Route path="/politica-de-privacidade" element={<PrivacyPolicy />} />
+          <Route path="/termos-de-uso" element={<TermsOfUse />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

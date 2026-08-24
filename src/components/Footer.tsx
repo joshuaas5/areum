@@ -82,6 +82,20 @@ const Footer = () => {
 
           {/* Copyright */}
           <div className="border-t border-primary-foreground/10 pt-6 w-full md:pt-8">
+            <nav aria-label="Informações legais" className="mb-4 flex flex-wrap justify-center gap-x-5 gap-y-2 text-xs md:text-sm">
+              <a
+                href="/politica-de-privacidade"
+                className="text-primary-foreground/60 transition-colors hover:text-primary-foreground"
+              >
+                Política de Privacidade
+              </a>
+              <a
+                href="/termos-de-uso"
+                className="text-primary-foreground/60 transition-colors hover:text-primary-foreground"
+              >
+                Termos de Uso e Compra
+              </a>
+            </nav>
             <p className="text-xs text-primary-foreground/50 md:text-sm">
               © 2026 Areum Cosmetics. Todos os direitos reservados.
             </p>

@@ -152,7 +152,12 @@ const LeadGuide = () => {
             </Button>
             <p className="flex items-center justify-center gap-2 text-center text-[0.7rem] text-muted-foreground md:text-xs">
               <Mail className="h-3.5 w-3.5" />
-              Ao baixar, você autoriza o envio de conteúdos e ofertas da Areum por e-mail e WhatsApp. Você pode sair quando quiser.
+              <span>
+                Ao baixar, você autoriza conteúdos e ofertas por e-mail e WhatsApp. Você pode sair quando quiser. Consulte a nossa{" "}
+                <a href="/politica-de-privacidade" className="font-medium text-primary underline underline-offset-2">
+                  Política de Privacidade
+                </a>.
+              </span>
             </p>
           </form>
         </motion.div>
