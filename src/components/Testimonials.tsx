@@ -3,13 +3,13 @@ import { BadgeCheck, Quote, Star } from "lucide-react";
 
 const testimonials = [
   {
-    name: "Cliente verificada",
+    name: "M*****a",
     date: "Ago 2026",
     rating: 5,
     text: "Amei o produto! Chegou super bem embalado e dentro do prazo. O sérum tem uma textura ótima, é fácil de aplicar e deixa a pele bem macia e hidratada, sem ficar com aquela sensação pesada ou pegajosa, além de ter um cheiro maravilhoso. Já estou usando e gostei bastante do resultado. Produto de ótima qualidade e com um preço que vale a pena. Com certeza compraria novamente.",
   },
   {
-    name: "Cliente verificado",
+    name: "P*****o",
     date: "Ago 2026",
     rating: 5,
     text: "Produto muito bom, já dá pra sentir o resultado em pouco tempo de uso. Me surpreendeu positivamente após alguns dias de uso. Embalagem bem protegida e chegou rápido. Recomendo a compra.",
