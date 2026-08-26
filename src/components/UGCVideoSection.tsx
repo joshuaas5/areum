@@ -24,7 +24,7 @@ const videos: UGCVideo[] = [
     src: "/videos/ugc-primeiro-uso.mp4",
     poster: "/videos/poster-primeiro-uso.jpg",
     name: "Primeiro uso",
-    caption: "Cheiroso, leve e absorve na hora 😍 2 semanas e volto com o resultado!",
+    caption: "Leve, absorve na hora e NÃO fica pegajosa 😍 2 semanas e mostro o resultado!",
     tag: "Amei o 1º uso",
   },
   {

@@ -22,9 +22,9 @@ const benefits = [
   },
   {
     icon: Leaf,
-    title: "Leve para o dia a dia",
+    title: "Não fica pegajosa",
     description:
-      "Textura aquosa, rápida absorção e acabamento sem pegajosidade para encaixar na sua rotina real.",
+      "Textura aquosa, absorção rápida e acabamento que não deixa aquela sensação pesada ou pegajosa na pele. Ideal para usar de dia e à noite.",
   },
 ];
 
