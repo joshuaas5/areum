@@ -37,7 +37,7 @@ const Article = () => {
       <h3>Rotina mínima (3 passos) — comece por aqui</h3>
       <ol>
         <li><strong>Limpeza:</strong> sabonete facial adequado ao seu tipo de pele, manhã e noite.</li>
-        <li><strong>Sérum:</strong> aplique 3 a 4 gotas na pele levemente úmida. Sérum com ácido hialurônico e colágeno cobre hidratação e viço.</li>
+        <li><strong>Sérum:</strong> aplique 3 a 4 gotas na pele levemente úmida. Sérum com ácido hialurônico e colágeno cobre hidratação e brilho.</li>
         <li><strong>Protetor solar (de dia):</strong> FPS 30 ou mais, todos os dias, mesmo em dia nublado.</li>
       </ol>
       <h3>Rotina completa (5 passos) — para quem já tem o hábito</h3>

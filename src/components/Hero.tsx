@@ -120,7 +120,7 @@ const Hero = () => {
 
             <p className="mx-auto mt-4 max-w-xl text-sm leading-7 text-muted-foreground md:mt-7 md:text-base md:leading-8 lg:mx-0">
               Sérum facial com Hyalocollagreen 5%, ácido hialurônico e colágeno vegano para hidratação leve,
-              viço imediato e sensação de pele mais firme.
+              brilho imediato e sensação de pele mais firme.
             </p>
 
             <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-xs text-muted-foreground md:mt-6 md:gap-3 md:text-sm lg:justify-start">

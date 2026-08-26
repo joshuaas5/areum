@@ -1,7 +1,7 @@
 {
   "name": "Areum Cosmetics",
   "short_name": "Areum",
-  "description": "Sérum facial com tecnologia inspirada no skincare coreano (K-beauty) para hidratação, viço e glow.",
+  "description": "Sérum facial com tecnologia inspirada no skincare coreano (K-beauty) para hidratação, brilho e glow.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#fdf2f8",

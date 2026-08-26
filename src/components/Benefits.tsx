@@ -4,7 +4,7 @@ import { Droplets, Leaf, Shield, Sparkles } from "lucide-react";
 const benefits = [
   {
     icon: Sparkles,
-    title: "Viço de glass skin",
+    title: "Brilho de glass skin",
     description:
       "Ajuda a devolver luminosidade para a pele opaca, com acabamento leve e aparência descansada.",
   },

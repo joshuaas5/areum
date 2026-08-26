@@ -10,7 +10,7 @@ const Article = () => {
       date="2026-06-14"
     >
       <p>
-        O <strong>ácido hialurônico</strong> é um dos ativos mais populares da skincare — e por boas razões. Ele hidrata, dá viço e ajuda a pele a parecer mais firme. Mas existe um erro comum que faz muita gente achar que o ácido hialurônico "não funciona". A explicação está na forma como você aplica.
+        O <strong>ácido hialurônico</strong> é um dos ativos mais populares da skincare — e por boas razões. Ele hidrata, dá brilho e ajuda a pele a parecer mais firme. Mas existe um erro comum que faz muita gente achar que o ácido hialurônico "não funciona". A explicação está na forma como você aplica.
       </p>
 
       <h2>O que é ácido hialurônico</h2>
@@ -18,7 +18,7 @@ const Article = () => {
         O ácido hialurônico é uma molécula que ocorre naturalmente na nossa pele e tem uma capacidade enorme de <strong>reter água</strong> — até mil vezes o seu peso em água. É isso que dá à pele o aspecto hidratado e "plump" (cheio).
       </p>
       <p>
-        Com a idade, a quantidade de ácido hialurônico na pele diminui. Por isso, usar produtos que o contêm ajuda a repor hidratação e devolver viço.
+        Com a idade, a quantidade de ácido hialurônico na pele diminui. Por isso, usar produtos que o contêm ajuda a repor hidratação e devolver brilho.
       </p>
 
       <h2>Benefícios do ácido hialurônico para o rosto</h2>
@@ -63,13 +63,13 @@ const Article = () => {
         <li>Aplicar na pele seca (já explicado — o erro nº 1).</li>
         <li>Não selar com hidratante depois, especialmente em pele seca ou clima seco.</li>
         <li>Usar quantidade exagerada — 3 a 4 gotas são suficientes para o rosto inteiro.</li>
-        <li>Esperar efeito firmador imediato — o efeito é gradual, o imediato é de hidratação e viço.</li>
+        <li>Esperar efeito firmador imediato — o efeito é gradual, o imediato é de hidratação e brilho.</li>
         <li>Misturar com muitos ativos de uma vez. Se começou agora, use o sérum + protetor solar.</li>
       </ul>
 
       <h2>Em resumo</h2>
       <p>
-        O ácido hialurônico é um dos ativos mais seguros e eficazes para hidratação. O segredo está em <strong>aplicar na pele úmida e selar com hidratante</strong>. Com 2 a 4 semanas de uso diário, a pele tende a ficar mais hidratada, com viço e aparência mais lisa.
+        O ácido hialurônico é um dos ativos mais seguros e eficazes para hidratação. O segredo está em <strong>aplicar na pele úmida e selar com hidratante</strong>. Com 2 a 4 semanas de uso diário, a pele tende a ficar mais hidratada, com brilho e aparência mais lisa.
       </p>
     </ArticleLayout>
   );

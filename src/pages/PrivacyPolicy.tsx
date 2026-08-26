@@ -36,7 +36,7 @@ const PrivacyPolicy = () => (
       Os contatos do Guia Glass Skin são armazenados no Supabase com controles de acesso. Dados podem ser compartilhados somente na medida necessária com fornecedores de hospedagem, análise, atendimento, checkout, pagamento, antifraude e logística, ou quando houver obrigação legal. A Areum não vende os seus dados pessoais.
     </p>
     <p>
-      Alguns fornecedores podem processar dados fora do Brasil. Nesses casos, buscamos utilizar serviços com medidas adequadas de segurança e proteção de dados.
+      Alguns fornecedores podem processar dados fora do Brasil. Nesses casos, buscamos utilizar serbrilhos com medidas adequadas de segurança e proteção de dados.
     </p>
 
     <h2>Por quanto tempo guardamos</h2>
@@ -56,7 +56,7 @@ const PrivacyPolicy = () => (
 
     <h2>Atualizações</h2>
     <p>
-      Esta política poderá ser atualizada para refletir mudanças no site, nos serviços ou na legislação. A versão vigente ficará sempre disponível nesta página.
+      Esta política poderá ser atualizada para refletir mudanças no site, nos serbrilhos ou na legislação. A versão vigente ficará sempre disponível nesta página.
     </p>
   </LegalLayout>
 );

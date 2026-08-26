@@ -18,13 +18,13 @@ const Article = () => {
         Sérum é um produto de textura leve (aquosa ou gel) com <strong>concentração alta de ativos</strong>. A função dele é entregar ingredientes como ácido hialurônico, vitamina C, niacinamida e colágeno diretamente na pele, de forma mais eficiente que um hidratante comum.
       </p>
       <p>
-        Enquanto o hidratante tem como principal tarefa <em>selar a hidratação</em> (criar uma barreira que impede a perda de água), o sérum age como um <strong>tratamento</strong>: hidrata com profundidade, devolve viço, melhora a aparência da textura e ajuda a tratar questões específicas (opacidade, linhas finas, firmeza).
+        Enquanto o hidratante tem como principal tarefa <em>selar a hidratação</em> (criar uma barreira que impede a perda de água), o sérum age como um <strong>tratamento</strong>: hidrata com profundidade, devolve brilho, melhora a aparência da textura e ajuda a tratar questões específicas (opacidade, linhas finas, firmeza).
       </p>
 
       <h2>Benefícios do sérum facial</h2>
       <ul>
         <li><strong>Hidratação intensa:</strong> o ácido hialurônico atrai água para a pele, dando efeito plump imediato.</li>
-        <li><strong>Viço e luminosidade:</strong> a pele opaca ganha aspecto mais descansado e luminoso.</li>
+        <li><strong>Brilho e luminosidade:</strong> a pele opaca ganha aspecto mais descansado e luminoso.</li>
         <li><strong>Sensação de firmeza:</strong> ativos como colágeno vegano formam um filme que melhora a percepção de elasticidade.</li>
         <li><strong>Textura leve:</strong> absorção rápida, sem sensação gordurosa — ideal para usar de dia, sob protetor solar e maquiagem.</li>
         <li><strong>Encaixa em qualquer rotina:</strong> funciona em pele seca, oleosa, mista ou sensível, desde que você escolha o ativo certo.</li>
@@ -55,7 +55,7 @@ const Article = () => {
         <li><strong>Finalize:</strong> de dia, use protetor solar. À noite, pode seguir com hidratante se sua pele for seca.</li>
       </ol>
       <p>
-        Use <strong>uma ou duas vezes ao dia</strong> (manhã e/ou noite). Resultados de hidratação e viço aparecem nas primeiras aplicações; efeito de firmeza e textura mais lisa, com 2 a 4 semanas.
+        Use <strong>uma ou duas vezes ao dia</strong> (manhã e/ou noite). Resultados de hidratação e brilho aparecem nas primeiras aplicações; efeito de firmeza e textura mais lisa, com 2 a 4 semanas.
       </p>
 
       <h2>Erros comuns ao usar sérum</h2>

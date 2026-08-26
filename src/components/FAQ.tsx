@@ -16,7 +16,7 @@ const faqs = [
   {
     question: "Quanto tempo leva para ver resultado?",
     answer:
-      "Hidratação e viço imediatos são sentidos já nas primeiras aplicações. Sensação de firmeza e aparência mais lisa tendem a aparecer com 2 a 4 semanas de uso contínuo, uma ou duas vezes ao dia.",
+      "Hidratação e brilho imediatos são sentidos já nas primeiras aplicações. Sensação de firmeza e aparência mais lisa tendem a aparecer com 2 a 4 semanas de uso contínuo, uma ou duas vezes ao dia.",
   },
   {
     question: "O que é Hyalocollagreen e quais os ativos do sérum?",

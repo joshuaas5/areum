@@ -3,22 +3,16 @@ import { BadgeCheck, Quote, Star } from "lucide-react";
 
 const testimonials = [
   {
-    name: "Cristiane",
-    date: "Jun 2026",
-    rating: 5,
-    text: "Sinceramente, me surpreendeu. Minha pele estava bem apagada e agora sinto ela com um viço bonito, aquele brilho saudável que a gente vê nos doramas.",
-  },
-  {
-    name: "Ema Ramos",
-    date: "Jul 2026",
-    rating: 5,
-    text: "Gostei bastante da textura. Absorbe rápido e não fica pegajoso. Tenho sentido meu rosto mais firme e hidratado desde que comecei a usar.",
-  },
-  {
-    name: "Maria Gabriela",
+    name: "Cliente verificada",
     date: "Ago 2026",
     rating: 5,
-    text: "Valeu o investimento. Sinto um efeito lifting leve e muita gente tem comentado que minha pele está bonita. Recomendo.",
+    text: "Amei o produto! Chegou super bem embalado e dentro do prazo. O sérum tem uma textura ótima, é fácil de aplicar e deixa a pele bem macia e hidratada, sem ficar com aquela sensação pesada ou pegajosa, além de ter um cheiro maravilhoso. Já estou usando e gostei bastante do resultado. Produto de ótima qualidade e com um preço que vale a pena. Com certeza compraria novamente.",
+  },
+  {
+    name: "Cliente verificado",
+    date: "Ago 2026",
+    rating: 5,
+    text: "Produto muito bom, já dá pra sentir o resultado em pouco tempo de uso. Me surpreendeu positivamente após alguns dias de uso. Embalagem bem protegida e chegou rápido. Recomendo a compra.",
   },
 ];
 
@@ -44,12 +38,12 @@ const Testimonials = () => {
               ))}
             </div>
             <span className="font-medium text-foreground">5,0</span>
-            <span className="hidden sm:inline">• baseado em avaliações de compradoras</span>
-            <span className="sm:hidden">• compradoras</span>
+            <span className="hidden sm:inline">• avaliações reais de clientes</span>
+            <span className="sm:hidden">• clientes</span>
           </div>
         </motion.div>
 
-        <div className="grid gap-4 md:grid-cols-3 md:gap-5">
+        <div className="grid gap-4 md:grid-cols-2 md:gap-5">
           {testimonials.map((testimonial, index) => (
             <motion.article
               key={testimonial.name}
