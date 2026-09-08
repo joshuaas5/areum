@@ -108,6 +108,15 @@ export const trackLead = () => {
   trackGA4("generate_lead", data);
 };
 
+export const trackArmyFormView = () => {
+  const data = { content_name: "AREUM ARMY", lead_source: "army_page" };
+  trackMeta("LeadFormView", data, true);
+  trackGA4("view_promotion", {
+    promotion_id: "areum-army",
+    promotion_name: "AREUM ARMY",
+  });
+};
+
 /** Carrega os scripts do Meta Pixel e GA4 dinamicamente (só se os IDs existirem) */
 export const initAnalytics = () => {
   if (PIXEL_ID && typeof window !== "undefined" && !window.fbq) {

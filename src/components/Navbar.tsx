@@ -12,6 +12,7 @@ const navLinks = [
   { label: "Benefícios", href: "/#beneficios" },
   { label: "Como usar", href: "/#modo-de-uso" },
   { label: "Conteúdos", href: "/blog" },
+  { label: "AREUM ARMY", href: "/army" },
   { label: "Dúvidas", href: "/#faq" },
 ];
 

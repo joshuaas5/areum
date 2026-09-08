@@ -62,6 +62,13 @@ const Footer = () => {
               <span>🤝</span>
               <span>Parcerias e influenciadores</span>
             </a>
+            <a
+              href="/army"
+              className="flex items-center gap-2 text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors"
+            >
+              <span>💗</span>
+              <span>AREUM ARMY — seja embaixadora</span>
+            </a>
           </div>
 
           {/* Badges */}

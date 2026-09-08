@@ -11,6 +11,7 @@ import SkincareCoreanoPassoAPasso from "./pages/blog/SkincareCoreanoPassoAPasso"
 import AcidoHialuronicoComoUsar from "./pages/blog/AcidoHialuronicoComoUsar";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfUse from "./pages/TermsOfUse";
+import Army from "./pages/Army";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/blog/acido-hialuronico-como-usar" element={<AcidoHialuronicoComoUsar />} />
           <Route path="/politica-de-privacidade" element={<PrivacyPolicy />} />
           <Route path="/termos-de-uso" element={<TermsOfUse />} />
+          <Route path="/army" element={<Army />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
