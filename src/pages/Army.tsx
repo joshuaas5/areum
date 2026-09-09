@@ -29,6 +29,12 @@ import { trackArmyCTA } from "@/lib/analytics";
 
 const heroImage = "/army/army-ugc-real.webp";
 
+const creatorProof = [
+  { src: "/army/japonesa-usando.jpg", alt: "Criadora usando o sérum AREUM" },
+  { src: "/army/flavia-hero.jpg", alt: "Flávia divulgando o sérum AREUM" },
+  { src: "/army/glow-hero.jpg", alt: "Dorameira divulgando o sérum AREUM" },
+];
+
 const steps = [
   {
     number: "01",
@@ -351,14 +357,38 @@ const Army = () => {
 
       <section className="relative overflow-hidden bg-[#4b292d] py-20 md:py-28">
         <div className="absolute -left-24 bottom-[-8rem] h-80 w-80 rounded-full bg-[#8f453d]/45 blur-3xl" aria-hidden="true" />
-        <div className="relative mx-auto grid max-w-[1160px] items-start gap-12 px-5 md:grid-cols-[.78fr_1.22fr] md:px-8">
-          <div className="pt-3 text-white md:sticky md:top-28">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#efb4a7]">Sua próxima indicação pode valer comissão</p>
-            <h2 className="mt-4 font-heading text-5xl font-semibold uppercase leading-[.92] tracking-[-0.03em] md:text-7xl">Comece sua<br /><em className="font-normal text-[#efb4a7]">renda extra.</em></h2>
-            <p className="mt-6 max-w-md text-base leading-7 text-white/72 md:text-lg">Faça sua inscrição e dê o primeiro passo para ganhar comissão pelas suas indicações.</p>
-            <p className="mt-8 font-heading text-2xl italic text-white">Represente. Compartilhe. Ganhe.</p>
+        <div className="relative mx-auto max-w-[1160px] px-5 md:px-8">
+          <div className="mb-10 grid grid-cols-[auto_1fr] items-center gap-4 rounded-2xl border border-white/15 bg-white/[.08] px-4 py-4 shadow-[0_18px_45px_rgba(35,15,17,.18)] backdrop-blur sm:px-5 md:mb-12 md:max-w-3xl md:gap-5">
+            <div className="flex -space-x-3" aria-label="Criadoras reais da AREUM">
+              {creatorProof.map((creator) => (
+                <img
+                  key={creator.src}
+                  src={creator.src}
+                  alt={creator.alt}
+                  className="h-12 w-12 rounded-full border-2 border-[#4b292d] object-cover object-top shadow-md md:h-14 md:w-14"
+                  loading="lazy"
+                />
+              ))}
+            </div>
+            <div>
+              <p className="inline-flex items-center gap-1.5 text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-[#efb4a7]">
+                <BadgeCheck className="h-3.5 w-3.5" /> Conteúdo real
+              </p>
+              <p className="mt-1 text-sm font-medium leading-5 text-white md:text-base md:leading-6">
+                A AREUM já é divulgada por criadoras reais em todo o Brasil.
+              </p>
+            </div>
           </div>
-          <ArmyFormEmbed />
+
+          <div className="grid items-start gap-12 md:grid-cols-[.78fr_1.22fr]">
+            <div className="pt-3 text-white md:sticky md:top-28">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#efb4a7]">Sua próxima indicação pode valer comissão</p>
+              <h2 className="mt-4 font-heading text-5xl font-semibold uppercase leading-[.92] tracking-[-0.03em] md:text-7xl">Comece sua<br /><em className="font-normal text-[#efb4a7]">renda extra.</em></h2>
+              <p className="mt-6 max-w-md text-base leading-7 text-white/72 md:text-lg">Faça sua inscrição e dê o primeiro passo para ganhar comissão pelas suas indicações.</p>
+              <p className="mt-8 font-heading text-2xl italic text-white">Represente. Compartilhe. Ganhe.</p>
+            </div>
+            <ArmyFormEmbed />
+          </div>
         </div>
       </section>
 
