@@ -27,7 +27,7 @@ import {
 } from "@/components/ui/accordion";
 import { trackArmyCTA } from "@/lib/analytics";
 
-const heroImage = "/army/areum-army-hero.webp";
+const heroImage = "/army/army-ugc-real.webp";
 
 const steps = [
   {
@@ -164,55 +164,76 @@ const Army = () => {
       <StickyArmyCTA />
 
       <header className="absolute inset-x-0 top-0 z-40">
-        <div className="mx-auto flex max-w-[1240px] items-center justify-between px-5 py-5 md:px-8 md:py-7">
-          <a href="/" aria-label="AREUM — página inicial" className="rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8f453d]">
-            <img src={areumLogo} alt="AREUM" className="h-10 w-auto md:h-12" />
+        <div className="mx-auto flex max-w-[1240px] items-center justify-between px-4 py-4 md:px-8 md:py-7">
+          <a href="/" aria-label="AREUM - página inicial" className="rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8f453d]">
+            <img src={areumLogo} alt="AREUM" className="h-auto w-[138px] md:h-12 md:w-auto" />
           </a>
           <nav aria-label="Navegação da AREUM ARMY" className="flex items-center gap-6">
             <a href="#como-funciona" className="hidden text-sm font-medium text-[#5f4b46] hover:text-[#8f453d] md:inline">Como funciona</a>
-            <CTA placement="header" compact />
+            <a
+              href="#inscricao"
+              onClick={() => trackArmyCTA("header")}
+              className="army-header-cta"
+            >
+              <span className="md:hidden">INSCREVA-SE</span>
+              <span className="hidden md:inline">QUERO COMEÇAR MINHA RENDA EXTRA</span>
+              <ArrowRight className="h-4 w-4" />
+            </a>
           </nav>
         </div>
       </header>
 
-      <section className="army-hero relative min-h-[760px] pt-28 md:min-h-[820px] md:pt-32">
+      <section className="army-hero relative min-h-[760px] pt-24 md:min-h-[820px] md:pt-32">
         <div className="army-hero-orb army-hero-orb--one" aria-hidden="true" />
         <div className="army-hero-orb army-hero-orb--two" aria-hidden="true" />
-        <div className="relative mx-auto grid max-w-[1240px] items-center gap-10 px-5 pb-16 md:grid-cols-[1.04fr_.96fr] md:px-8 md:pb-20">
-          <div className="relative z-10 pt-4 md:pt-10">
-            <p className="inline-flex items-center gap-2 rounded-full border border-[#b77468]/30 bg-white/70 px-4 py-2 text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-[#8f453d] backdrop-blur">
+        <div className="relative mx-auto grid max-w-[1240px] items-center gap-7 px-4 pb-12 md:grid-cols-[1.04fr_.96fr] md:gap-10 md:px-8 md:pb-20">
+          <div className="relative z-10 pt-3 md:pt-10">
+            <p className="inline-flex items-center gap-2 rounded-full border border-[#b77468]/30 bg-white/70 px-3 py-2 text-[0.61rem] font-semibold uppercase tracking-[0.14em] text-[#8f453d] backdrop-blur md:px-4 md:text-[0.68rem] md:tracking-[0.2em]">
               <Heart className="h-3.5 w-3.5 fill-current" /> AREUM ARMY · Programa de embaixadoras
             </p>
-            <h1 className="mt-6 font-heading text-[3.45rem] font-semibold uppercase leading-[0.87] tracking-[-0.045em] text-[#302523] sm:text-7xl md:text-[5.75rem] lg:text-[7rem]">
+            <h1 className="mt-5 font-heading text-[4.4rem] font-semibold uppercase leading-[0.77] tracking-[-0.055em] text-[#302523] sm:text-7xl md:mt-6 md:text-[5.75rem] md:leading-[0.87] lg:text-[7rem]">
               Renda<br />
               <span className="army-outline-word">extra</span>
             </h1>
-            <p className="mt-6 max-w-xl font-heading text-3xl font-medium leading-[1.03] text-[#503a36] md:text-[2.65rem]">
+            <p className="mt-5 max-w-xl font-heading text-[1.62rem] font-medium leading-[1.04] text-[#503a36] md:mt-6 md:text-[2.65rem] md:leading-[1.03]">
               com as suas indicações de skincare.
             </p>
-            <p className="mt-6 max-w-xl text-base leading-7 text-[#6b5752] md:text-lg md:leading-8">
+            <p className="mt-6 hidden max-w-xl text-base leading-7 text-[#6b5752] md:block md:text-lg md:leading-8">
               Represente a AREUM e ganhe <strong className="font-semibold text-[#302523]">R$10 de comissão inicial por unidade vendida</strong> em vendas elegíveis pelo seu cupom.
             </p>
-            <div className="mt-7 flex flex-wrap gap-x-5 gap-y-2 text-sm font-medium text-[#59423e]">
+            <div className="mt-7 hidden flex-wrap gap-x-5 gap-y-2 text-sm font-medium text-[#59423e] md:flex">
               {["Sem estoque", "Sem taxa", "Não precisa ser influencer"].map((item) => (
                 <span key={item} className="inline-flex items-center gap-2"><Check className="h-4 w-4 text-[#a75b50]" />{item}</span>
               ))}
             </div>
-            <div className="mt-8"><CTA placement="hero" /></div>
-            <p className="mt-4 max-w-lg text-xs leading-5 text-[#806c67]">
+            <div className="mt-6 md:mt-8"><CTA placement="hero" /></div>
+            <p className="mt-4 hidden max-w-lg text-xs leading-5 text-[#806c67] md:block">
               Inscrição gratuita e sujeita à aprovação. Ganhos dependem das vendas realizadas e não são garantidos.
             </p>
           </div>
 
           <div className="relative mx-auto w-full max-w-[520px] md:mt-8">
             <div className="army-hero-photo-frame">
-              <img src={heroImage} alt="Mulher em uma rotina de beleza, com pele natural e iluminada" className="h-full w-full object-cover" fetchPriority="high" />
+              <img src={heroImage} alt="Criadora mostrando o sérum facial AREUM" className="h-full w-full object-cover object-[center_32%] md:object-center" fetchPriority="high" />
             </div>
-            <div className="absolute -bottom-5 -left-3 flex items-center gap-3 rounded-2xl border border-white/70 bg-white/90 px-4 py-3 shadow-[0_16px_40px_rgba(67,32,28,.16)] backdrop-blur md:-left-10 md:bottom-9">
+            <div className="absolute -bottom-4 left-3 flex items-center gap-3 rounded-2xl border border-white/70 bg-white/95 px-4 py-3 shadow-[0_16px_40px_rgba(67,32,28,.2)] backdrop-blur md:-left-10 md:bottom-9">
               <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[#f2d9da] text-[#8f453d]"><WalletCards className="h-5 w-5" /></div>
               <div><strong className="block text-lg leading-none">R$10</strong><span className="text-xs text-[#6b5752]">por unidade elegível</span></div>
             </div>
-            <img src={serumImage} alt="Sérum facial AREUM" className="absolute -right-5 bottom-0 h-48 w-auto drop-shadow-[0_18px_22px_rgba(75,41,45,.25)] md:-right-12 md:h-64" />
+            <img src={serumImage} alt="Sérum facial AREUM" className="absolute -right-12 bottom-0 hidden h-64 w-auto drop-shadow-[0_18px_22px_rgba(75,41,45,.25)] md:block" />
+          </div>
+          <div className="relative z-10 mt-1 rounded-2xl border border-[#b77468]/20 bg-white/70 px-4 py-4 backdrop-blur md:hidden">
+            <p className="text-[0.93rem] leading-6 text-[#5f4b46]">
+              Ganhe <strong className="font-semibold text-[#302523]">R$10 de comissão inicial por unidade vendida</strong> em vendas elegíveis pelo seu cupom.
+            </p>
+            <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-xs font-semibold text-[#59423e]">
+              {["Sem estoque", "Sem taxa", "Não precisa ser influencer"].map((item) => (
+                <span key={item} className="inline-flex items-center gap-1.5"><Check className="h-3.5 w-3.5 text-[#a75b50]" />{item}</span>
+              ))}
+            </div>
+            <p className="mt-3 text-[0.66rem] leading-4 text-[#806c67]">
+              Inscrição gratuita e sujeita à aprovação. Ganhos dependem das vendas realizadas e não são garantidos.
+            </p>
           </div>
         </div>
         <a href="#oferta" aria-label="Ver detalhes da oportunidade" className="absolute bottom-5 left-1/2 hidden -translate-x-1/2 items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#7a5d57] md:flex">

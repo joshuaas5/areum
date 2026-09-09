@@ -247,18 +247,38 @@
   }
 
   .army-outline-word {
-    color: transparent;
-    -webkit-text-stroke: 2px #8f453d;
-    text-stroke: 2px #8f453d;
+    display: inline-block;
+    margin-top: 0.1em;
+    padding: 0.04em 0.14em 0.09em 0.1em;
+    color: white;
+    background: linear-gradient(135deg, #a8544a, #7e3732);
+    border-radius: 0.12em;
+    box-shadow: 0 12px 28px rgba(96, 45, 40, 0.24);
+    transform: rotate(-1deg);
   }
 
   .army-hero-photo-frame {
-    height: min(610px, 67vh);
-    min-height: 470px;
+    height: 410px;
     overflow: hidden;
-    border: 8px solid rgba(255, 255, 255, 0.75);
-    border-radius: 12rem 12rem 2rem 2rem;
+    border: 6px solid rgba(255, 255, 255, 0.85);
+    border-radius: 2rem;
     box-shadow: 0 30px 80px rgba(75, 41, 45, 0.18);
+  }
+
+  .army-header-cta {
+    display: inline-flex;
+    min-height: 2.55rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    border-radius: 9999px;
+    background: #8f453d;
+    padding: 0.65rem 0.82rem;
+    color: white;
+    font-size: 0.63rem;
+    font-weight: 700;
+    letter-spacing: 0.055em;
+    box-shadow: 0 10px 24px rgba(96, 45, 40, 0.18);
   }
 
   .army-primary-cta {
@@ -296,6 +316,34 @@
     padding: 0.7rem 1rem;
     font-size: 0.69rem;
     letter-spacing: 0.055em;
+  }
+
+  @media (min-width: 768px) {
+    .army-outline-word {
+      margin-top: 0;
+      padding: 0;
+      color: transparent;
+      background: transparent;
+      border-radius: 0;
+      box-shadow: none;
+      -webkit-text-stroke: 2px #8f453d;
+      text-stroke: 2px #8f453d;
+      transform: none;
+    }
+
+    .army-hero-photo-frame {
+      height: min(610px, 67vh);
+      min-height: 470px;
+      border-width: 8px;
+      border-radius: 12rem 12rem 2rem 2rem;
+    }
+
+    .army-header-cta {
+      min-height: 2.8rem;
+      border-radius: 0.8rem;
+      padding: 0.7rem 1rem;
+      font-size: 0.69rem;
+    }
   }
 
   .army-kicker {
