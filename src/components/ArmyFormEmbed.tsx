@@ -103,8 +103,6 @@ const ArmyFormEmbed = ({ id = "inscricao" }: { id?: string }) => {
     if (!selectedChannels.length) nextErrors.channels = "Escolha pelo menos uma forma de divulgação.";
     if (selectedChannels.includes("Outros") && form.otherChannel.trim().length < 2)
       nextErrors.otherChannel = "Conte qual seria o outro canal.";
-    if (form.motivation.trim().length < 8)
-      nextErrors.motivation = "Conte em uma frase por que quer participar.";
     if (!form.privacy) nextErrors.privacy = "Você precisa concordar com o uso dos dados para a seleção.";
     setErrors(nextErrors);
     return Object.keys(nextErrors).length === 0;
@@ -267,9 +265,8 @@ const ArmyFormEmbed = ({ id = "inscricao" }: { id?: string }) => {
         </div>
 
         <div className="sm:col-span-2">
-          <Label htmlFor="army-motivation">O que você quer construir com essa oportunidade?</Label>
-          <Textarea id="army-motivation" placeholder="Conte por que a renda extra faria diferença e como pretende divulgar a AREUM." maxLength={600} value={form.motivation} onChange={(event) => updateField("motivation", event.target.value)} aria-invalid={Boolean(errors.motivation)} aria-describedby={errors.motivation ? "army-motivation-error" : undefined} className="army-input min-h-28 resize-y" />
-          <FieldError id="army-motivation-error" message={errors.motivation} />
+          <Label htmlFor="army-motivation">Por que você quer fazer parte da AREUM ARMY? <span className="text-[#8b7772]">(opcional)</span></Label>
+          <Textarea id="army-motivation" placeholder="Se quiser, conte um pouco sobre o que motivou você." maxLength={600} value={form.motivation} onChange={(event) => updateField("motivation", event.target.value)} className="army-input min-h-24 resize-y" />
         </div>
 
         <div className="absolute -left-[9999px]" aria-hidden="true">

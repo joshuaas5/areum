@@ -42,7 +42,7 @@ export const backupArmyApplication = async (payload: ArmyBackupPayload) => {
     [fields.channels]: channelList.join(", "),
     [fields.instagram]: payload.instagram ?? "",
     [fields.tiktok]: payload.tiktok ?? "",
-    [fields.motivation]: payload.motivation,
+    [fields.motivation]: payload.motivation || "Não informado",
     [fields.source]: "areumco.com.br/army",
     [fields.utm]: Object.keys(payload.utm).length ? JSON.stringify(payload.utm) : "",
     [fields.id]: payload.id,
