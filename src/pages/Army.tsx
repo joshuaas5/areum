@@ -196,11 +196,11 @@ const Army = () => {
               Renda<br />
               <span className="army-outline-word">extra</span>
             </h1>
-            <p className="mt-5 max-w-xl font-heading text-[1.62rem] font-medium leading-[1.04] text-[#503a36] md:mt-6 md:text-[2.65rem] md:leading-[1.03]">
-              com as suas indicações de skincare.
+            <p className="mt-5 max-w-xl font-heading text-[1.76rem] font-medium leading-[1.02] text-[#503a36] md:mt-6 md:text-[2.65rem] md:leading-[1.03]">
+              Seu começo no digital pode ser aqui.
             </p>
             <p className="mt-6 hidden max-w-xl text-base leading-7 text-[#6b5752] md:block md:text-lg md:leading-8">
-              Represente a AREUM e ganhe <strong className="font-semibold text-[#302523]">R$10 de comissão inicial por unidade vendida</strong> em vendas elegíveis pelo seu cupom.
+              Represente a AREUM nas suas redes, crie conteúdo e ganhe <strong className="font-semibold text-[#302523]">R$10 de comissão inicial por unidade vendida</strong> em vendas elegíveis pelo seu cupom.
             </p>
             <div className="mt-7 hidden flex-wrap gap-x-5 gap-y-2 text-sm font-medium text-[#59423e] md:flex">
               {["Sem estoque", "Sem taxa", "Não precisa ser influencer"].map((item) => (
@@ -225,7 +225,7 @@ const Army = () => {
           </div>
           <div className="relative z-10 mt-1 rounded-2xl border border-[#b77468]/20 bg-white/70 px-4 py-4 backdrop-blur md:hidden">
             <p className="text-[0.93rem] leading-6 text-[#5f4b46]">
-              Ganhe <strong className="font-semibold text-[#302523]">R$10 de comissão inicial por unidade vendida</strong> em vendas elegíveis pelo seu cupom.
+              Crie sua presença no digital, represente a AREUM e ganhe <strong className="font-semibold text-[#302523]">R$10 por unidade vendida</strong> em vendas elegíveis pelo seu cupom.
             </p>
             <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-xs font-semibold text-[#59423e]">
               {["Sem estoque", "Sem taxa", "Não precisa ser influencer"].map((item) => (
@@ -298,7 +298,7 @@ const Army = () => {
             <p className="army-kicker">Pode ser para você</p>
             <h2 className="army-section-title">Não precisa ter milhares de seguidores.</h2>
             <p className="mt-5 text-base leading-7 text-[#644d48] md:text-lg md:leading-8">
-              Instagram, TikTok, WhatsApp, clientes ou amigos: existem diferentes formas de compartilhar a AREUM com a sua rede.
+              Comece pelo Instagram, TikTok ou WhatsApp. Crie conteúdo, compartilhe seu cupom e se apresente como embaixadora da AREUM para construir sua presença no digital.
             </p>
             <div className="mt-8 flex flex-wrap gap-2">
               {["Instagram", "TikTok", "WhatsApp", "Clientes", "Amigos"].map((item) => <span key={item} className="rounded-full border border-[#b87568]/35 bg-white/55 px-4 py-2 text-sm font-medium text-[#60433d]">{item}</span>)}

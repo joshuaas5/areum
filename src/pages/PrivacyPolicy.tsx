@@ -33,7 +33,7 @@ const PrivacyPolicy = () => (
 
     <h2>Armazenamento e compartilhamento</h2>
     <p>
-      Os contatos do Guia Glass Skin são armazenados no Supabase com controles de acesso. Dados podem ser compartilhados somente na medida necessária com fornecedores de hospedagem, análise, atendimento, checkout, pagamento, antifraude e logística, ou quando houver obrigação legal. A Areum não vende os seus dados pessoais.
+      Os contatos do Guia Glass Skin e as candidaturas da AREUM ARMY são armazenados no Supabase com controles de acesso. As candidaturas da AREUM ARMY também podem ser mantidas em uma cópia privada no Google Workspace para continuidade operacional e análise das inscrições. Dados podem ser compartilhados somente na medida necessária com fornecedores de hospedagem, armazenamento, análise, atendimento, checkout, pagamento, antifraude e logística, ou quando houver obrigação legal. A Areum não vende os seus dados pessoais.
     </p>
     <p>
       Alguns fornecedores podem processar dados fora do Brasil. Nesses casos, buscamos utilizar serbrilhos com medidas adequadas de segurança e proteção de dados.
