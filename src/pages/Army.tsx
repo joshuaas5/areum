@@ -30,9 +30,9 @@ import { trackArmyCTA } from "@/lib/analytics";
 const heroImage = "/army/army-ugc-real.webp";
 
 const creatorProof = [
-  { src: "/army/japonesa-usando.jpg", alt: "Criadora usando o sérum AREUM" },
+  { src: "/army/japonesa-proof.jpg", alt: "Criadora japonesa usando o sérum AREUM" },
   { src: "/army/flavia-hero.jpg", alt: "Flávia divulgando o sérum AREUM" },
-  { src: "/army/glow-hero.jpg", alt: "Dorameira divulgando o sérum AREUM" },
+  { src: "/army/dorameira-proof.jpg", alt: "Dorameira divulgando o sérum AREUM" },
 ];
 
 const steps = [
@@ -365,7 +365,7 @@ const Army = () => {
                   key={creator.src}
                   src={creator.src}
                   alt={creator.alt}
-                  className="h-12 w-12 rounded-full border-2 border-[#4b292d] object-cover object-top shadow-md md:h-14 md:w-14"
+                  className="h-14 w-12 rounded-xl border-2 border-[#4b292d] object-cover object-center shadow-md md:h-16 md:w-14"
                   loading="lazy"
                 />
               ))}
