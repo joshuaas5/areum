@@ -13,7 +13,7 @@ type ArmyBackupPayload = {
 };
 
 const GOOGLE_FORM_ENDPOINT =
-  "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfl6IshQjaF4zBmIczw6CIDBNCOvq8SJDml2w1cmi4Ldd0zHQ/formResponse";
+  "https://docs.google.com/forms/d/e/1FAIpQLScEknrzIXiVOYlm1htQjoTmp0s-KUmfTq4qk9sQ2fmkX3xJIg/formResponse";
 
 const fields = {
   name: "entry.1801119649",
