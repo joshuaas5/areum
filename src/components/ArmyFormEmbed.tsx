@@ -10,6 +10,7 @@ import {
   trackArmyFormStart,
   trackArmyFormView,
 } from "@/lib/analytics";
+import { backupArmyApplication } from "@/lib/army-backup";
 
 const channels = ["Instagram", "TikTok", "WhatsApp", "Clientes", "Amigos", "Outros"];
 
@@ -115,9 +116,9 @@ const ArmyFormEmbed = ({ id = "inscricao" }: { id?: string }) => {
     setStatus("sending");
 
     try {
-      if (!supabase) throw new Error("Serviço indisponível");
-
-      const { error } = await supabase.from("army_applications").insert({
+      const applicationId = crypto.randomUUID();
+      const application = {
+        id: applicationId,
         name: form.name.trim(),
         whatsapp: form.whatsapp.trim(),
         city: form.city.trim(),
@@ -130,9 +131,33 @@ const ArmyFormEmbed = ({ id = "inscricao" }: { id?: string }) => {
         source: "areum_army",
         consent_privacy: true,
         utm,
+      };
+
+      const supabaseRequest = supabase
+        ? supabase.from("army_applications").insert(application).then(({ error }) => {
+            if (error) throw error;
+          })
+        : Promise.reject(new Error("Serviço principal indisponível"));
+
+      const backupRequest = backupArmyApplication({
+        id: applicationId,
+        name: application.name,
+        whatsapp: application.whatsapp,
+        city: application.city,
+        state: application.state,
+        channels: selectedChannels,
+        instagram: application.instagram,
+        tiktok: application.tiktok,
+        otherChannel: application.other_channel,
+        motivation: application.motivation,
+        utm,
       });
 
-      if (error) throw error;
+      const results = await Promise.allSettled([supabaseRequest, backupRequest]);
+      if (results.every((result) => result.status === "rejected")) {
+        throw new Error("Serviços de inscrição indisponíveis");
+      }
+
       setStatus("success");
       trackArmyApplicationResult("success");
       setForm(initialForm);
@@ -242,8 +267,8 @@ const ArmyFormEmbed = ({ id = "inscricao" }: { id?: string }) => {
         </div>
 
         <div className="sm:col-span-2">
-          <Label htmlFor="army-motivation">Por que você quer fazer parte da AREUM ARMY?</Label>
-          <Textarea id="army-motivation" placeholder="Pode responder em uma frase." maxLength={600} value={form.motivation} onChange={(event) => updateField("motivation", event.target.value)} aria-invalid={Boolean(errors.motivation)} aria-describedby={errors.motivation ? "army-motivation-error" : undefined} className="army-input min-h-28 resize-y" />
+          <Label htmlFor="army-motivation">O que você quer construir com essa oportunidade?</Label>
+          <Textarea id="army-motivation" placeholder="Conte por que a renda extra faria diferença e como pretende divulgar a AREUM." maxLength={600} value={form.motivation} onChange={(event) => updateField("motivation", event.target.value)} aria-invalid={Boolean(errors.motivation)} aria-describedby={errors.motivation ? "army-motivation-error" : undefined} className="army-input min-h-28 resize-y" />
           <FieldError id="army-motivation-error" message={errors.motivation} />
         </div>
 
