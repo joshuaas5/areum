@@ -1,214 +1,143 @@
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import {
   ArrowDown,
   ArrowRight,
   BadgeCheck,
+  Boxes,
   Camera,
   Check,
-  Gift,
   Heart,
   Instagram,
+  Megaphone,
+  PackageCheck,
   Send,
   Sparkles,
-  Star,
-  Tag,
-  Ticket,
   TrendingUp,
-  Trophy,
   Users,
-  X,
+  WalletCards,
 } from "lucide-react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import areumLogo from "@/assets/areum-logo.png";
+import serumImage from "@/assets/areum-serum.webp";
 import ArmyFormEmbed from "@/components/ArmyFormEmbed";
-import { Button } from "@/components/ui/button";
 import {
   Accordion,
+  AccordionContent,
   AccordionItem,
   AccordionTrigger,
-  AccordionContent,
 } from "@/components/ui/accordion";
+import { trackArmyCTA } from "@/lib/analytics";
 
-// Prints reais das embaixadoras (recortes dos vídeos UGC) — /public/army
-const imgGlowHero = "/army/glow-hero.jpg";
-const imgGlowTextura = "/army/textura-mao.jpg";
-const imgGlowFrasco = "/army/glow-frasco.jpg";
-const imgFlaviaHero = "/army/flavia-hero.jpg";
-const imgFlaviaAbriu = "/army/flavia-abriu.jpg";
-const imgFlaviaUsando = "/army/flavia-usando.jpg";
-const imgJaponesaUsando = "/army/japonesa-usando.jpg";
-const imgJaponesaResultado = "/army/japonesa-resultado.jpg";
-
-const fade = {
-  initial: { opacity: 0, y: 24 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
-  transition: { duration: 0.55 },
-};
-
-const trustStrip = [
-  "Sem estoque",
-  "Sem taxa de adesão",
-  "Sem investimento inicial",
-  "Cupom exclusivo",
-  "Você não precisa ser influencer",
-];
-
-const requirements = [
-  {
-    title: "Gostar da AREUM de verdade",
-    text: "Você não precisa ser influencer. Precisa gostar da marca e querer fazer parte do crescimento dela.",
-  },
-  {
-    title: "Estar presente nas redes",
-    text: "Instagram, TikTok ou WhatsApp. O canal importa menos do que a vontade de compartilhar.",
-  },
-  {
-    title: "Indicar de forma natural",
-    text: "Se você já mostra um skincare para uma amiga, já tem o perfil que procuramos.",
-  },
-];
-
-const rewards = [
-  {
-    icon: BadgeCheck,
-    value: "R$10",
-    label: "de comissão por unidade vendida com o seu cupom",
-  },
-  {
-    icon: Tag,
-    value: "5% OFF",
-    label: "para suas amigas, clientes e seguidores na primeira compra",
-  },
-  {
-    icon: Ticket,
-    value: "R$0",
-    label: "para entrar. Sem taxa, sem estoque, sem pedido mínimo",
-  },
-];
+const heroImage = "/army/areum-army-hero.webp";
 
 const steps = [
   {
     number: "01",
     title: "Faça sua inscrição",
-    text: "Conte um pouco sobre você e suas redes. Leva menos de 2 minutos.",
+    text: "Conte um pouco sobre você e como pretende divulgar a AREUM.",
   },
   {
     number: "02",
-    title: "Seja aprovada",
-    text: "Analisamos cada inscrição para montar uma comunidade alinhada com a marca.",
+    title: "Receba seu cupom",
+    text: "Se for aprovada, você recebe um cupom exclusivo para compartilhar.",
   },
   {
     number: "03",
-    title: "Receba seu cupom",
-    text: "Código exclusivo + material pronto: fotos, vídeos, ideias de Stories e legendas.",
-  },
-  {
-    number: "04",
     title: "Indique e ganhe",
-    text: "Venda elegível pelo seu cupom = comissão paga pela AREUM. A operação é toda nossa.",
+    text: "Cada unidade vendida em uma venda elegível pelo seu cupom gera comissão.",
   },
-];
-
-const materials = [
-  "Vídeos e fotos oficiais da marca",
-  "Ideias de Stories e Reels prontas",
-  "Sugestões de legendas e abordagens",
-  "Informações completas sobre os produtos",
-  "Campanhas e promoções exclusivas",
-  "Comunidade privada da AREUM ARMY",
 ];
 
 const growth = [
   {
-    icon: Trophy,
-    title: "Metas e desafios",
-    text: "Participe de campanhas internas e acompanhe sua evolução.",
-  },
-  {
     icon: TrendingUp,
     title: "Comissões progressivas",
-    text: "Quem vende mais desbloqueia condições de comissão superiores.",
+    text: "Novas condições podem ser liberadas conforme seu desempenho.",
+  },
+  {
+    icon: Sparkles,
+    title: "Campanhas e benefícios",
+    text: "Recompensas e oportunidades especiais nas ações da marca.",
   },
   {
     icon: Camera,
-    title: "Reconhecimento",
-    text: "Melhores conteúdos repostados no perfil oficial @areumco.",
+    title: "Visibilidade",
+    text: "Seus conteúdos podem aparecer no perfil oficial da AREUM.",
   },
   {
-    icon: Gift,
-    title: "Benefícios exclusivos",
-    text: "Acesso antecipado a novidades, produtos e oportunidades.",
+    icon: Users,
+    title: "Comunidade",
+    text: "Faça parte oficialmente da AREUM ARMY e cresça com a marca.",
   },
-];
-
-const noStock = [
-  "comprar caixas de produto",
-  "guardar estoque",
-  "cobrar cliente",
-  "embalar pedidos",
-  "fazer envios",
 ];
 
 const faqs = [
   {
-    q: "Preciso pagar para entrar?",
-    a: "Não. A inscrição e a participação inicial na AREUM ARMY são gratuitas.",
+    q: "Preciso pagar ou comprar estoque?",
+    a: "Não. A inscrição é gratuita e você não precisa comprar estoque, cumprir pedido mínimo ou pagar taxa de adesão.",
   },
   {
-    q: "Preciso comprar produtos para revender?",
-    a: "Não. Você não trabalha com estoque — a venda e o envio são feitos diretamente pela AREUM.",
+    q: "Preciso ser influencer?",
+    a: "Não. Você pode compartilhar a AREUM pelo Instagram, TikTok, WhatsApp e com sua rede de clientes ou amigos.",
   },
   {
-    q: "Preciso ter muitos seguidores?",
-    a: "Não. Avaliamos o perfil como um todo, não apenas o número de seguidores.",
+    q: "Quanto recebo de comissão?",
+    a: "A comissão inicial é de R$10 por unidade vendida em uma venda elegível realizada pelo seu cupom. As vendas precisam atender às regras do programa.",
   },
   {
-    q: "Preciso criar conteúdo?",
-    a: "A ARMY é uma comunidade ativa. Esperamos participação na divulgação — e fornecemos material pronto para ajudar.",
+    q: "Como funciona o desconto do meu cupom?",
+    a: "Quem compra usando seu cupom recebe 5% de desconto. O mesmo cupom identifica as vendas elegíveis atribuídas a você.",
   },
   {
-    q: "Posso divulgar pelo WhatsApp?",
-    a: "Sim. Você pode indicar para amigas, clientes e pessoas da sua rede, além de usar Instagram e TikTok.",
+    q: "Quem recebe o pagamento e envia o produto?",
+    a: "A própria AREUM. Você compartilha seu cupom e a marca cuida do pagamento, estoque, embalagem e envio.",
   },
   {
-    q: "Como sei quais vendas são minhas?",
-    a: "Cada embaixadora recebe um cupom individual, usado para identificar suas vendas elegíveis.",
+    q: "Minha inscrição é aprovada automaticamente?",
+    a: "Não. As inscrições passam por análise e o cupom é disponibilizado após a aprovação.",
   },
   {
-    q: "Quando recebo?",
+    q: "Quando recebo minha comissão?",
     a: "As regras e o calendário de pagamento são apresentados às integrantes aprovadas.",
   },
 ];
 
+const CTA = ({ placement, compact = false }: { placement: string; compact?: boolean }) => (
+  <a
+    href="#inscricao"
+    onClick={() => trackArmyCTA(placement)}
+    className={compact ? "army-primary-cta army-primary-cta--compact" : "army-primary-cta"}
+  >
+    QUERO COMEÇAR MINHA RENDA EXTRA
+    <ArrowRight className="h-5 w-5" />
+  </a>
+);
+
 const StickyArmyCTA = () => {
   const [visible, setVisible] = useState(false);
+  const [formVisible, setFormVisible] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 600);
+    const onScroll = () => setVisible(window.scrollY > 520);
+    const form = document.getElementById("inscricao");
+    const observer = form
+      ? new IntersectionObserver(([entry]) => setFormVisible(entry.isIntersecting), { threshold: 0.08 })
+      : null;
+    if (form && observer) observer.observe(form);
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      observer?.disconnect();
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
 
-  if (!visible) return null;
+  if (!visible || formVisible) return null;
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-primary/15 bg-background/95 px-4 py-3 shadow-[0_-4px_20px_rgba(0,0,0,0.08)] backdrop-blur md:hidden">
-      <div className="flex items-center justify-between gap-3">
-        <div className="flex flex-col">
-          <span className="font-heading text-lg font-bold leading-none text-primary">
-            ARMY AREUM
-          </span>
-          <span className="text-[0.7rem] text-muted-foreground">
-            R$0 para entrar • ganhe R$10/venda
-          </span>
-        </div>
-        <Button variant="hero" size="lg" className="flex-1 max-w-[55%] shimmer" asChild>
-          <a href="#inscricao">Quero fazer parte</a>
-        </Button>
-      </div>
+    <div className="fixed inset-x-0 bottom-0 z-50 border-t border-[#8f453d]/15 bg-[#fffaf7]/95 p-3 shadow-[0_-8px_30px_rgba(62,28,25,.12)] backdrop-blur md:hidden">
+      <a href="#inscricao" onClick={() => trackArmyCTA("sticky_mobile")} className="army-primary-cta army-primary-cta--compact w-full">
+        QUERO MINHA RENDA EXTRA <ArrowRight className="h-5 w-5" />
+      </a>
     </div>
   );
 };
@@ -216,447 +145,212 @@ const StickyArmyCTA = () => {
 const Army = () => {
   useEffect(() => {
     const previousTitle = document.title;
-    document.title = "AREUM ARMY | Programa de Embaixadoras | Areum";
-
+    document.title = "AREUM ARMY | Renda extra indicando skincare";
     const meta = document.querySelector('meta[name="description"]');
     const previousDescription = meta?.getAttribute("content");
     meta?.setAttribute(
       "content",
-      "Ganhe divulgando o skincare que você já ama. Sem estoque, sem taxa de adesão e sem investimento inicial. Inscrição gratuita e sujeita à aprovação.",
+      "Inscreva-se gratuitamente na AREUM ARMY. Ganhe comissão por vendas elegíveis com seu cupom, sem estoque e sem precisar ser influencer.",
     );
     window.scrollTo(0, 0);
-
     return () => {
       document.title = previousTitle;
-      if (meta && previousDescription !== undefined) meta.setAttribute("content", previousDescription);
+      if (meta && previousDescription !== null) meta.setAttribute("content", previousDescription);
     };
   }, []);
 
   return (
-    <main className="overflow-hidden">
-      <Navbar variant="solid" />
+    <main className="army-page overflow-hidden bg-[#fffaf7] text-[#302523]">
       <StickyArmyCTA />
 
-      {/* ─── HERO ─── */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-blush/70 via-blush/30 to-background">
-        <div className="pointer-events-none absolute -left-24 top-16 h-72 w-72 rounded-full bg-accent/40 blur-3xl" aria-hidden />
-        <div className="pointer-events-none absolute -right-16 bottom-0 h-80 w-80 rounded-full bg-champagne/60 blur-3xl" aria-hidden />
-        <div className="container relative mx-auto grid items-center gap-10 px-4 pb-16 pt-12 md:grid-cols-[1.05fr_0.95fr] md:px-8 md:pb-24 md:pt-16">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/25 bg-background/70 px-4 py-1.5 text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-primary backdrop-blur md:text-xs">
-              <Heart className="h-3.5 w-3.5 fill-current" />
-              Programa de Embaixadoras AREUM
+      <header className="absolute inset-x-0 top-0 z-40">
+        <div className="mx-auto flex max-w-[1240px] items-center justify-between px-5 py-5 md:px-8 md:py-7">
+          <a href="/" aria-label="AREUM — página inicial" className="rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8f453d]">
+            <img src={areumLogo} alt="AREUM" className="h-10 w-auto md:h-12" />
+          </a>
+          <nav aria-label="Navegação da AREUM ARMY" className="flex items-center gap-6">
+            <a href="#como-funciona" className="hidden text-sm font-medium text-[#5f4b46] hover:text-[#8f453d] md:inline">Como funciona</a>
+            <CTA placement="header" compact />
+          </nav>
+        </div>
+      </header>
+
+      <section className="army-hero relative min-h-[760px] pt-28 md:min-h-[820px] md:pt-32">
+        <div className="army-hero-orb army-hero-orb--one" aria-hidden="true" />
+        <div className="army-hero-orb army-hero-orb--two" aria-hidden="true" />
+        <div className="relative mx-auto grid max-w-[1240px] items-center gap-10 px-5 pb-16 md:grid-cols-[1.04fr_.96fr] md:px-8 md:pb-20">
+          <div className="relative z-10 pt-4 md:pt-10">
+            <p className="inline-flex items-center gap-2 rounded-full border border-[#b77468]/30 bg-white/70 px-4 py-2 text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-[#8f453d] backdrop-blur">
+              <Heart className="h-3.5 w-3.5 fill-current" /> AREUM ARMY · Programa de embaixadoras
             </p>
-            <h1 className="text-balance font-heading text-[2.1rem] font-semibold leading-[1.06] text-foreground md:text-6xl lg:text-7xl">
-              Ganhe divulgando o{" "}
-              <span className="italic text-primary">skincare</span> que você já ama.
+            <h1 className="mt-6 font-heading text-[3.45rem] font-semibold uppercase leading-[0.87] tracking-[-0.045em] text-[#302523] sm:text-7xl md:text-[5.75rem] lg:text-[7rem]">
+              Renda<br />
+              <span className="army-outline-word">extra</span>
             </h1>
-
-            <p className="mt-5 max-w-xl text-sm leading-7 text-muted-foreground md:mt-6 md:text-base md:leading-8">
-              Transforme suas indicações em uma nova fonte de renda. Crie conteúdo, compartilhe
-              com quem confia em você e{" "}
-              <strong className="font-semibold text-foreground">seja remunerada</strong> pelas
-              vendas geradas através do seu cupom.
+            <p className="mt-6 max-w-xl font-heading text-3xl font-medium leading-[1.03] text-[#503a36] md:text-[2.65rem]">
+              com as suas indicações de skincare.
             </p>
-
-            <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-              <Button variant="hero" size="xl" className="w-full whitespace-normal text-center uppercase tracking-[0.1em] sm:w-auto" asChild>
-                <a href="#inscricao">
-                  Quero fazer parte da ARMY
-                  <ArrowRight className="h-5 w-5" />
-                </a>
-              </Button>
-              <a
-                href="#como-funciona"
-                className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground/60 transition-colors hover:text-primary"
-              >
-                Ver como funciona
-                <ArrowDown className="h-4 w-4" />
-              </a>
-            </div>
-
-            <p className="mt-4 text-xs leading-5 text-muted-foreground">
-              Inscrição gratuita e sujeita à aprovação. Ganhos dependem das vendas realizadas e
-              não são garantidos.
+            <p className="mt-6 max-w-xl text-base leading-7 text-[#6b5752] md:text-lg md:leading-8">
+              Represente a AREUM e ganhe <strong className="font-semibold text-[#302523]">R$10 de comissão inicial por unidade vendida</strong> em vendas elegíveis pelo seu cupom.
             </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.65, delay: 0.1 }}
-            className="relative mx-auto w-full max-w-sm md:max-w-md"
-          >
-            <div className="absolute -inset-6 rounded-full bg-accent/30 blur-3xl" aria-hidden />
-            <div className="relative overflow-hidden rounded-[2rem] border-4 border-background shadow-product">
-              <img
-                src={imgGlowHero}
-                alt="Embaixadora AREUM com pele iluminada segurando o sérum"
-                className="aspect-[9/13] w-full object-cover"
-                loading="eager"
-              />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-foreground/70 via-foreground/25 to-transparent p-5 pt-14">
-                <p className="font-heading text-lg italic leading-snug text-white md:text-xl">
-                  “Já uso. Já indiquei. Agora posso ser remunerada por isso.”
-                </p>
-              </div>
-            </div>
-
-            <div className="absolute -left-6 top-8 hidden w-28 overflow-hidden rounded-2xl border-4 border-background shadow-card-soft lg:block xl:w-32">
-              <img src={imgGlowTextura} alt="Textura do sérum AREUM na mão" className="aspect-[4/5] w-full object-cover" loading="lazy" />
-            </div>
-            <div className="absolute -right-5 bottom-24 hidden w-24 overflow-hidden rounded-2xl border-4 border-background shadow-card-soft lg:block xl:w-28">
-              <img src={imgGlowFrasco} alt="Frasco do sérum AREUM" className="aspect-[4/5] w-full object-cover" loading="lazy" />
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Trust strip */}
-        <div className="relative border-y border-primary/10 bg-background/70 backdrop-blur">
-          <div className="container mx-auto flex flex-wrap items-center justify-center gap-x-8 gap-y-2 px-4 py-3.5 text-[0.68rem] font-medium uppercase tracking-[0.14em] text-foreground/60 md:text-xs">
-            {trustStrip.map((item) => (
-              <span key={item} className="inline-flex items-center gap-2">
-                <Check className="h-3.5 w-3.5 text-primary" />
-                {item}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ─── VOCÊ JÁ INDICA ─── */}
-      <section className="bg-background py-16 md:py-24">
-        <div className="container mx-auto px-4 md:px-8">
-          <motion.div {...fade} className="mx-auto max-w-3xl text-center">
-            <h2 className="text-balance font-heading text-3xl font-semibold leading-tight text-foreground md:text-5xl">
-              Já indica produtos?
-              <br />
-              <span className="text-primary">Agora você pode ser remunerada por isso.</span>
-            </h2>
-            <p className="mt-5 text-sm leading-7 text-muted-foreground md:text-base md:leading-8">
-              Sabe aquele skincare que você mostra para uma amiga? A dica que manda no WhatsApp?
-              Na AREUM ARMY, suas indicações viram comissão — e a AREUM cuida de pagamento,
-              estoque, embalagem e envio.
-            </p>
-          </motion.div>
-
-          <div className="mx-auto mt-10 grid max-w-4xl grid-cols-2 gap-3 md:mt-14 md:grid-cols-4 md:gap-4">
-            {[
-              { src: imgFlaviaAbriu, alt: "Embaixadora abrindo o sérum AREUM" },
-              { src: imgJaponesaUsando, alt: "Cliente aplicando o sérum AREUM no rosto" },
-              { src: imgFlaviaUsando, alt: "Embaixadora aplicando o sérum na mão" },
-              { src: imgJaponesaResultado, alt: "Resultado na pele após uso do sérum AREUM" },
-            ].map((item, index) => (
-              <motion.div
-                key={item.src}
-                initial={{ opacity: 0, y: 18 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.08 }}
-                className="overflow-hidden rounded-2xl border-2 border-background shadow-card-soft"
-              >
-                <img src={item.src} alt={item.alt} className="aspect-[9/16] w-full object-cover" loading="lazy" />
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ─── PARA QUEM É ─── */}
-      <section className="bg-secondary/50 py-16 md:py-24">
-        <div className="container mx-auto grid max-w-5xl items-center gap-10 px-4 md:grid-cols-[0.85fr_1.15fr] md:px-8">
-          <motion.div {...fade} className="relative mx-auto w-full max-w-xs md:max-w-sm">
-            <div className="overflow-hidden rounded-[2rem] border-4 border-background shadow-product">
-              <img
-                src={imgFlaviaHero}
-                alt="Embaixadora AREUM apresentando o sérum para a câmera"
-                className="aspect-[9/16] w-full object-cover"
-                loading="lazy"
-              />
-            </div>
-            <p className="absolute -bottom-5 -right-2 rotate-[-3deg] rounded-full bg-background px-4 py-2 text-xs font-medium text-primary shadow-card-soft md:text-sm">
-              não precisa ser influencer ♡
-            </p>
-          </motion.div>
-
-          <motion.div {...fade}>
-            <p className="mb-3 text-[0.65rem] font-semibold uppercase tracking-[0.24em] text-primary/85 md:text-xs">
-              Para quem é a ARMY
-            </p>
-            <h2 className="text-balance font-heading text-3xl font-semibold leading-tight text-foreground md:text-4xl">
-              Você já tem o perfil. Falta só o cupom.
-            </h2>
-            <div className="mt-7 space-y-5">
-              {requirements.map((item, index) => (
-                <div key={item.title} className="flex gap-4">
-                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 font-heading text-base font-bold text-primary">
-                    {index + 1}
-                  </span>
-                  <div>
-                    <h3 className="font-heading text-lg font-semibold text-foreground md:text-xl">
-                      {item.title}
-                    </h3>
-                    <p className="mt-1 text-sm leading-6 text-muted-foreground md:text-base md:leading-7">
-                      {item.text}
-                    </p>
-                  </div>
-                </div>
+            <div className="mt-7 flex flex-wrap gap-x-5 gap-y-2 text-sm font-medium text-[#59423e]">
+              {["Sem estoque", "Sem taxa", "Não precisa ser influencer"].map((item) => (
+                <span key={item} className="inline-flex items-center gap-2"><Check className="h-4 w-4 text-[#a75b50]" />{item}</span>
               ))}
             </div>
-          </motion.div>
+            <div className="mt-8"><CTA placement="hero" /></div>
+            <p className="mt-4 max-w-lg text-xs leading-5 text-[#806c67]">
+              Inscrição gratuita e sujeita à aprovação. Ganhos dependem das vendas realizadas e não são garantidos.
+            </p>
+          </div>
+
+          <div className="relative mx-auto w-full max-w-[520px] md:mt-8">
+            <div className="army-hero-photo-frame">
+              <img src={heroImage} alt="Mulher em uma rotina de beleza, com pele natural e iluminada" className="h-full w-full object-cover" fetchPriority="high" />
+            </div>
+            <div className="absolute -bottom-5 -left-3 flex items-center gap-3 rounded-2xl border border-white/70 bg-white/90 px-4 py-3 shadow-[0_16px_40px_rgba(67,32,28,.16)] backdrop-blur md:-left-10 md:bottom-9">
+              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[#f2d9da] text-[#8f453d]"><WalletCards className="h-5 w-5" /></div>
+              <div><strong className="block text-lg leading-none">R$10</strong><span className="text-xs text-[#6b5752]">por unidade elegível</span></div>
+            </div>
+            <img src={serumImage} alt="Sérum facial AREUM" className="absolute -right-5 bottom-0 h-48 w-auto drop-shadow-[0_18px_22px_rgba(75,41,45,.25)] md:-right-12 md:h-64" />
+          </div>
+        </div>
+        <a href="#oferta" aria-label="Ver detalhes da oportunidade" className="absolute bottom-5 left-1/2 hidden -translate-x-1/2 items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#7a5d57] md:flex">
+          Entenda a oportunidade <ArrowDown className="h-4 w-4" />
+        </a>
+      </section>
+
+      <section id="oferta" className="border-y border-[#d9bdb7] bg-[#8f453d] text-white">
+        <div className="mx-auto grid max-w-[1240px] divide-y divide-white/20 px-5 sm:grid-cols-3 sm:divide-x sm:divide-y-0 md:px-8">
+          {[
+            ["R$10", "de comissão inicial por unidade elegível"],
+            ["5% OFF", "para quem compra usando seu cupom"],
+            ["R$0", "para entrar na AREUM ARMY"],
+          ].map(([value, label]) => (
+            <div key={value} className="flex items-center gap-4 py-6 sm:block sm:px-7 sm:text-center md:py-8">
+              <strong className="min-w-24 font-heading text-4xl font-semibold sm:block sm:text-5xl">{value}</strong>
+              <span className="mt-1 text-sm leading-5 text-white/78 sm:block">{label}</span>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* ─── O QUE VOCÊ GANHA ─── */}
-      <section id="beneficios" className="scroll-mt-24 bg-background py-16 md:py-24">
-        <div className="container mx-auto px-4 md:px-8">
-          <motion.div {...fade} className="mx-auto max-w-3xl text-center">
-            <p className="mb-3 text-[0.65rem] font-semibold uppercase tracking-[0.24em] text-primary/85 md:text-xs">
-              O que você ganha
-            </p>
-            <h2 className="text-balance font-heading text-3xl font-semibold leading-tight text-foreground md:text-5xl">
-              Começar custa <span className="text-primary">R$0.</span>
-            </h2>
-          </motion.div>
-
-          <div className="mx-auto mt-10 grid max-w-4xl gap-4 sm:grid-cols-3 md:mt-14">
-            {rewards.map((reward, index) => (
-              <motion.div
-                key={reward.value}
-                initial={{ opacity: 0, y: 18 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.08 }}
-                className="rounded-3xl border border-primary/15 bg-gradient-to-b from-blush/30 to-background p-7 text-center shadow-card-soft"
-              >
-                <reward.icon className="mx-auto mb-3 h-6 w-6 text-primary" />
-                <p className="font-heading text-4xl font-bold text-primary md:text-5xl">{reward.value}</p>
-                <p className="mt-2 text-xs leading-5 text-muted-foreground md:text-sm">{reward.label}</p>
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="mt-10 text-center">
-            <Button variant="hero" size="xl" className="uppercase tracking-[0.1em]" asChild>
-              <a href="#inscricao">
-                Quero me inscrever
-                <ArrowRight className="h-5 w-5" />
-              </a>
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── COMO FUNCIONA ─── */}
-      <section id="como-funciona" className="scroll-mt-24 bg-secondary/50 py-16 md:py-24">
-        <div className="container mx-auto px-4 md:px-8">
-          <motion.div {...fade} className="mx-auto mb-10 max-w-3xl text-center md:mb-14">
-            <p className="mb-3 text-[0.65rem] font-semibold uppercase tracking-[0.24em] text-primary/85 md:text-xs">
-              Como funciona
-            </p>
-            <h2 className="text-balance font-heading text-3xl font-semibold leading-tight text-foreground md:text-5xl">
-              Você indica. A AREUM cuida do resto.
-            </h2>
-          </motion.div>
-
-          <div className="mx-auto grid max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {steps.map((step, index) => (
-              <motion.div
-                key={step.number}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.08 }}
-                className="rounded-3xl border border-primary/10 bg-background p-6 shadow-card-soft"
-              >
-                <p className="font-heading text-4xl font-bold text-primary/25">{step.number}</p>
-                <h3 className="mt-3 font-heading text-xl font-semibold text-foreground">{step.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-muted-foreground">{step.text}</p>
-              </motion.div>
-            ))}
-          </div>
-
-          <motion.div {...fade} className="mx-auto mt-10 max-w-3xl rounded-3xl border border-primary/15 bg-background p-6 md:p-8">
-            <div className="flex flex-col items-center gap-4 md:flex-row">
-              <div className="flex -space-x-3">
-                <img src={imgGlowFrasco} alt="" className="h-14 w-14 rounded-full border-2 border-background object-cover" loading="lazy" />
-                <img src={imgJaponesaUsando} alt="" className="h-14 w-14 rounded-full border-2 border-background object-cover" loading="lazy" />
-                <img src={imgFlaviaUsando} alt="" className="h-14 w-14 rounded-full border-2 border-background object-cover" loading="lazy" />
-              </div>
-              <p className="flex-1 text-center text-sm leading-6 text-muted-foreground md:text-left md:text-base">
-                <strong className="font-semibold text-foreground">Sem estoque, sem burocracia.</strong>{" "}
-                A compra é feita direto com a AREUM pelo link do seu cupom. Você concentra sua
-                energia em divulgar e indicar.
+      <section id="como-funciona" className="scroll-mt-24 bg-[#fffaf7] py-20 md:py-28">
+        <div className="mx-auto max-w-[1160px] px-5 md:px-8">
+          <div className="grid gap-10 md:grid-cols-[.8fr_1.2fr] md:gap-16">
+            <div>
+              <p className="army-kicker">É simples</p>
+              <h2 className="army-section-title">Você indica.<br /><em>A AREUM faz o resto.</em></h2>
+              <p className="mt-5 max-w-md text-base leading-7 text-[#6b5752]">
+                A compra acontece diretamente com a AREUM. Você compartilha; a gente cuida da operação.
               </p>
-              <Send className="hidden h-6 w-6 shrink-0 rotate-45 text-primary md:block" aria-hidden />
+              <div className="relative mt-10 hidden h-72 overflow-hidden rounded-[2rem] bg-[#f3dedf] md:block">
+                <img src={serumImage} alt="Sérum AREUM" className="absolute bottom-[-30px] left-1/2 h-[330px] -translate-x-1/2 drop-shadow-[0_24px_30px_rgba(67,32,28,.2)]" loading="lazy" />
+                <span className="absolute left-5 top-5 rounded-full bg-white/80 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#8f453d]">Skincare inspirado na beleza coreana</span>
+              </div>
             </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ─── MATERIAL + CRESCIMENTO ─── */}
-      <section className="bg-background py-16 md:py-24">
-        <div className="container mx-auto grid max-w-5xl gap-12 px-4 md:grid-cols-2 md:px-8">
-          <motion.div {...fade}>
-            <p className="mb-3 flex items-center gap-2 text-[0.65rem] font-semibold uppercase tracking-[0.24em] text-primary/85 md:text-xs">
-              <Users className="h-3.5 w-3.5" />
-              A gente te ajuda a começar
-            </p>
-            <h2 className="text-balance font-heading text-3xl font-semibold leading-tight text-foreground md:text-4xl">
-              Você não recebe apenas um cupom.
-            </h2>
-            <p className="mt-4 text-sm leading-7 text-muted-foreground md:text-base">
-              Toda integrante tem acesso a materiais prontos para divulgar — mesmo quem nunca
-              criou conteúdo.
-            </p>
-            <ul className="mt-6 space-y-2.5">
-              {materials.map((material) => (
-                <li key={material} className="flex items-start gap-2.5 text-sm leading-6 text-foreground/85 md:text-base">
-                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                  <span>{material}</span>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
-          <motion.div {...fade}>
-            <p className="mb-3 flex items-center gap-2 text-[0.65rem] font-semibold uppercase tracking-[0.24em] text-primary/85 md:text-xs">
-              <Sparkles className="h-3.5 w-3.5" />
-              Crescimento
-            </p>
-            <h2 className="text-balance font-heading text-3xl font-semibold leading-tight text-foreground md:text-4xl">
-              Cresça dentro da ARMY.
-            </h2>
-            <p className="mt-4 text-sm leading-7 text-muted-foreground md:text-base">
-              Sua participação não para na primeira venda. Quem cresce com a AREUM desbloqueia
-              novas oportunidades.
-            </p>
-            <div className="mt-6 space-y-4">
-              {growth.map((item) => (
-                <div key={item.title} className="flex gap-4 rounded-2xl border border-primary/10 bg-secondary/40 p-5">
-                  <item.icon className="h-5 w-5 shrink-0 text-primary" />
-                  <div>
-                    <h3 className="font-heading text-lg font-semibold text-foreground">{item.title}</h3>
-                    <p className="mt-1 text-sm leading-6 text-muted-foreground">{item.text}</p>
-                  </div>
+            <div className="space-y-0 border-t border-[#decac4]">
+              {steps.map((step) => (
+                <div key={step.number} className="grid grid-cols-[64px_1fr] gap-4 border-b border-[#decac4] py-7 md:grid-cols-[86px_1fr] md:py-9">
+                  <span className="font-heading text-3xl italic text-[#b87568] md:text-4xl">{step.number}</span>
+                  <div><h3 className="font-heading text-2xl font-semibold text-[#302523] md:text-3xl">{step.title}</h3><p className="mt-2 text-sm leading-6 text-[#6b5752] md:text-base md:leading-7">{step.text}</p></div>
                 </div>
               ))}
+              <div className="grid grid-cols-2 gap-3 pt-7 sm:grid-cols-4">
+                {[
+                  [PackageCheck, "Pagamento"], [Boxes, "Estoque"], [BadgeCheck, "Embalagem"], [Send, "Envio"],
+                ].map(([Icon, label]) => {
+                  const ItemIcon = Icon as typeof PackageCheck;
+                  return <div key={label as string} className="rounded-2xl bg-[#f7e9e8] p-4 text-center"><ItemIcon className="mx-auto h-5 w-5 text-[#8f453d]" /><span className="mt-2 block text-xs font-semibold text-[#5f4742]">{label as string}</span></div>;
+                })}
+              </div>
             </div>
-            <p className="mt-4 text-xs leading-5 text-muted-foreground">
-              Metas, benefícios e valores podem variar conforme cada campanha.
-            </p>
-          </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* ─── COMUNIDADE + BIO ─── */}
-      <section className="bg-secondary/50 py-16 md:py-24">
-        <div className="container mx-auto px-4 md:px-8">
-          <motion.div
-            {...fade}
-            className="mx-auto max-w-3xl rounded-[2rem] border border-primary/15 bg-gradient-to-br from-blush/40 to-champagne/40 p-7 text-center md:p-12"
-          >
-            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-background shadow-card-soft">
-              <Instagram className="h-6 w-6 text-primary" />
+      <section className="relative overflow-hidden bg-[#f2dfdf] py-20 md:py-28">
+        <div className="absolute right-[-8rem] top-[-8rem] h-80 w-80 rounded-full border border-[#b87568]/30" aria-hidden="true" />
+        <div className="relative mx-auto grid max-w-[1160px] gap-12 px-5 md:grid-cols-2 md:px-8">
+          <div>
+            <p className="army-kicker">Pode ser para você</p>
+            <h2 className="army-section-title">Não precisa ter milhares de seguidores.</h2>
+            <p className="mt-5 text-base leading-7 text-[#644d48] md:text-lg md:leading-8">
+              Instagram, TikTok, WhatsApp, clientes ou amigos: existem diferentes formas de compartilhar a AREUM com a sua rede.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-2">
+              {["Instagram", "TikTok", "WhatsApp", "Clientes", "Amigos"].map((item) => <span key={item} className="rounded-full border border-[#b87568]/35 bg-white/55 px-4 py-2 text-sm font-medium text-[#60433d]">{item}</span>)}
             </div>
-            <h2 className="text-balance font-heading text-3xl font-semibold leading-tight text-foreground md:text-4xl">
-              Não é só sobre vender. É sobre fazer parte.
-            </h2>
-            <p className="mt-4 text-sm leading-7 text-muted-foreground md:text-base">
-              Valorizamos quem cria conteúdo, marca <strong className="text-foreground">@areumco</strong>,
-              participa das campanhas e compartilha a marca de forma verdadeira. Os melhores
-              conteúdos aparecem nos nossos Stories, Destaques e perfil oficial.
-            </p>
-            <p className="mt-6 text-sm text-muted-foreground">
-              Enquanto estiver ativa na ARMY, sua bio identifica a marca:
-            </p>
-            <p className="mx-auto mt-3 inline-block rounded-full border border-primary/20 bg-background px-6 py-3 text-sm font-medium text-foreground md:text-base">
-              Embaixadora AREUM 💗 @areumco
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ─── NÃO PRECISA ─── */}
-      <section className="bg-background py-16 md:py-20">
-        <div className="container mx-auto px-4 md:px-8">
-          <motion.div {...fade} className="mx-auto max-w-3xl rounded-3xl border border-primary/15 bg-secondary/30 p-7 md:p-10">
-            <h2 className="text-balance font-heading text-2xl font-semibold leading-tight text-foreground md:text-3xl">
-              Você não precisa de nada disso:
-            </h2>
-            <ul className="mt-5 grid gap-2.5 sm:grid-cols-2">
-              {noStock.map((item) => (
-                <li key={item} className="flex items-center gap-2.5 text-sm text-foreground/70">
-                  <X className="h-4 w-4 shrink-0 text-primary/60" />
-                  <span className="line-through decoration-primary/40">{item}</span>
-                </li>
-              ))}
+          </div>
+          <div className="rounded-[2rem] bg-[#4b292d] p-7 text-white shadow-[0_24px_70px_rgba(75,41,45,.18)] md:p-10">
+            <Megaphone className="h-8 w-8 text-[#efb4a7]" />
+            <h3 className="mt-7 font-heading text-3xl font-semibold leading-tight md:text-4xl">Você não precisa começar sabendo tudo.</h3>
+            <p className="mt-4 text-base leading-7 text-white/75">A AREUM oferece materiais para ajudar você a divulgar com mais confiança.</p>
+            <ul className="mt-7 space-y-3 text-sm leading-6 text-white/90">
+              {["Fotos e vídeos oficiais", "Ideias de conteúdo", "Informações dos produtos", "Campanhas e materiais de divulgação"].map((item) => <li key={item} className="flex items-center gap-3"><Check className="h-4 w-4 shrink-0 text-[#efb4a7]" />{item}</li>)}
             </ul>
-          </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* ─── FAQ ─── */}
-      <section id="faq" className="scroll-mt-24 bg-secondary/50 py-16 md:py-24">
-        <div className="container mx-auto px-4 md:px-8">
-          <motion.div {...fade} className="mx-auto mb-9 max-w-3xl text-center md:mb-12">
-            <h2 className="font-heading text-3xl font-semibold leading-tight text-foreground md:text-4xl">
-              Perguntas rápidas
-            </h2>
-          </motion.div>
-
-          <motion.div {...fade} className="mx-auto max-w-3xl">
-            <Accordion type="single" collapsible className="w-full space-y-2">
-              {faqs.map((faq, index) => (
-                <AccordionItem
-                  key={faq.q}
-                  value={`item-${index}`}
-                  className="rounded-xl border border-primary/10 bg-background px-5"
-                >
-                  <AccordionTrigger className="text-left text-sm font-medium text-foreground hover:no-underline md:text-base">
-                    {faq.q}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-sm leading-7 text-muted-foreground">{faq.a}</AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </motion.div>
+      <section className="bg-[#fffaf7] py-20 md:py-28">
+        <div className="mx-auto max-w-[1160px] px-5 md:px-8">
+          <div className="max-w-3xl">
+            <p className="army-kicker">Cresça com a AREUM</p>
+            <h2 className="army-section-title">Suas vendas podem abrir novas oportunidades.</h2>
+          </div>
+          <div className="mt-12 grid gap-px overflow-hidden rounded-[2rem] border border-[#decac4] bg-[#decac4] sm:grid-cols-2">
+            {growth.map((item) => (
+              <article key={item.title} className="bg-[#fffaf7] p-7 md:p-9">
+                <item.icon className="h-7 w-7 text-[#a75b50]" />
+                <h3 className="mt-5 font-heading text-2xl font-semibold text-[#302523] md:text-3xl">{item.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-[#6b5752] md:text-base md:leading-7">{item.text}</p>
+              </article>
+            ))}
+          </div>
+          <p className="mt-5 text-xs leading-5 text-[#806c67]">Benefícios e comissões podem variar conforme campanhas e desempenho.</p>
+          <div className="mt-9"><CTA placement="growth" /></div>
         </div>
       </section>
 
-      {/* ─── INSCRIÇÃO ─── */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-background via-blush/40 to-champagne/40 py-16 md:py-24">
-        <div className="container mx-auto px-4 md:px-8">
-          <motion.div {...fade} className="mx-auto mb-10 max-w-3xl text-center md:mb-12">
-            <div className="mb-4 flex items-center justify-center gap-1 text-primary">
-              {[0, 1, 2, 3, 4].map((i) => (
-                <Star key={i} className="h-4 w-4 fill-current" />
-              ))}
-            </div>
-            <h2 className="text-balance font-heading text-3xl font-semibold leading-tight text-foreground md:text-5xl">
-              Talvez a próxima história da AREUM seja a sua.
-            </h2>
-            <p className="mt-5 text-sm leading-7 text-muted-foreground md:text-base">
-              Não precisa ter milhares de seguidores. Não precisa comprar estoque. Precisa apenas
-              querer fazer parte.
-            </p>
-            <p className="mt-6 font-heading text-2xl font-semibold text-primary md:text-3xl">
-              Represente. Crie. Compartilhe. Ganhe.
-            </p>
-          </motion.div>
+      <section className="border-y border-[#decac4] bg-white py-20 md:py-28">
+        <div className="mx-auto grid max-w-[1050px] gap-10 px-5 md:grid-cols-[.65fr_1.35fr] md:px-8">
+          <div><p className="army-kicker">Dúvidas rápidas</p><h2 className="army-section-title">Tudo o que você precisa saber.</h2></div>
+          <Accordion type="single" collapsible className="border-t border-[#decac4]">
+            {faqs.map((faq, index) => (
+              <AccordionItem key={faq.q} value={`faq-${index}`} className="border-[#decac4]">
+                <AccordionTrigger className="py-5 text-left text-base font-semibold text-[#3c2d2a] hover:text-[#8f453d] hover:no-underline md:text-lg">{faq.q}</AccordionTrigger>
+                <AccordionContent className="pb-5 pr-6 text-sm leading-7 text-[#6b5752] md:text-base">{faq.a}</AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </section>
 
+      <section className="relative overflow-hidden bg-[#4b292d] py-20 md:py-28">
+        <div className="absolute -left-24 bottom-[-8rem] h-80 w-80 rounded-full bg-[#8f453d]/45 blur-3xl" aria-hidden="true" />
+        <div className="relative mx-auto grid max-w-[1160px] items-start gap-12 px-5 md:grid-cols-[.78fr_1.22fr] md:px-8">
+          <div className="pt-3 text-white md:sticky md:top-28">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#efb4a7]">Sua próxima indicação pode valer comissão</p>
+            <h2 className="mt-4 font-heading text-5xl font-semibold uppercase leading-[.92] tracking-[-0.03em] md:text-7xl">Comece sua<br /><em className="font-normal text-[#efb4a7]">renda extra.</em></h2>
+            <p className="mt-6 max-w-md text-base leading-7 text-white/72 md:text-lg">Faça sua inscrição e dê o primeiro passo para ganhar comissão pelas suas indicações.</p>
+            <p className="mt-8 font-heading text-2xl italic text-white">Represente. Compartilhe. Ganhe.</p>
+          </div>
           <ArmyFormEmbed />
-
-          <p className="mx-auto mt-8 max-w-2xl text-center text-xs leading-5 text-muted-foreground">
-            Sem taxa de adesão • Sem estoque • Sem investimento inicial
-            <br />
-            Inscrições sujeitas à aprovação. Comissões são pagas sobre vendas elegíveis conforme
-            as regras do programa. Não existe garantia de renda.
-          </p>
         </div>
       </section>
 
-      <Footer />
+      <footer className="bg-[#302023] px-5 py-12 text-white md:px-8">
+        <div className="mx-auto flex max-w-[1160px] flex-col items-center justify-between gap-7 text-center md:flex-row md:text-left">
+          <div><img src={areumLogo} alt="AREUM" className="mx-auto h-12 brightness-0 invert opacity-90 md:mx-0" /><p className="mt-3 text-sm text-white/55">Beleza inspirada na K-beauty, feita para a rotina real.</p></div>
+          <div className="flex flex-wrap items-center justify-center gap-5 text-sm text-white/65">
+            <a href="https://instagram.com/AreumCo" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-white"><Instagram className="h-4 w-4" />@areumco</a>
+            <a href="mailto:contato@areumco.com.br" className="hover:text-white">contato@areumco.com.br</a>
+            <a href="/politica-de-privacidade" className="hover:text-white">Privacidade</a>
+          </div>
+        </div>
+        <p className="mx-auto mt-8 max-w-[1160px] border-t border-white/10 pt-6 text-center text-xs text-white/40 md:text-left">© 2026 Areum Cosmetics. CNPJ 50.548.562/0001-42.</p>
+      </footer>
     </main>
   );
 };

@@ -31,3 +31,6 @@ dist-ssr
 
 # TypeScript incremental build info
 *.tsbuildinfo
+
+# Supabase CLI local metadata
+supabase/.temp/
