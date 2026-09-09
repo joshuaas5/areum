@@ -107,7 +107,8 @@ const CTA = ({ placement, compact = false }: { placement: string; compact?: bool
     onClick={() => trackArmyCTA(placement)}
     className={compact ? "army-primary-cta army-primary-cta--compact" : "army-primary-cta"}
   >
-    QUERO COMEÇAR MINHA RENDA EXTRA
+    <span className="md:hidden">QUERO GANHAR RENDA EXTRA</span>
+    <span className="hidden md:inline">QUERO COMEÇAR MINHA RENDA EXTRA</span>
     <ArrowRight className="h-5 w-5" />
   </a>
 );
@@ -166,7 +167,7 @@ const Army = () => {
       <header className="absolute inset-x-0 top-0 z-40">
         <div className="mx-auto flex max-w-[1240px] items-center justify-between px-4 py-4 md:px-8 md:py-7">
           <a href="/" aria-label="AREUM - página inicial" className="rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8f453d]">
-            <img src={areumLogo} alt="AREUM" className="h-auto w-[138px] md:h-12 md:w-auto" />
+            <img src={areumLogo} alt="AREUM" className="h-auto w-[150px] md:h-12 md:w-auto" />
           </a>
           <nav aria-label="Navegação da AREUM ARMY" className="flex items-center gap-6">
             <a href="#como-funciona" className="hidden text-sm font-medium text-[#5f4b46] hover:text-[#8f453d] md:inline">Como funciona</a>
