@@ -1,75 +1,282 @@
-import { useEffect } from "react";
-import { motion } from "framer-motion";
-import { ExternalLink, Heart } from "lucide-react";
-import { ARMY_FORM_URL } from "@/lib/army-config";
-import { trackArmyFormView } from "@/lib/analytics";
+import { FormEvent, useEffect, useMemo, useState } from "react";
+import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { supabase } from "@/lib/supabase";
+import {
+  trackArmyApplicationResult,
+  trackArmyFormStart,
+  trackArmyFormView,
+} from "@/lib/analytics";
+
+const channels = ["Instagram", "TikTok", "WhatsApp", "Clientes", "Amigos", "Outros"];
+
+type FormState = {
+  name: string;
+  whatsapp: string;
+  city: string;
+  state: string;
+  instagram: string;
+  tiktok: string;
+  motivation: string;
+  otherChannel: string;
+  website: string;
+  privacy: boolean;
+};
+
+const initialForm: FormState = {
+  name: "",
+  whatsapp: "",
+  city: "",
+  state: "",
+  instagram: "",
+  tiktok: "",
+  motivation: "",
+  otherChannel: "",
+  website: "",
+  privacy: false,
+};
+
+const FieldError = ({ id, message }: { id: string; message?: string }) =>
+  message ? (
+    <p id={id} role="alert" className="mt-1.5 text-sm font-medium text-[#9b3029]">
+      {message}
+    </p>
+  ) : null;
 
 const ArmyFormEmbed = ({ id = "inscricao" }: { id?: string }) => {
+  const [form, setForm] = useState(initialForm);
+  const [selectedChannels, setSelectedChannels] = useState<string[]>([]);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [started, setStarted] = useState(false);
+
   useEffect(() => {
     trackArmyFormView();
   }, []);
 
-  if (!ARMY_FORM_URL) {
+  const utm = useMemo(() => {
+    if (typeof window === "undefined") return {};
+    const params = new URLSearchParams(window.location.search);
+    return ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"].reduce(
+      (acc, key) => {
+        const value = params.get(key);
+        if (value) acc[key] = value.slice(0, 200);
+        return acc;
+      },
+      {} as Record<string, string>,
+    );
+  }, []);
+
+  const markStarted = () => {
+    if (!started) {
+      setStarted(true);
+      trackArmyFormStart();
+    }
+  };
+
+  const updateField = <K extends keyof FormState>(field: K, value: FormState[K]) => {
+    markStarted();
+    setForm((current) => ({ ...current, [field]: value }));
+    setErrors((current) => ({ ...current, [field]: "" }));
+    if (status === "error") setStatus("idle");
+  };
+
+  const toggleChannel = (channel: string, checked: boolean) => {
+    markStarted();
+    setSelectedChannels((current) =>
+      checked ? [...current, channel] : current.filter((item) => item !== channel),
+    );
+    setErrors((current) => ({ ...current, channels: "" }));
+  };
+
+  const validate = () => {
+    const nextErrors: Record<string, string> = {};
+    if (form.name.trim().length < 2) nextErrors.name = "Digite seu nome.";
+    if (form.whatsapp.replace(/\D/g, "").length < 10)
+      nextErrors.whatsapp = "Digite um WhatsApp com DDD.";
+    if (form.city.trim().length < 2) nextErrors.city = "Digite sua cidade.";
+    if (!/^[A-Za-z]{2}$/.test(form.state.trim())) nextErrors.state = "Informe a UF com 2 letras.";
+    if (!selectedChannels.length) nextErrors.channels = "Escolha pelo menos uma forma de divulgação.";
+    if (selectedChannels.includes("Outros") && form.otherChannel.trim().length < 2)
+      nextErrors.otherChannel = "Conte qual seria o outro canal.";
+    if (form.motivation.trim().length < 8)
+      nextErrors.motivation = "Conte em uma frase por que quer participar.";
+    if (!form.privacy) nextErrors.privacy = "Você precisa concordar com o uso dos dados para a seleção.";
+    setErrors(nextErrors);
+    return Object.keys(nextErrors).length === 0;
+  };
+
+  const submit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (form.website || !validate()) return;
+    setStatus("sending");
+
+    try {
+      if (!supabase) throw new Error("Serviço indisponível");
+
+      const { error } = await supabase.from("army_applications").insert({
+        name: form.name.trim(),
+        whatsapp: form.whatsapp.trim(),
+        city: form.city.trim(),
+        state: form.state.trim().toUpperCase(),
+        channels: selectedChannels,
+        instagram: form.instagram.trim() || null,
+        tiktok: form.tiktok.trim() || null,
+        other_channel: form.otherChannel.trim() || null,
+        motivation: form.motivation.trim(),
+        source: "areum_army",
+        consent_privacy: true,
+        utm,
+      });
+
+      if (error) throw error;
+      setStatus("success");
+      trackArmyApplicationResult("success");
+      setForm(initialForm);
+      setSelectedChannels([]);
+      setErrors({});
+    } catch {
+      setStatus("error");
+      trackArmyApplicationResult("error");
+    }
+  };
+
+  if (status === "success") {
     return (
-      <div id={id} className="mx-auto max-w-xl border border-dashed border-primary/30 bg-background/60 p-8 text-center">
-        <p className="text-sm text-muted-foreground">
-          Formulário indisponível no momento. Fale com a gente no Instagram{" "}
-          <a href="https://instagram.com/AreumCo" className="font-medium text-primary underline-offset-4 hover:underline">
-            @areumco
-          </a>
-          .
+      <div id={id} className="army-form-card scroll-mt-28 text-center" aria-live="polite">
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#f4dedf] text-[#8f453d]">
+          <CheckCircle2 className="h-8 w-8" />
+        </div>
+        <p className="mt-6 text-xs font-semibold uppercase tracking-[0.2em] text-[#a75b50]">Inscrição recebida</p>
+        <h2 className="mt-2 font-heading text-4xl font-semibold leading-tight text-[#302523]">
+          Você deu o primeiro passo.
+        </h2>
+        <p className="mx-auto mt-4 max-w-md text-base leading-7 text-[#6b5752]">
+          Sua candidatura foi enviada para análise. A inscrição não garante aprovação.
         </p>
+        <button
+          type="button"
+          onClick={() => setStatus("idle")}
+          className="mt-7 text-sm font-semibold text-[#8f453d] underline decoration-[#d7ada6] underline-offset-4"
+        >
+          Enviar outra inscrição
+        </button>
       </div>
     );
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.55 }}
-      id={id}
-      className="scroll-mt-24"
-    >
-      <div className="mx-auto mb-6 max-w-xl text-center">
-        <p className="mb-2 flex items-center justify-center gap-2 text-[0.65rem] font-medium uppercase tracking-[0.2em] text-primary/85 md:text-xs">
-          <Heart className="h-3.5 w-3.5 fill-current" />
-          Formulário de inscrição
-        </p>
-        <h3 className="font-heading text-2xl font-semibold leading-tight text-foreground md:text-3xl">
-          Quero fazer parte da AREUM ARMY
-        </h3>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Leva menos de 2 minutos. Resposta em até alguns dias úteis.
-        </p>
-      </div>
-
-      <div className="mx-auto max-w-2xl overflow-hidden border border-primary/15 bg-background shadow-card-soft">
-        <iframe
-          src={ARMY_FORM_URL}
-          width="100%"
-          height="1400"
-          style={{ border: 0 }}
-          title="Formulário de inscrição AREUM ARMY"
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        />
-      </div>
-
-      <p className="mx-auto mt-4 max-w-xl text-center text-xs leading-5 text-muted-foreground">
-        O formulário não carregou?{" "}
-        <a
-          href={ARMY_FORM_URL.replace("embedded=true", "embedded=false")}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 font-medium text-primary underline-offset-4 hover:underline"
-        >
-          Abrir em nova aba
-          <ExternalLink className="h-3 w-3" />
-        </a>
+    <form id={id} onSubmit={submit} noValidate className="army-form-card scroll-mt-28" aria-label="Inscrição AREUM ARMY">
+      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#a75b50]">Inscrição gratuita</p>
+      <h2 className="mt-2 font-heading text-4xl font-semibold leading-[1.05] text-[#302523] md:text-5xl">
+        Quero fazer parte da AREUM ARMY
+      </h2>
+      <p className="mt-3 text-sm leading-6 text-[#6b5752]">
+        Preencha seus dados. As inscrições passam por análise.
       </p>
-    </motion.div>
+
+      <div className="mt-8 grid gap-5 sm:grid-cols-2">
+        <div className="sm:col-span-2">
+          <Label htmlFor="army-name">Nome completo</Label>
+          <Input id="army-name" autoComplete="name" value={form.name} onChange={(event) => updateField("name", event.target.value)} aria-invalid={Boolean(errors.name)} aria-describedby={errors.name ? "army-name-error" : undefined} className="army-input" />
+          <FieldError id="army-name-error" message={errors.name} />
+        </div>
+
+        <div className="sm:col-span-2">
+          <Label htmlFor="army-whatsapp">WhatsApp com DDD</Label>
+          <Input id="army-whatsapp" type="tel" inputMode="tel" autoComplete="tel" placeholder="(47) 99999-9999" value={form.whatsapp} onChange={(event) => updateField("whatsapp", event.target.value)} aria-invalid={Boolean(errors.whatsapp)} aria-describedby={errors.whatsapp ? "army-whatsapp-error" : undefined} className="army-input" />
+          <FieldError id="army-whatsapp-error" message={errors.whatsapp} />
+        </div>
+
+        <div>
+          <Label htmlFor="army-city">Cidade</Label>
+          <Input id="army-city" autoComplete="address-level2" value={form.city} onChange={(event) => updateField("city", event.target.value)} aria-invalid={Boolean(errors.city)} aria-describedby={errors.city ? "army-city-error" : undefined} className="army-input" />
+          <FieldError id="army-city-error" message={errors.city} />
+        </div>
+
+        <div>
+          <Label htmlFor="army-state">Estado (UF)</Label>
+          <Input id="army-state" autoComplete="address-level1" maxLength={2} placeholder="SC" value={form.state} onChange={(event) => updateField("state", event.target.value.toUpperCase())} aria-invalid={Boolean(errors.state)} aria-describedby={errors.state ? "army-state-error" : undefined} className="army-input uppercase" />
+          <FieldError id="army-state-error" message={errors.state} />
+        </div>
+
+        <fieldset className="sm:col-span-2">
+          <legend className="text-sm font-medium text-[#302523]">Como você pretende divulgar?</legend>
+          <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3">
+            {channels.map((channel) => (
+              <label
+                key={channel}
+                className={`flex min-h-12 cursor-pointer items-center gap-3 rounded-xl border px-3 py-2.5 text-sm text-[#4f3b37] transition hover:border-[#b87568] ${
+                  selectedChannels.includes(channel)
+                    ? "border-[#8f453d] bg-[#fff6f4]"
+                    : "border-[#dfcac4] bg-white"
+                }`}
+              >
+                <Checkbox checked={selectedChannels.includes(channel)} onCheckedChange={(checked) => toggleChannel(channel, checked === true)} aria-label={channel} />
+                {channel}
+              </label>
+            ))}
+          </div>
+          <FieldError id="army-channels-error" message={errors.channels} />
+        </fieldset>
+
+        {selectedChannels.includes("Outros") && (
+          <div className="sm:col-span-2">
+            <Label htmlFor="army-other">Qual outro canal?</Label>
+            <Input id="army-other" value={form.otherChannel} onChange={(event) => updateField("otherChannel", event.target.value)} aria-invalid={Boolean(errors.otherChannel)} aria-describedby={errors.otherChannel ? "army-other-error" : undefined} className="army-input" />
+            <FieldError id="army-other-error" message={errors.otherChannel} />
+          </div>
+        )}
+
+        <div>
+          <Label htmlFor="army-instagram">Instagram <span className="text-[#8b7772]">(opcional)</span></Label>
+          <Input id="army-instagram" autoComplete="off" placeholder="@seuperfil" value={form.instagram} onChange={(event) => updateField("instagram", event.target.value)} className="army-input" />
+        </div>
+
+        <div>
+          <Label htmlFor="army-tiktok">TikTok <span className="text-[#8b7772]">(opcional)</span></Label>
+          <Input id="army-tiktok" autoComplete="off" placeholder="@seuperfil" value={form.tiktok} onChange={(event) => updateField("tiktok", event.target.value)} className="army-input" />
+        </div>
+
+        <div className="sm:col-span-2">
+          <Label htmlFor="army-motivation">Por que você quer fazer parte da AREUM ARMY?</Label>
+          <Textarea id="army-motivation" placeholder="Pode responder em uma frase." maxLength={600} value={form.motivation} onChange={(event) => updateField("motivation", event.target.value)} aria-invalid={Boolean(errors.motivation)} aria-describedby={errors.motivation ? "army-motivation-error" : undefined} className="army-input min-h-28 resize-y" />
+          <FieldError id="army-motivation-error" message={errors.motivation} />
+        </div>
+
+        <div className="absolute -left-[9999px]" aria-hidden="true">
+          <Label htmlFor="army-website">Website</Label>
+          <Input id="army-website" name="website" tabIndex={-1} autoComplete="off" value={form.website} onChange={(event) => updateField("website", event.target.value)} />
+        </div>
+
+        <div className="sm:col-span-2">
+          <label className="flex cursor-pointer items-start gap-3 text-sm leading-6 text-[#5f4b46]">
+            <Checkbox checked={form.privacy} onCheckedChange={(checked) => updateField("privacy", checked === true)} className="mt-1" aria-describedby={errors.privacy ? "army-privacy-error" : undefined} />
+            <span>
+              Concordo com o uso dos meus dados para análise da inscrição, conforme a{" "}
+              <a href="/politica-de-privacidade" target="_blank" className="font-semibold text-[#8f453d] underline underline-offset-4">Política de Privacidade</a>.
+            </span>
+          </label>
+          <FieldError id="army-privacy-error" message={errors.privacy} />
+        </div>
+      </div>
+
+      {status === "error" && (
+        <p role="alert" className="mt-5 rounded-xl border border-[#d99b94] bg-[#fff4f2] px-4 py-3 text-sm leading-6 text-[#8a2f29]">
+          Não foi possível enviar agora. Seus dados continuam preenchidos; tente novamente em instantes.
+        </p>
+      )}
+
+      <button type="submit" disabled={status === "sending"} className="army-primary-cta mt-7 w-full">
+        {status === "sending" ? <><Loader2 className="h-5 w-5 animate-spin" /> Enviando inscrição</> : <>ENVIAR MINHA INSCRIÇÃO <ArrowRight className="h-5 w-5" /></>}
+      </button>
+      <p className="mt-4 text-center text-xs leading-5 text-[#806c67]">
+        Inscrição gratuita e sujeita à aprovação. Não existe garantia de renda.
+      </p>
+    </form>
   );
 };
 

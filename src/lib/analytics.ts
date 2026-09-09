@@ -117,6 +117,25 @@ export const trackArmyFormView = () => {
   });
 };
 
+export const trackArmyCTA = (placement: string) => {
+  const data = { content_name: "AREUM ARMY", lead_source: "army_page", placement };
+  trackMeta("ArmyCTAClick", data, true);
+  trackGA4("army_cta_click", data);
+};
+
+export const trackArmyFormStart = () => {
+  const data = { content_name: "AREUM ARMY", lead_source: "army_page" };
+  trackMeta("ArmyFormStart", data, true);
+  trackGA4("army_form_start", data);
+};
+
+export const trackArmyApplicationResult = (result: "success" | "error") => {
+  const data = { content_name: "AREUM ARMY", lead_source: "army_page", result };
+  if (result === "success") trackMeta("Lead", data);
+  else trackMeta("ArmyFormError", data, true);
+  trackGA4(result === "success" ? "generate_lead" : "army_form_error", data);
+};
+
 /** Carrega os scripts do Meta Pixel e GA4 dinamicamente (só se os IDs existirem) */
 export const initAnalytics = () => {
   if (PIXEL_ID && typeof window !== "undefined" && !window.fbq) {
