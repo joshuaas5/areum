@@ -12,6 +12,9 @@ import AcidoHialuronicoComoUsar from "./pages/blog/AcidoHialuronicoComoUsar";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfUse from "./pages/TermsOfUse";
 import Army from "./pages/Army";
+import { lazy, Suspense } from "react";
+
+const PeleRadiante = lazy(() => import("./pages/PeleRadiante"));
 
 const queryClient = new QueryClient();
 
@@ -30,6 +33,7 @@ const App = () => (
           <Route path="/politica-de-privacidade" element={<PrivacyPolicy />} />
           <Route path="/termos-de-uso" element={<TermsOfUse />} />
           <Route path="/army" element={<Army />} />
+          <Route path="/pele-radiante" element={<Suspense fallback={<p role="status">Carregando AREUM…</p>}><PeleRadiante /></Suspense>} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
