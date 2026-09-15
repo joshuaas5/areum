@@ -263,7 +263,7 @@ export default function PeleRadiante() {
             </p>
             <h1 id="pr-title">
               A transformação que a sua pele estava pedindo.
-              <br /> Mais hidratada, macia e <em>luminosa.</em>
+              <br /> Mais hidratada, macia, preenchida e <em>luminosa!</em>
             </h1>
             <p className="pr-lead">
               O segredo inspirado no skincare coreano para revelar uma pele com
