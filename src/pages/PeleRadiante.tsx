@@ -285,7 +285,7 @@ export default function PeleRadiante() {
               width="1100"
               height="1375"
               fetchPriority="high"
-              alt="Imagem editorial criada com IA: mulher madura de cabelos prateados, sorrindo e tocando suavemente a pele"
+              alt="Mulher madura de cabelos prateados sorrindo e tocando suavemente a pele"
             />
             <span className="pr-photo-tag">BELEZA EM TODAS AS FASES</span>
             <img
@@ -304,9 +304,6 @@ export default function PeleRadiante() {
                 Você continua sendo você.
               </strong>
             </figcaption>
-            <span className="pr-editorial-label">
-              Imagem editorial criada com IA.
-            </span>
           </figure>
           <div className="pr-hero-buy">
             <BuyBox placement="hero" />
@@ -556,9 +553,8 @@ export default function PeleRadiante() {
               width="1500"
               height="1000"
               loading="lazy"
-              alt="Imagem editorial criada com IA: três mulheres de diferentes gerações juntas"
+              alt="Três mulheres de diferentes gerações juntas"
             />
-            <figcaption>Imagem editorial criada com IA.</figcaption>
           </figure>
           <div className="pr-generations-copy">
             <Sun size={38} strokeWidth={1.2} aria-hidden="true" />
