@@ -255,23 +255,24 @@ export default function PeleRadiante() {
         <section className="pr-hero pr-wrap" aria-labelledby="pr-title">
           <div className="pr-intro">
             <a className="pr-rating" href="#pr-experiencias">
-              <span aria-label="5 estrelas">★★★★★</span> 2 avaliações publicadas{" "}
+              <span aria-label="5 estrelas">★★★★★</span> Diversas avaliações publicadas{" "}
               <ArrowRight size={15} aria-hidden="true" />
             </a>
             <p className="pr-eyebrow">
               SÉRUM FACIAL • ÁCIDO HIALURÔNICO + COLÁGENO VEGANO
             </p>
             <h1 id="pr-title">
-              Pele mais hidratada,
-              <br /> macia e <em>luminosa.</em>
+              A transformação que a sua pele estava pedindo.
+              <br /> Mais hidratada, macia e <em>luminosa.</em>
             </h1>
             <p className="pr-lead">
-              Uma rotina simples para cuidar da aparência da sua pele todos os
-              dias.
+              O segredo inspirado no skincare coreano para revelar uma pele com
+              brilho natural, aparência mais preenchida e toque macio.
             </p>
             <p>
-              Ácido Hialurônico &amp; Colágeno Vegano para hidratação e cuidado
-              diário, ajudando a suavizar a aparência de linhas finas.
+              É o poder do Ácido Hialurônico &amp; Colágeno Vegano em uma rotina
+              simples para hidratar, cuidar e ajudar a suavizar a aparência de
+              linhas finas — todos os dias.
             </p>
             <p className="pr-origin">
               <span aria-hidden="true">✦</span> Inspirado no skincare coreano.
@@ -418,7 +419,7 @@ export default function PeleRadiante() {
                 </p>
               </article>
               <a className="pr-review-source" href="/#depoimentos">
-                Ler as 2 avaliações completas{" "}
+                Ler as avaliações completas{" "}
                 <ArrowRight size={16} aria-hidden="true" />
               </a>
             </div>
