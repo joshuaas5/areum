@@ -225,9 +225,9 @@ export default function PeleRadiante() {
         <a className="pr-brand" href="/" aria-label="AREUM — página inicial">
           <img
             className="pr-logo"
-            src="/areum-logo-premium.png"
-            width="1000"
-            height="280"
+            src="/pele-radiante/logo-areum-oficial.png"
+            width="533"
+            height="237"
             alt="AREUM 아름"
           />
         </a>
@@ -605,9 +605,9 @@ export default function PeleRadiante() {
         <a className="pr-brand" href="/" aria-label="AREUM — página inicial">
           <img
             className="pr-logo"
-            src="/areum-logo-premium.png"
-            width="1000"
-            height="280"
+            src="/pele-radiante/logo-areum-oficial.png"
+            width="533"
+            height="237"
             loading="lazy"
             alt="AREUM 아름"
           />

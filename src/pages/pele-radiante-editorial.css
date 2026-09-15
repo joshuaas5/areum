@@ -30,7 +30,7 @@
   text-decoration: none;
 }
 .pr-logo {
-  width: 175px;
+  width: 142px;
   height: auto;
   object-fit: contain;
 }
@@ -559,7 +559,7 @@
     min-height: 82px;
   }
   .pr-logo {
-    width: 130px;
+    width: 105px;
   }
   .pr-header nav {
     display: none;
