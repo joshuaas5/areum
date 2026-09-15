@@ -381,11 +381,7 @@
   background: #f7e4e2;
 }
 .pr-ritual h2 {
-  font-size: 37px;
-  text-transform: lowercase;
-}
-.pr-ritual h2::first-letter {
-  text-transform: uppercase;
+  font-size: 40px;
 }
 .pr-steps li {
   border-color: #d9b6a8;
@@ -848,5 +844,281 @@
   }
   .pr-page h2 {
     font-size: 31px;
+  }
+}
+
+/* Hero de conversão: preço, CEP e CTA no primeiro scroll. */
+.pr-page h1 .pr-h1-sub {
+  display: block;
+  margin-top: 14px;
+  font-size: 0.62em;
+  line-height: 1.2;
+  letter-spacing: -1px;
+  color: var(--pr-muted);
+}
+.pr-intro .pr-lead {
+  font-weight: 700;
+  color: var(--pr-ink);
+  margin-top: 16px;
+}
+.pr-intro .pr-dose {
+  font-size: 18px;
+  color: var(--pr-muted);
+  margin-top: 2px;
+  margin-bottom: 14px;
+}
+.pr-hero .pr-buybox {
+  padding-top: 14px;
+}
+.pr-price-hero {
+  font-size: 58px !important;
+  line-height: 1.05 !important;
+  letter-spacing: -2.5px !important;
+  margin-top: 4px !important;
+}
+.pr-payment-methods {
+  font-size: 15px !important;
+}
+.pr-cep {
+  margin-top: 14px;
+  padding: 13px 16px;
+  background: #fbf1ee;
+  border: 1px solid #ecd8d0;
+  border-radius: 10px;
+}
+.pr-cep-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 800;
+}
+.pr-cep-label svg {
+  color: #986047;
+  flex-shrink: 0;
+}
+.pr-cep-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+.pr-cep-row input {
+  flex: 1 1 0;
+  width: 0;
+  min-width: 0;
+  height: 50px;
+  padding: 0 14px;
+  font: 600 18px/1 "Manrope", sans-serif;
+  letter-spacing: 0.5px;
+  color: var(--pr-ink);
+  background: #fff;
+  border: 1px solid #d7b7aa;
+  border-radius: 8px;
+}
+.pr-cep-row input:focus-visible {
+  outline: 2px solid #986047;
+  outline-offset: 1px;
+}
+.pr-cep-row input[aria-invalid] {
+  border-color: #b3261e;
+}
+.pr-cep-row button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 108px;
+  height: 50px;
+  padding: 0 16px;
+  font: 800 15px/1 "Manrope", sans-serif;
+  color: #fff;
+  background: var(--pr-ink);
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.pr-cep-row button:disabled {
+  opacity: 0.75;
+  cursor: progress;
+}
+.pr-spin {
+  animation: pr-spin 0.8s linear infinite;
+}
+@keyframes pr-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.pr-cep-info {
+  font-size: 14px;
+  color: var(--pr-muted);
+  margin-top: 9px;
+}
+.pr-cep-info strong {
+  color: var(--pr-ink);
+}
+.pr-cep-result {
+  display: flex;
+  gap: 7px;
+  align-items: flex-start;
+  font-size: 14px;
+  line-height: 1.45;
+}
+.pr-cep-result:not(:empty) {
+  margin-top: 8px;
+}
+.pr-cep-result svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: #2f7a4f;
+}
+.pr-hero .pr-button {
+  min-height: 68px;
+  font-size: 19px;
+}
+.pr-trustline {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 4px 0;
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--pr-muted);
+}
+.pr-trust-pair,
+.pr-trust-pair > * {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+.pr-trust-pair > * + *::before,
+.pr-trust-pair + .pr-trust-pair::before {
+  content: "•";
+  margin: 0 7px;
+  color: #c9a597;
+}
+.pr-trust-pair + .pr-trust-pair::before {
+  margin-right: 2px;
+}
+.pr-trustline a {
+  font-weight: 700;
+  color: var(--pr-ink);
+  min-height: 32px;
+}
+
+/* Segundo CTA */
+.pr-offer .pr-product-name {
+  font: 700 22px/1.3 "Manrope", sans-serif;
+  letter-spacing: 0;
+}
+.pr-offer .pr-product-name span {
+  font-weight: 400;
+}
+.pr-offer {
+  margin-top: 78px;
+}
+.pr-offer-product {
+  min-height: 0;
+}
+.pr-offer-product img {
+  height: 380px;
+  margin: 0;
+}
+
+/* Como usar */
+.pr-steps li {
+  align-items: center;
+  padding-block: 22px;
+}
+.pr-steps li > span {
+  min-width: 36px;
+}
+.pr-steps li > p {
+  font: 500 21px/1.4 "DM Sans", sans-serif;
+  color: var(--pr-ink) !important;
+  letter-spacing: -0.3px;
+}
+
+/* Sticky bar mobile: preço + botão, só isso. */
+.pr-mobile-bar .pr-button {
+  flex: 1;
+  max-width: 230px;
+}
+
+@media (max-width: 760px) {
+  .pr-hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .pr-product-stage {
+    height: 360px;
+  }
+  .pr-page h1 {
+    font-size: 34px;
+    letter-spacing: -1.5px;
+  }
+  .pr-page h1 .pr-h1-sub {
+    font-size: 23px;
+    letter-spacing: -0.6px;
+    margin-top: 10px;
+  }
+  .pr-intro .pr-lead {
+    font-size: 18px;
+    margin-top: 16px;
+  }
+  .pr-intro .pr-dose {
+    font-size: 17px;
+    margin-bottom: 16px;
+  }
+  .pr-price-hero {
+    font-size: 50px !important;
+  }
+  .pr-cep {
+    padding: 14px 12px;
+  }
+  .pr-trustline {
+    font-size: 12.5px;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .pr-trust-pair + .pr-trust-pair::before {
+    display: none;
+  }
+  .pr-ritual h2 {
+    font-size: 33px;
+  }
+  .pr-steps li > p {
+    font-size: 19px;
+  }
+  .pr-offer {
+    margin-top: 48px;
+  }
+  .pr-offer-product img {
+    height: 240px;
+  }
+  .pr-offer .pr-product-name {
+    font-size: 18px;
+  }
+  .pr-mobile-bar .pr-button {
+    max-width: none;
+    font-size: 17px;
+  }
+  .pr-hero .pr-button,
+  .pr-offer .pr-button {
+    font-size: clamp(14px, 4.1vw, 18px);
+    padding-inline: 6px;
+    letter-spacing: -0.2px;
+  }
+}
+@media (max-width: 360px) {
+  .pr-page h1 {
+    font-size: 30px;
+  }
+  .pr-page h1 .pr-h1-sub {
+    font-size: 21px;
+  }
+  .pr-cep-row button {
+    min-width: 92px;
+    padding: 0 10px;
   }
 }

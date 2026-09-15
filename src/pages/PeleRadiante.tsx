@@ -1,10 +1,11 @@
-import { useEffect } from "react";
+import { FormEvent, useEffect, useId, useState } from "react";
 import {
   ArrowRight,
   Droplets,
   Sparkles,
-  Heart,
-  Feather,
+  Gem,
+  Hourglass,
+  MapPin,
   ShieldCheck,
   Truck,
   MessageCircle,
@@ -12,12 +13,14 @@ import {
   Plus,
   Check,
   Star,
+  Loader2,
 } from "lucide-react";
 import serum from "@/assets/areum-serum.webp";
 import { CHECKOUT_URL } from "@/lib/analytics-config";
 import {
   trackCheckoutClick,
   trackContact,
+  trackShippingEstimate,
   trackViewContent,
 } from "@/lib/analytics";
 import "./pele-radiante.css";
@@ -82,52 +85,145 @@ function SupportLink({ placement }: { placement: string }) {
   );
 }
 
-function BuyBox({ placement }: { placement: string }) {
+const formatCep = (value: string) => {
+  const digits = value.replace(/\D/g, "").slice(0, 8);
+  return digits.length > 5 ? `${digits.slice(0, 5)}-${digits.slice(5)}` : digits;
+};
+
+type ShippingState =
+  | { status: "idle" | "loading" | "invalid" | "not_found" | "error" }
+  | { status: "found"; city: string; uf: string };
+
+// Consulta o CEP no ViaCEP só para confirmar a cidade. O valor exato e o prazo
+// continuam sendo calculados pela Yampi no checkout, antes do pagamento.
+function ShippingEstimate({ placement }: { placement: string }) {
+  const id = useId();
+  const [cep, setCep] = useState("");
+  const [state, setState] = useState<ShippingState>({ status: "idle" });
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const digits = cep.replace(/\D/g, "");
+    if (digits.length !== 8) {
+      setState({ status: "invalid" });
+      return;
+    }
+    setState({ status: "loading" });
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 6000);
+    try {
+      const response = await fetch(`https://viacep.com.br/ws/${digits}/json/`, {
+        signal: controller.signal,
+      });
+      if (!response.ok) throw new Error(String(response.status));
+      const data: { erro?: boolean | string; localidade?: string; uf?: string } =
+        await response.json();
+      if (data.erro || !data.localidade || !data.uf) {
+        setState({ status: "not_found" });
+        trackShippingEstimate("not_found", `pele_radiante_${placement}`);
+        return;
+      }
+      setState({ status: "found", city: data.localidade, uf: data.uf });
+      trackShippingEstimate("found", `pele_radiante_${placement}`, data.uf);
+    } catch {
+      setState({ status: "error" });
+      trackShippingEstimate("error", `pele_radiante_${placement}`);
+    } finally {
+      window.clearTimeout(timeout);
+    }
+  }
+
   return (
-    <div className="pr-buybox" aria-label="Comprar Sérum Facial AREUM">
-      <p className="pr-product-name">
-        Sérum Facial AREUM <span>• 30 ml</span>
+    <form className="pr-cep" onSubmit={onSubmit} noValidate>
+      <label className="pr-cep-label" htmlFor={`${id}-cep`}>
+        <Truck size={20} aria-hidden="true" /> Calcule o frete pelo seu CEP
+      </label>
+      <div className="pr-cep-row">
+        <input
+          id={`${id}-cep`}
+          name="cep"
+          inputMode="numeric"
+          autoComplete="postal-code"
+          placeholder="00000-000"
+          maxLength={9}
+          value={cep}
+          aria-describedby={`${id}-cep-info`}
+          aria-invalid={state.status === "invalid" || undefined}
+          onChange={(event) => {
+            setCep(formatCep(event.target.value));
+            if (state.status !== "idle" && state.status !== "loading")
+              setState({ status: "idle" });
+          }}
+        />
+        <button type="submit" disabled={state.status === "loading"}>
+          {state.status === "loading" ? (
+            <Loader2 className="pr-spin" size={18} aria-label="Calculando" />
+          ) : (
+            "Calcular"
+          )}
+        </button>
+      </div>
+      <p className="pr-cep-info" id={`${id}-cep-info`}>
+        Frete a partir de <strong>R$ 9,55</strong> • Envio rastreado
       </p>
-      <p className="pr-price">R$79,90</p>
-      <p className="pr-payment">ou 3x de R$26,63 sem juros</p>
-      <p className="pr-payment">Pix e cartão de crédito</p>
-      <PurchaseLink placement={placement} />
-      <p className="pr-shipping">
-        <Truck size={23} aria-hidden="true" />
-        <span>
-          Frete e prazo pelo seu CEP na próxima etapa, antes de pagar.
-        </span>
+      <p className="pr-cep-result" aria-live="polite">
+        {state.status === "found" && (
+          <>
+            <MapPin size={17} aria-hidden="true" />
+            <span>
+              Entregamos em{" "}
+              <strong>
+                {state.city}/{state.uf}
+              </strong>
+              . Frete a partir de R$ 9,55 — valor e prazo exatos aparecem no
+              checkout, antes de pagar.
+            </span>
+          </>
+        )}
+        {state.status === "invalid" && (
+          <span>Digite os 8 números do seu CEP.</span>
+        )}
+        {state.status === "not_found" && (
+          <span>Não encontramos esse CEP. Confira os números e tente de novo.</span>
+        )}
+        {state.status === "error" && (
+          <span>
+            Não conseguimos consultar agora. O frete para o seu CEP aparece no
+            checkout, antes de pagar.
+          </span>
+        )}
       </p>
-      <p className="pr-assurance">
-        <ShieldCheck size={20} aria-hidden="true" /> Compra segura • Envio
-        rastreado • Atendimento AREUM
-      </p>
-      <SupportLink placement={placement} />
-    </div>
+    </form>
   );
 }
 
 const benefits = [
   {
     icon: Droplets,
-    title: "Hidratação",
-    text: "Cuidado diário que ajuda a manter a pele hidratada e confortável.",
+    title: "Hidratação profunda",
+    text: "Pele mais macia, confortável e nutrida o dia todo.",
+  },
+  {
+    icon: Gem,
+    title: "Efeito preenchimento",
+    text: "Ajuda a dar aparência mais preenchida e firme.",
   },
   {
     icon: Sparkles,
     title: "Luminosidade",
-    text: "Valorize a aparência luminosa e natural da sua pele.",
+    text: "Pele com aspecto mais radiante e saudável.",
   },
   {
-    icon: Feather,
-    title: "Maciez",
-    text: "Um toque de cuidado para uma pele mais macia e suave.",
+    icon: Hourglass,
+    title: "Cuidado anti-idade",
+    text: "Suaviza a aparência das linhas de expressão e sinais do tempo.",
   },
-  {
-    icon: Heart,
-    title: "Aparência das linhas finas",
-    text: "Hidratação que ajuda a suavizar a aparência de linhas finas.",
-  },
+];
+const steps = [
+  "Limpe bem o rosto",
+  "Com a pele levemente úmida, aplique 3 a 4 gotas",
+  "Massageie suavemente até absorver",
+  "Em seguida, aplique seu hidratante de costume",
 ];
 const faqs = [
   [
@@ -136,15 +232,15 @@ const faqs = [
   ],
   [
     "Como devo usar?",
-    "Aplique 3 a 4 gotas na pele limpa e levemente úmida, de manhã e à noite. Espalhe suavemente no rosto e pescoço. Durante o dia, finalize com protetor solar. Siga também as orientações do rótulo.",
+    "Limpe bem o rosto. Com a pele levemente úmida, aplique 3 a 4 gotas e massageie suavemente até absorver. Em seguida, aplique seu hidratante de costume. Use de manhã e à noite — pode ser o primeiro passo da sua rotina ou usado sozinho. Durante o dia, finalize com protetor solar.",
   ],
   [
     "Como consulto o frete e o prazo?",
-    "Toque no botão de compra e informe seu CEP no checkout. As opções de entrega, os valores e o prazo estimado aparecem antes da confirmação do pagamento.",
+    "Digite seu CEP na calculadora do topo da página. O frete começa em R$ 9,55 e o envio é rastreado. No checkout, as opções de entrega, o valor exato e o prazo estimado aparecem antes da confirmação do pagamento.",
   ],
   [
     "Quais são as formas de pagamento?",
-    "Você pode pagar com Pix ou cartão de crédito. O parcelamento divulgado é de 3x de R$26,63 sem juros. Confira as condições e o valor total na etapa de pagamento.",
+    "Você pode pagar com Pix ou cartão de crédito. O parcelamento divulgado é de 3x de R$ 26,63 sem juros. Confira as condições e o valor total na etapa de pagamento.",
   ],
   [
     "Vou conseguir acompanhar a entrega?",
@@ -164,7 +260,7 @@ export default function PeleRadiante() {
       [
         'meta[name="description"]',
         "content",
-        "Pele mais hidratada, macia e luminosa com Sérum Facial AREUM 30 ml. Uma rotina simples, inspirada no skincare coreano. R$79,90.",
+        "A transformação que a sua pele estava pedindo: mais hidratada, preenchida e luminosa. Sérum AREUM com Ácido Hialurônico + Colágeno Vegano. R$ 79,90.",
       ],
       [
         'link[rel="canonical"]',
@@ -184,7 +280,7 @@ export default function PeleRadiante() {
       [
         'meta[property="og:description"]',
         "content",
-        "Hidratação, maciez e luminosidade. AREUM. Beleza em todas as fases.",
+        "Mais hidratada, preenchida e luminosa. Ácido Hialurônico + Colágeno Vegano. AREUM. Beleza em todas as fases.",
       ],
       [
         'meta[name="twitter:title"]',
@@ -194,7 +290,7 @@ export default function PeleRadiante() {
       [
         'meta[name="twitter:description"]',
         "content",
-        "Hidratação, maciez e luminosidade. AREUM. Beleza em todas as fases.",
+        "Mais hidratada, preenchida e luminosa. Ácido Hialurônico + Colágeno Vegano. AREUM. Beleza em todas as fases.",
       ],
     ];
     const previous = updates.map(([selector, attribute, value]) => {
@@ -254,29 +350,15 @@ export default function PeleRadiante() {
       <main id="pr-main">
         <section className="pr-hero pr-wrap" aria-labelledby="pr-title">
           <div className="pr-intro">
-            <a className="pr-rating" href="#pr-experiencias">
-              <span aria-label="5 estrelas">★★★★★</span> Diversas avaliações publicadas{" "}
-              <ArrowRight size={15} aria-hidden="true" />
-            </a>
-            <p className="pr-eyebrow">
-              SÉRUM FACIAL • ÁCIDO HIALURÔNICO + COLÁGENO VEGANO
-            </p>
+            <p className="pr-eyebrow">BELEZA EM TODAS AS FASES</p>
             <h1 id="pr-title">
               A transformação que a sua pele estava pedindo.
-              <br /> Mais hidratada, macia, preenchida e <em>luminosa!</em>
+              <span className="pr-h1-sub">
+                Mais hidratada, preenchida e <em>luminosa.</em>
+              </span>
             </h1>
-            <p className="pr-lead">
-              O segredo inspirado no skincare coreano para revelar uma pele com
-              brilho natural, aparência mais preenchida e toque macio.
-            </p>
-            <p>
-              É o poder do Ácido Hialurônico &amp; Colágeno Vegano em uma rotina
-              simples para hidratar, cuidar e ajudar a suavizar a aparência de
-              linhas finas — todos os dias.
-            </p>
-            <p className="pr-origin">
-              <span aria-hidden="true">✦</span> Inspirado no skincare coreano.
-            </p>
+            <p className="pr-lead">Ácido Hialurônico + Colágeno Vegano</p>
+            <p className="pr-dose">3 a 4 gotas. Manhã e noite.</p>
           </div>
           <figure className="pr-product-stage">
             <img
@@ -287,7 +369,6 @@ export default function PeleRadiante() {
               fetchPriority="high"
               alt="Mulher madura de cabelos prateados sorrindo e tocando suavemente a pele"
             />
-            <span className="pr-photo-tag">BELEZA EM TODAS AS FASES</span>
             <img
               className="pr-hero-bottle"
               src={serum}
@@ -306,7 +387,38 @@ export default function PeleRadiante() {
             </figcaption>
           </figure>
           <div className="pr-hero-buy">
-            <BuyBox placement="hero" />
+            <div className="pr-buybox" aria-label="Comprar Sérum Facial AREUM">
+              <p className="pr-price pr-price-hero">R$ 79,90</p>
+              <p className="pr-payment">ou 3x de R$ 26,63 sem juros</p>
+              <p className="pr-payment pr-payment-methods">
+                Pix e cartão de crédito
+              </p>
+              <ShippingEstimate placement="hero" />
+              <PurchaseLink placement="hero" />
+              <p className="pr-trustline">
+                <span className="pr-trust-pair">
+                  <span>
+                    <ShieldCheck size={16} aria-hidden="true" /> Compra segura
+                  </span>
+                  <span>Envio rastreado</span>
+                </span>
+                <span className="pr-trust-pair">
+                  <span>Atendimento AREUM</span>
+                  <a
+                    href={supportUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() =>
+                      trackContact("whatsapp", "pele_radiante_hero_trustline")
+                    }
+                  >
+                    <MessageCircle size={15} aria-hidden="true" /> Ajuda no
+                    WhatsApp
+                    <span className="pr-sr-only"> (abre em nova aba)</span>
+                  </a>
+                </span>
+              </p>
+            </div>
           </div>
         </section>
         <div className="pr-ribbon">
@@ -329,15 +441,11 @@ export default function PeleRadiante() {
             <div>
               <p className="pr-eyebrow">AREUM NA ROTINA REAL</p>
               <h2 id="pr-experiences-title">
-                O cuidado ganha vida
+                Já usado e aprovado por mulheres
                 <br />
-                <em>na pele de quem usa.</em>
+                <em>que confiam na AREUM</em>
               </h2>
             </div>
-            <p>
-              Veja o sérum em uso e leia o que clientes já compartilharam sobre
-              a AREUM.
-            </p>
           </div>
           <div className="pr-proof-grid">
             <div className="pr-video-grid">
@@ -427,11 +535,8 @@ export default function PeleRadiante() {
           className="pr-section pr-wrap"
           aria-labelledby="pr-benefits-title"
         >
-          <p className="pr-eyebrow">O ESSENCIAL, TODOS OS DIAS</p>
           <h2 id="pr-benefits-title">
-            Mais cuidado.
-            <br />
-            <em>Mais conforto na sua pele.</em>
+            O que o <em>Sérum AREUM</em> entrega
           </h2>
           <div className="pr-benefits">
             {benefits.map(({ icon: Icon, title, text }) => (
@@ -452,46 +557,47 @@ export default function PeleRadiante() {
             <div>
               <p className="pr-eyebrow">POUCAS GOTAS. UM MOMENTO SEU.</p>
               <h2 id="pr-ritual-title">
-                SUA PELE MUDA.
-                <br />
-                SEU CUIDADO NÃO PRECISA SER <em>COMPLICADO.</em>
+                Como usar o <em>Sérum AREUM</em>
               </h2>
-              <p className="pr-lead">
-                3 a 4 gotas. Manhã e noite. Todos os dias.
-              </p>
-              <p>
-                Um passo simples para fazer parte da rotina que você já tem.
-              </p>
-              <a className="pr-text-link" href="#pr-comprar">
-                Quero esse cuidado <ArrowRight size={22} aria-hidden="true" />
-              </a>
+              <p className="pr-lead">Use de manhã e à noite.</p>
+              <p>Pode ser o primeiro passo da sua rotina ou usado sozinho.</p>
             </div>
             <ol className="pr-steps">
-              <li>
-                <span>01</span>
-                <div>
-                  <h3>Prepare a pele</h3>
-                  <p>Limpe o rosto e deixe a pele levemente úmida.</p>
-                </div>
-              </li>
-              <li>
-                <span>02</span>
-                <div>
-                  <h3>Aplique 3 a 4 gotas</h3>
-                  <p>Espalhe no rosto e pescoço com movimentos suaves.</p>
-                </div>
-              </li>
-              <li>
-                <span>03</span>
-                <div>
-                  <h3>Continue seu cuidado</h3>
-                  <p>
-                    Finalize com seu hidratante habitual, se necessário. De dia,
-                    use protetor solar.
-                  </p>
-                </div>
-              </li>
+              {steps.map((step, index) => (
+                <li key={step}>
+                  <span aria-hidden="true">{index + 1}.</span>
+                  <p>{step}</p>
+                </li>
+              ))}
             </ol>
+          </div>
+        </section>
+        <section
+          id="pr-comprar"
+          className="pr-offer pr-wrap"
+          aria-labelledby="pr-offer-title"
+        >
+          <div className="pr-offer-product">
+            <img
+              src={serum}
+              width="1000"
+              height="1500"
+              loading="lazy"
+              alt="Sérum Facial AREUM com aplicador conta-gotas, 30 ml"
+            />
+          </div>
+          <div className="pr-buybox" aria-label="Comprar Sérum Facial AREUM">
+            <h2 id="pr-offer-title" className="pr-product-name">
+              Sérum Facial AREUM <span>• 30 ml</span>
+            </h2>
+            <p className="pr-price">R$ 79,90</p>
+            <p className="pr-payment">ou 3x de R$ 26,63 sem juros</p>
+            <PurchaseLink placement="final" />
+            <p className="pr-assurance">
+              <ShieldCheck size={20} aria-hidden="true" /> Frete calculado pelo
+              CEP • Compra segura • Envio rastreado
+            </p>
+            <SupportLink placement="final" />
           </div>
         </section>
         <section
@@ -509,7 +615,7 @@ export default function PeleRadiante() {
             <article>
               <Truck aria-hidden="true" />
               <h3>Envio rastreado</h3>
-              <p>Frete e prazo para seu endereço informados antes de pagar.</p>
+              <p>Frete a partir de R$ 9,55, com valor e prazo pelo seu CEP.</p>
             </article>
             <article>
               <MessageCircle aria-hidden="true" />
@@ -520,28 +626,6 @@ export default function PeleRadiante() {
               </p>
             </article>
           </div>
-        </section>
-        <section
-          id="pr-comprar"
-          className="pr-offer pr-wrap"
-          aria-labelledby="pr-offer-title"
-        >
-          <div className="pr-offer-product">
-            <p className="pr-eyebrow">SEU PRÓXIMO MOMENTO DE CUIDADO</p>
-            <h2 id="pr-offer-title">
-              Pequenas gotas.
-              <br />
-              <em>Beleza no dia a dia.</em>
-            </h2>
-            <img
-              src={serum}
-              width="1000"
-              height="1500"
-              loading="lazy"
-              alt="Sérum Facial AREUM com aplicador conta-gotas, 30 ml"
-            />
-          </div>
-          <BuyBox placement="final" />
         </section>
         <section
           className="pr-generations"
@@ -618,10 +702,7 @@ export default function PeleRadiante() {
         </div>
       </footer>
       <aside className="pr-mobile-bar" aria-label="Compra rápida">
-        <div>
-          <span>Sérum AREUM • 30 ml</span>
-          <strong>R$79,90</strong>
-        </div>
+        <strong>R$ 79,90</strong>
         <PurchaseLink placement="mobile_sticky" compact />
       </aside>
     </div>

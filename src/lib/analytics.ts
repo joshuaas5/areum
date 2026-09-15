@@ -87,6 +87,17 @@ export const trackContact = (method: "email" | "whatsapp", placement: string) =>
   trackGA4("contact", data);
 };
 
+// Mede o uso da calculadora de frete sem enviar o CEP (dado pessoal): só a UF.
+export const trackShippingEstimate = (
+  result: "found" | "not_found" | "error",
+  placement: string,
+  uf?: string,
+) => {
+  const data = { result, placement, ...(uf ? { uf } : {}) };
+  trackMeta("ShippingEstimate", data, true);
+  trackGA4("shipping_estimate", data);
+};
+
 export const trackOutboundClick = (destination: string, placement: string) => {
   const data = { destination, placement };
   trackMeta("OutboundClick", data, true);
