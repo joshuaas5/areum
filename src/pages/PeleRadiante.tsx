@@ -223,7 +223,13 @@ export default function PeleRadiante() {
       </div>
       <header className="pr-header pr-wrap">
         <a className="pr-brand" href="/" aria-label="AREUM — página inicial">
-          AREUM<span>BELEZA EM TODAS AS FASES</span>
+          <img
+            className="pr-logo"
+            src="/areum-logo-premium.png"
+            width="1000"
+            height="280"
+            alt="AREUM 아름"
+          />
         </a>
         <nav aria-label="Navegação da página">
           <a href="#pr-beneficios">Benefícios</a>
@@ -596,9 +602,16 @@ export default function PeleRadiante() {
         </section>
       </main>
       <footer className="pr-footer pr-wrap">
-        <div className="pr-brand">
-          AREUM<span>BELEZA EM TODAS AS FASES</span>
-        </div>
+        <a className="pr-brand" href="/" aria-label="AREUM — página inicial">
+          <img
+            className="pr-logo"
+            src="/areum-logo-premium.png"
+            width="1000"
+            height="280"
+            loading="lazy"
+            alt="AREUM 아름"
+          />
+        </a>
         <p>Areum Cosmetics • CNPJ 50.548.562/0001-42</p>
         <a href="mailto:contato@areumco.com.br">contato@areumco.com.br</a>
         <div>
