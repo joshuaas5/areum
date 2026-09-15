@@ -26,6 +26,18 @@ import {
 import "./pele-radiante.css";
 import "./pele-radiante-editorial.css";
 
+// Espelha QuoteResult de api/quote.ts. Vive aqui para o front não importar do
+// diretório de funções serverless.
+type ShippingQuote =
+  | {
+      ok: true;
+      city: string;
+      uf: string;
+      cheapest: QuoteOption;
+      options: QuoteOption[];
+    }
+  | { ok: false; reason: "invalid" | "not_found" | "unavailable" };
+
 const supportUrl =
   "https://wa.me/5547989258264?text=" +
   encodeURIComponent("Olá! Quero ajuda para comprar o Sérum Facial AREUM.");
@@ -90,12 +102,19 @@ const formatCep = (value: string) => {
   return digits.length > 5 ? `${digits.slice(0, 5)}-${digits.slice(5)}` : digits;
 };
 
-type ShippingState =
-  | { status: "idle" | "loading" | "invalid" | "not_found" | "error" }
-  | { status: "found"; city: string; uf: string };
+type QuoteOption = { carrier: string; service: string; price: number; days: number };
 
-// Consulta o CEP no ViaCEP só para confirmar a cidade. O valor exato e o prazo
-// continuam sendo calculados pela Yampi no checkout, antes do pagamento.
+type ShippingState =
+  | { status: "idle" | "loading" | "invalid" | "not_found" | "error" | "unavailable" }
+  | { status: "found"; city: string; uf: string; cheapest: QuoteOption; options: QuoteOption[] };
+
+const money = new Intl.NumberFormat("pt-BR", {
+  style: "currency",
+  currency: "BRL",
+});
+
+// Cotação real, via /api/quote (Melhor Envio no servidor, ver api/quote.ts).
+// O navegador nunca vê token: as credenciais ficam só no backend.
 function ShippingEstimate({ placement }: { placement: string }) {
   const id = useId();
   const [cep, setCep] = useState("");
@@ -109,27 +128,43 @@ function ShippingEstimate({ placement }: { placement: string }) {
       return;
     }
     setState({ status: "loading" });
-    const controller = new AbortController();
-    const timeout = window.setTimeout(() => controller.abort(), 6000);
     try {
-      const response = await fetch(`https://viacep.com.br/ws/${digits}/json/`, {
-        signal: controller.signal,
+      const response = await fetch("/api/quote", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ zipcode: digits, quantity: 1 }),
       });
-      if (!response.ok) throw new Error(String(response.status));
-      const data: { erro?: boolean | string; localidade?: string; uf?: string } =
-        await response.json();
-      if (data.erro || !data.localidade || !data.uf) {
-        setState({ status: "not_found" });
-        trackShippingEstimate("not_found", `pele_radiante_${placement}`);
+      const data: ShippingQuote = await response.json();
+
+      if (data.ok) {
+        setState({
+          status: "found",
+          city: data.city,
+          uf: data.uf,
+          cheapest: data.cheapest,
+          options: data.options,
+        });
+        trackShippingEstimate("found", `pele_radiante_${placement}`, data.uf, {
+          price: data.cheapest.price,
+          days: data.cheapest.days,
+          carrier: data.cheapest.carrier,
+          service: data.cheapest.service,
+          optionCount: data.options.length,
+        });
         return;
       }
-      setState({ status: "found", city: data.localidade, uf: data.uf });
-      trackShippingEstimate("found", `pele_radiante_${placement}`, data.uf);
+
+      if (data.reason === "not_found") setState({ status: "not_found" });
+      else if (data.reason === "invalid") setState({ status: "invalid" });
+      else setState({ status: "unavailable" });
+
+      trackShippingEstimate(
+        data.reason === "not_found" ? "not_found" : "error",
+        `pele_radiante_${placement}`,
+      );
     } catch {
       setState({ status: "error" });
       trackShippingEstimate("error", `pele_radiante_${placement}`);
-    } finally {
-      window.clearTimeout(timeout);
     }
   }
 
@@ -164,35 +199,52 @@ function ShippingEstimate({ placement }: { placement: string }) {
         </button>
       </div>
       <p className="pr-cep-info" id={`${id}-cep-info`}>
-        Frete a partir de <strong>R$ 9,55</strong> • Envio rastreado
+        Cálculo na hora • Envio rastreado para todo o Brasil
       </p>
-      <p className="pr-cep-result" aria-live="polite">
+      <div className="pr-cep-result" aria-live="polite">
         {state.status === "found" && (
           <>
-            <MapPin size={17} aria-hidden="true" />
-            <span>
-              Entregamos em{" "}
-              <strong>
-                {state.city}/{state.uf}
-              </strong>
-              . Frete a partir de R$ 9,55 — valor e prazo exatos aparecem no
-              checkout, antes de pagar.
-            </span>
+            <p className="pr-quote-head">
+              <MapPin size={17} aria-hidden="true" />
+              <span>
+                Entregamos em{" "}
+                <strong>
+                  {state.city}/{state.uf}
+                </strong>
+              </span>
+            </p>
+            <ul className="pr-quote-list">
+              {state.options.slice(0, 4).map((option) => (
+                <li key={`${option.carrier}-${option.service}`}>
+                  <span className="pr-quote-name">
+                    {option.carrier}
+                    {option.service ? ` · ${option.service}` : ""}
+                  </span>
+                  <span className="pr-quote-days">
+                    {option.days > 0 ? `até ${option.days} dias úteis` : ""}
+                  </span>
+                  <strong className="pr-quote-price">
+                    {option.price > 0 ? money.format(option.price) : "Grátis"}
+                  </strong>
+                </li>
+              ))}
+            </ul>
+            <p className="pr-quote-foot">
+              Valor final conferido no checkout, antes de pagar.
+            </p>
           </>
         )}
-        {state.status === "invalid" && (
-          <span>Digite os 8 números do seu CEP.</span>
-        )}
+        {state.status === "invalid" && <span>Digite os 8 números do seu CEP.</span>}
         {state.status === "not_found" && (
           <span>Não encontramos esse CEP. Confira os números e tente de novo.</span>
         )}
-        {state.status === "error" && (
+        {(state.status === "error" || state.status === "unavailable") && (
           <span>
-            Não conseguimos consultar agora. O frete para o seu CEP aparece no
+            Não conseguimos calcular agora. O frete para o seu CEP aparece no
             checkout, antes de pagar.
           </span>
         )}
-      </p>
+      </div>
     </form>
   );
 }
@@ -236,7 +288,7 @@ const faqs = [
   ],
   [
     "Como consulto o frete e o prazo?",
-    "Digite seu CEP na calculadora do topo da página. O frete começa em R$ 9,55 e o envio é rastreado. No checkout, as opções de entrega, o valor exato e o prazo estimado aparecem antes da confirmação do pagamento.",
+    "Digite seu CEP na calculadora do topo da página: mostramos as transportadoras disponíveis, o valor e o prazo antes de você ir para o checkout. O envio é rastreado.",
   ],
   [
     "Quais são as formas de pagamento?",
@@ -615,7 +667,7 @@ export default function PeleRadiante() {
             <article>
               <Truck aria-hidden="true" />
               <h3>Envio rastreado</h3>
-              <p>Frete a partir de R$ 9,55, com valor e prazo pelo seu CEP.</p>
+              <p>Calcule no topo da página: valor e prazo pelo seu CEP.</p>
             </article>
             <article>
               <MessageCircle aria-hidden="true" />

@@ -957,9 +957,7 @@
   color: var(--pr-ink);
 }
 .pr-cep-result {
-  display: flex;
-  gap: 7px;
-  align-items: flex-start;
+  display: block;
   font-size: 14px;
   line-height: 1.45;
 }
@@ -970,6 +968,54 @@
   flex-shrink: 0;
   margin-top: 2px;
   color: #2f7a4f;
+}
+.pr-quote-head {
+  display: flex;
+  gap: 7px;
+  align-items: flex-start;
+  font-size: 14px;
+  line-height: 1.45;
+}
+.pr-quote-head svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: #2f7a4f;
+}
+.pr-quote-list {
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid #ecd8d0;
+}
+.pr-quote-list li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2px 10px;
+  padding: 7px 0;
+  border-bottom: 1px solid #f2e2dc;
+}
+.pr-quote-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--pr-ink);
+}
+.pr-quote-days {
+  grid-column: 1;
+  font-size: 12.5px;
+  color: var(--pr-muted);
+}
+.pr-quote-price {
+  grid-row: 1 / span 2;
+  grid-column: 2;
+  align-self: center;
+  font-size: 15px;
+  color: var(--pr-ink);
+  white-space: nowrap;
+}
+.pr-quote-foot {
+  margin-top: 8px;
+  font-size: 12.5px;
+  color: var(--pr-muted);
 }
 .pr-hero .pr-button {
   min-height: 68px;
