@@ -1,11 +1,10 @@
-import { FormEvent, useEffect, useId, useState } from "react";
+import { useEffect } from "react";
 import {
   ArrowRight,
   Droplets,
   Sparkles,
   Gem,
   Hourglass,
-  MapPin,
   ShieldCheck,
   Truck,
   MessageCircle,
@@ -13,30 +12,16 @@ import {
   Plus,
   Check,
   Star,
-  Loader2,
 } from "lucide-react";
 import serum from "@/assets/areum-serum.webp";
 import { CHECKOUT_URL } from "@/lib/analytics-config";
 import {
   trackCheckoutClick,
   trackContact,
-  trackShippingEstimate,
   trackViewContent,
 } from "@/lib/analytics";
 import "./pele-radiante.css";
 import "./pele-radiante-editorial.css";
-
-// Espelha QuoteResult de api/quote.ts. Vive aqui para o front não importar do
-// diretório de funções serverless.
-type ShippingQuote =
-  | {
-      ok: true;
-      city: string;
-      uf: string;
-      cheapest: QuoteOption;
-      options: QuoteOption[];
-    }
-  | { ok: false; reason: "invalid" | "not_found" | "unavailable" };
 
 const supportUrl =
   "https://wa.me/5547989258264?text=" +
@@ -97,158 +82,6 @@ function SupportLink({ placement }: { placement: string }) {
   );
 }
 
-const formatCep = (value: string) => {
-  const digits = value.replace(/\D/g, "").slice(0, 8);
-  return digits.length > 5 ? `${digits.slice(0, 5)}-${digits.slice(5)}` : digits;
-};
-
-type QuoteOption = { carrier: string; service: string; price: number; days: number };
-
-type ShippingState =
-  | { status: "idle" | "loading" | "invalid" | "not_found" | "error" | "unavailable" }
-  | { status: "found"; city: string; uf: string; cheapest: QuoteOption; options: QuoteOption[] };
-
-const money = new Intl.NumberFormat("pt-BR", {
-  style: "currency",
-  currency: "BRL",
-});
-
-// Cotação real, via /api/quote (Melhor Envio no servidor, ver api/quote.ts).
-// O navegador nunca vê token: as credenciais ficam só no backend.
-function ShippingEstimate({ placement }: { placement: string }) {
-  const id = useId();
-  const [cep, setCep] = useState("");
-  const [state, setState] = useState<ShippingState>({ status: "idle" });
-
-  async function onSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const digits = cep.replace(/\D/g, "");
-    if (digits.length !== 8) {
-      setState({ status: "invalid" });
-      return;
-    }
-    setState({ status: "loading" });
-    try {
-      const response = await fetch("/api/quote", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ zipcode: digits, quantity: 1 }),
-      });
-      const data: ShippingQuote = await response.json();
-
-      if (data.ok) {
-        setState({
-          status: "found",
-          city: data.city,
-          uf: data.uf,
-          cheapest: data.cheapest,
-          options: data.options,
-        });
-        trackShippingEstimate("found", `pele_radiante_${placement}`, data.uf, {
-          price: data.cheapest.price,
-          days: data.cheapest.days,
-          carrier: data.cheapest.carrier,
-          service: data.cheapest.service,
-          optionCount: data.options.length,
-        });
-        return;
-      }
-
-      if (data.reason === "not_found") setState({ status: "not_found" });
-      else if (data.reason === "invalid") setState({ status: "invalid" });
-      else setState({ status: "unavailable" });
-
-      trackShippingEstimate(
-        data.reason === "not_found" ? "not_found" : "error",
-        `pele_radiante_${placement}`,
-      );
-    } catch {
-      setState({ status: "error" });
-      trackShippingEstimate("error", `pele_radiante_${placement}`);
-    }
-  }
-
-  return (
-    <form className="pr-cep" onSubmit={onSubmit} noValidate>
-      <label className="pr-cep-label" htmlFor={`${id}-cep`}>
-        <Truck size={20} aria-hidden="true" /> Calcule o frete pelo seu CEP
-      </label>
-      <div className="pr-cep-row">
-        <input
-          id={`${id}-cep`}
-          name="cep"
-          inputMode="numeric"
-          autoComplete="postal-code"
-          placeholder="00000-000"
-          maxLength={9}
-          value={cep}
-          aria-describedby={`${id}-cep-info`}
-          aria-invalid={state.status === "invalid" || undefined}
-          onChange={(event) => {
-            setCep(formatCep(event.target.value));
-            if (state.status !== "idle" && state.status !== "loading")
-              setState({ status: "idle" });
-          }}
-        />
-        <button type="submit" disabled={state.status === "loading"}>
-          {state.status === "loading" ? (
-            <Loader2 className="pr-spin" size={18} aria-label="Calculando" />
-          ) : (
-            "Calcular"
-          )}
-        </button>
-      </div>
-      <p className="pr-cep-info" id={`${id}-cep-info`}>
-        Cálculo na hora • Envio rastreado para todo o Brasil
-      </p>
-      <div className="pr-cep-result" aria-live="polite">
-        {state.status === "found" && (
-          <>
-            <p className="pr-quote-head">
-              <MapPin size={17} aria-hidden="true" />
-              <span>
-                Entregamos em{" "}
-                <strong>
-                  {state.city}/{state.uf}
-                </strong>
-              </span>
-            </p>
-            <ul className="pr-quote-list">
-              {state.options.slice(0, 4).map((option) => (
-                <li key={`${option.carrier}-${option.service}`}>
-                  <span className="pr-quote-name">
-                    {option.carrier}
-                    {option.service ? ` · ${option.service}` : ""}
-                  </span>
-                  <span className="pr-quote-days">
-                    {option.days > 0 ? `até ${option.days} dias úteis` : ""}
-                  </span>
-                  <strong className="pr-quote-price">
-                    {option.price > 0 ? money.format(option.price) : "Grátis"}
-                  </strong>
-                </li>
-              ))}
-            </ul>
-            <p className="pr-quote-foot">
-              Valor final conferido no checkout, antes de pagar.
-            </p>
-          </>
-        )}
-        {state.status === "invalid" && <span>Digite os 8 números do seu CEP.</span>}
-        {state.status === "not_found" && (
-          <span>Não encontramos esse CEP. Confira os números e tente de novo.</span>
-        )}
-        {(state.status === "error" || state.status === "unavailable") && (
-          <span>
-            Não conseguimos calcular agora. O frete para o seu CEP aparece no
-            checkout, antes de pagar.
-          </span>
-        )}
-      </div>
-    </form>
-  );
-}
-
 const benefits = [
   {
     icon: Droplets,
@@ -288,7 +121,7 @@ const faqs = [
   ],
   [
     "Como consulto o frete e o prazo?",
-    "Digite seu CEP na calculadora do topo da página: mostramos as transportadoras disponíveis, o valor e o prazo antes de você ir para o checkout. O envio é rastreado.",
+    "Enviamos para todo o Brasil com frete reduzido por tempo limitado. O valor exato do frete e o prazo aparecem no checkout, antes de você confirmar o pagamento. O envio é rastreado.",
   ],
   [
     "Quais são as formas de pagamento?",
@@ -445,7 +278,13 @@ export default function PeleRadiante() {
               <p className="pr-payment pr-payment-methods">
                 Pix e cartão de crédito
               </p>
-              <ShippingEstimate placement="hero" />
+              <p className="pr-freight">
+                <Truck size={20} aria-hidden="true" />
+                <span>
+                  <strong>FRETE REDUZIDO</strong> por tempo limitado para todo o
+                  Brasil
+                </span>
+              </p>
               <PurchaseLink placement="hero" />
               <p className="pr-trustline">
                 <span className="pr-trust-pair">
@@ -645,9 +484,16 @@ export default function PeleRadiante() {
             <p className="pr-price">R$ 79,90</p>
             <p className="pr-payment">ou 3x de R$ 26,63 sem juros</p>
             <PurchaseLink placement="final" />
+            <p className="pr-freight">
+              <Truck size={20} aria-hidden="true" />
+              <span>
+                <strong>FRETE REDUZIDO</strong> por tempo limitado para todo o
+                Brasil
+              </span>
+            </p>
             <p className="pr-assurance">
-              <ShieldCheck size={20} aria-hidden="true" /> Frete calculado pelo
-              CEP • Compra segura • Envio rastreado
+              <ShieldCheck size={20} aria-hidden="true" /> Compra segura • Envio
+              rastreado • Atendimento AREUM
             </p>
             <SupportLink placement="final" />
           </div>
@@ -667,7 +513,10 @@ export default function PeleRadiante() {
             <article>
               <Truck aria-hidden="true" />
               <h3>Envio rastreado</h3>
-              <p>Calcule no topo da página: valor e prazo pelo seu CEP.</p>
+              <p>
+                Envio para todo o Brasil com frete reduzido por tempo
+                limitado.
+              </p>
             </article>
             <article>
               <MessageCircle aria-hidden="true" />

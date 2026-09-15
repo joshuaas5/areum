@@ -87,32 +87,6 @@ export const trackContact = (method: "email" | "whatsapp", placement: string) =>
   trackGA4("contact", data);
 };
 
-// Mede o uso da calculadora de frete sem enviar o CEP (dado pessoal): só a UF
-// e o valor cotado, para medir impacto do frete na conversão.
-export const trackShippingEstimate = (
-  result: "found" | "not_found" | "error",
-  placement: string,
-  uf?: string,
-  quote?: { price: number; days: number; carrier: string; service: string; optionCount: number },
-) => {
-  const data = {
-    result,
-    placement,
-    ...(uf ? { uf } : {}),
-    ...(quote
-      ? {
-          shipping_price: quote.price,
-          shipping_days: quote.days,
-          shipping_carrier: quote.carrier,
-          shipping_service: quote.service,
-          shipping_options: quote.optionCount,
-        }
-      : {}),
-  };
-  trackMeta("ShippingEstimate", data, true);
-  trackGA4("shipping_estimate", data);
-};
-
 export const trackOutboundClick = (destination: string, placement: string) => {
   const data = { destination, placement };
   trackMeta("OutboundClick", data, true);
