@@ -11,6 +11,7 @@ import {
   Sun,
   Plus,
   Check,
+  Star,
 } from "lucide-react";
 import serum from "@/assets/areum-serum.webp";
 import { CHECKOUT_URL } from "@/lib/analytics-config";
@@ -20,6 +21,7 @@ import {
   trackViewContent,
 } from "@/lib/analytics";
 import "./pele-radiante.css";
+import "./pele-radiante-editorial.css";
 
 const supportUrl =
   "https://wa.me/5547989258264?text=" +
@@ -216,12 +218,16 @@ export default function PeleRadiante() {
       <a className="pr-skip" href="#pr-main">
         Pular para o conteúdo
       </a>
+      <div className="pr-topline">
+        Inspirado no skincare coreano. Feito para o seu momento.
+      </div>
       <header className="pr-header pr-wrap">
         <a className="pr-brand" href="/" aria-label="AREUM — página inicial">
           AREUM<span>BELEZA EM TODAS AS FASES</span>
         </a>
         <nav aria-label="Navegação da página">
           <a href="#pr-beneficios">Benefícios</a>
+          <a href="#pr-experiencias">Quem usa</a>
           <a href="#pr-uso">Como usar</a>
           <a href="#pr-duvidas">Dúvidas</a>
         </nav>
@@ -242,9 +248,16 @@ export default function PeleRadiante() {
       <main id="pr-main">
         <section className="pr-hero pr-wrap" aria-labelledby="pr-title">
           <div className="pr-intro">
-            <p className="pr-eyebrow">SEU MOMENTO DE CUIDADO</p>
+            <a className="pr-rating" href="#pr-experiencias">
+              <span aria-label="5 estrelas">★★★★★</span> 2 avaliações publicadas{" "}
+              <ArrowRight size={15} aria-hidden="true" />
+            </a>
+            <p className="pr-eyebrow">
+              SÉRUM FACIAL • ÁCIDO HIALURÔNICO + COLÁGENO VEGANO
+            </p>
             <h1 id="pr-title">
-              PELE MAIS HIDRATADA, MACIA E <em>LUMINOSA.</em>
+              Pele mais hidratada,
+              <br /> macia e <em>luminosa.</em>
             </h1>
             <p className="pr-lead">
               Uma rotina simples para cuidar da aparência da sua pele todos os
@@ -259,11 +272,17 @@ export default function PeleRadiante() {
             </p>
           </div>
           <figure className="pr-product-stage">
-            <span className="pr-stage-word" aria-hidden="true">
-              seu ritual.
-            </span>
-            <div className="pr-product-halo" aria-hidden="true" />
             <img
+              className="pr-model"
+              src="/pele-radiante/editorial-madura.webp"
+              width="1100"
+              height="1375"
+              fetchPriority="high"
+              alt="Imagem editorial criada com IA: mulher madura de cabelos prateados, sorrindo e tocando suavemente a pele"
+            />
+            <span className="pr-photo-tag">BELEZA EM TODAS AS FASES</span>
+            <img
+              className="pr-hero-bottle"
               src={serum}
               width="1000"
               height="1500"
@@ -271,10 +290,16 @@ export default function PeleRadiante() {
               alt="Frasco oficial do Sérum AREUM 30 ml, com Ácido Hialurônico e Colágeno Vegano"
             />
             <figcaption>
-              <span>UM GESTO SIMPLES.</span>
-              <strong>Um cuidado só seu.</strong>
+              <span>UM MOMENTO SEU.</span>
+              <strong>
+                O cuidado aparece.
+                <br />
+                Você continua sendo você.
+              </strong>
             </figcaption>
-            <span className="pr-volume">30 ml</span>
+            <span className="pr-editorial-label">
+              Imagem editorial criada com IA.
+            </span>
           </figure>
           <div className="pr-hero-buy">
             <BuyBox placement="hero" />
@@ -291,6 +316,108 @@ export default function PeleRadiante() {
             <Check aria-hidden="true" /> Cuidado diário
           </span>
         </div>
+        <section
+          id="pr-experiencias"
+          className="pr-section pr-wrap pr-experiences"
+          aria-labelledby="pr-experiences-title"
+        >
+          <div className="pr-section-head">
+            <div>
+              <p className="pr-eyebrow">AREUM NA ROTINA REAL</p>
+              <h2 id="pr-experiences-title">
+                O cuidado ganha vida
+                <br />
+                <em>na pele de quem usa.</em>
+              </h2>
+            </div>
+            <p>
+              Veja o sérum em uso e leia o que clientes já compartilharam sobre
+              a AREUM.
+            </p>
+          </div>
+          <div className="pr-proof-grid">
+            <div className="pr-video-grid">
+              {[
+                {
+                  file: "flavia",
+                  title: "Flávia e seu momento AREUM",
+                  label: "Na rotina",
+                },
+                {
+                  file: "primeiro-uso",
+                  title: "Primeiras impressões com o sérum",
+                  label: "Primeiras impressões",
+                },
+                {
+                  file: "glow",
+                  title: "A textura do sérum na pele",
+                  label: "Textura e aplicação",
+                },
+              ].map((video) => (
+                <figure className="pr-video-card" key={video.file}>
+                  <video
+                    controls
+                    playsInline
+                    preload="none"
+                    poster={`/videos/poster-${video.file}.jpg`}
+                    aria-label={video.title}
+                  >
+                    <source
+                      src={`/videos/ugc-${video.file}.mp4`}
+                      type="video/mp4"
+                    />
+                    Seu navegador não suporta vídeo.
+                  </video>
+                  <figcaption>
+                    <span>{video.label}</span>
+                    <strong>{video.title}</strong>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+            <div className="pr-reviews">
+              <div className="pr-reviews-heading">
+                <span>★★★★★</span>
+                <p>
+                  O que já falaram
+                  <br />
+                  <strong>sobre a AREUM</strong>
+                </p>
+              </div>
+              <article>
+                <div className="pr-review-stars" aria-label="5 de 5 estrelas">
+                  {[0, 1, 2, 3, 4].map((n) => (
+                    <Star key={n} size={15} aria-hidden="true" />
+                  ))}
+                </div>
+                <blockquote>
+                  “O sérum tem uma textura ótima, é fácil de aplicar e deixa a
+                  pele bem macia e hidratada”
+                </blockquote>
+                <p>
+                  M*****a <span>• Ago 2026</span>
+                </p>
+              </article>
+              <article>
+                <div className="pr-review-stars" aria-label="5 de 5 estrelas">
+                  {[0, 1, 2, 3, 4].map((n) => (
+                    <Star key={n} size={15} aria-hidden="true" />
+                  ))}
+                </div>
+                <blockquote>
+                  “Embalagem bem protegida e chegou rápido. Recomendo a compra.”
+                </blockquote>
+                <p>
+                  P*****o <span>• Ago 2026</span>
+                </p>
+              </article>
+              <a className="pr-review-source" href="/#depoimentos">
+                Ler as 2 avaliações completas{" "}
+                <ArrowRight size={16} aria-hidden="true" />
+              </a>
+            </div>
+          </div>
+        </section>
         <section
           id="pr-beneficios"
           className="pr-section pr-wrap"
@@ -416,13 +543,23 @@ export default function PeleRadiante() {
           className="pr-generations"
           aria-labelledby="pr-generations-title"
         >
-          <div className="pr-wrap">
+          <figure className="pr-generations-photo">
+            <img
+              src="/pele-radiante/editorial-geracoes.webp"
+              width="1500"
+              height="1000"
+              loading="lazy"
+              alt="Imagem editorial criada com IA: três mulheres de diferentes gerações juntas"
+            />
+            <figcaption>Imagem editorial criada com IA.</figcaption>
+          </figure>
+          <div className="pr-generations-copy">
             <Sun size={38} strokeWidth={1.2} aria-hidden="true" />
             <p className="pr-eyebrow">A BELEZA ACOMPANHA VOCÊ</p>
             <h2 id="pr-generations-title">
-              SKINCARE NÃO TEM
+              Skincare não tem
               <br />
-              UMA IDADE CERTA.
+              uma idade certa.
             </h2>
             <p>
               Tem a pele que você tem hoje — e o cuidado que faz sentido para
